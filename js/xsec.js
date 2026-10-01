@@ -33,6 +33,7 @@
     { key: "epi",  name: "SiGe 에피",    en: "SiGe",    color: "#a7b2c4", semi: true, k: 1.05 },
     { key: "lowk", name: "저유전막",     en: "low-k",   color: "#a8e0d0", k: 0.7 },
     { key: "acl",  name: "탄소 하드마스크", en: "ACL",  color: "#33363d", k: 0.85 },
+    { key: "cfx",  name: "고분자 보호막", en: "CFₓ",   color: "#b4a3e6", k: 0.5 },
   ];
   const ID = {};
   MATS.forEach((m, i) => { if (m) { ID[m.key] = i; m.id = i; m.rgb = hex2rgb(m.color); } });
@@ -258,7 +259,7 @@
       for (let k = 0; k < list.length; k += 3) {
         const i = list[k];
         acc[i] += R[i] * dt;
-        if (acc[i] >= 1) {
+        if (acc[i] >= 0.9999) {
           const over = acc[i] - 1;
           m[i] = 0; acc[i] = 0; this.nd[i] = 0; this.na[i] = 0;
           // 남은 양을 안쪽(법선 반대) 이웃에 넘긴다
@@ -273,6 +274,8 @@
       t += dt;
       yield Math.min(1, t / tEnd);
     }
+    // 마무리: 절반 넘게 깎인 셀은 제거 (셀보다 얇은 식각량의 반올림)
+    for (let i = 0; i < m.length; i++) if (m[i] && acc[i] >= 0.5 && (p.rateFn ? p.rateFn(i, m[i]) : sel[m[i]]) > 0) { m[i] = 0; acc[i] = 0; this.nd[i] = 0; this.na[i] = 0; }
     this.lastTime = t;
   };
 
@@ -321,7 +324,7 @@
       for (let k = 0; k < list.length; k += 3) {
         const i = list[k];
         acc[i] += R[i] * d;
-        if (acc[i] >= 1) {
+        if (acc[i] >= 0.9999) {
           const over = acc[i] - 1;
           m[i] = id; acc[i] = 0;
           const nx = list[k + 1] / 10, ny = list[k + 2] / 10, x = i % W, y = (i / W) | 0;
@@ -335,6 +338,8 @@
       done += d;
       yield done / total;
     }
+    // 마무리: 절반 넘게 자란 셀은 막으로 (셀보다 얇은 두께의 반올림)
+    for (let i = 0; i < m.length; i++) if (!m[i] && acc[i] >= 0.5) { m[i] = id; acc[i] = 0; } else if (!m[i]) acc[i] = 0;
   };
 
   /* ------------------------------------------------------------ 공정: 평탄 도포 (스핀 코팅) */
@@ -609,7 +614,7 @@
       for (let q = 0; q < list.length; q += 4) {
         const i = list[q];
         acc[i] += list[q + 1] * dt;
-        if (acc[i] >= 1) {
+        if (acc[i] >= 0.9999) {
           acc[i] = 0; m[i] = OX; C[i] = 0.5; this.nd[i] *= 0.3; this.na[i] *= 0.3;
           expand[i] += 1.27;
           // 부피 팽창: 산화제가 들어온 쪽(가로 또는 위)으로 첫 빈 셀까지 고체를 한 칸 민다
