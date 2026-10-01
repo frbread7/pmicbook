@@ -30,7 +30,7 @@
     { key: "tin",  name: "TiN",          en: "TiN",     color: "#c9a227", k: 2.0 },
     { key: "hk",   name: "High-k",       en: "HfO₂",    color: "#6fbf9a", k: 3.0 },
     { key: "sil",  name: "실리사이드",   en: "NiSi",    color: "#6f5f93", k: 1.8 },
-    { key: "epi",  name: "SiGe 에피",    en: "SiGe",    color: "#a7b2c4", semi: true, k: 1.05 },
+    { key: "epi",  name: "SiGe 에피",    en: "SiGe",    color: "#c9b48a", semi: true, k: 1.05 },
     { key: "lowk", name: "저유전막",     en: "low-k",   color: "#a8e0d0", k: 0.7 },
     { key: "acl",  name: "탄소 하드마스크", en: "ACL",  color: "#33363d", k: 0.85 },
     { key: "cfx",  name: "고분자 보호막", en: "CFₓ",   color: "#b4a3e6", k: 0.5 },
