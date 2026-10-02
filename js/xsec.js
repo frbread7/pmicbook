@@ -19,24 +19,33 @@
   // k: 이온 주입 저지 능력(실리콘 대비, 클수록 얇은 두께로 막는다)
   const MATS = [
     null,
-    { key: "si",   name: "실리콘",       en: "Si",      color: "#8f99aa", semi: true, k: 1.0 },
-    { key: "ox",   name: "산화막",       en: "SiO₂",    color: "#bcd8f0", k: 1.1 },
-    { key: "nit",  name: "질화막",       en: "Si₃N₄",   color: "#e2b05a", k: 1.4 },
-    { key: "poly", name: "폴리실리콘",   en: "poly-Si", color: "#c0604a", semi: true, k: 1.0 },
-    { key: "pr",   name: "감광막",       en: "PR",      color: "#cf7aa6", k: 0.6 },
-    { key: "w",    name: "텅스텐",       en: "W",       color: "#58606e", k: 3.5 },
-    { key: "cu",   name: "구리",         en: "Cu",      color: "#cc7a3a", k: 3.0 },
-    { key: "al",   name: "알루미늄",     en: "Al",      color: "#b7bec8", k: 0.95 },
+    { key: "si",   name: "Silicon",       en: "Si",      color: "#8f99aa", semi: true, k: 1.0 },
+    { key: "ox",   name: "Silicon dioxide", en: "SiO₂",  color: "#bcd8f0", k: 1.1 },
+    { key: "nit",  name: "Silicon nitride", en: "Si₃N₄", color: "#e2b05a", k: 1.4 },
+    { key: "poly", name: "Polysilicon",   en: "poly-Si", color: "#c0604a", semi: true, k: 1.0 },
+    { key: "pr",   name: "Photoresist",   en: "PR",      color: "#cf7aa6", k: 0.6 },
+    { key: "w",    name: "Tungsten",      en: "W",       color: "#58606e", k: 3.5 },
+    { key: "cu",   name: "Copper",        en: "Cu",      color: "#cc7a3a", k: 3.0 },
+    { key: "al",   name: "Aluminum",      en: "Al",      color: "#b7bec8", k: 0.95 },
     { key: "tin",  name: "TiN",          en: "TiN",     color: "#c9a227", k: 2.0 },
     { key: "hk",   name: "High-k",       en: "HfO₂",    color: "#6fbf9a", k: 3.0 },
-    { key: "sil",  name: "실리사이드",   en: "NiSi",    color: "#6f5f93", k: 1.8 },
-    { key: "epi",  name: "SiGe 에피",    en: "SiGe",    color: "#c9b48a", semi: true, k: 1.05 },
-    { key: "lowk", name: "저유전막",     en: "low-k",   color: "#a8e0d0", k: 0.7 },
-    { key: "acl",  name: "탄소 하드마스크", en: "ACL",  color: "#33363d", k: 0.85 },
-    { key: "cfx",  name: "고분자 보호막", en: "CFₓ",   color: "#b4a3e6", k: 0.5 },
+    { key: "sil",  name: "Silicide",      en: "NiSi",    color: "#6f5f93", k: 1.8 },
+    { key: "epi",  name: "SiGe epitaxy",  en: "SiGe",    color: "#c9b48a", semi: true, k: 1.05 },
+    { key: "lowk", name: "Low-k dielectric", en: "low-k", color: "#a8e0d0", k: 0.7 },
+    { key: "acl",  name: "Carbon hard mask", en: "ACL",  color: "#33363d", k: 0.85 },
+    { key: "cfx",  name: "CFₓ polymer",     en: "CFₓ",   color: "#b4a3e6", k: 0.5 },
   ];
   const ID = {};
   MATS.forEach((m, i) => { if (m) { ID[m.key] = i; m.id = i; m.rgb = hex2rgb(m.color); } });
+  const KO_MATERIAL = {
+    si: "규소", ox: "이산화규소", nit: "질화규소", poly: "다결정 규소",
+    pr: "감광막", w: "텅스텐", cu: "구리", al: "알루미늄", tin: "질화티타늄",
+    hk: "고유전율 절연막", sil: "실리사이드", epi: "SiGe 에피층",
+    lowk: "저유전율 절연막", acl: "탄소 하드마스크", cfx: "CFₓ 중합막"
+  };
+  const isKo = () => document.documentElement.lang.toLowerCase().startsWith("ko");
+  const tr = (en, ko) => isKo() ? ko : en;
+  const materialName = (m) => isKo() ? (KO_MATERIAL[m.key] || m.name) : m.name;
   function hex2rgb(h) { const n = parseInt(h.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
   const mid = (k) => (typeof k === "number" ? k : ID[k] || 0);
 
@@ -468,9 +477,13 @@
   }
 
   /* ------------------------------------------------------------ 공정: 이온 주입 */
-  /** p = { species:'B'|'P'|'As'|'BF2', E:keV, dose:cm^-2, tilt:도, channel:0..1 (채널링 꼬리 비율) } */
+  /** p = { species:'B'|'P'|'As'|'BF2', E:keV, dose:cm^-2, tilt:degrees,
+   *        channel:0..1, windows:[[x0,x1],...] (optional ideal mask openings, nm) } */
   SP.implant = function (p) {
     const W = this.W, H = this.H, m = this.mat, dx = this.dx;
+    const windows = p.windows == null ? null :
+      (Array.isArray(p.windows) ? p.windows.filter((w) => Array.isArray(w) && w.length === 2 &&
+        Number.isFinite(w[0]) && Number.isFinite(w[1]) && w[1] > w[0]) : []);
     const r = range(p.species, p.E);
     const arr = r.type === "n" ? this.nd : this.na;
     const add = new Float32Array(W * H);
@@ -478,6 +491,10 @@
     const Rp = r.Rp, dR = r.dRp, ch = p.channel || 0, lam = Rp * 0.8 + 2 * dR;
     const peak = p.dose / (Math.sqrt(2 * Math.PI) * dR * 1e-7);  // cm^-3
     for (let x0 = 0; x0 < W; x0++) {
+      // The optional incident-beam window is an ideal mask boundary for BCD lessons.
+      // It changes only where rays enter this 2D approximation; no resist stopping
+      // power, lateral mask scattering, or process-specific mask stack is inferred.
+      if (windows && !windows.some(([a, b]) => x0 * dx >= a && x0 * dx < b)) continue;
       // 위에서 비스듬히 들어오는 광선을 따라 등가 실리콘 깊이 누적
       let px = x0 + 0.5 - sx * this.surf * 1.0, py = 0, z = 0;
       const step = 0.5;
@@ -894,8 +911,8 @@
 
   /** 재질 범례 HTML: XS.legend(['si','ox','pr'], true) */
   function legend(keys, doping) {
-    return keys.map((k) => { const m = MATS[mid(k)]; return `<span><i style="background:${m.color}"></i>${m.name}${m.en && m.en !== m.name ? ` <span class="en">${m.en}</span>` : ""}</span>`; }).join("") +
-      (doping ? `<span><i style="background:#3d7be0"></i>n형 도핑</span><span><i style="background:#e0574a"></i>p형 도핑</span><span><i style="background:transparent;border:1px dashed #d4a800"></i>p-n 접합</span>` : "");
+    return keys.map((k) => { const m = MATS[mid(k)]; return `<span><i style="background:${m.color}"></i>${materialName(m)}${m.en && m.en !== materialName(m) ? ` <span class="en">${m.en}</span>` : ""}</span>`; }).join("") +
+      (doping ? `<span><i style="background:#3d7be0"></i>${tr("n-type doping", "n형 도핑")}</span><span><i style="background:#e0574a"></i>${tr("p-type doping", "p형 도핑")}</span><span><i style="background:transparent;border:1px dashed #d4a800"></i>${tr("p–n junction", "p–n 접합")}</span>` : "");
   }
 
   /* ------------------------------------------------------------ 측정 도우미 */
@@ -923,12 +940,12 @@
     const uid = "xs" + Math.random().toString(36).slice(2, 7);
     el.classList.add("sim");
     el.innerHTML = `
-      <div class="sim-head"><span class="sim-tag">${o.tag || "CROSS-SECTION"}</span><h3>${o.title || "단면 시뮬레이터"}</h3></div>
+      <div class="sim-head"><span class="sim-tag">${o.tag || tr("CROSS-SECTION", "단면도")}</span><h3>${o.title || tr("Cross-section simulator", "단면 시뮬레이터")}</h3></div>
       <div class="sim-body side">
-        <div class="sim-view"><canvas></canvas><span class="hint">단면 위에 마우스를 올리면 재질·깊이·도핑을 읽습니다</span></div>
+        <div class="sim-view"><canvas></canvas><span class="hint">${tr("Hover over the cross-section to inspect material, depth, and doping.", "단면도에 마우스를 올리면 재질, 깊이, 도핑을 확인할 수 있습니다.")}</span></div>
         <div class="sim-controls">
-          <div class="ctrl"><span>단계 <output id="${uid}-k"></output></span><input type="range" id="${uid}-r" min="0" max="1" value="0"></div>
-          <div class="btn-row"><button class="btn sm" data-a="first" title="처음으로" aria-label="처음으로">⏮</button><button class="btn sm" data-a="prev" title="이전 단계" aria-label="이전 단계">◀</button><button class="btn sm primary" data-a="next">다음 ▶</button><button class="btn sm" data-a="play">자동 재생</button></div>
+          <div class="ctrl"><span>${tr("Step", "단계")} <output id="${uid}-k"></output></span><input type="range" id="${uid}-r" min="0" max="1" value="0"></div>
+          <div class="btn-row"><button class="btn sm" data-a="first" title="${tr("First step", "첫 단계")}" aria-label="${tr("First step", "첫 단계")}">⏮</button><button class="btn sm" data-a="prev" title="${tr("Previous step", "이전 단계")}" aria-label="${tr("Previous step", "이전 단계")}">◀</button><button class="btn sm primary" data-a="next">${tr("Next", "다음")} ▶</button><button class="btn sm" data-a="play">${tr("Play", "재생")}</button></div>
           <div class="step-desc" id="${uid}-d"></div>
           ${o.extra || ""}
           <ol class="steps-list" id="${uid}-l"></ol>
@@ -937,9 +954,9 @@
       ${o.below ? `<div class="sim-controls xs-below">${o.below}</div>` : ""}
       <div class="mat-legend" id="${uid}-g"></div>
       <div class="sim-readout">
-        <div class="stat"><span class="k">현재 공정</span><span class="v" id="${uid}-o1" style="font-size:15px">—</span></div>
-        <div class="stat"><span class="k">커서 위치 (x, 깊이)</span><span class="v" id="${uid}-o2" style="font-size:15px">—</span></div>
-        <div class="stat"><span class="k">재질 · 순 도핑</span><span class="v" id="${uid}-o3" style="font-size:15px">—</span></div>
+        <div class="stat"><span class="k">${tr("Current process", "현재 공정")}</span><span class="v" id="${uid}-o1" style="font-size:15px">—</span></div>
+        <div class="stat"><span class="k">${tr("Cursor (x, depth)", "커서 (x, 깊이)")}</span><span class="v" id="${uid}-o2" style="font-size:15px">—</span></div>
+        <div class="stat"><span class="k">${tr("Material · net doping", "재질 · 순 도핑")}</span><span class="v" id="${uid}-o3" style="font-size:15px">—</span></div>
       </div>
       ${o.note ? `<div class="sim-note">${o.note}</div>` : ""}`;
     const cvEl = el.querySelector("canvas"), list = el.querySelector("#" + uid + "-l"), desc = el.querySelector("#" + uid + "-d");
@@ -972,14 +989,14 @@
       rng.style.setProperty("--fill", (steps.length ? (shownK / steps.length) * 100 : 0) + "%");
       kout.textContent = shownK + " / " + steps.length;
       const st = shownK > 0 ? steps[shownK - 1] : null;
-      desc.innerHTML = st ? `<b>${st.label}</b><br>${st.desc || ""}` : `<b>시작</b><br>${o.startDesc || "깨끗한 실리콘 웨이퍼에서 출발한다."}`;
-      PB.stat(uid + "-o1", st ? st.label : "시작");
+      desc.innerHTML = st ? `<b>${st.label}</b><br>${st.desc || ""}` : `<b>${tr("Start", "시작")}</b><br>${o.startDesc || tr("Start with a clean silicon wafer.", "깨끗한 규소 웨이퍼에서 시작합니다.")}`;
+      PB.stat(uid + "-o1", st ? st.label : tr("Start", "시작"));
       [...list.children].forEach((li, i) => { li.classList.toggle("cur", i === shownK - 1); li.classList.toggle("future", i >= shownK); });
       const cur = list.children[shownK - 1];
       if (cur && list.scrollHeight > list.clientHeight) { const top = cur.offsetTop - list.offsetTop; if (top < list.scrollTop || top > list.scrollTop + list.clientHeight - 30) list.scrollTop = top - 60; }
     }
     function renderList() {
-      list.innerHTML = steps.map((s, i) => `<li data-i="${i}"><span class="k">${s.k || s.op.toUpperCase()}</span><span class="d">${s.label}</span>${o.editable ? '<button class="x" title="이 단계부터 삭제" aria-label="삭제">×</button>' : ""}</li>`).join("");
+      list.innerHTML = steps.map((s, i) => `<li data-i="${i}"><span class="k">${s.k || s.op.toUpperCase()}</span><span class="d">${s.label}</span>${o.editable ? `<button class="x" title="${tr("Delete from this step", "이 단계부터 삭제")}" aria-label="${tr("Delete", "삭제")}">×</button>` : ""}</li>`).join("");
     }
     list.addEventListener("click", (e) => {
       const li = e.target.closest("li"); if (!li) return;
@@ -988,10 +1005,10 @@
       stopPlay(); API.go(i + 1);
     });
     rng.addEventListener("input", () => { stopPlay(); API.go(+rng.value); });
-    function stopPlay() { playing = false; el.querySelector('[data-a="play"]').textContent = "자동 재생"; }
+    function stopPlay() { playing = false; el.querySelector('[data-a="play"]').textContent = tr("Play", "재생"); }
     el.querySelectorAll("[data-a]").forEach((b) => b.addEventListener("click", () => {
       const a = b.dataset.a;
-      if (a === "play") { if (playing) { stopPlay(); return; } playing = true; b.textContent = "정지"; if (R.cur >= steps.length) R.goto(0); R.goto(R.cur + 1, true); return; }
+      if (a === "play") { if (playing) { stopPlay(); return; } playing = true; b.textContent = tr("Stop", "정지"); if (R.cur >= steps.length) R.goto(0); R.goto(R.cur + 1, true); return; }
       stopPlay();
       if (a === "first") API.go(0);
       if (a === "prev") API.go(Math.max(0, R.cur - 1));
@@ -1014,7 +1031,7 @@
       const i = cy * shown.W + cx, mt = shown.mat[i], net = shown.nd[i] - shown.na[i];
       PB.stat(uid + "-o2", `${Math.round(cx * shown.dx)}, ${shown.ynm(cy)}<small>nm</small>`);
       const dop = mt && MATS[mt].semi && Math.abs(net) > 1e14 ? ` · ${net > 0 ? "n" : "p"} ${Math.abs(net).toExponential(1).replace("e+", "e")}` : "";
-      PB.stat(uid + "-o3", (mt ? MATS[mt].name : "빈 공간") + `<small>${dop}</small>`);
+      PB.stat(uid + "-o3", (mt ? materialName(MATS[mt]) : tr("Empty space", "빈 공간")) + `<small>${dop}</small>`);
       cv.redraw();
     };
     cvEl.addEventListener("mousemove", onMove);
