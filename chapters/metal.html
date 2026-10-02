@@ -2,27 +2,30 @@
 <!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
      Executable code: MIT (see ../LICENSE-MIT).
      Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
-<html lang="ko">
+<html lang="en">
 <head>
-<!--head:start {"desc": "알루미늄에서 구리 다마신까지. 듀얼 다마신 공정을 단면으로 쌓고, 배리어·씨드·전해 도금, 선폭이 줄 때의 저항 크기 효과, RC 지연과 저유전막, 전자 이동 수명(Black 식)과 차세대 배선 금속을 시뮬레이터로 익힌다.", "libs": ["xsec"]}-->
+<!--head:start {"desc": "Copper contacts and interconnects connect PMIC devices and circuits. Explore dual-damascene integration, line resistance, RC delay, current density, IR drop, and electromigration using illustrative models.", "libs": ["xsec"], "lang": "en"}-->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>금속 배선 · ProcessBook</title>
-<meta name="description" content="알루미늄에서 구리 다마신까지. 듀얼 다마신 공정을 단면으로 쌓고, 배리어·씨드·전해 도금, 선폭이 줄 때의 저항 크기 효과, RC 지연과 저유전막, 전자 이동 수명(Black 식)과 차세대 배선 금속을 시뮬레이터로 익힌다.">
-<link rel="canonical" href="https://processbook.euiyun.com/chapters/metal.html">
+<title>Contacts, BEOL, and Thick Top Metal · PMICBook</title>
+<meta name="description" content="Copper contacts and interconnects connect PMIC devices and circuits. Explore dual-damascene integration, line resistance, RC delay, current density, IR drop, and electromigration using illustrative models.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/chapters/metal.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/metal.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/metal.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/metal.html">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <meta name="theme-color" content="#c2550c">
 <meta property="og:type" content="article">
-<meta property="og:site_name" content="ProcessBook">
-<meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="금속 배선 · ProcessBook">
-<meta property="og:description" content="알루미늄에서 구리 다마신까지. 듀얼 다마신 공정을 단면으로 쌓고, 배리어·씨드·전해 도금, 선폭이 줄 때의 저항 크기 효과, RC 지연과 저유전막, 전자 이동 수명(Black 식)과 차세대 배선 금속을 시뮬레이터로 익힌다.">
-<meta property="og:url" content="https://processbook.euiyun.com/chapters/metal.html">
-<meta property="og:image" content="https://processbook.euiyun.com/og.png">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Contacts, BEOL, and Thick Top Metal · PMICBook">
+<meta property="og:description" content="Copper contacts and interconnects connect PMIC devices and circuits. Explore dual-damascene integration, line resistance, RC delay, current density, IR drop, and electromigration using illustrative models.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/chapters/metal.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://processbook.euiyun.com/chapters/metal.html#chapter","name":"금속 배선","headline":"금속 배선 · ProcessBook","description":"알루미늄에서 구리 다마신까지. 듀얼 다마신 공정을 단면으로 쌓고, 배리어·씨드·전해 도금, 선폭이 줄 때의 저항 크기 효과, RC 지연과 저유전막, 전자 이동 수명(Black 식)과 차세대 배선 금속을 시뮬레이터로 익힌다.","url":"https://processbook.euiyun.com/chapters/metal.html","position":11,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공대 학부","image":"https://processbook.euiyun.com/og.png","dateModified":"2026-10-01","isPartOf":{"@type":"Book","@id":"https://processbook.euiyun.com/#book","name":"ProcessBook · 반도체 제조 공정 교과서","url":"https://processbook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ProcessBook","item":"https://processbook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"11. 금속 배선","item":"https://processbook.euiyun.com/chapters/metal.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/metal.html#chapter","name":"Contacts, BEOL, and Thick Top Metal","headline":"Contacts, BEOL, and Thick Top Metal · PMICBook","description":"Copper contacts and interconnects connect PMIC devices and circuits. Explore dual-damascene integration, line resistance, RC delay, current density, IR drop, and electromigration using illustrative models.","url":"https://frbread7.github.io/pmicbook/chapters/metal.html","position":17,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"17. Contacts, BEOL, and Thick Top Metal","item":"https://frbread7.github.io/pmicbook/chapters/metal.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -34,207 +37,205 @@
 <body data-chapter="metal">
 <main class="chapter">
   <header class="chapter-hero">
-    <div class="eyebrow">Chapter 11</div>
-    <h1>금속 배선</h1>
-    <p class="lead">트랜지스터 수백억 개는 혼자서는 아무 일도 못 한다. 그것들을 잇는 수십 km의 금속선, 즉 <strong>배선</strong><span class="en">(Interconnect)</span>이 있어야 회로가 된다. 최신 로직 칩의 배선은 15층 안팎, 가장 아래층의 선 간격은 20 nm대다. 트랜지스터는 작아질수록 빨라지지만 배선은 가늘어질수록 저항이 커져 오히려 느려진다. 오늘날 칩의 속도와 전력을 좌우하는 것은 트랜지스터만큼이나 배선이다. 이 장에서는 구리 다마신 공정을 직접 쌓아 보고, 배선이 왜 점점 어려워지는지 계산한다.</p>
+    <div class="eyebrow">Chapter 17 · Contacts and interconnect</div>
+    <h1>PMIC interconnect: contacts, BEOL and reliability</h1>
+    <p class="lead">Power-management ICs rely on contacts, vias, and metal to connect control circuits with high-current devices and package terminals. Resistance causes IR drop and self-heating; local current density and temperature affect interconnect reliability. The retained ProcessBook models explain deposition, fill, line scaling, and relative stress trends. They are illustrative, not a foundry stack, design rule, or lifetime prediction.</p>
     <ul class="objectives">
-      <li>알루미늄 식각 방식에서 구리 다마신으로 바뀐 이유를 설명한다.</li>
-      <li>듀얼 다마신 공정(비아 퍼스트)을 단면으로 쌓고 각 단계의 목적을 안다.</li>
-      <li>배리어·씨드·전해 도금(수퍼필)의 역할을 이해한다.</li>
-      <li>선폭이 줄 때 저항률이 커지는 크기 효과와 배리어 두께의 영향을 계산한다.</li>
-      <li>RC 지연을 저항·커패시턴스·길이로 추정하고 저유전막의 효과를 비교한다.</li>
-      <li>Black 식으로 전자 이동(EM) 수명을 계산하고 Ru·Mo 같은 차세대 금속의 의미를 안다.</li>
+      <li>Trace current from a power device through contacts, vias, upper metal, and package connections.</li>
+      <li>Explain why copper damascene uses patterned dielectric, barriers, fill, and CMP.</li>
+      <li>Use the retained fine-line models to distinguish local signal RC from PMIC supply-path IR drop.</li>
+      <li>Compare relative electromigration stress trends without inferring a product lifetime.</li>
     </ul>
   </header>
 
   <section id="history">
-    <h2>알루미늄에서 구리로</h2>
-    <p>1990년대까지 배선은 <strong>알루미늄</strong>이었다. 알루미늄을 전면에 입히고 감광막으로 무늬를 그려 염소 플라즈마로 식각하는 방식(감산 공정)이다. 그런데 알루미늄은 저항률이 2.7 µΩ·cm로 높고, 전류가 흐르면 원자가 밀려나는 전자 이동<span class="en">(Electromigration)</span>에 약했다. <strong>구리</strong>는 저항률 1.7 µΩ·cm로 약 40% 낮고 전자 이동에도 훨씬 강하지만, 결정적인 약점이 있었다. 휘발성 염화물을 만들지 않아 <strong>플라즈마로 식각할 수 없다</strong>. 게다가 실리콘과 산화막 속으로 빠르게 확산해 트랜지스터를 망가뜨린다.</p>
-    <p>1997년 IBM이 내놓은 해답이 <span class="term">다마신</span><span class="en">(Damascene)</span>이다. 다마스쿠스의 상감 세공에서 이름을 땄다. 금속을 깎아 선을 만드는 대신, <strong>절연막에 홈을 파고 그 홈을 금속으로 채운 뒤 넘친 금속을 CMP로 갈아 낸다</strong>. 구리를 식각할 필요가 없고, 홈 안쪽을 얇은 배리어 금속(Ta/TaN)으로 감싸 확산을 막는다. 홈(트렌치)과 아래층으로 가는 구멍(비아)을 한 번에 채우는 것이 <span class="term">듀얼 다마신</span>이다.</p>
+    <h2>From subtractive aluminum to copper damascene</h2>
+    <p>Aluminum interconnect was commonly patterned by subtractive etching. Copper has lower bulk resistivity, but is difficult to pattern with conventional volatile-product plasma etches and can diffuse into surrounding dielectrics and silicon. Copper interconnect therefore uses a damascene approach with a diffusion barrier.</p>
+    <p>In damascene integration, dielectric trenches and contact vias are patterned first, lined with a barrier, filled with metal, and planarized by CMP. Dual damascene forms a via and its connected line in a shared metal-fill sequence. Exact stacks and process order vary by technology.</p>
   </section>
 
+  <section id="pmic-metal"><h2>Contacts, vias and thick top metal in a PMIC</h2><p>Power-device source, drain, and body contacts feed local metal, vias, and upper-level buses. Contact and via resistance can concentrate voltage drop and heating at current bottlenecks. Wider or thicker upper metal can reduce line resistance, but consumes routing area and changes capacitance, stress, and thermal spreading. The right trade-off depends on the current waveform, layout, stack, and package return path.</p><div class="formula">$$\Delta V = IR,\qquad P_{\mathrm{loss}}=I^2R,\qquad J=I/A$$<div class="where">These relations are first-order electrical estimates. Current crowding at contacts and corners, temperature-dependent resistivity, parallel paths, and self-heating require layout-aware analysis. No universal current-density value guarantees electromigration lifetime.</div></div></section>
   <section id="dd">
-    <h2>듀얼 다마신을 쌓아 보자</h2>
-    <p>아래 시뮬레이터는 아래층 구리선(M1) 위에 비아와 M2 트렌치를 만드는 비아 퍼스트 듀얼 다마신을 단계별로 보여 준다. 절연막은 저유전막(low-k), 식각 정지막은 SiCN(그림에서는 질화막)으로 나타냈다.</p>
+    <h2>Dual-damascene interconnect cross-section</h2>
+    <p>The retained cross-section steps through a simplified via-first dual-damascene connection from M1 to M2. It uses a low-k dielectric and represents the etch stop as nitride. This is one illustrative local-interconnect flow; PMIC platforms may also use aluminum, copper, or mixed metal stacks with thicker upper conductors.</p>
     <div id="sim-dd"></div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>단계</th><th>핵심</th><th>어려운 점</th></tr></thead>
+        <thead><tr><th>Step</th><th>Purpose</th><th>Integration concern</th></tr></thead>
         <tbody>
-          <tr><td>배리어 (Ta/TaN, 2~3 nm)</td><td>구리 확산 차단, 접착</td><td>단면적을 잡아먹는다. 선폭 20 nm에서 배리어 2 nm × 양쪽 = 20%</td></tr>
-          <tr><td>씨드 (PVD Cu, 수 nm)</td><td>도금 전극</td><td>좁은 트렌치 입구 오버행 → 도금 보이드</td></tr>
-          <tr><td>전해 도금 (ECP)</td><td>첨가제(가속제·억제제·평탄제)로 바닥부터 채우는 수퍼필</td><td>첨가제 관리, 보이드·심</td></tr>
-          <tr><td>어닐</td><td>결정립 성장으로 저항↓, 응력 안정</td><td>저유전막·하부막 열 한계 (~400 °C)</td></tr>
-          <tr><td>CMP</td><td>넘친 구리·배리어 제거</td><td>디싱·이로전(<a href="cmp.html">10장</a>), 저유전막 박리</td></tr>
-          <tr><td>캡 (SiCN, Co)</td><td>위쪽 확산 차단, EM 개선</td><td>구리 위만 선택적으로 Co 캡을 입히면 EM 수명 크게 향상</td></tr>
+          <tr><td>Barrier/liner</td><td>Limit copper diffusion and support adhesion</td><td>Occupies conductive area, especially in narrow features</td></tr>
+          <tr><td>Seed or other fill-enabling layer</td><td>Provide a conductive path for electroplating</td><td>Overhang can close a narrow opening before fill</td></tr>
+          <tr><td>Electrochemical fill</td><td>Fill the via and trench</td><td>Additive balance and feature geometry affect void or seam risk</td></tr>
+          <tr><td>Post-fill treatment</td><td>Adjust grain structure and stress</td><td>Thermal budget and dielectric compatibility depend on the stack</td></tr>
+          <tr><td>CMP</td><td>Remove overburden and planarize</td><td>Dishing, erosion, and dielectric damage; see <a href="cmp.html">Chapter 16</a></td></tr>
+          <tr><td>Cap</td><td>Limit diffusion at the upper interface</td><td>Interface-dependent electromigration behavior needs stack-specific evidence</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="callout deep"><strong>수퍼필: 구멍이 바닥부터 차는 이유</strong><p>전해 도금액에는 세 종류의 첨가제가 들어 있다. 억제제(PEG 계열 고분자)는 표면을 덮어 도금을 느리게 하고, 가속제(SPS 계열)는 반대로 빠르게 한다. 트렌치 바닥의 오목한 모서리에서는 도금이 진행될수록 표면적이 줄어 가속제가 농축되고, 그래서 바닥이 점점 빨리 자란다(곡률 증대 가속제 피복 모델). 평탄제는 위가 볼록하게 솟는 것을 막는다. 덕분에 컨포멀 증착이라면 가운데에 이음매나 보이드가 남을 좁은 구멍도 바닥부터 꽉 찬다.</p></div>
+    <div class="callout deep"><strong>Why bottom-up fill matters</strong><p>A conformal deposit can close a narrow opening before its interior fills, leaving a seam or void. In one electrochemical copper-fill approach, suppressor, accelerator, and leveler additives change local deposition rates so the recessed region fills before the opening closes. This explains the engineering objective; actual additive chemistry and feature dimensions are process-specific.</p></div>
   </section>
 
   <section id="size">
-    <h2>가늘어질수록 저항률이 커진다</h2>
-    <p>벌크 구리의 저항률은 1.7 µΩ·cm지만, 선폭이 전자의 평균 자유 행로(구리 약 39 nm)에 가까워지면 상황이 바뀐다. 전자가 선의 표면과 결정립 경계에 부딪혀 산란되는 일이 잦아져 저항률이 커진다(Fuchs–Sondheimer 표면 산란, Mayadas–Shatzkes 결정립 산란). 게다가 구리는 배리어가 필요해, 선폭이 줄어도 배리어 두께는 그대로라 전도 면적의 비율이 줄어든다. 이 두 효과가 겹쳐 20 nm 선폭의 구리선은 같은 단면적 기준으로 벌크보다 수 배 저항이 크다.</p>
-    <div class="formula">$$\rho(w) \approx \rho_0\left[1 + \frac{C\,\lambda}{w}\right], \qquad R' = \frac{\rho(w)}{(w - 2t_b)(h - t_b)}$$
-      <div class="where">\(\lambda\)는 전자 평균 자유 행로, \(C\)는 표면·결정립 산란을 뭉뚱그린 계수(~1), \(t_b\)는 배리어 두께, \(h\)는 배선 높이. 평균 자유 행로가 짧은 Ru(~6.6 nm)·Mo(~11 nm)는 벌크 저항률이 구리의 3~4배인데도, 배리어가 거의 필요 없어 아주 가는 선에서는 구리보다 유리해질 수 있다.</div>
+    <h2>Fine-line scaling as a comparison case</h2>
+    <p>At very small line widths, surface and grain-boundary scattering can raise effective resistivity while a barrier reduces the available conductor area. The retained model below compares this fine-line case for copper and alternative metals. It is useful for understanding why geometry matters, but its 6–100 nm widths describe a local-interconnect scaling exercise, not a PMIC top-metal design rule. Power paths are usually evaluated with their actual wider conductors, contacts, vias, parallel routes, and temperature profile.</p>
+    <div class="formula">$$w_c=w-2t_b,\quad h_c=h-t_b,\quad \rho_{\mathrm{eff}}\approx\rho_0\left(1+\frac{C\lambda}{\min(w_c,h_c)}\right),\quad R'=\frac{\rho_{\mathrm{eff}}}{w_ch_c}$$
+      <div class="where">\(\lambda\) is an illustrative electron mean free path, \(C\) lumps scattering effects, \(t_b\) is barrier thickness, and \(w_c,h_c\) are conducting dimensions. The expression requires \(w_c&gt;0\) and \(h_c&gt;0\); the widget's input bounds enforce this. Material values and barrier assumptions are teaching inputs, not a process comparison or selection rule.</div>
     </div>
     <div class="sim" id="sim-size">
-      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>금속별 선 저항 대 선폭</h3></div>
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>Line resistance versus line width by metal</h3></div>
       <div class="sim-body side">
         <div class="sim-view"><canvas id="sz-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>선폭 <output id="sz-w-out"></output></span><input type="range" id="sz-w" min="6" max="100" step="1" value="20"></label>
-          <label class="ctrl"><span>종횡비 (높이/폭) <output id="sz-a-out"></output></span><input type="range" id="sz-a" min="1" max="3" step="0.1" value="2"></label>
-          <label class="ctrl"><span>구리 배리어 두께 (한쪽) <output id="sz-b-out"></output></span><input type="range" id="sz-b" min="0.5" max="5" step="0.1" value="2.5"></label>
-          <label class="ctrl"><span>산란 계수 C <output id="sz-c-out"></output></span><input type="range" id="sz-c" min="0.5" max="2" step="0.05" value="1"></label>
+          <label class="ctrl"><span>line width<output id="sz-w-out"></output></span><input type="range" id="sz-w" min="6" max="100" step="1" value="20"></label>
+          <label class="ctrl"><span>Aspect ratio (height/width)<output id="sz-a-out"></output></span><input type="range" id="sz-a" min="1" max="3" step="0.1" value="2"></label>
+          <label class="ctrl"><span>Copper barrier thickness (one side)<output id="sz-b-out"></output></span><input type="range" id="sz-b" min="0.5" max="2.5" step="0.1" value="2.5"></label>
+          <label class="ctrl"><span>Scattering coefficient C<output id="sz-c-out"></output></span><input type="range" id="sz-c" min="0.5" max="2" step="0.05" value="1"></label>
         </div>
       </div>
       <div class="sim-readout">
-        <div class="stat"><span class="k">Cu 선 저항</span><span class="v" id="sz-o-cu">—</span></div>
+        <div class="stat"><span class="k">Cu line resistance</span><span class="v" id="sz-o-cu">—</span></div>
         <div class="stat"><span class="k">Ru</span><span class="v" id="sz-o-ru">—</span></div>
         <div class="stat"><span class="k">Mo</span><span class="v" id="sz-o-mo">—</span></div>
         <div class="stat"><span class="k">W</span><span class="v" id="sz-o-w">—</span></div>
-        <div class="stat"><span class="k">가장 낮은 금속</span><span class="v" id="sz-o-best">—</span></div>
+        <div class="stat"><span class="k">lowest metal</span><span class="v" id="sz-o-best">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 선폭 50 nm에서는 구리가 압도적이다. 15 nm 아래로 줄이면 배리어와 크기 효과 때문에 구리 곡선이 가파르게 치솟고, 배리어 없는 Ru·Mo가 비슷해지거나 역전한다. ② 배리어를 1 nm로 얇게 만들 수 있다면 구리의 수명이 늘어난다. 원자층 수준 배리어와 자기 형성 배리어(CuMn) 연구가 계속되는 이유다. ③ 종횡비를 높이면 저항은 줄지만 이웃 선과의 커패시턴스가 커진다(다음 절). (금속별 ρ₀·λ는 문헌 대표값: Cu 1.7/39, Ru 7.1/6.6, Mo 5.3/11, W 5.3/19 µΩ·cm/nm, Ru·Mo·W 라이너 0.5 nm 가정)</div>
+      <div class="sim-note">Try reducing width while keeping the assumed barrier thickness fixed: the copper conducting area shrinks rapidly. Increasing height lowers this model's resistance per length but may increase coupling and stack stress. The Cu, Ru, Mo, and W curves use illustrative bulk-resistivity/mean-free-path pairs (µΩ·cm/nm): 1.7/39, 7.1/6.6, 5.3/11, and 5.3/19, with a 0.5 nm liner for the non-Cu examples. They are sensitivity inputs, not transferable material rankings.</div>
     </div>
   </section>
 
   <section id="rc">
-    <h2>RC 지연과 저유전막</h2>
-    <p>배선의 신호 지연은 저항 \(R\)과 커패시턴스 \(C\)의 곱으로 정해진다. 선의 길이 \(L\)에 대해 둘 다 비례하므로 분포 RC 선로의 지연은 길이의 <strong>제곱</strong>에 비례한다. 커패시턴스는 대부분 같은 층의 이웃 선과의 측면 커패시턴스이고, 절연막의 유전율 \(k\)에 비례한다. 그래서 SiO₂(k = 3.9~4.2) 대신 탄소를 섞고 구멍을 낸 SiCOH(k ≈ 2.4~3.0), 나아가 선 사이에 공기 구멍을 둔 에어갭(k → 1)을 쓴다. 대가는 기계적 강도다. 다공성 저유전막은 CMP·패키징 응력에 쉽게 금이 가고 플라즈마에 손상된다.</p>
+    <h2>Signal RC delay versus power-path voltage drop</h2>
+    <p>A distributed signal wire accumulates resistance and capacitance with length, so its first-order RC delay grows roughly with \(L^2\). Dielectric constant and neighboring geometry affect coupling. The retained fine-line widget explores that signal-path question. A PMIC power bus has a different primary concern: DC and pulsed current create voltage drop, local heating, and switching-loop parasitics; use <a href="layout.html">Chapter 19</a> for current-loop and thermal interpretation. Lower-k materials can reduce capacitive coupling, while their mechanical and integration properties still matter.</p>
     <div class="formula">$$\tau \approx 0.38\,R'C'L^2, \qquad C' \approx \varepsilon_0 k\left(2\frac{h}{s} + 2\frac{w}{t_{\text{ILD}}}\right) + C_{\text{fringe}}$$
-      <div class="where">\(R'\), \(C'\)는 단위 길이당 저항·커패시턴스, \(s\)는 선 간격, \(t_{\text{ILD}}\)는 위아래 층과의 절연막 두께. 긴 배선은 중간중간 리피터(버퍼)를 넣어 지연을 길이에 선형으로 만든다.</div>
+      <div class="where">\(R'\) and \(C'\) are resistance and capacitance per unit length, \(s\) is line spacing, and \(t_{\text{ILD}}\) is interlayer-dielectric thickness. The coefficient and capacitance geometry are illustrative; driver/load delay, return path, distributed inductance, and nonlinear switching are omitted.</div>
     </div>
     <div class="sim" id="sim-rc">
-      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>배선 RC 지연 계산기</h3></div>
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>Wiring RC Delay Calculator</h3></div>
       <div class="sim-body side">
         <div class="sim-view"><canvas id="rc-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>피치 (선폭 = 피치/2) <output id="rc-p-out"></output></span><input type="range" id="rc-p" min="20" max="400" step="2" value="40"></label>
-          <label class="ctrl"><span>유전율 k <output id="rc-k-out"></output></span><input type="range" id="rc-k" min="1" max="4.2" step="0.05" value="2.7"></label>
-          <label class="ctrl"><span>배선 길이 <output id="rc-l-out"></output></span><input type="range" id="rc-l" min="1" max="2000" step="1" value="100"></label>
-          <label class="ctrl"><span>금속</span><select id="rc-m"><option value="cu">구리 (배리어 2.5 nm)</option><option value="ru">루테늄</option><option value="mo">몰리브덴</option></select></label>
+          <label class="ctrl"><span>Pitch (linewidth = pitch/2)<output id="rc-p-out"></output></span><input type="range" id="rc-p" min="20" max="400" step="2" value="40"></label>
+          <label class="ctrl"><span>permittivity k<output id="rc-k-out"></output></span><input type="range" id="rc-k" min="1" max="4.2" step="0.05" value="2.7"></label>
+          <label class="ctrl"><span>wiring length<output id="rc-l-out"></output></span><input type="range" id="rc-l" min="1" max="2000" step="1" value="100"></label>
+          <label class="ctrl"><span>metal</span><select id="rc-m"><option value="cu">Copper (barrier 2.5 nm)</option><option value="ru">ruthenium</option><option value="mo">molybdenum</option></select></label>
         </div>
       </div>
       <div class="sim-readout">
         <div class="stat"><span class="k">R′</span><span class="v" id="rc-o-r">—</span></div>
         <div class="stat"><span class="k">C′</span><span class="v" id="rc-o-c">—</span></div>
-        <div class="stat"><span class="k">RC 지연</span><span class="v" id="rc-o-t">—</span></div>
-        <div class="stat"><span class="k">같은 길이 트랜지스터 지연 대비</span><span class="v" id="rc-o-x">—</span></div>
+        <div class="stat"><span class="k">RC delay</span><span class="v" id="rc-o-t">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 피치 40 nm(최하층급) 구리선 100 µm의 지연은 수십 ps로, 게이트 지연(~5~10 ps)보다 훨씬 크다. 그래서 짧은 하층은 국부 연결에만, 긴 신호는 굵은 상층으로 올린다. ② k를 4.0 → 2.5로 낮추면 지연이 약 40% 준다. ③ 길이를 10배로 늘리면 지연은 100배다. (높이 = 2 × 선폭, 위아래 절연막 = 선폭, 프린지 C 상수 근사)</div>
+      <div class="sim-note">Try changing length by a factor of ten with other inputs fixed: the model's distributed RC term grows by a factor of one hundred. Changing the assumed dielectric constant changes coupling. This example uses height = twice line width and a simplified fringe term; it cannot determine a PMIC timing limit or a particular gate's delay.</div>
     </div>
   </section>
 
   <section id="em">
-    <h2>전자 이동: 배선의 수명</h2>
-    <p>전류 밀도가 10⁶ A/cm²를 넘으면 흐르는 전자가 금속 원자를 조금씩 밀어(전자 바람) 한쪽에는 빈 구멍(보이드)이, 반대쪽에는 원자가 쌓인 언덕(힐록)이 생긴다. 보이드가 선을 끊으면 회로가 죽는다. 이 <span class="term">전자 이동</span><span class="en">(EM, Electromigration)</span> 수명은 경험식인 <strong>Black 식</strong>으로 예측한다.</p>
+    <h2>Electromigration: relative stress trends</h2>
+    <p>Current and temperature can drive atomic transport, forming voids or hillocks that change route resistance. Black’s equation is an empirical stress model. Its constants depend on the material, interface, geometry, waveform, process, and failure criterion. This retained widget now compares ratios within one assumed mechanism; it does not report years of life or a qualification result.</p>
     <div class="formula">$$\mathrm{MTTF} = A\,J^{-n}\exp\!\left(\frac{E_a}{kT}\right)$$
-      <div class="where">\(J\)는 전류 밀도, \(n\)은 보통 1~2, \(E_a\)는 원자가 움직이는 경로의 활성화 에너지. 알루미늄은 결정립 경계(~0.5~0.7 eV), 구리는 위쪽 캡과의 계면(~0.8~1.0 eV)이 주 경로이며, Co 캡을 씌우면 계면 확산이 억제되어 ~1.4 eV 이상으로 높아진다. 신뢰성 시험은 고온·고전류로 가속해 실제 사용 조건으로 환산한다.</div>
+      <div class="where">\(J\) is current density, \(n\) is an empirical current exponent, \(E_a\) is an effective activation energy, and \(A\) includes calibration factors. Ratios cancel \(A\) only when the assumed mechanism and parameters remain applicable at both points. The selectable \(E_a\) and \(n\) values below are sensitivity inputs, not assignments to aluminum, copper, or a particular cap.</div>
     </div>
     <div class="sim" id="sim-em">
-      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>Black 식: 전류 밀도·온도와 수명</h3></div>
+      <div class="sim-head"><span class="sim-tag">RELATIVE MODEL</span><h3>Current and temperature stress sensitivity</h3></div>
       <div class="sim-body side">
         <div class="sim-view"><canvas id="em-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>전류 밀도 J <output id="em-j-out"></output></span><input type="range" id="em-j" min="0.1" max="20" step="0.1" value="2"></label>
-          <label class="ctrl"><span>동작 온도 <output id="em-t-out"></output></span><input type="range" id="em-t" min="25" max="300" step="5" value="105"></label>
-          <label class="ctrl"><span>활성화 에너지 E<sub>a</sub> <output id="em-e-out"></output></span><input type="range" id="em-e" min="0.5" max="1.6" step="0.05" value="0.9"></label>
-          <div class="ctrl"><span>예시</span><div class="seg" id="em-q"><button data-value="0.6">Al</button><button data-value="0.9" class="on">Cu/SiCN 캡</button><button data-value="1.4">Cu/Co 캡</button></div></div>
-          <label class="ctrl"><span>지수 n <output id="em-n-out"></output></span><input type="range" id="em-n" min="1" max="2.5" step="0.1" value="2"></label>
+          <label class="ctrl"><span>Current density J<output id="em-j-out"></output></span><input type="range" id="em-j" min="0.1" max="20" step="0.1" value="2"></label>
+          <label class="ctrl"><span>operating temperature<output id="em-t-out"></output></span><input type="range" id="em-t" min="25" max="300" step="5" value="105"></label>
+          <label class="ctrl"><span>Activation energy E<sub>a</sub> <output id="em-e-out"></output></span><input type="range" id="em-e" min="0.5" max="1.6" step="0.05" value="0.9"></label>
+          <div class="ctrl"><span>Illustrative activation energy</span><div class="seg" id="em-q"><button data-value="0.6">0.60 eV</button><button data-value="0.9" class="on">0.90 eV</button><button data-value="1.4">1.40 eV</button></div></div>
+          <label class="ctrl"><span>exponent n<output id="em-n-out"></output></span><input type="range" id="em-n" min="1" max="2.5" step="0.1" value="2"></label>
         </div>
       </div>
       <div class="sim-readout">
-        <div class="stat"><span class="k">기준 대비 수명</span><span class="v" id="em-o-r">—</span></div>
-        <div class="stat"><span class="k">추정 수명 (기준 10년)</span><span class="v" id="em-o-y">—</span></div>
-        <div class="stat"><span class="k">가속 시험 (300 °C, 10 MA/cm²) 배율</span><span class="v" id="em-o-a">—</span></div>
+        <div class="stat"><span class="k">Trend factor vs 1 MA/cm², 105 °C</span><span class="v" id="em-o-r">—</span></div>
+        <div class="stat"><span class="k">Factor if current density doubles</span><span class="v" id="em-o-a">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 기준(1 MA/cm², 105 °C)에서 10년인 배선의 전류 밀도를 2배로 올리면 n = 2에서 수명이 1/4이다. ② 온도를 105 → 125 °C로 20 °C만 올려도 Cu(0.9 eV)는 수명이 절반 가까이 준다. ③ Co 캡(1.4 eV)은 같은 조건에서 수명이 수십 배 길다. 선폭이 줄어 전류 밀도가 계속 커지는 상황에서 EM은 배선 설계의 하드 리밋이다.</div>
+      <div class="sim-note">Try doubling current density while keeping the illustrative exponent at \(n=2\): the relative trend factor becomes one quarter. Change temperature or activation energy to see sensitivity. The reference point is an arbitrary index of one, not a ten-year lifetime; this model cannot compare different stacks or predict field life without calibration.</div>
     </div>
   </section>
 
   <section id="next">
-    <h2>배선의 미래</h2>
+    <h2>Interconnect choices in PMICs</h2>
     <ul>
-      <li><strong>새 금속</strong>: 최하층 국부 배선과 비아에 Ru·Mo·W 같은 배리어리스 금속, 직접 식각이 가능한 Ru로 다시 감산 공정(서브트랙티브)을 쓰는 방안, 에어갭과의 결합.</li>
-      <li><strong>후면 전력 공급</strong><span class="en">(BSPDN)</span>: 전원선을 웨이퍼 뒷면으로 옮겨 앞면 배선은 신호에만 쓴다. 전압 강하와 배선 혼잡을 함께 줄인다(<a href="advanced.html">13장</a>).</li>
-      <li><strong>3D 적층과 하이브리드 본딩</strong>: 칩을 쌓아 수평 배선을 수직 연결(µm 피치 Cu–Cu 본딩)로 대체한다.</li>
-      <li><strong>자기 정렬 비아</strong>: 비아가 아래 선과 어긋나 이웃 선에 닿는 위험을 구조적으로 막는 공정. 피치가 줄수록 오버레이 여유가 사라지기 때문이다.</li>
+      <li><strong>Power routes:</strong> size upper metal, contacts, and vias for the specified current waveform, IR drop, temperature rise, and local crowding. Parallel paths need their actual current distribution checked.</li>
+      <li><strong>Return paths:</strong> place high-di/dt supply and return loops to limit parasitic inductance and coupling into sensitive analog nodes; see <a href="layout.html">Chapter 19</a>.</li>
+      <li><strong>Package connection:</strong> bond wires, bumps, leadframes, and package planes add resistance, inductance, and thermal impedance. The die metal alone does not set system behavior.</li>
+      <li><strong>Advanced options:</strong> hybrid bonding and backside routing have different integration, alignment, and thermal requirements. They are bounded context in <a href="advanced.html">Chapter 23</a>, not default PMIC stack assumptions.</li>
     </ul>
   </section>
 
   <section class="keypoints" id="summary">
-    <h2>핵심 정리</h2>
+    <h2>Key takeaways</h2>
     <ol>
-      <li>구리는 식각이 어렵고 확산이 빨라, 홈을 파고 채운 뒤 CMP로 가는 다마신과 배리어가 필요하다.</li>
-      <li>듀얼 다마신은 비아와 트렌치를 한 번에 채운다: 정지막 → 저유전막 → 비아 → 트렌치 → 배리어/씨드 → 도금 → CMP → 캡.</li>
-      <li>선폭이 평균 자유 행로에 가까워지면 표면·결정립 산란으로 저항률이 커지고, 배리어가 단면적을 잡아먹는다. 아주 가는 선에서는 Ru·Mo가 유리해질 수 있다.</li>
-      <li>RC 지연 ∝ R′C′L². 저유전막과 리피터, 굵은 상층 배선으로 관리한다.</li>
-      <li>EM 수명은 \(J^{-n}e^{E_a/kT}\). 계면 캡(Co)이 구리 EM을 크게 개선한다.</li>
+      <li>PMIC contacts, vias, upper metal, and package connections form a current and thermal path; local bottlenecks matter.</li>
+      <li>Damascene patterns dielectric trenches and vias before metal fill, then planarizes with CMP.</li>
+      <li>Fine-line scattering and barrier area can raise resistance; the retained scaling models are illustrative local-interconnect examples.</li>
+      <li>Distributed signal RC can scale approximately with \(L^2\); supply paths also require IR-drop, switching-loop, and thermal analysis.</li>
+      <li>Black-law ratios show sensitivity to assumed stress parameters but cannot determine a qualified lifetime without measured calibration.</li>
     </ol>
   </section>
 
   <section class="quiz-sec" id="quiz">
-    <h2>확인 퀴즈</h2>
+    <h2>Knowledge check</h2>
     <div class="quiz">
-      <div class="quiz-q"><p>구리 배선에 다마신 공정이 필요한 가장 큰 이유는?</p><div class="opts">
-        <button class="opt">구리가 너무 단단해서</button><button class="opt" data-correct>구리는 휘발성 염화물을 만들지 않아 플라즈마로 식각하기 어렵기 때문에</button><button class="opt">구리는 노광이 안 되기 때문에</button><button class="opt">구리는 CMP가 안 되기 때문에</button>
-      </div><div class="quiz-exp">CuClₓ는 상온에서 휘발하지 않는다. 그래서 절연막을 식각해 홈을 만들고 구리를 채운다.</div></div>
-      <div class="quiz-q"><p>배선 길이를 3배로 늘리면 분포 RC 지연은?</p><div class="opts">
-        <button class="opt">3배</button><button class="opt" data-correct>9배</button><button class="opt">√3배</button><button class="opt">변하지 않는다</button>
-      </div><div class="quiz-exp">R과 C가 모두 길이에 비례하므로 τ ∝ L².</div></div>
-      <div class="quiz-q"><p>Black 식에서 n = 2일 때 전류 밀도를 3배로 올리면 EM 수명은?</p><div class="opts">
-        <button class="opt">1/3</button><button class="opt" data-correct>1/9</button><button class="opt">3배</button><button class="opt">변하지 않는다</button>
-      </div><div class="quiz-exp">MTTF ∝ J⁻² → 3⁻² = 1/9.</div></div>
-      <div class="quiz-q"><p>선폭 10 nm대에서 Ru가 구리의 대안으로 거론되는 이유는?</p><div class="opts">
-        <button class="opt">벌크 저항률이 구리보다 낮아서</button><button class="opt" data-correct>평균 자유 행로가 짧아 크기 효과가 작고, 배리어가 거의 필요 없어 전도 단면적을 다 쓸 수 있어서</button><button class="opt">녹는점이 낮아서</button><button class="opt">도금이 쉬워서</button>
-      </div><div class="quiz-exp">Ru의 벌크 저항률(7.1)은 구리(1.7)의 4배지만, 아주 가는 선에서는 크기 효과와 배리어 손실 때문에 격차가 사라진다.</div></div>
+      <div class="quiz-q"><p>Why does a typical copper damascene flow pattern the dielectric first?</p><div class="opts">
+        <button class="opt">Copper is an electrical insulator.</button><button class="opt" data-correct>Copper is difficult to pattern by conventional volatile-product plasma etching, so a trench or via is filled and planarized.</button><button class="opt">Copper cannot be planarized.</button><button class="opt">The dielectric needs no patterning.</button>
+      </div><div class="quiz-exp">Damascene creates the recess in dielectric, adds barrier/fill, then uses CMP to remove overburden.</div></div>
+      <div class="quiz-q"><p>What is the distributed RC delay if the wire length is tripled?</p><div class="opts">
+        <button class="opt">3 times</button><button class="opt" data-correct>9 times</button><button class="opt">√3 times</button><button class="opt">doesn't change</button>
+      </div><div class="quiz-exp">Since both R and C are proportional to the length, τ ∝ L².</div></div>
+      <div class="quiz-q"><p>Within one illustrative Black-law parameter set, how does the relative trend factor change when current density triples and \(n=2\)?</p><div class="opts">
+        <button class="opt">1/3</button><button class="opt" data-correct>1/9</button><button class="opt">3 times</button><button class="opt">doesn't change</button>
+      </div><div class="quiz-exp">The relative factor follows \(J^{-2}\), so tripling current gives \(3^{-2}=1/9\). This is not a prediction of field life.</div></div>
+      <div class="quiz-q"><p>Why can a PMIC metal route still fail a voltage-drop target when its wide upper bus appears adequate?</p><div class="opts">
+        <button class="opt">Wider upper metal removes all package resistance.</button><button class="opt" data-correct>Contacts, vias, local necks, parallel current distribution, and package connections also contribute resistance.</button><button class="opt">Only signal-wire capacitance sets DC drop.</button><button class="opt">The metal temperature never changes.</button>
+      </div><div class="quiz-exp">A power path is a series and parallel network. Analyze the actual device-to-package current path, including local bottlenecks.</div></div>
     </div>
   </section>
+<section class="callout" id="attribution"><h2>Source and attribution</h2><p>Derived from ProcessBook and adapted under CC BY 4.0 from <a href="https://github.com/geniuskey/processbook/blob/0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff/chapters/metal.html">the immutable upstream metal lesson at commit 0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff</a>. Content has been translated and reframed for PMIC/BCD engineering; the retained simulators use simplified educational assumptions and do not represent foundry recipes or qualification data. See <a href="../LICENSE-CC-BY-4.0">CC BY 4.0 license</a>.</p></section>
 </main>
 <script>
 (function () {
   "use strict";
   function small(v, u) { return v + "<small>" + u + "</small>"; }
 
-  /* ---------------- 듀얼 다마신 단면 */
+  /* ---------------- Dual damascene cross section */
   var W = 150, DX = 4, mid = W * DX / 2;
   XS.stepper("#sim-dd", {
-    title: "비아 퍼스트 듀얼 다마신", tag: "CROSS-SECTION",
+    title: "Via First Dual Damascene", tag: "CROSS-SECTION",
     make: function () {
       var s = new XS.Sim({ W: W, H: 110, dx: DX, surf: 70, substrate: "lowk" });
       s.rect("tin", mid - 70, mid + 70, 0, 84); s.rect("cu", mid - 66, mid + 66, 0, 80);
       return s;
     },
     legend: ["lowk", "nit", "cu", "tin", "pr", "acl"], doping: false,
-    startDesc: "아래층 구리선 M1(TaN 배리어로 감싼 구리)이 저유전막 속에 묻혀 있고, 표면은 CMP로 평평하다.",
+    startDesc: "The lower layer copper wire M1 (copper wrapped with TaN barrier) is buried in a low dielectric film, and the surface is flat by CMP.",
     steps: [
-      { op: "depo", mat: "nit", mode: "cvd", thick: 16, stick: 0.2, k: "DEP", label: "식각 정지막 SiCN 16 nm", desc: "구리 위쪽 확산을 막는 캡이자, 비아 식각을 멈추는 정지막이다(그림은 질화막 색)." },
-      { op: "depo", mat: "lowk", mode: "cvd", thick: 160, stick: 0.2, k: "DEP", label: "저유전막 (SiCOH) 160 nm", desc: "PECVD로 탄소가 섞인 다공성 산화막을 입힌다. k ≈ 2.5~3." },
-      { op: "depo", mat: "acl", mode: "cvd", thick: 30, stick: 0.2, k: "DEP", label: "하드마스크 30 nm", desc: "얇은 감광막만으로는 식각을 버티지 못하므로 하드마스크를 깐다." },
-      { op: "litho", thick: 100, wl: 193, NA: 1.35, sigma: 0.6, dose: 26, focus: 0, swing: 0.1, peb: 6, dev: 40, clear: [[mid - 30, mid + 30]], k: "LITH", label: "비아 노광 (60 nm 홀)", desc: "아래 M1 위에 비아 자리를 연다. 오버레이가 어긋나면 비아가 이웃 선으로 빗나간다." },
-      { op: "etch", sel: { acl: 1, lowk: 0.3, pr: 0.3 }, rate: 4, time: 9, ion: 0.95, sigma: 2, k: "ETCH", label: "하드마스크 식각", desc: "감광막 무늬를 하드마스크로 옮긴다." },
-      { op: "etch", sel: { lowk: 1, nit: 0.05, pr: 0.25, acl: 0.05 }, rate: 5, time: 36, ion: 0.95, sigma: 2, k: "ETCH", label: "비아 식각 (정지막에서 멈춤)", desc: "플루오로카본 플라즈마로 저유전막을 뚫는다. SiCN 정지막에서 멈춘다." },
-      { op: "strip", mat: "pr", k: "STRIP", label: "감광막 제거", desc: "저유전막이 손상되지 않도록 약한 애싱을 쓴다." },
-      { op: "litho", thick: 120, wl: 193, NA: 1.35, sigma: 0.6, dose: 24, focus: 0, swing: 0.1, peb: 6, dev: 40, clear: [[mid - 90, mid + 90]], k: "LITH", label: "트렌치 노광 (M2 선)", desc: "감광막이 비아 구멍을 메운 채로 트렌치 무늬를 찍는다. 비아 속 감광막(플러그)이 비아 바닥을 보호한다." },
-      { op: "etch", sel: { acl: 1, lowk: 0.3, pr: 0.3 }, rate: 4, time: 9, ion: 0.95, sigma: 2, k: "ETCH", label: "하드마스크 식각", desc: "트렌치 무늬를 하드마스크로 옮긴다." },
-      { op: "etch", sel: { lowk: 1, nit: 0.05, pr: 0.5, acl: 0.05 }, rate: 5, time: 18, ion: 0.95, sigma: 2, k: "ETCH", label: "트렌치 식각 (시간 제어)", desc: "트렌치를 저유전막 절반 깊이까지 시간으로 깎는다. 비아 속 감광막도 함께 깎인다." },
-      { op: "strip", mat: ["pr", "acl"], k: "STRIP", label: "감광막·하드마스크 제거", desc: "비아와 트렌치가 이어진 듀얼 다마신 구조가 드러난다." },
-      { op: "etch", sel: { nit: 1, lowk: 0.1 }, rate: 3, time: 7, ion: 1, sigma: 1.5, k: "ETCH", label: "정지막 개방 (라이너 제거)", desc: "비아 바닥의 SiCN을 걷어 아래 M1 구리를 드러낸다." },
-      { op: "depo", mat: "tin", mode: "pvd", thick: 8, cosn: 4, k: "DEP", label: "배리어 Ta/TaN PVD", desc: "이온화 PVD로 비아 바닥까지 얇은 배리어를 입힌다(그림은 TiN 색). 옆벽은 얇다." },
-      { op: "depo", mat: "cu", mode: "cvd", thick: 130, stick: 0.02, k: "DEP", label: "구리 씨드 + 전해 도금", desc: "씨드를 입히고 도금으로 채운다. 실제 수퍼필은 바닥부터 차오르지만 여기서는 거의 컨포멀한 성장으로 근사했다." },
-      { op: "cmp", stop: "", level: -176, over: 0, dish: { cu: 6 }, k: "CMP", label: "구리 CMP", desc: "넘친 구리와 배리어를 갈아 낸다. 넓은 구리 선의 가운데가 조금 오목해진다(디싱)." },
-      { op: "depo", mat: "nit", mode: "cvd", thick: 16, stick: 0.2, k: "DEP", label: "캡 SiCN · 완성", desc: "구리 위를 덮어 다음 층으로의 확산을 막는다. M1–비아–M2가 이어졌다." }
+      { op: "depo", mat: "nit", mode: "cvd", thick: 16, stick: 0.2, k: "DEP", label: "Etch stop film SiCN 16 nm", desc: "It is a cap that prevents upward diffusion of copper and a stop film that stops via etching (nitride film color shown in the picture)." },
+      { op: "depo", mat: "lowk", mode: "cvd", thick: 160, stick: 0.2, k: "DEP", label: "Low dielectric film (SiCOH) 160 nm", desc: "A porous oxide film mixed with carbon is coated with PECVD. k ≈ 2.5~3." },
+      { op: "depo", mat: "acl", mode: "cvd", thick: 30, stick: 0.2, k: "DEP", label: "Hardmask 30 nm", desc: "A thin photoresist film alone cannot withstand etching, so a hardmask is applied." },
+      { op: "litho", thick: 100, wl: 193, NA: 1.35, sigma: 0.6, dose: 26, focus: 0, swing: 0.1, peb: 6, dev: 40, clear: [[mid - 30, mid + 30]], k: "LITH", label: "Via exposure (60 nm hole)", desc: "M1 below If the overlay is misaligned, the via will deviate to the neighboring line." },
+      { op: "etch", sel: { acl: 1, lowk: 0.3, pr: 0.3 }, rate: 4, time: 9, ion: 0.95, sigma: 2, k: "ETCH", label: "Hardmask etch", desc: "Transfers the photoresist pattern to a hardmask." },
+      { op: "etch", sel: { lowk: 1, nit: 0.05, pr: 0.25, acl: 0.05 }, rate: 5, time: 36, ion: 0.95, sigma: 2, k: "ETCH", label: "Via etch (stops at stationary film)", desc: "Piercing of low dielectric film with fluorocarbon plasma. It stops at the SiCN stationary film." },
+      { op: "strip", mat: "pr", k: "STRIP", label: "Removal of photoresist film", desc: "Use weak ashing to avoid damaging the low-k film." },
+      { op: "litho", thick: 120, wl: 193, NA: 1.35, sigma: 0.6, dose: 24, focus: 0, swing: 0.1, peb: 6, dev: 40, clear: [[mid - 90, mid + 90]], k: "LITH", label: "Trench exposure (M2 line)", desc: "A trench pattern is created with the photoresist filling the via hole. The photoresist (plug) inside the via protects the bottom of the via." },
+      { op: "etch", sel: { acl: 1, lowk: 0.3, pr: 0.3 }, rate: 4, time: 9, ion: 0.95, sigma: 2, k: "ETCH", label: "Hardmask etch", desc: "Transfers the trench pattern to a hardmask." },
+      { op: "etch", sel: { lowk: 1, nit: 0.05, pr: 0.5, acl: 0.05 }, rate: 5, time: 18, ion: 0.95, sigma: 2, k: "ETCH", label: "Trench etch (time control)", desc: "The trench is cut over time to half the depth of the low-k film. In the via The photoresist film is also cut off." },
+      { op: "strip", mat: ["pr", "acl"], k: "STRIP", label: "Removal of photoresist film and hard mask", desc: "The dual damascene structure where vias and trenches are connected is revealed." },
+      { op: "etch", sel: { nit: 1, lowk: 0.1 }, rate: 3, time: 7, ion: 1, sigma: 1.5, k: "ETCH", label: "Opening the stop film (removing the liner)", desc: "Removing the SiCN at the bottom of the via to expose the M1 copper underneath." },
+      { op: "depo", mat: "tin", mode: "pvd", thick: 8, cosn: 4, k: "DEP", label: "Barrier Ta/TaN PVD", desc: "Coat a thin barrier with ionized PVD to the bottom of the via (TiN color in the picture). The side walls are thin." },
+      { op: "depo", mat: "cu", mode: "cvd", thick: 130, stick: 0.02, k: "DEP", label: "Copper seed + electrolytic plating", desc: "Seed is applied and filled with plating. Actual superfill fills from the bottom, but here it is approximated by nearly conformal growth." },
+      { op: "cmp", stop: "", level: -176, over: 0, dish: { cu: 6 }, k: "CMP", label: "Copper CMP", desc: "Grind away the excess copper and barrier. The center of the wide copper line becomes slightly concave (dishing)." },
+      { op: "depo", mat: "nit", mode: "cvd", thick: 16, stick: 0.2, k: "DEP", label: "Cap SiCN · Completed", desc: "Covers the copper to prevent diffusion to the next layer. M1-via-M2 followed." }
     ],
-    note: "실제 공정에서는 트렌치 퍼스트, 자기 정렬 비아, 메탈 하드마스크 등 다양한 변형이 있다. 셀 4 nm 교육용 모델."
+    note: "In real-world processes, there are many variations, including trench first, self-aligned vias, and metal hardmasks. Cell 4 nm educational model."
   });
 
-  /* ---------------- 크기 효과 */
+  /* ---------------- Size effect */
   var MET = { cu: { n: "Cu", r0: 1.7, l: 39, bar: true, col: "accent" }, ru: { n: "Ru", r0: 7.1, l: 6.6, col: "accent2" }, mo: { n: "Mo", r0: 5.3, l: 11, col: "ok" }, w: { n: "W", r0: 5.3, l: 19, col: "warn" } };
-  function lineR(m, w, ar, tb, C) { // Ω/µm
-    var M = MET[m], b = M.bar ? tb : 0.5, h = w * ar, cw = Math.max(0.1, w - 2 * b), ch = Math.max(0.1, h - b);
+  function lineR(m, w, ar, tb, C) { // Ω/µm; UI ranges keep both dimensions positive.
+    var M = MET[m], b = M.bar ? tb : 0.5, h = w * ar, cw = w - 2 * b, ch = h - b;
     var rho = M.r0 * (1 + C * M.l / Math.min(cw, ch));   // µΩ·cm
     return rho * 1e-8 / (cw * 1e-9 * ch * 1e-9) * 1e-6;  // Ω/m → Ω/µm
   }
@@ -244,8 +245,8 @@
     var gB = PB.range("sz-b", function (v) { return v.toFixed(1) + " nm"; }, rr), gC = PB.range("sz-c", function (v) { return v.toFixed(2); }, rr);
     cv = PB.canvas("#sz-cv", function (ctx, w, h) {
       var P = PB.palette(), wd = gW(), ar = gA(), tb = gB(), C = gC();
-      var series = Object.keys(MET).map(function (k) { var d = []; for (var x = 6; x <= 100; x += 0.5) d.push([x, lineR(k, x, ar, tb, C)]); return { data: d, color: P[MET[k].col], width: k === "cu" ? 3 : 2.2 }; });
-      PB.chart(ctx, null, { x: [6, 100], y: [1, 2e4], logX: true, logY: true, xLabel: "선폭 (nm)", yLabel: "선 저항 (Ω/µm)", series: series, vlines: [{ x: wd, color: P.faint }] });
+      var series = Object.keys(MET).map(function (k) { var d = []; for (var x = 6; x<= 100; x += 0.5) d.push([x, lineR(k, x, ar, tb, C)]); return { data: d, color: P[MET[k].col], width: k === "cu" ? 3 : 2.2 }; });
+      PB.chart(ctx, null, { x: [6, 100], y: [1, 1e5], logX: true, logY: true, xLabel: "Linewidth (nm)", yLabel: "Line resistance (Ω/µm)", series: series, vlines: [{ x: wd, color: P.faint }] });
       ctx.font = PB.font(12); ctx.textAlign = "right";
       Object.keys(MET).forEach(function (k, i) { ctx.fillStyle = P[MET[k].col]; ctx.fillText(MET[k].n, w - 26, 30 + i * 18); });
       var best = null;
@@ -266,14 +267,13 @@
       var P = PB.palette(), p = gP(), k = gK(), L = gL(), m = mSel.value, c = calc(p, k, m);
       var d = [], d2 = [];
       for (var x = 1; x <= 2000; x *= 1.1) { d.push([x, 0.38 * c.R * c.C * x * x * 1e12]); d2.push([x, 0.38 * calc(p, 3.9, m).R * calc(p, 3.9, m).C * x * x * 1e12]); }
-      PB.chart(ctx, null, { x: [1, 2000], y: [1e-3, 1e5], logX: true, logY: true, xLabel: "배선 길이 (µm)", yLabel: "RC 지연 (ps)", series: [{ data: d2, color: P.faint, width: 1.6, dash: [5, 4] }, { data: d, color: P.accent, width: 3 }],
-        hlines: [{ y: 8, color: P.accent2, label: "게이트 지연 ~8 ps" }], points: [{ x: L, y: 0.38 * c.R * c.C * L * L * 1e12, color: P.accent }] });
-      ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left"; ctx.fillText("점선: k = 3.9 (SiO₂)", 66, 26);
+      PB.chart(ctx, null, { x: [1, 2000], y: [1e-3, 1e5], logX: true, logY: true, xLabel: "Wiring length (µm)", yLabel: "RC delay (ps)", series: [{ data: d2, color: P.faint, width: 1.6, dash: [5, 4] }, { data: d, color: P.accent, width: 3 }],
+        points: [{ x: L, y: 0.38 * c.R * c.C * L * L * 1e12, color: P.accent }] });
+      ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left"; ctx.fillText("Dashed line: k = 3.9 (SiO₂)", 66, 26);
       var t = 0.38 * c.R * c.C * L * L * 1e12;
       PB.stat("rc-o-r", small(PB.fmt(c.R, 3), "Ω/µm"));
       PB.stat("rc-o-c", small(PB.fmt(c.C * 1e15, 3), "fF/µm"));
       PB.stat("rc-o-t", t > 1000 ? small(PB.fmt(t / 1000, 3), "ns") : small(PB.fmt(t, 3), "ps"));
-      PB.stat("rc-o-x", small("× " + PB.fmt(t / 8, 2), ""));
     }, { aspect: 0.62, minHeight: 300, maxHeight: 440 });
   })();
 
@@ -288,17 +288,14 @@
     cv = PB.canvas("#em-cv", function (ctx, w, h) {
       var P = PB.palette(), J = gJ(), T = gT(), Ea = gE(), n = gN();
       var temps = [25, 105, 150, 200, 300], cols = [P.ok, P.accent, P.warn, P.bad, P.accent2];
-      var series = temps.map(function (TT, i) { var d = []; for (var j = 0.1; j <= 20; j *= 1.08) d.push([j, 10 * rel(j, TT, Ea, n)]); return { data: d, color: cols[i], width: TT === 105 ? 3 : 1.8 }; });
-      PB.chart(ctx, null, { x: [0.1, 20], y: [1e-6, 1e6], logX: true, logY: true, xLabel: "전류 밀도 J (MA/cm²)", yLabel: "수명 (년)", series: series, points: [{ x: J, y: 10 * rel(J, T, Ea, n), color: P.text, r: 5 }], hlines: [{ y: 10, color: P.faint, label: "10년" }] });
+      var series = temps.map(function (TT, i) { var d = []; for (var j = 0.1; j <= 20; j *= 1.08) d.push([j, rel(j, TT, Ea, n)]); return { data: d, color: cols[i], width: TT === 105 ? 3 : 1.8 }; });
+      PB.chart(ctx, null, { x: [0.1, 20], y: [1e-9, 1e9], logX: true, logY: true, xLabel: "Current density J (MA/cm²)", yLabel: "Relative trend factor", series: series, points: [{ x: J, y: rel(J, T, Ea, n), color: P.text, r: 5 }], hlines: [{ y: 1, color: P.faint, label: "reference 1" }] });
       ctx.font = PB.font(11); ctx.textAlign = "right"; temps.forEach(function (TT, i) { ctx.fillStyle = cols[i]; ctx.fillText(TT + " °C", w - 26, 30 + i * 16); });
       var r = rel(J, T, Ea, n);
       PB.stat("em-o-r", small("× " + PB.fmt(r, 3), ""));
-      var y = 10 * r;
-      PB.stat("em-o-y", y >= 1 ? small(PB.fmt(y, 3), "년") : y * 365 >= 1 ? small(PB.fmt(y * 365, 3), "일") : small(PB.fmt(y * 8760, 3), "시간"));
-      PB.stat("em-o-a", small("× " + PB.fmt(1 / rel(10, 300, Ea, n) * rel(J, T, Ea, n), 3), ""));
+      PB.stat("em-o-a", small("× " + PB.fmt(Math.pow(2, -n), 3), ""));
     }, { aspect: 0.62, minHeight: 300, maxHeight: 440 });
   })();
-})();
-</script>
+})();</script>
 </body>
 </html>

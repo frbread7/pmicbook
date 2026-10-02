@@ -1,0 +1,340 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
+     Executable code: MIT (see ../../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE-CC-BY-4.0). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc":"식각 프로파일, 선택비, 종횡비와 엔드포인트 여유가 BCD 절연·콘택트·필드 구조에 미치는 영향을 다룹니다. 단면 모델은 교육용 근사치입니다.","libs":["xsec"],"lang":"ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>식각, 절연 및 콘택트 · PMICBook</title>
+<meta name="description" content="식각 프로파일, 선택비, 종횡비와 엔드포인트 여유가 BCD 절연·콘택트·필드 구조에 미치는 영향을 다룹니다. 단면 모델은 교육용 근사치입니다.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/etch.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/etch.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/etch.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/etch.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="식각, 절연 및 콘택트 · PMICBook">
+<meta property="og:description" content="식각 프로파일, 선택비, 종횡비와 엔드포인트 여유가 BCD 절연·콘택트·필드 구조에 미치는 영향을 다룹니다. 단면 모델은 교육용 근사치입니다.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/etch.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/etch.html#chapter","name":"식각, 절연 및 콘택트","headline":"식각, 절연 및 콘택트 · PMICBook","description":"식각 프로파일, 선택비, 종횡비와 엔드포인트 여유가 BCD 절연·콘택트·필드 구조에 미치는 영향을 다룹니다. 단면 모델은 교육용 근사치입니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/etch.html","position":12,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"12. 식각, 절연 및 콘택트","item":"https://frbread7.github.io/pmicbook/ko/chapters/etch.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<script src="../../js/xsec.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="etch">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">12장 · 패턴 전사</div>
+    <h1>BCD 집적을 위한 식각</h1>
+    <p class="lead">식각은 마스크의 개구 패턴을 대상 박막에 옮기는 공정입니다. BCD 집적에서는 박막을 얼마나 빨리 제거하는지만 중요한 것이 아닙니다. 절연 구조를 유지하고 콘택트와 소자 가장자리를 형성하며, 아래층이 허용 범위 이상 손실되지 않도록 식각 프로파일을 제어해야 합니다. 이 페이지의 모델은 공정 레시피가 아닌 교육용 단순화 예시입니다.</p>
+    <ul class="objectives"><li>선택비, 이방성, 프로파일 편향과 균일도가 소자 형상에 미치는 영향을 설명합니다.</li><li>이온의 방향성과 표면 화학이 플라즈마 식각 형상을 어떻게 만드는지 설명합니다.</li><li>종횡비 효과와 엔드포인트 여유를 절연·콘택트·필드 구조와 연결합니다.</li><li>단면을 이용해 마스크 소모, 측벽 보호와 오버에칭을 살펴봅니다.</li></ul>
+  </header>
+  <section id="etch-metrics"><h2>식각에서 보존해야 할 요소</h2>
+    <p>패턴 식각은 마스크가 덮지 않은 재료를 제거하고 선택된 영역은 마스크로 보호합니다. <strong>선택비</strong>는 대상 박막의 제거율을 마스크 또는 하부 박막의 제거율로 나눈 값입니다. <strong>이방성</strong>은 수직 방향과 측면 방향의 제거 정도를 비교하며, <strong>균일도</strong>는 웨이퍼 전반의 편차를 나타냅니다. BCD에서는 이 요소들이 서로 맞물립니다. 절연 개구의 가장자리를 제어해야 하고, 콘택트는 실리콘을 과도하게 깎지 않으면서 목표 영역에 도달해야 하며, 고전압 필드 구조는 최종 측면 형상에 좌우됩니다.</p>
+    <div class="formula">$$S_{A:B}=\frac{R_A}{R_B},\qquad A=1-\frac{R_{lat}}{R_{vert}},\qquad \Delta t_{stop}\approx\frac{R_{target}}{S_{target:stop}}\,t_{overetch}$$<div class="where">이는 관계를 정리하기 위한 식입니다. 실제 제거율과 허용 여유는 박막 조성, 패턴 밀도, 챔버, 로딩 및 엔드포인트 방식에 따라 달라지며, 특정 파운드리의 값을 뜻하지 않습니다.</div></div>
+    <div class="callout"><strong>BCD와의 연관성</strong><p>식각 편향과 손상은 절연 경계를 이동시키고, 콘택트 저항을 바꾸거나 접합을 노출하고, 고전압 종단 형상에 영향을 줄 수 있습니다. 공정 윈도우를 평가할 때는 단면 분석과 전기적 데이터를 함께 살펴보세요.</p></div>
+  </section>
+  <section id="wet-dry"><h2>습식 식각과 플라즈마 식각</h2>
+    <p>습식 화학액은 표면 반응으로 재료를 제거하며, 수직 방향뿐 아니라 측면 방향으로도 식각하는 경우가 많습니다. 플라즈마 공정은 반응성 중성종과 방향성을 가진 이온 충격을 함께 이용하며, 두 작용의 균형에 따라 더 수직에 가까운 프로파일을 만들 수 있습니다. 플라즈마 손상, 대전, 잔류물, 정지막에 대한 선택비는 여전히 집적 과정에서 고려해야 합니다.</p>
+    <figure class="diagram"><svg viewBox="0 0 780 170" role="img" aria-label="등방성 식각과 방향성 식각의 개념 비교"><rect x="40" y="54" width="280" height="84" class="m-si"/><rect x="40" y="34" width="92" height="20" class="m-pr"/><rect x="228" y="34" width="92" height="20" class="m-pr"/><path d="M132 34 Q132 70 170 70 Q208 70 208 34" fill="var(--bg-elev)" stroke="var(--text-dim)"/><text x="180" y="24" text-anchor="middle" class="lbl-b">습식: 측면 언더컷</text><rect x="460" y="54" width="280" height="84" class="m-si"/><rect x="460" y="34" width="105" height="20" class="m-pr"/><rect x="635" y="34" width="105" height="20" class="m-pr"/><rect x="565" y="34" width="70" height="20" fill="var(--bg-elev)"/><path d="M580 0v35m20-35v35m20-35v35" stroke="var(--accent)"/><text x="600" y="24" text-anchor="middle" class="lbl-b">플라즈마: 방향성 프로파일</text></svg><figcaption>프로파일은 설명을 위한 예시입니다. 실제 형상은 재료, 마스크, 패턴 크기와 공정 조건에 따라 달라집니다.</figcaption></figure>
+    <p>이온 보조 반응과 측벽 패시베이션은 측면보다 바닥 방향의 제거를 우세하게 만들 수 있습니다. 압력을 높이거나 화학 조성을 바꾸면 이온 입사각 분포와 라디칼 수송이 달라질 수 있습니다. 변화의 방향은 공정에 따라 다르며, 시뮬레이터는 몇 가지 정성적 효과만 분리해 보여줍니다.</p>
+  </section>
+  <section id="trench-model"><h2>절연·콘택트 프로파일 모델</h2><p>마스크 선택, 개구 폭, 시간, 이방성과 입사각 분포가 이상화된 실리콘 트렌치에 미치는 영향을 살펴보세요. 이 트렌치는 절연 또는 콘택트 형상을 설명하기 위한 일반적인 식각 개구이며, 특정 BCD 레이아웃이나 공정 레시피를 나타내지 않습니다.</p><div class="sim" id="sim-etch">
+      <div class="sim-head"><span class="sim-tag">단면 모델</span><h3>트렌치 식각 프로파일</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="et-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="ctrl"><span>식각 방식</span><div class="seg" id="et-mode"><button data-value="dry" class="on">플라즈마</button><button data-value="wet">습식</button></div></div>
+          <label class="ctrl"><span>개구 폭 <output id="et-w-out"></output></span><input type="range" id="et-w" min="20" max="240" step="4" value="100"></label>
+          <label class="ctrl"><span>마스크</span><select id="et-mk"><option value="pr">포토레지스트 120 nm</option><option value="prt">포토레지스트 60 nm (박막)</option><option value="hm">산화막 하드마스크 60 nm</option><option value="acl">탄소 하드마스크 100 nm</option></select></label>
+          <label class="ctrl"><span>식각 시간 <output id="et-t-out"></output></span><input type="range" id="et-t" min="5" max="90" step="1" value="40"></label>
+          <label class="ctrl"><span>이방성 (이온 지배 비율) <output id="et-i-out"></output></span><input type="range" id="et-i" min="0" max="1" step="0.02" value="0.9"></label>
+          <label class="ctrl"><span>이온 입사각 분포 σ (압력 증가 시 커지는 경우가 많음) <output id="et-s-out"></output></span><input type="range" id="et-s" min="0.5" max="15" step="0.5" value="3"></label>
+          <label class="ctrl"><span>마스크 선택비 <output id="et-sel-out"></output></span><input type="range" id="et-sel" min="1" max="30" step="0.5" value="4"></label>
+        </div>
+      </div>
+      <div class="mat-legend" id="et-lg"></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">식각 깊이</span><span class="v" id="et-o-d">—</span></div>
+        <div class="stat"><span class="k">상부 / 바닥 CD</span><span class="v" id="et-o-cd">—</span></div>
+        <div class="stat"><span class="k">측벽 각도</span><span class="v" id="et-o-a">—</span></div>
+        <div class="stat"><span class="k">언더컷 (한쪽)</span><span class="v" id="et-o-u">—</span></div>
+        <div class="stat"><span class="k">잔여 마스크 두께</span><span class="v" id="et-o-m">—</span></div>
+      </div>
+      <div class="sim-note">실험: 이방성을 0.9에서 0에 가깝게 낮추면 측면 제거가 커집니다. 입사각 분포를 넓혀 테이퍼와 모서리 효과를 살펴보세요. 마스크가 얇거나 선택비가 낮으면 마스크가 소모될 수 있습니다. 개구가 좁을수록 식각이 느려질 수 있습니다. 모델 격자 간격은 4 nm이며, 실리콘 식각률은 설명을 위해 5 nm/s로 설정했습니다.</div>
+    </div>
+    <h3>알아둘 프로파일 효과</h3><p>언더컷은 보호되는 폭을 줄이고, 테이퍼는 깊이에 따라 개구 폭을 바꿉니다. 마이크로트렌칭은 바닥 모서리를 더 깊게 만들 수 있으며, 마스크 침식은 임계 치수를 바꿉니다. 절연 모듈에서는 활성 영역 사이의 거리가 달라질 수 있고, 콘택트 모듈에서는 접촉 면적과 라이너 피복이 달라질 수 있습니다.</p>
+  </section>
+  <section id="arde"><h2>종횡비 의존 식각</h2><p>패턴의 폭에 비해 깊이가 커질수록 반응종이 바닥에 도달하기 어려워지고 반응 부산물이 빠져나오는 경로도 길어집니다. 이로 인한 식각률 차이를 종횡비 의존 식각(ARDE) 또는 RIE 지연이라고 합니다. 같은 다이 안에서 폭이 서로 다른 콘택트 배열과 깊은 절연 패턴에서 중요합니다.</p><div class="sim" id="sim-arde">
+      <div class="sim-head"><span class="sim-tag">단면 모델</span><h3>폭이 다른 네 개 개구의 식각</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ar-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>이방성 (이온 지배 비율) <output id="ar-i-out"></output></span><input type="range" id="ar-i" min="0.2" max="1" step="0.02" value="0.6"></label>
+          <label class="ctrl"><span>이온 입사각 분포 σ <output id="ar-s-out"></output></span><input type="range" id="ar-s" min="0.5" max="10" step="0.5" value="3"></label>
+          <label class="ctrl"><span>식각 시간 <output id="ar-t-out"></output></span><input type="range" id="ar-t" min="10" max="100" step="2" value="50"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">깊이 (폭 16 / 32 / 64 / 128 nm)</span><span class="v" id="ar-o-d" style="font-size:15px">—</span></div>
+        <div class="stat"><span class="k">종횡비</span><span class="v" id="ar-o-ar" style="font-size:15px">—</span></div>
+        <div class="stat"><span class="k">최협폭 / 최광폭 패턴의 깊이 비</span><span class="v" id="ar-o-r">—</span></div>
+      </div>
+      <div class="sim-note">네 가지 폭을 비교하세요. 이 단순 모델에서는 이방성을 높이고 입사각 분포를 줄이면 깊이 차이가 작아집니다. 형상에 따른 접근성만 분리한 결과이며 양산 공정에 맞춰 보정되지 않았습니다.</div>
+    </div><p>각 개구의 깊이를 비교하세요. 이 모델은 형상에 따른 접근성 효과만 보여주며, 특정 챔버나 재료 적층에 맞춰 보정되지 않았습니다.</p></section>
+  <section id="cyclic"><h2>주기식 식각과 측벽 보호</h2><p>깊은 실리콘 식각에서는 재료 제거와 일시적인 측벽 보호를 번갈아 수행할 수 있습니다. 반복 주기의 수는 처리량과 스캘럽 진폭 및 프로파일 제어 사이의 절충을 만듭니다. 이런 예시는 깊은 패턴과 실리콘 관통 구조를 설명하기 위한 것이며, 모든 BCD 공정 흐름에 포함되는 표준 단계라고 가정하지 않습니다.</p><div class="sim" id="sim-bosch">
+      <div class="sim-head"><span class="sim-tag">단면 모델</span><h3>주기식 식각 및 패시베이션 모델</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="bo-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>주기 수 <output id="bo-n-out"></output></span><input type="range" id="bo-n" min="1" max="16" step="1" value="10"></label>
+          <label class="ctrl"><span>주기당 식각 시간 (SF₆) <output id="bo-e-out"></output></span><input type="range" id="bo-e" min="2" max="8" step="0.5" value="4"></label>
+          <label class="ctrl"><span>패시베이션 두께 (C₄F₈) <output id="bo-p-out"></output></span><input type="range" id="bo-p" min="10" max="30" step="10" value="10"></label>
+          <label class="check"><input type="checkbox" id="bo-off"> 패시베이션 없음 (비교를 위해 식각 시간 동일)</label>
+          <div class="lab-msg" id="bo-msg" style="font-size:12.5px;color:var(--text-faint)"></div>
+        </div>
+      </div>
+      <div class="mat-legend" id="bo-lg"></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">깊이</span><span class="v" id="bo-o-d">—</span></div>
+        <div class="stat"><span class="k">스캘럽 높이 (진폭)</span><span class="v" id="bo-o-s">—</span></div>
+        <div class="stat"><span class="k">종횡비</span><span class="v" id="bo-o-ar">—</span></div>
+      </div>
+      <div class="sim-note">제거 구간이 길어지면 주기당 깊이와 스캘럽 크기가 커집니다. 패시베이션을 끄면 더 등방성에 가까운 프로파일을 볼 수 있습니다. 보호막이 두꺼우면 바닥에서 제거하는 데 더 오래 걸릴 수 있습니다. 크기를 조정한 교육용 모델이며 실제 주기당 깊이는 공정마다 다릅니다.</div>
+    </div></section>
+  <section id="endpoint"><h2>엔드포인트와 오버에칭 여유</h2><p>광학 또는 전기 신호로 대상 층의 제거를 감지할 수 있지만, 웨이퍼 전반의 두께와 식각률 편차 때문에 어떤 위치는 다른 곳보다 먼저 식각이 끝납니다. 식각 시간을 추가하면 가장 느린 위치까지 제거할 수 있지만, 이미 제거가 끝난 영역에서는 손실이 늘어납니다. 따라서 콘택트, 유전체 개구와 절연 식각에서는 정지막에 대한 선택비가 중요합니다.</p><div class="formula">$$t_{clear}(r)=\frac{h(r)}{R(r)},\qquad \Delta h_{stop}=R_{stop}\,\Delta t=\frac{R_{target}}{S}\,\Delta t$$<div class="where">시뮬레이터는 계산을 설명하기 위한 대표 편차 값을 사용합니다. 엔드포인트 신호와 실제 공정 윈도우는 장비 및 박막 적층별 특성 평가가 필요합니다.</div></div><div class="sim" id="sim-oe">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>엔드포인트 편차와 정지막 손실</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="oe-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>박막 두께 <output id="oe-h-out"></output></span><input type="range" id="oe-h" min="50" max="500" step="10" value="200"></label>
+          <label class="ctrl"><span>박막 두께 편차 (가장자리가 더 두꺼움) <output id="oe-u-out"></output></span><input type="range" id="oe-u" min="0" max="10" step="0.5" value="3"></label>
+          <label class="ctrl"><span>식각률 편차 (중앙이 더 빠름) <output id="oe-r-out"></output></span><input type="range" id="oe-r" min="0" max="10" step="0.5" value="4"></label>
+          <label class="ctrl"><span>오버에칭 (엔드포인트 기준) <output id="oe-o-out"></output></span><input type="range" id="oe-o" min="0" max="60" step="1" value="20"></label>
+          <label class="ctrl"><span>정지막 선택비 S <output id="oe-s-out"></output></span><input type="range" id="oe-s" min="2" max="100" step="1" value="20"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">미완전 제거 면적</span><span class="v" id="oe-o-nc">—</span></div>
+        <div class="stat"><span class="k">정지막 손실, 최소 / 최대</span><span class="v" id="oe-o-l">—</span></div>
+        <div class="stat"><span class="k">완전 제거에 필요한 오버에칭</span><span class="v" id="oe-o-need">—</span></div>
+      </div>
+      <div class="sim-note">두께와 식각률의 불균일도를 바꾸어 어느 위치에서 가장 늦게 제거가 끝나는지 살펴보세요. 오버에칭을 늘리면 제거를 완료할 수 있지만, 대상 박막이 먼저 제거된 곳에서는 정지막 손실이 커집니다. 설명용 모델이며 장비의 엔드포인트 사양이 아닙니다.</div>
+    </div></section>
+  <section class="keypoints" id="summary"><h2>핵심 정리</h2><ol><li>식각 집적에서는 프로파일, 선택비, 마스크 잔존, 손상과 웨이퍼 균일도를 함께 고려합니다.</li><li>이온의 방향성과 측벽 화학은 플라즈마 식각의 이방성 프로파일을 설명하는 데 도움이 되며, 습식 식각은 측면 언더컷이 생기는 경우가 많습니다.</li><li>ARDE로 인해 좁거나 깊은 콘택트는 넓은 개구와 다른 식각 거동을 보일 수 있습니다.</li><li>오버에칭 여유는 미완전 제거를 방지하지만 정지막을 소모합니다.</li><li>대화형 모델의 값은 설명용이며 파운드리 공정 레시피로 간주해서는 안 됩니다.</li></ol></section>
+  <section class="quiz-sec" id="quiz"><h2>확인 문제</h2><div class="quiz">
+    <div class="quiz-q"><p>콘택트 식각에 오버에칭 여유가 필요한 이유는 무엇인가요?</p><div class="opts"><button class="opt">모든 패턴의 폭을 넓히기 위해</button><button class="opt" data-correct>위치별 박막 두께와 식각률이 달라 가장 느린 영역은 제거가 늦게 끝날 수 있으므로</button><button class="opt">마스크 선택비를 없애기 위해</button><button class="opt">손상이 전혀 없음을 보장하기 위해</button></div><div class="quiz-exp">여유를 두면 가장 느린 위치까지 제거할 수 있지만, 먼저 제거가 끝난 영역의 노출 시간은 늘어납니다.</div></div>
+    <div class="quiz-q"><p>ARDE는 무엇을 설명하나요?</p><div class="opts"><button class="opt">좁은 개구에서 식각률이 반드시 증가하는 현상</button><button class="opt" data-correct>패턴 형상에 따라 식각률이 달라지며, 좁거나 깊은 패턴에서 느려지는 경우가 많은 현상</button><button class="opt">웨이퍼 휨을 측정하는 방법</button><button class="opt">열산화의 한 종류</button></div><div class="quiz-exp">수송이 제한되고 부산물 배출 경로가 길어지면 종횡비가 큰 패턴의 식각이 느려질 수 있습니다.</div></div>
+    <div class="quiz-q"><p>대상층 대 정지막 선택비가 20:1일 때 오버에칭 노출 시간이 늘어나면 정지막 손실은 어떻게 되나요?</p><div class="opts"><button class="opt">항상 0이 됩니다</button><button class="opt" data-correct>정지막 식각률에 따라 증가합니다. 이 단순한 비율에서는 대상층 식각률의 약 20분의 1입니다</button><button class="opt">선택비와 무관해집니다</button><button class="opt">마스크 색만 바뀝니다</button></div><div class="quiz-exp">선택비는 오버에칭 중 정지막 손실을 줄이지만 없애지는 않습니다.</div></div>
+  </div></section>
+  <section class="callout" id="attribution"><h2>출처 및 저작자 표시</h2><p>ProcessBook의 식각 장을 바탕으로 작성했습니다. <a href="https://github.com/geniuskey/processbook/blob/0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff/chapters/etch.html">불변 원본 페이지 (커밋 0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff)</a>. CC BY 4.0에 따라 번역하고 BCD 절연·콘택트 집적에 맞게 크게 수정했으며, 원본 단면 시뮬레이터를 유지하고 레이블을 갱신했습니다. 다음을 참고하세요: <a href="../../LICENSE-CC-BY-4.0">라이선스</a>. 배경 자료: <a href="https://resourcecenter.ieee.org/education/short-courses/sscstut20210202">IEEE BCD 기술 튜토리얼</a>대화형 모델의 값은 설명용입니다.</p></section>
+</main>
+<script>
+(function () {
+  "use strict";
+  function small(v, u) { return v + "<small>" + u + "</small>"; }
+
+  /* ---------------- trench etch */
+  (function () {
+    document.getElementById("et-lg").innerHTML = XS.legend(["si", "pr", "ox", "acl"], false);
+    var W = 130, DX = 4, H = 120, SURF = 34;
+    var MK = { pr: { mat: "pr", t: 120 }, prt: { mat: "pr", t: 60 }, hm: { mat: "ox", t: 60 }, acl: { mat: "acl", t: 100 } };
+    var res = null, cv, job = 0;
+    var mode = PB.seg("et-mode", function () { run(); });
+    var mk = document.getElementById("et-mk");
+    var run = PB.debounce(function () {
+      var my = ++job;
+      var wO = gW(), t = gT(), ion = gI(), sg = gS(), sel = gSel(), m = MK[mk.value], wet = mode() === "wet";
+      var s = new XS.Sim({ W: W, H: H, dx: DX, surf: SURF });
+      var c = W * DX / 2;
+      s.rect(m.mat, 0, c - wO / 2, -m.t, 0); s.rect(m.mat, c + wO / 2, W * DX, -m.t, 0);
+      var selmap = { si: 1 }; selmap[m.mat] = 1 / sel;
+      var g = s.etchGen({ sel: selmap, rate: 5, time: t, ion: ion, sigma: sg, wet: wet });
+      var tick = function () {
+        if (my !== job) return;
+        var t0 = performance.now(), done = false;
+        while (performance.now() - t0 < 30) { var r = g.next(); if (r.done) { done = true; break; } }
+        res = { s: s, m: m, wO: wO, c: c, done: done };
+        cv.redraw();
+        if (!done) requestAnimationFrame(tick);
+      };
+      tick();
+    }, 120);
+    var gW = PB.range("et-w", function (v) { return v + " nm"; }, run);
+    var gT = PB.range("et-t", function (v) { return v + " s"; }, run);
+    var gI = PB.range("et-i", function (v) { return v.toFixed(2); }, run);
+    var gS = PB.range("et-s", function (v) { return v.toFixed(1) + "°"; }, run);
+    var gSel = PB.range("et-sel", function (v) { return v.toFixed(1) + " : 1"; }, run);
+    mk.addEventListener("change", run);
+    function measure(r) {
+      var s = r.s, Wc = s.W, c0 = Math.round(r.c / DX);
+      var depthRow = s.surfRow(c0);
+      var depth = s.ynm(depthRow);
+      var widthAt = function (row) { if (row < 0 || row >= s.H || s.mat[row * Wc + c0]) return 0; var a = c0, b = c0; while (a > 0 && !s.mat[row * Wc + a - 1]) a--; while (b < Wc - 1 && !s.mat[row * Wc + b + 1]) b++; return (b - a + 1) * DX; };
+      var top = widthAt(SURF + 1), bot = depth > 8 ? widthAt(SURF + Math.round(depth / DX * 0.85)) : 0;
+      var widest = 0; for (var y = SURF; y < depthRow; y++) widest = Math.max(widest, widthAt(y));
+      // Remaining mask thickness at the edge
+      var col = 6, mt = 0; for (var y2 = 0; y2 < SURF; y2++) if (s.mat[y2 * Wc + col] === XS.ID[r.m.mat]) mt++;
+      return { depth: Math.max(0, depth), top: top, bot: bot, under: Math.max(0, (widest - r.wO) / 2), mask: mt * DX };
+    }
+    cv = PB.canvas("#et-cv", function (ctx, w, h) {
+      if (!res) return;
+      var P = PB.palette();
+      var map = XS.draw(ctx, res.s, { x: 6, y: 6, w: w - 12, h: h - 12 }, { doping: false, y0nm: -130, y1nm: 340 });
+      ctx.strokeStyle = P.accent2; ctx.setLineDash([4, 3]); ctx.beginPath(); ctx.moveTo(map.X(res.c - res.wO / 2), map.Y(-res.m.t - 6)); ctx.lineTo(map.X(res.c - res.wO / 2), map.Y(320)); ctx.moveTo(map.X(res.c + res.wO / 2), map.Y(-res.m.t - 6)); ctx.lineTo(map.X(res.c + res.wO / 2), map.Y(320)); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = P.accent2; ctx.font = PB.font(11, true); ctx.textAlign = "center"; ctx.fillText("마스크 개구", map.X(res.c), map.Y(-res.m.t) - 6);
+      if (!res.done) { ctx.fillStyle = P.dim; ctx.textAlign = "right"; ctx.fillText("계산 중…", map.ox + map.pw - 8, map.oy + 16); }
+      var q = measure(res);
+      PB.stat("et-o-d", small(Math.round(q.depth), "nm"));
+      PB.stat("et-o-cd", small(q.top + " / " + (q.bot || "—"), "nm"));
+      var ang = q.depth > 20 && q.bot ? 90 - Math.atan2((q.top - q.bot) / 2, q.depth * 0.85) * 180 / Math.PI : null;
+      PB.stat("et-o-a", ang ? small(ang.toFixed(1), "°") : "—");
+      PB.stat("et-o-u", small(Math.round(q.under), "nm"));
+      PB.stat("et-o-m", q.mask > 0 ? small(q.mask + " / " + res.m.t, "nm") : "<span class='bad-t'>소모됨</span>");
+    }, { aspect: 0.78, minHeight: 300, maxHeight: 520 });
+    run();
+  })();
+
+  /* ---------------- ARDE */
+  (function () {
+    var W = 220, DX = 4, H = 100, SURF = 22, widths = [16, 32, 64, 128], res = null, cv, job = 0;
+    var run = PB.debounce(function () {
+      var my = ++job;
+      var s = new XS.Sim({ W: W, H: H, dx: DX, surf: SURF });
+      s.rect("acl", 0, W * DX, -60, 0);
+      var x = 40, cs = [];
+      widths.forEach(function (wd) { for (var y = 0; y < SURF; y++) for (var c = s.col(x); c < s.col(x + wd); c++) s.mat[y * W + c] = 0; cs.push(x + wd / 2); x += wd + 90; });
+      var g = s.etchGen({ sel: { si: 1, acl: 0.03 }, rate: 5, time: gT(), ion: gI(), sigma: gS() });
+      var tick = function () {
+        if (my !== job) return;
+        var t0 = performance.now(), done = false;
+        while (performance.now() - t0 < 30) { var r = g.next(); if (r.done) { done = true; break; } }
+        res = { s: s, cs: cs, done: done }; cv.redraw();
+        if (!done) requestAnimationFrame(tick);
+      };
+      tick();
+    }, 120);
+    var gI = PB.range("ar-i", function (v) { return v.toFixed(2); }, run);
+    var gS = PB.range("ar-s", function (v) { return v.toFixed(1) + "°"; }, run);
+    var gT = PB.range("ar-t", function (v) { return v + " s"; }, run);
+    cv = PB.canvas("#ar-cv", function (ctx, w, h) {
+      if (!res) return;
+      var P = PB.palette();
+      var hh = Math.round(h * 0.62);
+      var map = XS.draw(ctx, res.s, { x: 6, y: 6, w: w - 12, h: hh - 12 }, { doping: false, y0nm: -70, y1nm: 300 });
+      var ds = res.cs.map(function (c) { return res.s.ynm(res.s.surfRow(Math.round(c / DX))); });
+      ds.forEach(function (d, i) { ctx.fillStyle = P.text; ctx.font = PB.font(11, true); ctx.textAlign = "center"; ctx.fillText(widths[i] + " nm", map.X(res.cs[i]), map.Y(-60) - 6); });
+      var pts = ds.map(function (d, i) { return { x: d / widths[i], y: d / Math.max(1, ds[3]), color: P.accent, r: 5 }; });
+      var box = { x: 58, y: hh + 8, w: w - 80, h: h - hh - 50 };
+      var axmax = Math.max(4, Math.max.apply(null, pts.map(function (p) { return p.x; })) * 1.15);
+      var curve = pts.slice().sort(function (a, b) { return a.x - b.x; }).map(function (p) { return [p.x, p.y]; });
+      PB.chart(ctx, box, { x: [0, axmax], y: [0, 1.1], xLabel: "종횡비 (depth/width)", yLabel: "", series: [{ data: curve, color: P.accent, width: 2 }], points: pts });
+      ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left"; ctx.fillText("깊이 / 가장 넓은 트렌치의 깊이", box.x + 6, box.y + 12);
+      PB.stat("ar-o-d", small(ds.map(function (d) { return Math.round(d); }).join(" / "), "nm"));
+      PB.stat("ar-o-ar", ds.map(function (d, i) { return (d / widths[i]).toFixed(1); }).join(" / "));
+      PB.stat("ar-o-r", (ds[0] / Math.max(1, ds[3])).toFixed(2));
+    }, { aspect: 0.75, minHeight: 360, maxHeight: 540 });
+    run();
+  })();
+
+  /* ---------------- cyclic etch and passivation */
+  (function () {
+    document.getElementById("bo-lg").innerHTML = XS.legend(["si", "pr", "cfx"], false);
+    var W = 100, DX = 10, H = 140, SURF = 12, res = null, cv, job = 0;
+    var run = PB.debounce(function () {
+      var my = ++job, n = gN(), te = gE(), tp = gP(), off = document.getElementById("bo-off").checked;
+      var msg = document.getElementById("bo-msg");
+      var s = new XS.Sim({ W: W, H: H, dx: DX, surf: SURF });
+      var c = W * DX / 2, wO = 400;
+      s.rect("pr", 0, c - wO / 2, -100, 0); s.rect("pr", c + wO / 2, W * DX, -100, 0);
+      var steps = [];
+      // SF6 step: abundant radicals etch isotropically; ions also remove some polymer at the bottom.
+      if (off) steps.push({ op: "etch", wet: true, sel: { si: 1, pr: 0.01 }, rate: 15, time: te * n });
+      else for (var i = 0; i < n; i++) {
+        steps.push({ op: "etch", wet: true, sel: { si: 1, pr: 0.01, cfx: 0.15 * tp / 10 }, rate: 15, time: te });
+        steps.push({ op: "depo", mat: "cfx", mode: "ald", thick: tp });
+        steps.push({ op: "etch", sel: { cfx: 1, pr: 0.01 }, rate: 15, time: tp / 15 * 2.2, ion: 1, sigma: 1.5 });
+      }
+      var k = 0, g = null;
+      var tick = function () {
+        if (my !== job) return;
+        var t0 = performance.now();
+        while (performance.now() - t0 < 30) {
+          if (!g) { if (k >= steps.length) break; g = s.stepGen(steps[k]); }
+          var r = g.next(); if (r.done) { g = null; k++; }
+        }
+        var done = k >= steps.length;
+        msg.textContent = done ? "" : "계산 중… " + Math.floor(k / (off ? 1 : 3)) + " / " + n + "주기";
+        res = { s: s, c: c, wO: wO, done: done }; cv.redraw();
+        if (!done) requestAnimationFrame(tick);
+      };
+      tick();
+    }, 150);
+    var gN = PB.range("bo-n", function (v) { return v + "주기"; }, run);
+    var gE = PB.range("bo-e", function (v) { return v + " s"; }, run);
+    var gP = PB.range("bo-p", function (v) { return v + " nm"; }, run);
+    document.getElementById("bo-off").addEventListener("change", run);
+    cv = PB.canvas("#bo-cv", function (ctx, w, h) {
+      if (!res) return;
+      var s = res.s;
+      XS.draw(ctx, s, { x: 6, y: 6, w: w - 12, h: h - 12 }, { doping: false });
+      var c0 = Math.round(res.c / DX), dRow = s.surfRow(c0), depth = s.ynm(dRow);
+      // Scallop: variation in the left silicon sidewall position
+      var xs = [];
+      for (var y = SURF + 3; y < dRow - 4; y++) { var x = c0; while (x > 0 && !(s.mat[y * W + x - 1] === XS.ID.si)) x--; xs.push(x); }
+      var amp = 0;
+      for (var i = 4; i < xs.length - 4; i++) { var loc = xs.slice(i - 4, i + 5); amp = Math.max(amp, Math.max.apply(null, loc) - Math.min.apply(null, loc)); }
+      var wmid = (function () { var y = SURF + Math.round((dRow - SURF) / 2), a = c0, b = c0; while (a > 0 && s.mat[y * W + a - 1] !== XS.ID.si) a--; while (b < W - 1 && s.mat[y * W + b + 1] !== XS.ID.si) b++; return (b - a + 1) * DX; })();
+      PB.stat("bo-o-d", small(Math.round(depth), "nm"));
+      PB.stat("bo-o-s", small(amp * DX, "nm"));
+      PB.stat("bo-o-ar", (depth / wmid).toFixed(1));
+    }, { aspect: 0.85, minHeight: 360, maxHeight: 540 });
+    run();
+  })();
+
+  /* ---------------- endpoint and overetch */
+  (function () {
+    var cv, rr = function () { cv && cv.redraw(); };
+    var gH = PB.range("oe-h", function (v) { return v + " nm"; }, rr);
+    var gU = PB.range("oe-u", function (v) { return "±" + v.toFixed(1) + "%"; }, rr);
+    var gR = PB.range("oe-r", function (v) { return "±" + v.toFixed(1) + "%"; }, rr);
+    var gO = PB.range("oe-o", function (v) { return v + "%"; }, rr);
+    var gS = PB.range("oe-s", function (v) { return v + " : 1"; }, rr);
+    cv = PB.canvas("#oe-cv", function (ctx, w, h) {
+      var P = PB.palette(), h0 = gH(), u = gU() / 100, ru = gR() / 100, oe = gO() / 100, S = gS(), R0 = 5;
+      var rs = [], tc = [], N = 61;
+      for (var i = 0; i < N; i++) { var r = -150 + 300 * i / (N - 1), q = (r / 150) * (r / 150); var hh = h0 * (1 - u + 2 * u * q), R = R0 * (1 + ru - 2 * ru * q); rs.push([r, hh, R]); tc.push(hh / R); }
+      var tAvg = tc.reduce(function (a, b) { return a + b; }, 0) / N, tMax = Math.max.apply(null, tc), tTot = tAvg * (1 + oe);
+      var loss = rs.map(function (p, i) { return [p[0], Math.max(0, (tTot - tc[i]) * p[2] / S)]; });
+      var rem = rs.map(function (p, i) { return [p[0], Math.max(0, p[1] - p[2] * tTot)]; });
+      var b1 = { x: 58, y: 16, w: w - 76, h: (h - 110) / 2 }, b2 = { x: 58, y: 16 + (h - 110) / 2 + 40, w: w - 76, h: (h - 110) / 2 };
+      PB.chart(ctx, b1, { x: [-150, 150], y: [0, Math.max(tMax, tTot) * 1.15], xLabel: "", yLabel: "시간 (s)", series: [{ data: rs.map(function (p, i) { return [p[0], tc[i]]; }), color: P.accent, width: 2.6 }],
+        hlines: [{ y: tAvg, color: P.faint, label: "엔드포인트 (웨이퍼 평균)" }, { y: tTot, color: P.accent2, label: "총 식각 시간" }] });
+      ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left"; ctx.fillText("위치별 제거 시간 t_clear(r)", b1.x + 6, b1.y + 12);
+      var lm = Math.max(1, Math.max.apply(null, loss.map(function (l) { return l[1]; })) * 1.2);
+      PB.chart(ctx, b2, { x: [-150, 150], y: [0, lm], xLabel: "웨이퍼 반경 위치 (mm)", yLabel: "nm", series: [{ data: loss, color: P.warn, width: 2.6, fill: "rgba(217,138,0,.12)" }, { data: rem, color: P.bad, width: 2.6 }] });
+      ctx.fillStyle = P.warn; ctx.fillText("정지막 손실", b2.x + 6, b2.y + 12); ctx.fillStyle = P.bad; ctx.fillText("잔류 박막 (미제거)", b2.x + 90, b2.y + 12);
+      var nc = rem.filter(function (p) { return p[1] > 0.5; }).length / N;
+      PB.stat("oe-o-nc", nc > 0 ? "<span class='bad-t'>" + Math.round(nc * 100) + "%</span>" : "<span class='ok-t'>없음</span>");
+      var lv = loss.map(function (l) { return l[1]; });
+      PB.stat("oe-o-l", small(PB.fmt(Math.min.apply(null, lv), 2) + " / " + PB.fmt(Math.max.apply(null, lv), 2), "nm"));
+      PB.stat("oe-o-need", small(Math.round((tMax / tAvg - 1) * 100), "%"));
+    }, { aspect: 0.62, minHeight: 320, maxHeight: 460 });
+  })();
+})();
+</script>
+</body>
+</html>

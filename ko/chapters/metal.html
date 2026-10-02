@@ -1,0 +1,301 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
+     Executable code: MIT (see ../../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc":"구리 콘택트와 배선으로 PMIC 소자와 회로를 연결합니다. 듀얼 다마신, 선 저항, RC 지연, 전류 밀도, IR 강하와 일렉트로마이그레이션을 예시 모델로 살펴봅니다.","libs":["xsec"],"lang":"ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>콘택트, BEOL 및 두꺼운 최상층 금속 · PMICBook</title>
+<meta name="description" content="구리 콘택트와 배선으로 PMIC 소자와 회로를 연결합니다. 듀얼 다마신, 선 저항, RC 지연, 전류 밀도, IR 강하와 일렉트로마이그레이션을 예시 모델로 살펴봅니다.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/metal.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/metal.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/metal.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/metal.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="콘택트, BEOL 및 두꺼운 최상층 금속 · PMICBook">
+<meta property="og:description" content="구리 콘택트와 배선으로 PMIC 소자와 회로를 연결합니다. 듀얼 다마신, 선 저항, RC 지연, 전류 밀도, IR 강하와 일렉트로마이그레이션을 예시 모델로 살펴봅니다.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/metal.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/metal.html#chapter","name":"콘택트, BEOL 및 두꺼운 최상층 금속","headline":"콘택트, BEOL 및 두꺼운 최상층 금속 · PMICBook","description":"구리 콘택트와 배선으로 PMIC 소자와 회로를 연결합니다. 듀얼 다마신, 선 저항, RC 지연, 전류 밀도, IR 강하와 일렉트로마이그레이션을 예시 모델로 살펴봅니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/metal.html","position":17,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"17. 콘택트, BEOL 및 두꺼운 최상층 금속","item":"https://frbread7.github.io/pmicbook/ko/chapters/metal.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<script src="../../js/xsec.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="metal">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">17장 · 콘택트와 배선</div>
+    <h1>PMIC 배선: 콘택트, BEOL 및 신뢰성</h1>
+    <p class="lead">전력 관리 IC는 콘택트, 비아와 금속 배선으로 제어 회로를 고전류 소자 및 패키지 단자에 연결합니다. 저항은 IR 강하와 자체 발열을 일으키며, 국부 전류 밀도와 온도는 배선 신뢰성에 영향을 줍니다. 유지된 ProcessBook 모델은 증착, 충전, 배선 축소 및 상대적 스트레스 경향을 설명합니다. 이는 설명용이며 파운드리 적층 구조, 설계 규칙 또는 수명 예측이 아닙니다.</p>
+    <ul class="objectives">
+      <li>전력 소자에서 콘택트, 비아, 상부 금속과 패키지 연결을 거치는 전류 경로를 살펴봅니다.</li>
+      <li>구리 다마신에서 패턴 유전체, 배리어, 금속 충전과 CMP를 사용하는 이유를 설명합니다.</li>
+      <li>유지된 미세 배선 모델을 이용해 국부 신호 RC와 PMIC 전원 경로의 IR 강하를 구분합니다.</li>
+      <li>제품 수명을 추정하지 않고 일렉트로마이그레이션 스트레스의 상대적 경향을 비교합니다.</li>
+    </ul>
+  </header>
+
+  <section id="history">
+    <h2>알루미늄 감산 식각에서 구리 다마신으로</h2>
+    <p>알루미늄 배선은 일반적으로 감산 식각으로 패턴을 형성했습니다. 구리는 벌크 비저항이 더 낮지만, 기존의 휘발성 부산물을 이용하는 플라즈마 식각으로 패턴을 만들기 어렵고 주변 유전체와 실리콘으로 확산될 수 있습니다. 따라서 구리 배선에는 확산 방지막을 포함한 다마신 방식을 사용합니다.</p>
+    <p>다마신 집적에서는 유전체 트렌치와 콘택트 비아를 먼저 패터닝하고, 배리어를 입힌 뒤 금속으로 채우고 CMP로 평탄화합니다. 듀얼 다마신은 비아와 연결 배선을 하나의 금속 충전 순서로 형성합니다. 구체적인 적층과 공정 순서는 기술에 따라 다릅니다.</p>
+  </section>
+
+  <section id="pmic-metal"><h2>PMIC의 콘택트, 비아와 두꺼운 상부 금속</h2><p>전력 소자의 소스, 드레인 및 바디 콘택트는 국부 금속, 비아와 상부 배선 버스로 이어집니다. 콘택트와 비아의 저항은 전류 병목에서 전압 강하와 발열을 집중시킬 수 있습니다. 상부 금속을 넓히거나 두껍게 하면 배선 저항을 줄일 수 있지만 배선 면적을 차지하고 정전용량, 응력과 열 확산을 바꿉니다. 적절한 절충은 전류 파형, 레이아웃, 적층 구조와 패키지 귀환 경로에 따라 달라집니다.</p><div class="formula">$$\Delta V = IR,\qquad P_{\mathrm{loss}}=I^2R,\qquad J=I/A$$<div class="where">이 관계식은 1차 전기적 추정치입니다. 콘택트와 모서리의 전류 집중, 온도 의존 비저항, 병렬 경로 및 자체 발열을 고려하려면 레이아웃 기반 분석이 필요합니다. 보편적으로 적용할 수 있는 단일 전류 밀도 값만으로 일렉트로마이그레이션 수명을 보장할 수는 없습니다.</div></div></section>
+  <section id="dd">
+    <h2>듀얼 다마신 배선 단면</h2>
+    <p>유지된 단면 시뮬레이터는 M1에서 M2로 연결되는 단순화된 비아 우선 듀얼 다마신 순서를 단계별로 보여줍니다. 저유전율 유전체를 사용하고 정지막은 질화막으로 나타냅니다. 이는 국부 배선 흐름의 한 가지 설명용 예시입니다. PMIC 플랫폼에서는 알루미늄, 구리 또는 두꺼운 상부 배선을 포함하는 혼합 금속 적층도 사용할 수 있습니다.</p>
+    <div id="sim-dd"></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>단계</th><th>목적</th><th>집적 시 고려 사항</th></tr></thead>
+        <tbody>
+          <tr><td>배리어/라이너</td><td>구리 확산을 막고 접착력을 높임</td><td>특히 미세 패턴에서 도전 면적을 차지함</td></tr>
+          <tr><td>시드층 또는 충전을 돕는 층</td><td>전해 도금을 위한 전도 경로 제공</td><td>돌출부가 생기면 충전 전에 좁은 개구가 닫힐 수 있음</td></tr>
+          <tr><td>전기화학적 충전</td><td>비아와 트렌치를 채움</td><td>첨가제 균형과 패턴 형상이 보이드 또는 심 발생 위험에 영향을 줌</td></tr>
+          <tr><td>충전 후 처리</td><td>결정립 구조와 응력을 조정함</td><td>열 예산 및 유전체 호환성은 적층 구조에 따라 달라짐</td></tr>
+          <tr><td>CMP</td><td>과잉 금속을 제거하고 평탄화함</td><td>디싱, 침식 및 유전체 손상; 다음 장 참고: <a href="cmp.html">16장</a></td></tr>
+          <tr><td>캡층</td><td>상부 계면에서 확산을 제한함</td><td>계면에 따른 일렉트로마이그레이션 거동은 적층별 근거로 확인해야 함</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout deep"><strong>바닥부터 채우는 공정이 중요한 이유</strong><p>등각 증착에서는 내부가 채워지기 전에 좁은 개구가 닫혀 심이나 보이드가 남을 수 있습니다. 한 전기화학적 구리 충전 방식에서는 억제제, 촉진제와 평탄제가 국부 증착률을 바꾸어 개구가 닫히기 전에 움푹한 영역을 채웁니다. 이는 공학적 목표를 설명하는 예이며 실제 첨가제 화학과 패턴 치수는 공정별로 다릅니다.</p></div>
+  </section>
+
+  <section id="size">
+    <h2>비교 사례로 보는 미세 배선 축소</h2>
+    <p>배선 폭이 매우 작아지면 표면 및 결정립계 산란으로 유효 비저항이 증가할 수 있고, 배리어는 사용 가능한 도전 면적을 줄입니다. 아래 모델은 구리와 대체 금속의 미세 배선 사례를 비교합니다. 형상이 중요한 이유를 이해하는 데 유용하지만, 여기서 다루는 6–100 nm 폭은 국부 배선 축소 예시이지 PMIC 상부 금속의 설계 규칙이 아닙니다. 전력 경로는 실제로 더 넓은 도체, 콘택트, 비아, 병렬 경로와 온도 분포를 고려해 평가합니다.</p>
+    <div class="formula">$$w_c=w-2t_b,\quad h_c=h-t_b,\quad \rho_{\mathrm{eff}}\approx\rho_0\left(1+\frac{C\lambda}{\min(w_c,h_c)}\right),\quad R'=\frac{\rho_{\mathrm{eff}}}{w_ch_c}$$
+      <div class="where">\(\lambda\)은 설명용 전자 평균 자유 행로, \(C\)는 산란 효과를 묶어 나타내는 계수, \(t_b\)는 배리어 두께, \(w_c,h_c\)는 도전 치수입니다. 이 식은 \(w_c&gt;0\), \(h_c&gt;0\)일 때만 성립하며 위젯의 입력 범위가 이를 보장합니다. 재료 값과 배리어 가정은 교육용 입력값이지 공정 비교나 선택 기준이 아닙니다.</div>
+    </div>
+    <div class="sim" id="sim-size">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>금속별 배선 폭에 따른 선 저항</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sz-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>배선 폭<output id="sz-w-out"></output></span><input type="range" id="sz-w" min="6" max="100" step="1" value="20"></label>
+          <label class="ctrl"><span>종횡비 (높이/폭)<output id="sz-a-out"></output></span><input type="range" id="sz-a" min="1" max="3" step="0.1" value="2"></label>
+          <label class="ctrl"><span>구리 배리어 두께 (한쪽 면)<output id="sz-b-out"></output></span><input type="range" id="sz-b" min="0.5" max="2.5" step="0.1" value="2.5"></label>
+          <label class="ctrl"><span>산란 계수 C<output id="sz-c-out"></output></span><input type="range" id="sz-c" min="0.5" max="2" step="0.05" value="1"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">Cu 선 저항</span><span class="v" id="sz-o-cu">—</span></div>
+        <div class="stat"><span class="k">Ru</span><span class="v" id="sz-o-ru">—</span></div>
+        <div class="stat"><span class="k">Mo</span><span class="v" id="sz-o-mo">—</span></div>
+        <div class="stat"><span class="k">W</span><span class="v" id="sz-o-w">—</span></div>
+        <div class="stat"><span class="k">저항이 가장 낮은 금속</span><span class="v" id="sz-o-best">—</span></div>
+      </div>
+      <div class="sim-note">가정한 배리어 두께를 고정한 채 배선 폭을 줄여 보세요. 구리의 도전 면적이 빠르게 줄어듭니다. 높이를 늘리면 이 모델에서 단위 길이당 저항은 낮아지지만 인접 배선 간 결합과 적층 응력은 커질 수 있습니다. Cu, Ru, Mo, W 곡선은 벌크 비저항/평균 자유 행로의 설명용 쌍(µΩ·cm/nm)인 1.7/39, 7.1/6.6, 5.3/11, 5.3/19를 사용하며, 구리 이외의 예에는 0.5 nm 라이너를 가정합니다. 이는 민감도 분석용 입력값이지 일반화할 수 있는 재료 순위가 아닙니다.</div>
+    </div>
+  </section>
+
+  <section id="rc">
+    <h2>신호 RC 지연과 전원 경로 전압 강하</h2>
+    <p>분포형 신호 배선은 길이에 따라 저항과 정전용량이 누적되므로 1차 RC 지연은 대략 \(L^2\)에 비례해 증가합니다. 유전율과 인접 형상은 결합에 영향을 줍니다. 유지된 미세 배선 위젯은 이러한 신호 경로를 살펴봅니다. PMIC 전원 버스에서는 DC 및 펄스 전류에 따른 전압 강하, 국부 발열과 스위칭 루프 기생 성분이 주요 고려 사항입니다. 전류 루프와 열 관점의 해석은 <a href="layout.html">19장</a>을 참고하세요. 저유전율 재료는 정전 결합을 줄일 수 있지만 기계적 특성과 집적 특성도 고려해야 합니다.</p>
+    <div class="formula">$$\tau \approx 0.38\,R'C'L^2, \qquad C' \approx \varepsilon_0 k\left(2\frac{h}{s} + 2\frac{w}{t_{\text{ILD}}}\right) + C_{\text{fringe}}$$
+      <div class="where">\(R'\)과 \(C'\)는 단위 길이당 저항과 정전용량이고, \(s\)는 배선 간격, \(t_{\text{ILD}}\)는 층간 유전체 두께입니다. 계수와 정전용량 형상은 설명용입니다. 드라이버/부하 지연, 귀환 경로, 분포 인덕턴스와 비선형 스위칭은 포함하지 않았습니다.</div>
+    </div>
+    <div class="sim" id="sim-rc">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>배선 RC 지연 계산기</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="rc-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>피치 (배선 폭 = 피치/2)<output id="rc-p-out"></output></span><input type="range" id="rc-p" min="20" max="400" step="2" value="40"></label>
+          <label class="ctrl"><span>유전율 k<output id="rc-k-out"></output></span><input type="range" id="rc-k" min="1" max="4.2" step="0.05" value="2.7"></label>
+          <label class="ctrl"><span>배선 길이<output id="rc-l-out"></output></span><input type="range" id="rc-l" min="1" max="2000" step="1" value="100"></label>
+          <label class="ctrl"><span>금속</span><select id="rc-m"><option value="cu">구리 (배리어 2.5 nm)</option><option value="ru">루테늄</option><option value="mo">몰리브데넘</option></select></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">R′</span><span class="v" id="rc-o-r">—</span></div>
+        <div class="stat"><span class="k">C′</span><span class="v" id="rc-o-c">—</span></div>
+        <div class="stat"><span class="k">RC 지연</span><span class="v" id="rc-o-t">—</span></div>
+      </div>
+      <div class="sim-note">다른 입력을 고정하고 배선 길이를 10배 바꿔 보세요. 모델의 분포 RC 항은 100배 커집니다. 가정한 유전율을 바꾸면 결합이 달라집니다. 이 예시는 높이를 배선 폭의 2배로 두고 프린지 항을 단순화했습니다. PMIC 타이밍 한계나 특정 게이트 지연을 산출할 수 없습니다.</div>
+    </div>
+  </section>
+
+  <section id="em">
+    <h2>일렉트로마이그레이션: 상대적 스트레스 경향</h2>
+    <p>전류와 온도는 원자 이동을 유발해 배선 저항을 바꾸는 보이드나 힐록을 만들 수 있습니다. 블랙 식은 경험적 스트레스 모델입니다. 상수는 재료, 계면, 형상, 파형, 공정과 고장 판정 기준에 따라 달라집니다. 유지된 위젯은 하나의 가정된 메커니즘 안에서 비율을 비교하며 수명(년수)이나 적격성 평가 결과를 제공하지 않습니다.</p>
+    <div class="formula">$$\mathrm{MTTF} = A\,J^{-n}\exp\!\left(\frac{E_a}{kT}\right)$$
+      <div class="where">\(J\)는 전류 밀도, \(n\)은 경험적 전류 지수, \(E_a\)는 유효 활성화 에너지이며 \(A\)에는 보정 계수가 포함됩니다. 두 조건 모두에서 가정한 메커니즘과 매개변수가 적용될 때만 비율 계산에서 \(A\)가 소거됩니다. 아래에서 선택하는 \(E_a\)와 \(n\)은 민감도 분석용 입력값이며 알루미늄, 구리 또는 특정 캡층에 지정한 값이 아닙니다.</div>
+    </div>
+    <div class="sim" id="sim-em">
+      <div class="sim-head"><span class="sim-tag">상대 모델</span><h3>전류 및 온도 스트레스 민감도</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="em-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>전류 밀도 J<output id="em-j-out"></output></span><input type="range" id="em-j" min="0.1" max="20" step="0.1" value="2"></label>
+          <label class="ctrl"><span>동작 온도<output id="em-t-out"></output></span><input type="range" id="em-t" min="25" max="300" step="5" value="105"></label>
+          <label class="ctrl"><span>활성화 에너지 E<sub>a</sub> <output id="em-e-out"></output></span><input type="range" id="em-e" min="0.5" max="1.6" step="0.05" value="0.9"></label>
+          <div class="ctrl"><span>설명용 활성화 에너지</span><div class="seg" id="em-q"><button data-value="0.6">0.60 eV</button><button data-value="0.9" class="on">0.90 eV</button><button data-value="1.4">1.40 eV</button></div></div>
+          <label class="ctrl"><span>지수 n<output id="em-n-out"></output></span><input type="range" id="em-n" min="1" max="2.5" step="0.1" value="2"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">1 MA/cm², 105 °C 기준 경향 계수</span><span class="v" id="em-o-r">—</span></div>
+        <div class="stat"><span class="k">전류 밀도가 2배일 때의 계수</span><span class="v" id="em-o-a">—</span></div>
+      </div>
+      <div class="sim-note">설명용 지수 \(n=2\)를 고정한 채 전류 밀도를 2배로 하면 상대 경향 계수는 4분의 1이 됩니다. 온도나 활성화 에너지를 바꾸어 민감도를 살펴보세요. 기준점은 임의의 지수 1이며 10년 수명을 뜻하지 않습니다. 이 모델은 서로 다른 적층을 비교하거나 보정 없이 실제 사용 수명을 예측할 수 없습니다.</div>
+    </div>
+  </section>
+
+  <section id="next">
+    <h2>PMIC 배선 설계 선택</h2>
+    <ul>
+      <li><strong>전원 경로:</strong> 지정된 전류 파형, IR 강하, 온도 상승과 국부 전류 집중을 고려해 상부 금속, 콘택트와 비아 크기를 정합니다. 병렬 경로는 실제 전류 분포를 확인해야 합니다.</li>
+      <li><strong>귀환 경로:</strong> 기생 인덕턴스와 민감한 아날로그 노드로의 결합을 줄이도록 di/dt가 큰 전원 및 귀환 루프를 배치합니다. 다음을 참고하세요: <a href="layout.html">19장</a>.</li>
+      <li><strong>패키지 연결:</strong> 와이어 본드, 범프, 리드프레임 및 패키지 평면은 저항, 인덕턴스와 열 임피던스를 더합니다. 다이 금속만으로 시스템 거동이 결정되지는 않습니다.</li>
+      <li><strong>고급 선택지:</strong> 하이브리드 본딩과 후면 배선에는 서로 다른 집적, 정렬 및 열 요구 사항이 있습니다. 이에 관한 제한적인 배경 설명은 <a href="advanced.html">23장</a>을 참고하세요. 이를 일반적인 PMIC 적층 가정으로 간주해서는 안 됩니다.</li>
+    </ul>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>PMIC 콘택트, 비아, 상부 금속과 패키지 연결은 전류 및 열 경로를 이루므로 국부 병목이 중요합니다.</li>
+      <li>다마신은 금속 충전 전에 유전체 트렌치와 비아를 패터닝한 뒤 CMP로 평탄화합니다.</li>
+      <li>미세 배선 산란과 배리어 면적은 저항을 높일 수 있습니다. 유지된 축소 모델은 국부 배선의 설명용 사례입니다.</li>
+      <li>분포형 신호 RC는 대략 \(L^2\)에 비례해 증가할 수 있으며 전원 경로에는 IR 강하, 스위칭 루프와 열 분석도 필요합니다.</li>
+      <li>블랙 식의 비율은 가정한 스트레스 매개변수에 대한 민감도를 보여주지만 측정 기반 보정 없이는 검증된 수명을 정할 수 없습니다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 문제</h2>
+    <div class="quiz">
+      <div class="quiz-q"><p>일반적인 구리 다마신 공정에서 유전체를 먼저 패터닝하는 이유는 무엇인가요?</p><div class="opts">
+        <button class="opt">구리는 전기 절연체이기 때문입니다.</button><button class="opt" data-correct>기존의 휘발성 부산물 플라즈마 식각으로 구리 패턴을 만들기 어려워 트렌치나 비아를 채운 뒤 평탄화하기 때문입니다.</button><button class="opt">구리는 평탄화할 수 없기 때문입니다.</button><button class="opt">유전체는 패터닝할 필요가 없기 때문입니다.</button>
+      </div><div class="quiz-exp">다마신은 유전체에 홈을 만든 뒤 배리어와 금속을 채우고 CMP로 과잉 금속을 제거합니다.</div></div>
+      <div class="quiz-q"><p>배선 길이를 3배로 늘리면 분포 RC 지연은 어떻게 되나요?</p><div class="opts">
+        <button class="opt">3배</button><button class="opt" data-correct>9배</button><button class="opt">√3배</button><button class="opt">변하지 않습니다</button>
+      </div><div class="quiz-exp">R과 C가 모두 길이에 비례하므로 τ ∝ L²입니다.</div></div>
+      <div class="quiz-q"><p>하나의 설명용 블랙 식 매개변수 집합에서 전류 밀도를 3배로 하고 \(n=2\)로 두면 상대 경향 계수는 어떻게 바뀌나요?</p><div class="opts">
+        <button class="opt">1/3</button><button class="opt" data-correct>1/9</button><button class="opt">3배</button><button class="opt">변하지 않습니다</button>
+      </div><div class="quiz-exp">상대 계수는 \(J^{-2}\)에 비례하므로 전류 밀도를 3배로 하면 \(3^{-2}=1/9\)이 됩니다. 이는 실제 사용 수명 예측이 아닙니다.</div></div>
+      <div class="quiz-q"><p>넓은 상부 버스가 충분해 보여도 PMIC 금속 배선이 전압 강하 목표를 만족하지 못할 수 있는 이유는 무엇인가요?</p><div class="opts">
+        <button class="opt">상부 금속을 넓히면 패키지 저항이 모두 사라지기 때문입니다.</button><button class="opt" data-correct>콘택트, 비아, 국부 협소부, 병렬 전류 분포와 패키지 연결도 저항에 기여하기 때문입니다.</button><button class="opt">신호 배선 정전용량만 DC 강하를 결정하기 때문입니다.</button><button class="opt">금속 온도는 변하지 않기 때문입니다.</button>
+      </div><div class="quiz-exp">전원 경로는 직렬 및 병렬 네트워크입니다. 국부 병목을 포함해 소자에서 패키지까지의 실제 전류 경로를 분석해야 합니다.</div></div>
+    </div>
+  </section>
+<section class="callout" id="attribution"><h2>출처 및 저작자 표시</h2><p>ProcessBook를 바탕으로 CC BY 4.0에 따라 수정했습니다. 원본: <a href="https://github.com/geniuskey/processbook/blob/0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff/chapters/metal.html">불변 원본 금속 배선 장 (커밋 0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff)</a>. 본문은 PMIC/BCD 엔지니어링 관점에서 번역·재구성했습니다. 유지된 시뮬레이터는 교육용 단순화 가정을 사용하며 파운드리 레시피나 적격성 평가 데이터를 나타내지 않습니다. 다음을 참고하세요: <a href="../../LICENSE-CC-BY-4.0">CC BY 4.0 라이선스</a>.</p></section>
+</main>
+<script>
+(function () {
+  "use strict";
+  function small(v, u) { return v + "<small>" + u + "</small>"; }
+
+  /* ---------------- Dual damascene cross section */
+  var W = 150, DX = 4, mid = W * DX / 2;
+  XS.stepper("#sim-dd", {
+    title: "비아 우선 듀얼 다마신", tag: "단면 모델",
+    make: function () {
+      var s = new XS.Sim({ W: W, H: 110, dx: DX, surf: 70, substrate: "lowk" });
+      s.rect("tin", mid - 70, mid + 70, 0, 84); s.rect("cu", mid - 66, mid + 66, 0, 80);
+      return s;
+    },
+    legend: ["lowk", "nit", "cu", "tin", "pr", "acl"], doping: false,
+    startDesc: "하부층 구리 배선 M1(TaN 배리어로 감싼 구리)은 저유전율 박막에 매립되어 있으며 CMP로 표면이 평탄화되어 있습니다.",
+    steps: [
+      { op: "depo", mat: "nit", mode: "cvd", thick: 16, stick: 0.2, k: "DEP", label: "식각 정지막 SiCN 16 nm", desc: "구리의 상향 확산을 막는 캡이자 비아 식각을 멈추는 정지막입니다 (그림에서는 질화막 색으로 표시)." },
+      { op: "depo", mat: "lowk", mode: "cvd", thick: 160, stick: 0.2, k: "DEP", label: "저유전율 박막 (SiCOH) 160 nm", desc: "탄소가 혼합된 다공성 산화막을 PECVD로 증착합니다. k ≈ 2.5~3." },
+      { op: "depo", mat: "acl", mode: "cvd", thick: 30, stick: 0.2, k: "DEP", label: "하드마스크 30 nm", desc: "얇은 포토레지스트만으로는 식각을 견디기 어려워 하드마스크를 사용합니다." },
+      { op: "litho", thick: 100, wl: 193, NA: 1.35, sigma: 0.6, dose: 26, focus: 0, swing: 0.1, peb: 6, dev: 40, clear: [[mid - 30, mid + 30]], k: "LITH", label: "비아 노광 (60 nm 구멍)", desc: "아래쪽 M1과 정렬이 어긋나면 비아가 인접 배선 쪽으로 벗어납니다." },
+      { op: "etch", sel: { acl: 1, lowk: 0.3, pr: 0.3 }, rate: 4, time: 9, ion: 0.95, sigma: 2, k: "ETCH", label: "하드마스크 식각", desc: "포토레지스트 패턴을 하드마스크로 옮깁니다." },
+      { op: "etch", sel: { lowk: 1, nit: 0.05, pr: 0.25, acl: 0.05 }, rate: 5, time: 36, ion: 0.95, sigma: 2, k: "ETCH", label: "비아 식각 (정지막에서 정지)", desc: "플루오로카본 플라즈마로 저유전율 박막을 식각합니다. SiCN 정지막에서 멈춥니다." },
+      { op: "strip", mat: "pr", k: "STRIP", label: "포토레지스트 제거", desc: "저유전율 박막의 손상을 피하도록 약한 애싱을 사용합니다." },
+      { op: "litho", thick: 120, wl: 193, NA: 1.35, sigma: 0.6, dose: 24, focus: 0, swing: 0.1, peb: 6, dev: 40, clear: [[mid - 90, mid + 90]], k: "LITH", label: "트렌치 노광 (M2 배선)", desc: "비아 구멍을 포토레지스트로 채운 상태에서 트렌치 패턴을 형성합니다. 비아 안의 포토레지스트 플러그가 바닥을 보호합니다." },
+      { op: "etch", sel: { acl: 1, lowk: 0.3, pr: 0.3 }, rate: 4, time: 9, ion: 0.95, sigma: 2, k: "ETCH", label: "하드마스크 식각", desc: "트렌치 패턴을 하드마스크로 옮깁니다." },
+      { op: "etch", sel: { lowk: 1, nit: 0.05, pr: 0.5, acl: 0.05 }, rate: 5, time: 18, ion: 0.95, sigma: 2, k: "ETCH", label: "트렌치 식각 (시간 제어)", desc: "시간을 제어해 저유전율 박막 깊이의 절반까지 트렌치를 식각합니다. 비아 안의 포토레지스트도 함께 제거됩니다." },
+      { op: "strip", mat: ["pr", "acl"], k: "STRIP", label: "포토레지스트와 하드마스크 제거", desc: "비아와 트렌치가 연결된 듀얼 다마신 구조가 드러납니다." },
+      { op: "etch", sel: { nit: 1, lowk: 0.1 }, rate: 3, time: 7, ion: 1, sigma: 1.5, k: "ETCH", label: "정지막 개방 (라이너 제거)", desc: "비아 바닥의 SiCN을 제거해 아래쪽 M1 구리를 노출합니다." },
+      { op: "depo", mat: "tin", mode: "pvd", thick: 8, cosn: 4, k: "DEP", label: "Ta/TaN PVD 배리어", desc: "이온화 PVD로 비아 바닥까지 얇은 배리어를 입힙니다 (그림에서는 TiN 색으로 표시). 측벽의 막은 얇습니다." },
+      { op: "depo", mat: "cu", mode: "cvd", thick: 130, stick: 0.02, k: "DEP", label: "구리 시드층 + 전해 도금", desc: "시드층을 형성한 뒤 도금으로 채웁니다. 실제 슈퍼필은 바닥부터 채우지만 여기서는 거의 등각 성장으로 근사했습니다." },
+      { op: "cmp", stop: "", level: -176, over: 0, dish: { cu: 6 }, k: "CMP", label: "구리 CMP", desc: "과잉 구리와 배리어를 연마 제거합니다. 폭이 넓은 구리 배선의 중앙이 약간 오목해지는 디싱이 생깁니다." },
+      { op: "depo", mat: "nit", mode: "cvd", thick: 16, stick: 0.2, k: "DEP", label: "SiCN 캡 · 완료", desc: "구리를 덮어 다음 층으로 확산되는 것을 막습니다. M1-비아-M2 연결이 완성됩니다." }
+    ],
+    note: "실제 공정에는 트렌치 우선, 자기 정렬 비아, 금속 하드마스크 등 여러 변형이 있습니다. 격자 간격 4 nm의 교육용 모델입니다."
+  });
+
+  /* ---------------- Size effect */
+  var MET = { cu: { n: "Cu", r0: 1.7, l: 39, bar: true, col: "accent" }, ru: { n: "Ru", r0: 7.1, l: 6.6, col: "accent2" }, mo: { n: "Mo", r0: 5.3, l: 11, col: "ok" }, w: { n: "W", r0: 5.3, l: 19, col: "warn" } };
+  function lineR(m, w, ar, tb, C) { // Ω/µm; UI ranges keep both dimensions positive.
+    var M = MET[m], b = M.bar ? tb : 0.5, h = w * ar, cw = w - 2 * b, ch = h - b;
+    var rho = M.r0 * (1 + C * M.l / Math.min(cw, ch));   // µΩ·cm
+    return rho * 1e-8 / (cw * 1e-9 * ch * 1e-9) * 1e-6;  // Ω/m → Ω/µm
+  }
+  (function () {
+    var cv, rr = function () { cv && cv.redraw(); };
+    var gW = PB.range("sz-w", function (v) { return v + " nm"; }, rr), gA = PB.range("sz-a", function (v) { return v.toFixed(1); }, rr);
+    var gB = PB.range("sz-b", function (v) { return v.toFixed(1) + " nm"; }, rr), gC = PB.range("sz-c", function (v) { return v.toFixed(2); }, rr);
+    cv = PB.canvas("#sz-cv", function (ctx, w, h) {
+      var P = PB.palette(), wd = gW(), ar = gA(), tb = gB(), C = gC();
+      var series = Object.keys(MET).map(function (k) { var d = []; for (var x = 6; x<= 100; x += 0.5) d.push([x, lineR(k, x, ar, tb, C)]); return { data: d, color: P[MET[k].col], width: k === "cu" ? 3 : 2.2 }; });
+      PB.chart(ctx, null, { x: [6, 100], y: [1, 1e5], logX: true, logY: true, xLabel: "배선 폭 (nm)", yLabel: "선 저항 (Ω/µm)", series: series, vlines: [{ x: wd, color: P.faint }] });
+      ctx.font = PB.font(12); ctx.textAlign = "right";
+      Object.keys(MET).forEach(function (k, i) { ctx.fillStyle = P[MET[k].col]; ctx.fillText(MET[k].n, w - 26, 30 + i * 18); });
+      var best = null;
+      Object.keys(MET).forEach(function (k) { var r = lineR(k, wd, ar, tb, C); PB.stat("sz-o-" + k, small(PB.fmt(r, 3), "Ω/µm")); if (!best || r < best[1]) best = [k, r]; });
+      PB.stat("sz-o-best", MET[best[0]].n);
+    }, { aspect: 0.62, minHeight: 300, maxHeight: 440 });
+  })();
+
+  /* ---------------- RC */
+  (function () {
+    var cv, rr = function () { cv && cv.redraw(); };
+    var gP = PB.range("rc-p", function (v) { return v + " nm"; }, rr), gK = PB.range("rc-k", function (v) { return v.toFixed(2); }, rr);
+    var gL = PB.range("rc-l", function (v) { return v + " µm"; }, rr);
+    var mSel = document.getElementById("rc-m"); mSel.addEventListener("change", rr);
+    var e0 = 8.854e-12;
+    function calc(p, k, m) { var w = p / 2, hgt = 2 * w, s = p - w; var R = lineR(m, w, 2, 2.5, 1); var C = e0 * k * (2 * hgt / s + 2 * w / w) * 1e-6 + 0.04e-15 * k / 4; return { R: R, C: C }; } // C: F/µm
+    cv = PB.canvas("#rc-cv", function (ctx, w, h) {
+      var P = PB.palette(), p = gP(), k = gK(), L = gL(), m = mSel.value, c = calc(p, k, m);
+      var d = [], d2 = [];
+      for (var x = 1; x <= 2000; x *= 1.1) { d.push([x, 0.38 * c.R * c.C * x * x * 1e12]); d2.push([x, 0.38 * calc(p, 3.9, m).R * calc(p, 3.9, m).C * x * x * 1e12]); }
+      PB.chart(ctx, null, { x: [1, 2000], y: [1e-3, 1e5], logX: true, logY: true, xLabel: "배선 길이 (µm)", yLabel: "RC 지연 (ps)", series: [{ data: d2, color: P.faint, width: 1.6, dash: [5, 4] }, { data: d, color: P.accent, width: 3 }],
+        points: [{ x: L, y: 0.38 * c.R * c.C * L * L * 1e12, color: P.accent }] });
+      ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left"; ctx.fillText("점선: k = 3.9 (SiO₂)", 66, 26);
+      var t = 0.38 * c.R * c.C * L * L * 1e12;
+      PB.stat("rc-o-r", small(PB.fmt(c.R, 3), "Ω/µm"));
+      PB.stat("rc-o-c", small(PB.fmt(c.C * 1e15, 3), "fF/µm"));
+      PB.stat("rc-o-t", t > 1000 ? small(PB.fmt(t / 1000, 3), "ns") : small(PB.fmt(t, 3), "ps"));
+    }, { aspect: 0.62, minHeight: 300, maxHeight: 440 });
+  })();
+
+  /* ---------------- EM */
+  (function () {
+    var cv, rr = function () { cv && cv.redraw(); };
+    var gJ = PB.range("em-j", function (v) { return v.toFixed(1) + " MA/cm²"; }, rr), gT = PB.range("em-t", function (v) { return v + " °C"; }, rr);
+    var gE = PB.range("em-e", function (v) { return v.toFixed(2) + " eV"; }, rr), gN = PB.range("em-n", function (v) { return v.toFixed(1); }, rr);
+    PB.seg("em-q", function (v) { gE.set(+v); });
+    var kB = 8.617e-5;
+    function rel(J, T, Ea, n) { return Math.pow(J / 1, -n) * Math.exp(Ea / kB * (1 / (T + 273.15) - 1 / 378.15)); }
+    cv = PB.canvas("#em-cv", function (ctx, w, h) {
+      var P = PB.palette(), J = gJ(), T = gT(), Ea = gE(), n = gN();
+      var temps = [25, 105, 150, 200, 300], cols = [P.ok, P.accent, P.warn, P.bad, P.accent2];
+      var series = temps.map(function (TT, i) { var d = []; for (var j = 0.1; j <= 20; j *= 1.08) d.push([j, rel(j, TT, Ea, n)]); return { data: d, color: cols[i], width: TT === 105 ? 3 : 1.8 }; });
+      PB.chart(ctx, null, { x: [0.1, 20], y: [1e-9, 1e9], logX: true, logY: true, xLabel: "전류 밀도 J (MA/cm²)", yLabel: "상대 경향 계수", series: series, points: [{ x: J, y: rel(J, T, Ea, n), color: P.text, r: 5 }], hlines: [{ y: 1, color: P.faint, label: "기준값 1" }] });
+      ctx.font = PB.font(11); ctx.textAlign = "right"; temps.forEach(function (TT, i) { ctx.fillStyle = cols[i]; ctx.fillText(TT + " °C", w - 26, 30 + i * 16); });
+      var r = rel(J, T, Ea, n);
+      PB.stat("em-o-r", small("× " + PB.fmt(r, 3), ""));
+      PB.stat("em-o-a", small("× " + PB.fmt(Math.pow(2, -n), 3), ""));
+    }, { aspect: 0.62, minHeight: 300, maxHeight: 440 });
+  })();
+})();</script>
+</body>
+</html>

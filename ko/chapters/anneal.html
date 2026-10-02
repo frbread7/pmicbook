@@ -1,0 +1,213 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
+     Executable code: MIT (see ../../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc":"PMIC 및 BCD 소자의 확산, 도펀트 활성화와 열 예산을 다룹니다. 대화형 모델은 교육용 근사치입니다.","libs":["xsec"],"lang":"ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>어닐링과 열 예산 · PMICBook</title>
+<meta name="description" content="PMIC 및 BCD 소자의 확산, 도펀트 활성화와 열 예산을 다룹니다. 대화형 모델은 교육용 근사치입니다.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/anneal.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/anneal.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/anneal.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/anneal.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="어닐링과 열 예산 · PMICBook">
+<meta property="og:description" content="PMIC 및 BCD 소자의 확산, 도펀트 활성화와 열 예산을 다룹니다. 대화형 모델은 교육용 근사치입니다.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/anneal.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/anneal.html#chapter","name":"어닐링과 열 예산","headline":"어닐링과 열 예산 · PMICBook","description":"PMIC 및 BCD 소자의 확산, 도펀트 활성화와 열 예산을 다룹니다. 대화형 모델은 교육용 근사치입니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/anneal.html","position":15,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"15. 어닐링과 열 예산","item":"https://frbread7.github.io/pmicbook/ko/chapters/anneal.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<script src="../../js/xsec.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="anneal">
+<main class="chapter">
+<header class="chapter-hero"><div class="eyebrow">제15장 · 열 예산</div><h1>어닐링, 활성화와 확산</h1><p class="lead">이온 주입은 도펀트를 웨이퍼에 주입하는 동시에 결정 격자에 손상을 줍니다. 어닐링은 손상의 일부를 회복시키고 도펀트가 전기적으로 활성인 격자 자리에 들어가도록 돕지만, 열은 도펀트도 재분포시킵니다. PMIC와 BCD 소자에서는 이 열 이력이 접합 깊이, 웰·드리프트 프로파일, 누설, 저항과 소자 간 편차에 영향을 줍니다.</p><ul class="objectives"><li>픽의 법칙과 아레니우스 확산계수로 도펀트 재분포를 설명합니다.</li><li>일정 표면 농도 조건과 유한 주입량 조건의 확산 프로파일을 비교합니다.</li><li>온도와 시간의 전체 이력을 교육용 확산 예산과 연결합니다.</li><li>도펀트 활성화와 확산 억제가 서로 경쟁하는 어닐링 요구사항인 이유를 설명합니다.</li></ul></header>
+<section id="mechanisms"><h2>확산과 활성화</h2><p>원자는 공공이나 자기 침입형 원자와 같은 점 결함을 매개로 결정 안에서 이동합니다. 지배적인 이동 경로는 도펀트 종류, 온도, 농도와 결함 분포에 따라 달라집니다. 픽의 제1법칙은 농도 구배에 따른 플럭스를, 제2법칙은 시간이 지남에 따른 농도 프로파일의 변화를 나타냅니다.</p><div class="formula">$$J=-D\frac{\partial C}{\partial x},\qquad \frac{\partial C}{\partial t}=D\frac{\partial^2C}{\partial x^2},\qquad D=D_0e^{-E_a/kT}$$<div class="where">아레니우스 관계식은 희석·평형 조건을 가정한 근사식입니다. 실제 이온 주입 및 고농도 프로파일은 농도와 결함 상태에 따라 달라질 수 있습니다. 확산 길이는 \(\sqrt{Dt}\)에 비례하지만, 그 값 자체가 접합 이동량을 예측하지는 않습니다.</div></div><p>어닐링은 주입 손상을 회복시키고 도펀트를 전기적으로 유효한 격자 자리에 배치해 활성화합니다. 활성화율은 도펀트 종류와 농도, 손상, 온도, 시간에 따라 달라지므로 열 모델만으로 예측할 수 없습니다.</p></section>
+<section id="profiles"><h2>두 가지 이상화된 확산 프로파일</h2><p>표면 농도가 일정하면 상보 오차함수(erfc) 형태의 프로파일이 되고, 유한한 주입량은 더 넓고 낮은 가우스형 프로파일로 퍼집니다. 이온 주입 후 어닐링은 넓어진 유한 주입량 분포에 더 가깝지만 실제 프로파일은 비대칭일 수 있고 과도 확산이 나타날 수 있습니다.</p><div class="formula">$$C_{const}(x,t)=C_s\,\mathrm{erfc}\!\left(\frac{x}{2\sqrt{Dt}}\right),\qquad C_{dose}(x,t)=\frac{Q}{\sqrt{\pi Dt}}e^{-x^2/(4Dt)}$$<div class="where">이 교과서 해는 확산계수가 일정하고 경계 조건이 단순하다고 가정합니다. 농도 의존성, 클러스터 형성, 편석, 계면 및 과도 점 결함 효과는 포함하지 않습니다.</div></div><div class="sim" id="sim-fick">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>프리디포지션 · 드라이브인 · 주입 후 어닐링</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="fk-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="ctrl"><span>조건</span><div class="seg" id="fk-m"><button data-value="erfc">표면 농도 일정</button><button data-value="gauss">유한 주입량</button><button data-value="imp" class="on">이온 주입 + 어닐링</button></div></div>
+          <div class="ctrl"><span>도펀트</span><div class="seg" id="fk-sp"><button data-value="B" class="on">B</button><button data-value="P">P</button><button data-value="As">As</button><button data-value="Sb">Sb</button></div></div>
+          <label class="ctrl"><span>온도 <output id="fk-T-out"></output></span><input type="range" id="fk-T" min="700" max="1250" step="5" value="1000"></label>
+          <label class="ctrl"><span>시간 (로그 척도) <output id="fk-t-out"></output></span><input type="range" id="fk-t" min="0" max="4.6" step="0.02" value="1"></label>
+          <label class="ctrl"><span>표면 농도 C<sub>s</sub> / 주입량 Q <output id="fk-c-out"></output></span><input type="range" id="fk-c" min="11" max="21" step="0.1" value="15"></label>
+          <label class="ctrl"><span>배경 도핑 농도 <output id="fk-b-out"></output></span><input type="range" id="fk-b" min="14" max="18" step="0.1" value="16"></label>
+          <label class="check"><input type="checkbox" id="fk-ted"> 과도 확산(TED) 포함</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">확산계수 D</span><span class="v" id="fk-o-d">—</span></div>
+        <div class="stat"><span class="k">확산 길이 √(Dt)</span><span class="v" id="fk-o-l">—</span></div>
+        <div class="stat"><span class="k">접합 깊이 x<sub>j</sub></span><span class="v" id="fk-o-j">—</span></div>
+        <div class="stat"><span class="k">주입량 Q</span><span class="v" id="fk-o-q">—</span></div>
+      </div>
+      <div class="sim-note">표면 농도 일정, 유한 주입량, 이온 주입 후 어닐링 조건을 비교하세요. 과도 확산 옵션은 확산 길이에 고정된 교육용 값을 더하며 시간에 따른 결함 변화를 계산하지 않습니다.</div>
+    </div></section>
+<section id="diffusivity"><h2>아레니우스 확산계수와 누적 열 이력</h2><p>확산계수는 온도에 따라 크게 변하므로 최고 온도만 비교하면 오해할 수 있습니다. 확산계수가 일정하다고 근사하면 비등온 공정 순서는 \(D_{\mathrm{eff}}t_{\mathrm{total}}=\int D(T(t))dt\)로 요약할 수 있습니다. 여러 공정 단계가 전체 열 이력에 누적됩니다.</p><div class="sim" id="sim-arr">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>아레니우스 도표: 도펀트 확산계수</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ar-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>온도 <output id="ar-T-out"></output></span><input type="range" id="ar-T" min="600" max="1300" step="5" value="1000"></label>
+          <label class="ctrl"><span>시간 <output id="ar-t-out"></output></span><input type="range" id="ar-t" min="-3" max="4" step="0.05" value="1"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">√(Dt): B</span><span class="v" id="ar-o-B">—</span></div>
+        <div class="stat"><span class="k">P</span><span class="v" id="ar-o-P">—</span></div>
+        <div class="stat"><span class="k">As</span><span class="v" id="ar-o-As">—</span></div>
+        <div class="stat"><span class="k">Sb</span><span class="v" id="ar-o-Sb">—</span></div>
+      </div>
+      <div class="sim-note">온도와 시간에 따른 도펀트 확산계수의 경향을 비교하세요. 아레니우스 매개변수는 대표적인 교육용 값이며 농도 및 점 결함 효과는 생략했습니다.</div>
+    </div><div class="callout"><strong>교육용 예시 매개변수</strong><p>시뮬레이터의 B, P, As, Sb 아레니우스 계수는 공개 문헌의 대표적 값을 참고한 예시이며 보편적으로 적용되는 매개변수 세트가 아닙니다. 점 결함, 농도, 분위기, 응력과 이온 주입 손상은 유효 확산을 크게 바꿀 수 있습니다.</p></div></section>
+<section id="anneal-types"><h2>로(爐), 급속 열처리(RTA), 스파이크 및 밀리초 어닐링</h2><p>장시간 로 어닐링은 큰 열 노출을 줍니다. 급속 열 어닐링과 스파이크 공정은 최고 온도 부근의 체류 시간을 줄이고, 플래시·레이저 공정은 표면을 매우 짧게 고온에 노출할 수 있습니다. 단순히 온도를 높이는 것이 답은 아닙니다. 과도한 재분포, 용융, 박막 또는 소자 열화 없이 도펀트를 활성화하고 손상을 회복해야 합니다.</p><div class="sim" id="sim-rta">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>온도 이력과 열 예산</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="rt-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="ctrl"><span>방식</span><div class="seg" id="rt-m"><button data-value="furn">로 어닐링</button><button data-value="rta">RTA</button><button data-value="spike" class="on">스파이크</button><button data-value="flash">밀리초 어닐링</button></div></div>
+          <label class="ctrl"><span>최고 온도 <output id="rt-T-out"></output></span><input type="range" id="rt-T" min="800" max="1350" step="5" value="1050"></label>
+          <label class="ctrl"><span>유지 시간 <output id="rt-s-out"></output></span><input type="range" id="rt-s" min="0" max="3.6" step="0.05" value="0"></label>
+          <label class="ctrl"><span>승온 속도 <output id="rt-r-out"></output></span><input type="range" id="rt-r" min="-1" max="6" step="0.1" value="2.4"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">붕소 유효 Dt</span><span class="v" id="rt-o-dt">—</span></div>
+        <div class="stat"><span class="k">확산 길이 √(Dt)</span><span class="v" id="rt-o-l">—</span></div>
+        <div class="stat"><span class="k">동일한 Dt에 해당하는 1000 °C 등가 시간</span><span class="v" id="rt-o-eq">—</span></div>
+        <div class="stat"><span class="k">활성화 지표 (최고 온도 기준)</span><span class="v" id="rt-o-a">—</span></div>
+      </div>
+      <div class="sim-note">온도 이력과 적분 확산계수를 비교하세요. 이 모델은 하나의 붕소 확산 법칙과 최고 온도에 따른 정성적 활성화 지표를 사용하며, 어느 것도 특정 공정 모듈을 예측하지 않습니다.</div>
+    </div><p>온도 이력 시뮬레이터는 하나의 붕소 확산 모델을 사용해 선택한 곡선의 누적값을 적분합니다. “활성화 지표”는 온도에 대한 정성적 지표일 뿐, 활성화 모델도 특정 BCD 모듈의 레시피 비교도 아닙니다.</p></section>
+<section id="nonideal"><h2>과도 효과와 비이상 거동</h2><p>이온 주입 손상은 일부 도펀트에서 점 결함 농도를 일시적으로 높여 확산을 가속할 수 있습니다. 산화도 계면 부근에 점 결함을 주입할 수 있습니다. 농도가 높으면 도펀트 상호작용, 클러스터 형성 및 불완전한 전기적 활성화 때문에 단순 희석 가우스 모델이 성립하지 않습니다. 따라서 공정 시뮬레이션에 더해 실제 프로파일과 면저항을 측정해야 합니다.</p><ul><li><strong>과도 확산(TED):</strong> 이온 주입 뒤 과잉 침입형 원자가 확산을 일시적으로 촉진할 수 있습니다.</li><li><strong>산화 유도 확산(OED):</strong> 산화로 발생한 결함이 계면 부근의 도펀트 이동을 바꿀 수 있습니다.</li><li><strong>활성화와 클러스터 형성:</strong> 전체 화학적 주입량은 전기적으로 활성인 도펀트 농도와 같지 않습니다.</li></ul><p>이온 주입 프로파일 모델은 <a href="implant.html">도핑 및 웰·드리프트 이온 주입</a> 장에서, 열 공정 순서는 <a href="integration.html">BCD 공정 통합</a> 장에서 확인하세요.</p></section>
+<section class="keypoints" id="summary"><h2>핵심 정리</h2><ol><li>픽의 법칙과 아레니우스 확산계수는 재분포를 이해하는 유용한 1차 모델입니다.</li><li>일정 공급원과 유한 주입량의 경계 조건은 서로 다른 프로파일을 만듭니다.</li><li>열 예산은 최고 온도만이 아니라 전체 온도 이력에 따라 달라집니다.</li><li>실제 이온 주입 구조에서는 활성화, 손상 회복, 확산, 클러스터 형성과 편석이 서로 연계됩니다.</li><li>시뮬레이터 계수와 결과는 교육용 근사값입니다. 공개 문헌과 실측 구조로 검증해야 합니다.</li></ol></section>
+<section class="quiz-sec" id="quiz"><h2>이해도 확인</h2><div class="quiz">
+<div class="quiz-q"><p>확산계수가 일정한 모델에서 유한 주입량 프로파일이 퍼지면 최대 농도는 어떻게 변하나요?</p><div class="opts"><button class="opt">시간이 지날수록 증가합니다</button><button class="opt" data-correct>주입량이 더 넓은 영역으로 분포하므로 감소합니다</button><button class="opt">표면 농도로 고정됩니다</button><button class="opt">주입량과 무관해집니다</button></div><div class="quiz-exp">이상 모델에서는 주입량이 보존되고 대표 프로파일 폭은 대략 \(\sqrt{Dt}\)에 따라 증가합니다.</div></div>
+<div class="quiz-q"><p>최고 온도가 같은 두 어닐링에서 확산량이 달라질 수 있는 이유는 무엇인가요?</p><div class="opts"><button class="opt">최고 온도만으로 확산이 결정되기 때문입니다</button><button class="opt" data-correct>각 온도에서 머문 시간이 적분 확산계수를 바꾸기 때문입니다</button><button class="opt">냉각 중에만 확산이 일어나기 때문입니다</button><button class="opt">어닐링에서 주입량이 초기화되기 때문입니다</button></div><div class="quiz-exp">확산계수는 온도에 크게 의존하므로 전체 온도-시간 곡선이 중요합니다.</div></div>
+<div class="quiz-q"><p>이온 주입 후 어닐링의 역할은 무엇인가요?</p><div class="opts"><button class="opt">이온 주입량을 늘립니다</button><button class="opt" data-correct>일부 격자 손상을 회복하고 전기적 활성화를 돕지만 확산을 일으킬 수도 있습니다</button><button class="opt">접합 이동이 없음을 보장합니다</button><button class="opt">특성 평가를 불필요하게 만듭니다</button></div><div class="quiz-exp">어닐링은 여러 목적을 수행하지만 도펀트를 재분포시킬 수 있으며 완전한 활성화를 보장하지 않습니다.</div></div>
+</div></section>
+<section class="callout" id="attribution"><h2>저작물 출처 및 이용 조건</h2><p>ProcessBook의 어닐링 장을 바탕으로 작성했습니다. 원문은 <a href="https://github.com/geniuskey/processbook/blob/0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff/chapters/anneal.html">업스트림 기준 커밋 0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff의 페이지입니다</a>. CC BY 4.0에 따라 번역·수정하여 확산, 활성화 및 열 이력을 BCD 웰·드리프트 영역·접합과 연결했습니다. 업스트림의 프로파일, 아레니우스 및 열 이력 시뮬레이터를 유지했습니다. 다음을 참조하세요: <a href="../../LICENSE-CC-BY-4.0">CC BY 4.0 라이선스</a>. 시뮬레이터 계수는 교육용 근사값이며 파운드리 매개변수가 아닙니다.</p></section>
+</main>
+<script>
+(function () {
+  "use strict";
+  function small(v, u) { return v + "<small>" + u + "</small>"; }
+  var kB = 8.617e-5;
+  var DIF = { B: [0.76, 3.46, "p"], P: [3.85, 3.66, "n"], As: [0.066, 3.44, "n"], Sb: [0.214, 3.65, "n"] };
+  var D = function (sp, Tc) { var d = DIF[sp]; return d[0] * Math.exp(-d[1] / (kB * (Tc + 273.15))); };
+  var sup = function (x) { if (!(x > 0)) return "0"; var e = Math.floor(Math.log10(x)), m = x / Math.pow(10, e); return m.toFixed(1) + "×10<sup>" + e + "</sup>"; };
+  var nm = function (cm) { var n = cm * 1e7; return n >= 1000 ? small(PB.fmt(n / 1000, 3), "µm") : small(PB.fmt(n, 3), "nm"); };
+  var tf = function (s) { return s < 1 ? PB.fmt(s * 1000, 3) + " ms" : s < 120 ? PB.fmt(s, 3) + " s" : s < 7200 ? PB.fmt(s / 60, 3) + " min" : PB.fmt(s / 3600, 3) + " h"; };
+
+  /* ---------------- Fick solutions */
+  (function () {
+    var cv, rr = function () { cv && cv.redraw(); };
+    var gM = PB.seg("fk-m", rr), gSp = PB.seg("fk-sp", rr);
+    var gT = PB.range("fk-T", function (v) { return v + " °C"; }, rr);
+    var gt = PB.range("fk-t", function (v) { return tf(Math.pow(10, v)); }, rr);
+    var gC = PB.range("fk-c", function (v) { return "10^" + v.toFixed(1); }, rr);
+    var gB = PB.range("fk-b", function (v) { return "10^" + v.toFixed(1); }, rr);
+    var ted = document.getElementById("fk-ted"); ted.addEventListener("change", rr);
+    cv = PB.canvas("#fk-cv", function (ctx, w, h) {
+      var P = PB.palette(), mode = gM(), sp = gSp(), T = gT(), t = Math.pow(10, gt()), C = Math.pow(10, gC()), NB = Math.pow(10, gB());
+      var d = D(sp, T), Dt = d * t;
+      if (ted.checked && (sp === "B" || sp === "P") && mode === "imp") Dt += Math.pow(15e-7, 2) * (gC() >= 14 ? 1 : 0.3);   // assumed damage contribution of about 15 nm
+      var L = Math.sqrt(Dt), prof, Q;
+      var rp = XS.range(sp === "Sb" ? "As" : sp, 30);
+      if (mode === "erfc") { prof = function (x) { return C * PB.erfc(x / (2 * L)); }; Q = 2 * C * L / Math.sqrt(Math.PI); }
+      else if (mode === "gauss") { Q = C; prof = function (x) { return Q / Math.sqrt(Math.PI * Dt) * Math.exp(-x * x / (4 * Dt)); }; }
+      else {
+        Q = C;
+        var Rp = rp.Rp * 1e-7, s0 = rp.dRp * 1e-7, s = Math.sqrt(s0 * s0 + 2 * Dt);
+        prof = function (x) { return Q / (Math.sqrt(2 * Math.PI) * s) * (Math.exp(-Math.pow(x - Rp, 2) / (2 * s * s)) + Math.exp(-Math.pow(x + Rp, 2) / (2 * s * s))); };
+      }
+      var sImp = Math.sqrt(Math.pow(rp.dRp * 1e-7, 2) + 2 * Dt), xmax = mode === "imp" ? rp.Rp * 1e-7 + 7 * sImp : Math.max(50e-7, 7 * L);
+      var data = [], data0 = [], xj = null, prev = null;
+      for (var i = 0; i <= 400; i++) { var x = xmax * i / 400, v = prof(x); data.push([x * 1e7, Math.max(1e12, v)]); if (prev !== null && prev >= NB && v < NB && xj === null) xj = x; prev = v; }
+      if (mode === "imp") { var Rp0 = rp.Rp * 1e-7, s00 = rp.dRp * 1e-7; for (var j = 0; j <= 400; j++) { var x2 = xmax * j / 400; data0.push([x2 * 1e7, Math.max(1e12, Q / (Math.sqrt(2 * Math.PI) * s00) * Math.exp(-Math.pow(x2 - Rp0, 2) / (2 * s00 * s00)))]); } }
+      PB.chart(ctx, null, { x: [0, xmax * 1e7], y: [1e14, 1e22], logY: true, xLabel: "깊이 (nm)", yLabel: "농도 (cm⁻³)",
+        series: (data0.length ? [{ data: data0, color: P.faint, width: 1.5, dash: [5, 4] }] : []).concat([{ data: data, color: DIF[sp][2] === "n" ? P.blue : P.red, width: 3 }]),
+        hlines: [{ y: NB, color: P.faint, label: "배경 농도" }], vlines: xj ? [{ x: xj * 1e7, color: P.accent, label: "xⱼ" }] : [] });
+      if (data0.length) { ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left"; ctx.fillText("점선: 어닐링 전 (30 keV 이온 주입)", 64, 24); }
+      PB.stat("fk-o-d", sup(d) + "<small>cm²/s</small>");
+      PB.stat("fk-o-l", nm(L));
+      PB.stat("fk-o-j", xj ? nm(xj) : "—");
+      PB.stat("fk-o-q", sup(Q) + "<small>cm⁻²</small>");
+    }, { aspect: 0.62, minHeight: 320, maxHeight: 460 });
+    // Update slider meaning: Cs (cm⁻³) for constant surface concentration; otherwise dose = 10^(value−5)
+    var out = document.getElementById("fk-c-out");
+    var lastM = gM();
+    var upd = function () { var v = gC(); out.textContent = gM() === "erfc" ? "Cs 10^" + v.toFixed(1) + " cm⁻³" : "Q 10^" + v.toFixed(1) + " cm⁻²"; };
+    document.getElementById("fk-c").addEventListener("input", upd);
+    document.getElementById("fk-m").addEventListener("click", function () { var m = gM(); if ((m === "erfc") !== (lastM === "erfc")) gC.set(m === "erfc" ? 20 : 15); lastM = m; upd(); }); upd();
+  })();
+
+  /* ---------------- Arrhenius diffusivity */
+  (function () {
+    var cv, rr = function () { cv && cv.redraw(); };
+    var gT = PB.range("ar-T", function (v) { return v + " °C"; }, rr);
+    var gt = PB.range("ar-t", function (v) { return tf(Math.pow(10, v)); }, rr);
+    var COL = { B: "red", P: "blue", As: "accent2", Sb: "warn" };
+    cv = PB.canvas("#ar-cv", function (ctx, w, h) {
+      var P = PB.palette(), T = gT(), t = Math.pow(10, gt());
+      var series = Object.keys(DIF).map(function (sp) { var d = []; for (var Tc = 600; Tc <= 1300; Tc += 10) d.push([1000 / (Tc + 273.15), D(sp, Tc)]); return { data: d, color: P[COL[sp]], width: 2.6 }; });
+      var c = PB.chart(ctx, null, { x: [1000 / 1573, 1000 / 873], y: [1e-20, 1e-11], logY: true, xLabel: "1000 / T (K⁻¹)", yLabel: "확산계수 D (cm²/s)", series: series,
+        vlines: [{ x: 1000 / (T + 273.15), color: P.faint, label: T + " °C" }], xFmt: function (v) { return v.toFixed(2); } });
+      ctx.font = PB.font(12); ctx.textAlign = "left";
+      Object.keys(DIF).forEach(function (sp) { var y = c.Y(D(sp, 650)); ctx.fillStyle = P[COL[sp]]; ctx.fillText(sp, c.X(1000 / 923) + 6, y); });
+      Object.keys(DIF).forEach(function (sp) { PB.stat("ar-o-" + sp, nm(Math.sqrt(D(sp, T) * t))); });
+    }, { aspect: 0.62, minHeight: 300, maxHeight: 440 });
+  })();
+
+  /* ---------------- temperature history */
+  (function () {
+    var cv, rr = function () { cv && cv.redraw(); };
+    var PRE = { furn: [1000, 1800, -0.78], rta: [1050, 10, 1.7], spike: [1050, 0, 2.4], flash: [1300, 0.001, 6] };
+    var gM = PB.seg("rt-m", function (v) { var p = PRE[v]; gT.set(p[0]); gS.set(p[1] > 0 ? Math.log10(p[1] * 1000) - 3 + 3 : 0); gS.set(p[1] > 0 ? Math.max(0, Math.log10(p[1]) + 3) : 0); gR.set(p[2]); });
+    var gT = PB.range("rt-T", function (v) { return v + " °C"; }, rr);
+    var gS = PB.range("rt-s", function (v) { return v === 0 ? "0 (스파이크)" : tf(Math.pow(10, v - 3)); }, rr);
+    var gR = PB.range("rt-r", function (v) { return PB.fmt(Math.pow(10, v), 3) + " °C/s"; }, rr);
+    function profile() {
+      var Tp = gT(), hold = gS() === 0 ? 0 : Math.pow(10, gS() - 3), rate = Math.pow(10, gR()), T0 = 500;
+      var tr = (Tp - T0) / rate;
+      return { Tp: Tp, hold: hold, rate: rate, T0: T0, tr: tr, total: 2 * tr + hold, T: function (t) { if (t < tr) return T0 + rate * t; if (t < tr + hold) return Tp; if (t < 2 * tr + hold) return Tp - rate * (t - tr - hold); return T0; } };
+    }
+    cv = PB.canvas("#rt-cv", function (ctx, w, h) {
+      var P = PB.palette(), p = profile();
+      // Integration over logarithmic intervals
+      var N = 4000, Dt = 0, pts = [];
+      for (var i = 0; i < N; i++) { var t0 = p.total * i / N, t1 = p.total * (i + 1) / N, Tm = p.T((t0 + t1) / 2); Dt += D("B", Tm) * (t1 - t0); }
+      for (var j = 0; j <= 300; j++) { var tt = p.total * 1.15 * j / 300; pts.push([tt, p.T(tt)]); }
+      var box = { x: 58, y: 16, w: w - 76, h: h - 62 };
+      PB.chart(ctx, box, { x: [0, p.total * 1.15], y: [400, 1400], xLabel: "시간 (" + (p.total > 300 ? "min" : p.total < 1 ? "ms" : "s") + ")", yLabel: "온도 (°C)",
+        series: [{ data: pts, color: P.accent, width: 3, fill: PB.color("accent-soft") }],
+        xFmt: function (v) { return p.total > 300 ? PB.fmt(v / 60, 3) : p.total < 1 ? PB.fmt(v * 1000, 3) : PB.fmt(v, 3); } });
+      var L = Math.sqrt(Dt);
+      PB.stat("rt-o-dt", sup(Dt) + "<small>cm²</small>");
+      PB.stat("rt-o-l", nm(L));
+      PB.stat("rt-o-eq", small(tf(Dt / D("B", 1000)), ""));
+      var sol = 2e20 * Math.exp(-0.75 / kB * (1 / (p.Tp + 273.15) - 1 / 1273.15));
+      PB.stat("rt-o-a", "붕소 고용도 ≈ " + sup(sol) + "<small>cm⁻³</small>");
+    }, { aspect: 0.55, minHeight: 280, maxHeight: 400 });
+  })();
+})();
+</script>
+</body>
+</html>

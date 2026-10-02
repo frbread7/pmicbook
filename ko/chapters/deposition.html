@@ -1,0 +1,293 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
+     Executable code: MIT (see ../../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE-CC-BY-4.0). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc":"BCD 절연막, 패시베이션, 라이너와 배선 통합을 위한 CVD, PVD, ALD, 에피택시, 단차 피복과 박막 응력.","libs":["xsec"],"lang":"ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>박막 증착과 에피택시 · PMICBook</title>
+<meta name="description" content="BCD 절연막, 패시베이션, 라이너와 배선 통합을 위한 CVD, PVD, ALD, 에피택시, 단차 피복과 박막 응력.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/deposition.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/deposition.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/deposition.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/deposition.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="박막 증착과 에피택시 · PMICBook">
+<meta property="og:description" content="BCD 절연막, 패시베이션, 라이너와 배선 통합을 위한 CVD, PVD, ALD, 에피택시, 단차 피복과 박막 응력.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/deposition.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/deposition.html#chapter","name":"박막 증착과 에피택시","headline":"박막 증착과 에피택시 · PMICBook","description":"BCD 절연막, 패시베이션, 라이너와 배선 통합을 위한 CVD, PVD, ALD, 에피택시, 단차 피복과 박막 응력.","url":"https://frbread7.github.io/pmicbook/ko/chapters/deposition.html","position":13,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"13. 박막 증착과 에피택시","item":"https://frbread7.github.io/pmicbook/ko/chapters/deposition.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<script src="../../js/xsec.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="deposition">
+<main class="chapter">
+  <header class="chapter-hero"><div class="eyebrow">13장 · 박막 형성</div><h1>BCD 증착과 에피택시</h1><p class="lead">BCD 집적에는 게이트 및 필드 유전체, 측벽 스페이서, 절연막 충전재, 패시베이션, 콘택트 라이너와 배선 금속처럼 전기적·공정상 역할이 서로 다른 박막이 쓰입니다. 증착은 필요한 피복성과 재료 특성을 제공하면서 열 예산과 응력 한계를 지켜야 합니다. 이 장은 공개된 교육용 근사치를 사용하며 특정 파운드리의 적층 구조나 레시피를 제시하지 않습니다.</p><ul class="objectives"><li>성장 원리와 피복성에 따라 CVD, PVD, ALD 및 에피택시를 구별합니다.</li><li>패턴 형상과 부착 확률이 단차 피복, 입구 막힘 및 보이드 위험에 미치는 영향을 설명합니다.</li><li>게이트, 웰, 콘택트와 필드 구조 주변에서 유전체 및 라이너 피복이 중요한 이유를 설명합니다.</li><li>단순화한 모델로 온도 민감도, ALD 포화와 박막 응력을 살펴봅니다.</li></ul></header>
+  <section id="cvd"><h2>CVD: 표면 반응과 수송</h2><p>화학 기상 증착(CVD)은 반응물을 표면으로 수송하고, 표면 흡착 및 반응을 통해 고체 박막을 형성합니다. 전체 성장률은 표면 반응 속도론 또는 표면 가까운 기체층을 통한 물질 수송에 의해 제한될 수 있습니다. 이 구분은 온도와 가스 유량 변화가 공정에 서로 다르게 작용하는 이유를 설명하는 데 도움이 됩니다.</p><div class="formula">$$\frac{1}{G}\propto\frac{1}{k_s}+\frac{1}{h_g}$$<div class="where">표면 반응과 물질 수송이 연속적으로 제한하는 상황을 설명하기 위한 간결한 비유식입니다. 시뮬레이터는 정규화된 모델이며 특정 박막 화학에 맞춰 보정되지 않았습니다.</div></div><div class="sim" id="sim-cvd">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>CVD 성장률 지배 영역</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="cv-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="ctrl"><span>방식</span><div class="seg" id="cv-p"><button data-value="760">APCVD (1기압)</button><button data-value="1" class="on">LPCVD (약 1 Torr)</button></div></div>
+          <label class="ctrl"><span>표면 반응 활성화 에너지 E<sub>a</sub> <output id="cv-ea-out"></output></span><input type="range" id="cv-ea" min="0.8" max="2.4" step="0.05" value="1.6"></label>
+          <label class="ctrl"><span>공정 온도 <output id="cv-t-out"></output></span><input type="range" id="cv-t" min="400" max="1100" step="5" value="620"></label>
+          <label class="ctrl"><span>웨이퍼 간 온도 편차 <output id="cv-dt-out"></output></span><input type="range" id="cv-dt" min="0" max="10" step="0.5" value="2"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">성장률 (상대값)</span><span class="v" id="cv-o-g">—</span></div>
+        <div class="stat"><span class="k">속도 지배 영역</span><span class="v" id="cv-o-r">—</span></div>
+        <div class="stat"><span class="k">온도 분포에 따른 두께 편차</span><span class="v" id="cv-o-u">—</span></div>
+      </div>
+      <div class="sim-note">활성화 에너지, 온도와 압력 영역이 정규화 성장률에 미치는 영향을 살펴보세요. 그래프는 교육용 모델이며 보정된 박막 레시피가 아닙니다.</div>
+    </div><p>BCD에서는 후속 가열로 도펀트가 재분포하거나 접합 및 유전체 계면이 변할 수 있으므로 열 예산이 특히 중요합니다. 저온 플라즈마 증착은 일부 후공정 박막에 도움이 될 수 있지만, 조성, 수소 함량, 응력과 전기적 품질은 여전히 특성 평가가 필요합니다.</p></section>
+  <section id="methods"><h2>증착 방식 선택</h2><div class="table-wrap"><table><thead><tr><th>방식</th><th>유용한 특성</th><th>BCD 관련 예</th><th>집적 시 고려 사항</th></tr></thead><tbody><tr><td>열 CVD</td><td>반응에 의한 성장, 온도 의존성</td><td>일부 폴리실리콘 또는 유전체 박막</td><td>열 예산을 감당할 수 있는가?</td></tr><tr><td>PECVD</td><td>플라즈마로 저온 성장이 가능</td><td>층간 유전체, 패시베이션 또는 하드마스크</td><td>박막 조성, 손상과 응력이 허용 가능한가?</td></tr><tr><td>ALD</td><td>순차적인 표면 제한 반응, 충분히 노출하면 등각 피복</td><td>박막 유전체 또는 배리어·라이너층</td><td>전구체 노출로 깊은 패턴까지 포화시킬 수 있는가?</td></tr><tr><td>PVD</td><td>시선 방향 플럭스, 대체로 방향성 있음</td><td>금속 박막 및 일부 라이너</td><td>측벽과 패턴 바닥을 피복할 수 있는가?</td></tr><tr><td>에피택시</td><td>기판 결정 방향을 따르는 결정 성장</td><td>일부 소자층 또는 컬렉터 구조</td><td>결정 품질, 도핑과 선택성이 제어되는가?</td></tr></tbody></table></div><p>이는 개략적인 분류이며 정해진 BCD 공정 순서를 뜻하지 않습니다. 실제 적층 구조는 소자 전압, 누설, 항복, 저항, 열 예산과 신뢰성 목표를 고려해 선택합니다.</p></section>
+  <section id="coverage"><h2>단차 피복: 등각성 대 입구 막힘</h2><p>단차 피복은 패턴 바닥이나 측벽의 박막 두께를 평탄면의 두께와 비교한 값입니다. 방향성 PVD에서는 측벽이 얇게 남을 수 있습니다. CVD 피복은 수송과 표면 반응 확률에 좌우되며, ALD는 노출과 퍼지가 충분하면 복잡한 형상도 코팅할 수 있습니다. 내부가 채워지기 전에 개구부가 닫히면 심이나 보이드가 남을 수 있습니다.</p><div class="sim" id="sim-cov">
+      <div class="sim-head"><span class="sim-tag">단면 모델</span><h3>트렌치 단차 피복과 보이드</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sc-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="ctrl"><span>방식</span><div class="seg" id="sc-m"><button data-value="pvd">PVD</button><button data-value="cvd" class="on">CVD</button><button data-value="ald">ALD</button></div></div>
+          <label class="ctrl"><span>트렌치 폭 <output id="sc-w-out"></output></span><input type="range" id="sc-w" min="40" max="240" step="4" value="100"></label>
+          <label class="ctrl"><span>종횡비 (깊이/폭) <output id="sc-ar-out"></output></span><input type="range" id="sc-ar" min="0.5" max="5" step="0.1" value="2.5"></label>
+          <label class="ctrl"><span>증착 두께 (평탄면) <output id="sc-t-out"></output></span><input type="range" id="sc-t" min="4" max="80" step="2" value="30"></label>
+          <label class="ctrl"><span>부착 계수 s (CVD) <output id="sc-s-out"></output></span><input type="range" id="sc-s" min="0.01" max="1" step="0.01" value="0.4"></label>
+          <label class="ctrl"><span>PVD 방향성 cosⁿ <output id="sc-n-out"></output></span><input type="range" id="sc-n" min="0.5" max="20" step="0.5" value="1"></label>
+          <label class="ctrl"><span>재료</span><select id="sc-mat"><option value="ox">산화막</option><option value="nit">질화막</option><option value="w" selected>텅스텐</option><option value="tin">TiN</option><option value="cu">구리</option></select></label>
+        </div>
+      </div>
+      <div class="mat-legend" id="sc-lg"></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">상부 / 측벽 / 바닥 두께</span><span class="v" id="sc-o-t" style="font-size:15px">—</span></div>
+        <div class="stat"><span class="k">단차 피복률 (바닥/상부)</span><span class="v" id="sc-o-c">—</span></div>
+        <div class="stat"><span class="k">측벽/상부</span><span class="v" id="sc-o-sw">—</span></div>
+        <div class="stat"><span class="k">보이드</span><span class="v" id="sc-o-v">—</span></div>
+      </div>
+      <div class="sim-note">패턴 폭, 종횡비와 평탄면 두께를 바꾸면서 PVD, CVD 및 ALD의 피복을 비교하세요. 높은 부착 계수와 방향성 플럭스는 돌출부나 보이드 형성을 촉진할 수 있습니다. 결과는 정성적입니다.</div>
+    </div><div class="callout"><strong>BCD와의 연관성</strong><p>유전체나 패시베이션의 피복이 얇거나 끊기면 가장자리가 노출되고 누설이 증가하거나 외부 환경에 대한 보호가 약해질 수 있습니다. 라이너 피복이 나쁘면 콘택트 저항이 커지거나 배리어 기능이 저하될 수 있습니다. 단면 형상은 적격성 평가의 일부일 뿐이며 전기적 시험과 신뢰성 시험도 필요합니다.</p></div></section>
+  <section id="ald"><h2>ALD: 포화와 공정 윈도우</h2><p>원자층 증착(ALD)은 퍼지 단계로 반응물 노출을 분리합니다. 표면 반응은 포화에 가까워지므로 노출 시간을 더 늘려도 주기당 성장량은 거의 증가하지 않게 됩니다. 종횡비가 큰 개구에서는 반응물이 바닥에 도달하고 부산물이 빠져나와야 하므로 평탄면보다 펄스와 퍼지 시간이 더 길 수 있습니다.</p><div class="formula">$$\theta(t)=1-e^{-t/\tau},\qquad d=N_{cycle}\times GPC$$<div class="where">포화 곡선은 단순화한 모델입니다. 주기당 성장량, 온도 윈도우와 노출 요구량은 선택한 화학계와 장비에 따라 달라집니다.</div></div><div class="sim" id="sim-ald">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>ALD 포화 및 온도 윈도우</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="al-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>전구체 펄스 시간 <output id="al-p-out"></output></span><input type="range" id="al-p" min="0.01" max="2" step="0.01" value="0.3"></label>
+          <label class="ctrl"><span>패턴 종횡비 <output id="al-ar-out"></output></span><input type="range" id="al-ar" min="1" max="100" step="1" value="1"></label>
+          <label class="ctrl"><span>공정 온도 <output id="al-t-out"></output></span><input type="range" id="al-t" min="50" max="450" step="5" value="250"></label>
+          <label class="ctrl"><span>주기 수 <output id="al-n-out"></output></span><input type="range" id="al-n" min="10" max="400" step="10" value="100"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">피복률 θ (패턴 바닥)</span><span class="v" id="al-o-th">—</span></div>
+        <div class="stat"><span class="k">주기당 성장량 (GPC)</span><span class="v" id="al-o-g">—</span></div>
+        <div class="stat"><span class="k">박막 두께 (상부 / 바닥)</span><span class="v" id="al-o-d">—</span></div>
+        <div class="stat"><span class="k">온도 평가</span><span class="v" id="al-o-w">—</span></div>
+      </div>
+      <div class="sim-note">깊은 패턴의 펄스 시간을 늘리며 바닥 피복을 관찰해 보세요. 온도 응답은 가상의 ALD 윈도우를 나타내며 실제 화학계별 한계는 다릅니다. 주기당 성장량은 대표적인 모델 입력값입니다.</div>
+    </div><p>ALD는 박막 두께와 피복이 중요한 곳에 유용하지만 처리량, 전구체 화학과 박막 특성을 함께 고려해야 합니다. 형상에 맞게 잘 코팅되었다는 사실만으로 유전체 품질이나 신뢰성이 입증되지는 않습니다.</p></section>
+  <section id="epi"><h2>에피택시와 소자 영역 집적</h2><p>에피택시는 성장한 반도체층 안으로 기판의 결정 격자를 이어가는 공정입니다. 전력 반도체에서는 에피택시층 또는 설계된 실리콘 영역이 도핑과 전압 분포를 제어해야 하는 소자 구조를 뒷받침할 수 있습니다. 세부 사항은 구조마다 다릅니다. 중요한 점은 박막의 전기적 역할이 증착 방식의 이름만이 아니라 조성, 도핑, 두께, 결정 결함과 계면에 따라 달라진다는 것입니다.</p><p>고전압 소자에서 드리프트 영역 또는 전계 지지 영역은 저항과 전계 제어 사이의 절충을 만듭니다. 이 영역의 설계는 접합 위치, 절연과 종단 구조에 연결됩니다. 공개된 BCD 문헌은 이러한 구조 수준의 절충을 설명하지만 보편적인 박막 레시피를 제시하지는 않습니다.</p><p>참고 자료: <a href="https://www.st.com/content/st_com/en/about/innovation-and-technology/bcd.html">ST의 공개 BCD 집적 개요</a>.</p></section>
+  <section id="stress"><h2>박막 응력과 웨이퍼 형상</h2><p>열팽창 차이, 미세구조와 증착 조건에 따라 박막에 인장 또는 압축 응력이 남을 수 있습니다. 박막이 쌓이면 응력으로 웨이퍼가 휘어 취급과 리소그래피에 영향을 주거나 균열 및 박리를 일으킬 수 있습니다. BCD 제품에는 두꺼운 유전체와 상부 금속층이 포함될 수 있습니다. 금속 두께를 늘리면 고전류 경로의 시트 저항을 낮출 수 있지만, 응력과 단차 피복은 주변 적층 구조에 영향을 주므로 집적 계획에서 고려해야 합니다.</p><div class="formula">$$\sigma_f\approx\frac{E_s}{1-
+u_s}\frac{t_s^2}{6Rt_f},\qquad \delta\approx\frac{D^2}{8R}$$<div class="where">훨씬 두꺼운 기판 위의 얇은 박막을 가정한 스토니 관계식입니다. 실제 다층 웨이퍼에는 더 완전한 역학 모델이 필요합니다.</div></div><div class="sim" id="sim-bow">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>스토니 관계: 박막 응력 → 웨이퍼 휨</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="bw-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>박막 응력 (− 압축 / + 인장) <output id="bw-s-out"></output></span><input type="range" id="bw-s" min="-2000" max="2000" step="50" value="1200"></label>
+          <label class="ctrl"><span>박막 두께 <output id="bw-t-out"></output></span><input type="range" id="bw-t" min="0.05" max="5" step="0.05" value="0.3"></label>
+          <label class="ctrl"><span>웨이퍼 두께 <output id="bw-ts-out"></output></span><input type="range" id="bw-ts" min="100" max="925" step="5" value="775"></label>
+          <div class="ctrl"><span>웨이퍼 지름</span><div class="seg" id="bw-d"><button data-value="200">200 mm</button><button data-value="300" class="on">300 mm</button></div></div>
+          <div class="ctrl"><span>설명용 박막 예</span><div class="seg" id="bw-q"><button data-value="1200,0.3">LPCVD SiN</button><button data-value="-300,1">PECVD SiO₂</button><button data-value="-1500,0.1">압축 응력 SiN 라이너</button><button data-value="200,3">3D NAND 몰드 적층</button></div></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">곡률 반경 R</span><span class="v" id="bw-o-r">—</span></div>
+        <div class="stat"><span class="k">웨이퍼 휨</span><span class="v" id="bw-o-b">—</span></div>
+        <div class="stat"><span class="k">평가 (척 고정 참고용 대략값)</span><span class="v" id="bw-o-j">—</span></div>
+      </div>
+      <div class="sim-note">박막 응력, 박막 두께와 기판 두께를 바꾸어 곡률의 변화를 살펴보세요. 휨은 시각적으로 과장되어 있으며 예시값은 교육용 근사치이지 취급 사양이 아닙니다.</div>
+    </div><p>이 모델로 박막 응력과 두께에 따른 변화를 살펴보세요. 웨이퍼 치수와 박막 예시값은 설명용이며 합격 기준이 아닙니다.</p></section>
+  <section class="keypoints" id="summary"><h2>핵심 정리</h2><ol><li>CVD 성장은 표면 반응 또는 수송에 의해 제한될 수 있으며 온도와 유량에 대한 민감도가 서로 다릅니다.</li><li>PVD의 방향성, CVD의 수송과 ALD의 포화는 서로 다른 피복 프로파일을 만듭니다.</li><li>피복은 절연, 게이트·필드 유전체 가장자리, 패시베이션, 콘택트와 배리어에 중요합니다.</li><li>에피택시층의 특성과 계면은 소자 거동을 좌우합니다. 일반적인 성장 모델은 파운드리 적층 구조를 나타낼 수 없습니다.</li><li>박막 응력은 웨이퍼를 휘게 하고 후속 집적 단계에 영향을 줄 수 있습니다.</li></ol></section>
+  <section class="quiz-sec" id="quiz"><h2>확인 문제</h2><div class="quiz">
+    <div class="quiz-q"><p>방향성 PVD가 깊은 패턴의 측벽을 충분히 피복하지 못할 수 있는 이유는 무엇인가요?</p><div class="opts"><button class="opt">반응물이 모든 표면을 포화시킨다</button><button class="opt" data-correct>유입 플럭스의 상당 부분이 시선 방향으로 이동해 수직 표면에 도달하지 못한다</button><button class="opt">PVD는 항상 에피택시 방식이다</button><button class="opt">박막 응력이 0이 된다</button></div><div class="quiz-exp">방향성 입사는 소스를 향한 표면에 유리하며 패턴 형상에 따라 측벽과 바닥에 그림자가 생길 수 있습니다.</div></div>
+    <div class="quiz-q"><p>단순화 모델에서 ALD 포화는 무엇을 의미하나요?</p><div class="opts"><button class="opt">한 번 노출하는 동안 성장량이 제한 없이 비례 증가한다</button><button class="opt" data-correct>표면 반응이 한계에 가까워지므로 노출 시간을 늘려도 추가 피복량은 점차 줄어든다</button><button class="opt">웨이퍼 온도가 균일하다</button><button class="opt">박막에 결함이 없다</button></div><div class="quiz-exp">포화는 표면 화학 반응의 특성입니다. 이것만으로 박막 품질이나 모든 패턴에서의 충분한 물질 수송이 보장되지는 않습니다.</div></div>
+    <div class="quiz-q"><p>등각 유전체 또는 라이너에서 바닥과 측벽 피복이 중요한 이유는 무엇인가요?</p><div class="opts"><button class="opt">웨이퍼 지름만 결정한다</button><button class="opt" data-correct>얇거나 끊긴 부분은 절연, 누설, 배리어 기능 또는 콘택트 저항에 영향을 줄 수 있다</button><button class="opt">전기적 시험이 필요 없어지게 한다</button><button class="opt">그 자체로 항복 전압을 결정한다</button></div><div class="quiz-exp">피복은 의도한 구조를 형성하는 데 도움이 되지만, 전기적 성능은 재료와 형상 모두에 좌우됩니다.</div></div>
+  </div></section>
+  <section class="callout" id="attribution"><h2>출처 및 저작자 표시</h2><p>ProcessBook의 증착 장을 바탕으로 작성했습니다. <a href="https://github.com/geniuskey/processbook/blob/0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff/chapters/deposition.html">불변 원본 페이지 (커밋 0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff)</a>. CC BY 4.0에 따라 박막 형성, 피복, 에피택시와 응력을 BCD 집적에 연결하도록 번역·수정했으며 원본 CVD, 등각 피복, ALD 및 웨이퍼 휨 시뮬레이터를 유지했습니다. 다음을 참고하세요: <a href="../../LICENSE-CC-BY-4.0">라이선스</a>. 공개 참고 자료: <a href="https://www.st.com/content/st_com/en/about/innovation-and-technology/bcd.html">ST의 BCD 개요</a>.</p></section>
+</main>
+<script>
+(function () {
+  "use strict";
+  function small(v, u) { return v + "<small>" + u + "</small>"; }
+  var kB = 8.617e-5;
+
+  /* ---------------- CVD growth */
+  (function () {
+    var cv, rr = function () { cv && cv.redraw(); };
+    var gP = PB.seg("cv-p", rr);
+    var gEa = PB.range("cv-ea", function (v) { return v.toFixed(2) + " eV"; }, rr);
+    var gT = PB.range("cv-t", function (v) { return v + " °C"; }, rr);
+    var gDT = PB.range("cv-dt", function (v) { return "±" + v + " °C"; }, rr);
+    function rates(Tc, Ea, p) {
+      var T = Tc + 273.15, T0 = 893;
+      var ks = Math.exp(-Ea / kB * (1 / T - 1 / T0));                 // normalized to 1 at 620 °C
+      var hg = (p === 1 ? 30 : 0.3) * Math.pow(T / T0, 1.75);          // lower pressure increases gas diffusivity and h_g
+      return { ks: ks, hg: hg, G: ks * hg / (ks + hg) };
+    }
+    cv = PB.canvas("#cv-cv", function (ctx, w, h) {
+      var P = PB.palette(), Ea = gEa(), p = +gP(), T = gT(), dT = gDT();
+      var sG = [], sK = [], sH = [];
+      for (var t = 350; t <= 1150; t += 5) { var r = rates(t, Ea, p), x = 1000 / (t + 273.15); sG.push([x, r.G]); sK.push([x, r.ks]); sH.push([x, r.hg]); }
+      var r0 = rates(T, Ea, p);
+      PB.chart(ctx, null, { x: [1000 / 1423, 1000 / 623], y: [1e-4, 1e3], logY: true, xLabel: "1000 / T (K⁻¹)   ← 고온 · 저온 →", yLabel: "성장률 (상대값)",
+        series: [{ data: sK, color: P.accent2, width: 1.4, dash: [5, 4] }, { data: sH, color: P.warn, width: 1.4, dash: [5, 4] }, { data: sG, color: P.accent, width: 3 }],
+        points: [{ x: 1000 / (T + 273.15), y: r0.G, color: P.accent, r: 6, label: T + " °C" }], xFmt: function (v) { return v.toFixed(2); } });
+      ctx.font = PB.font(12); ctx.textAlign = "right"; ctx.fillStyle = P.accent2; ctx.fillText("표면 반응 k_s", w - 24, h - 80); ctx.fillStyle = P.warn; ctx.fillText("물질 수송 h_g", w - 24, h - 62); ctx.fillStyle = P.accent; ctx.fillText("순 성장률 G", w - 24, h - 98);
+      var g1 = rates(T - dT, Ea, p).G, g2 = rates(T + dT, Ea, p).G;
+      PB.stat("cv-o-g", small(PB.fmt(r0.G, 3), ""));
+      var ratio = r0.ks / r0.hg;
+      PB.stat("cv-o-r", ratio < 0.3 ? "반응 지배" : ratio > 3 ? "수송 지배" : "전이 영역");
+      PB.stat("cv-o-u", small("±" + (Math.abs(g2 - g1) / 2 / r0.G * 100).toFixed(1), "%"));
+    }, { aspect: 0.62, minHeight: 300, maxHeight: 440 });
+  })();
+
+  /* ---------------- step coverage */
+  (function () {
+    var lg = document.getElementById("sc-lg");
+    var res = null, cv, job = 0;
+    var gM = PB.seg("sc-m", function () { run(); });
+    var matSel = document.getElementById("sc-mat");
+    var run = PB.debounce(function () {
+      var my = ++job, wT = gW(), ar = gAR(), th = gT(), mode = gM(), mat = matSel.value;
+      lg.innerHTML = XS.legend(["si", mat], false);
+      var DX = 4, depth = Math.round(wT * ar / DX) * DX, W = Math.max(100, Math.round((wT * 3) / DX)), SURF = Math.ceil((th * 1.6 + 30) / DX);
+      var H = SURF + Math.ceil(depth / DX) + 16;
+      var s = new XS.Sim({ W: W, H: H, dx: DX, surf: SURF });
+      var c = W * DX / 2;
+      for (var y = SURF; y < SURF + depth / DX; y++) for (var x = s.col(c - wT / 2); x < s.col(c + wT / 2); x++) s.mat[y * W + x] = 0;
+      var g = s.depoGen({ mat: mat, mode: mode, thick: th, stick: gS(), cosn: gN() });
+      var tick = function () {
+        if (my !== job) return;
+        var t0 = performance.now(), done = false;
+        while (performance.now() - t0 < 30) { var r = g.next(); if (r.done) { done = true; break; } }
+        res = { s: s, c: c, wT: wT, depth: depth, th: th, mat: mat, done: done, SURF: SURF, DX: DX };
+        cv.redraw();
+        if (!done) requestAnimationFrame(tick);
+      };
+      tick();
+    }, 120);
+    var gW = PB.range("sc-w", function (v) { return v + " nm"; }, run);
+    var gAR = PB.range("sc-ar", function (v) { return v.toFixed(1); }, run);
+    var gT = PB.range("sc-t", function (v) { return v + " nm"; }, run);
+    var gS = PB.range("sc-s", function (v) { return v.toFixed(2); }, run);
+    var gN = PB.range("sc-n", function (v) { return v.toFixed(1); }, run);
+    matSel.addEventListener("change", run);
+    cv = PB.canvas("#sc-cv", function (ctx, w, h) {
+      if (!res) return;
+      var s = res.s, W = s.W, id = XS.ID[res.mat], DX = res.DX;
+      XS.draw(ctx, s, { x: 6, y: 6, w: w - 12, h: h - 12 }, { doping: false });
+      var cnt = function (x, y0, y1) { var n = 0; for (var y = y0; y < y1; y++) if (s.mat[y * W + x] === id) n++; return n; };
+      var top = cnt(4, 0, res.SURF) * DX;
+      var cx = Math.round(res.c / DX), bot = cnt(cx, res.SURF, s.H) * DX;
+      // Sidewall thickness at mid-depth on the left wall
+      var ym = res.SURF + Math.round(res.depth / DX / 2), x0 = s.col(res.c - res.wT / 2), side = 0;
+      for (var x = x0; x < cx; x++) { if (s.mat[ym * W + x] === id) side++; else break; }
+      side *= DX;
+      // 보이드: empty cells enclosed by deposited material in the trench
+      var reach = s.reach(), voids = 0;
+      for (var y = res.SURF; y < res.SURF + res.depth / DX; y++) for (var x2 = x0; x2 < s.col(res.c + res.wT / 2); x2++) { var i = y * W + x2; if (!s.mat[i] && !reach[i]) voids++; }
+      PB.stat("sc-o-t", small(top + " / " + side + " / " + bot, "nm"));
+      PB.stat("sc-o-c", top ? small(Math.round(Math.min(bot, res.depth) / top * 100), "%") : "—");
+      PB.stat("sc-o-sw", top ? small(Math.round(side / top * 100), "%") : "—");
+      PB.stat("sc-o-v", !res.done ? "계산 중…" : voids > 6 ? "<span class='bad-t'>형성됨 (" + Math.round(voids * DX * DX) + " nm²)</span>" : voids > 0 ? "<span class='warn-t'>심</span>" : "<span class='ok-t'>없음</span>");
+    }, { aspect: 0.8, minHeight: 320, maxHeight: 520 });
+    run();
+  })();
+
+  /* ---------------- ALD */
+  (function () {
+    var cv, rr = function () { cv && cv.redraw(); };
+    var gP = PB.range("al-p", function (v) { return v.toFixed(2) + " s"; }, rr);
+    var gAR = PB.range("al-ar", function (v) { return v; }, rr);
+    var gT = PB.range("al-t", function (v) { return v + " °C"; }, rr);
+    var gN = PB.range("al-n", function (v) { return v; }, rr);
+    var tau0 = 0.04;
+    function tau(ar) { return tau0 * (1 + 0.02 * ar * ar); }       // Narrow features: diffusion limitation (Gordon-type approximation proportional to AR squared)
+    function gpcT(T) {
+      var base = 0.11;
+      var low = T < 150 ? (150 - T) / 100 : 0;                         // condensation or incomplete reaction
+      var high = T > 330 ? Math.pow((T - 330) / 60, 2) * 0.05 : 0;    // precursor decomposition (CVD-like component)
+      return { g: base * (1 + 0.6 * low) + high, low: low, high: high };
+    }
+    cv = PB.canvas("#al-cv", function (ctx, w, h) {
+      var P = PB.palette(), tp = gP(), ar = gAR(), T = gT(), N = gN();
+      var narrow = w < 560;
+      var b1 = narrow ? { x: 54, y: 16, w: w - 70, h: h / 2 - 54 } : { x: 54, y: 16, w: w / 2 - 70, h: h - 62 };
+      var b2 = narrow ? { x: 54, y: h / 2 + 18, w: w - 70, h: h / 2 - 62 } : { x: w / 2 + 34, y: 16, w: w / 2 - 50, h: h - 62 };
+      var s1 = [], s2 = [];
+      for (var t = 0; t <= 2; t += 0.01) { s1.push([t, 1 - Math.exp(-t / tau(1))]); s2.push([t, 1 - Math.exp(-t / tau(ar))]); }
+      PB.chart(ctx, b1, { x: [0, 2], y: [0, 1.05], xLabel: "펄스 시간 (s)", yLabel: "피복률 θ", series: [{ data: s1, color: P.faint, width: 1.6, dash: [5, 4] }, { data: s2, color: P.accent, width: 3 }], vlines: [{ x: tp, color: P.accent2 }] });
+      ctx.font = PB.font(11); ctx.fillStyle = P.dim; ctx.textAlign = "left"; ctx.fillText("점선: 평탄면 · 실선: 종횡비 " + ar + " 패턴 바닥", b1.x + 6, b1.y + 12);
+      var sw = []; for (var T2 = 50; T2 <= 450; T2 += 5) sw.push([T2, gpcT(T2).g]);
+      PB.chart(ctx, b2, { x: [50, 450], y: [0, 0.3], xLabel: "온도 (°C)", yLabel: "", series: [{ data: sw, color: P.accent2, width: 3 }], bands: [{ x0: 150, x1: 330, color: PB.color("accent-soft") }], vlines: [{ x: T, color: P.accent }] });
+      ctx.fillStyle = P.dim; ctx.fillText("GPC (nm/주기) · 음영 영역 = ALD 윈도우", b2.x + 6, b2.y + 12);
+      var thTop = 1 - Math.exp(-tp / tau(1)), thBot = 1 - Math.exp(-tp / tau(ar)), g = gpcT(T);
+      var gTop = g.g * Math.min(1, thTop * thTop * 1.0 + (g.high ? 0 : 0)), gBot = g.g * thBot * thBot;
+      if (g.high) { gTop = 0.11 * thTop * thTop + g.high; gBot = 0.11 * thBot * thBot + g.high * 0.5; }
+      PB.stat("al-o-th", small((thBot * 100).toFixed(0), "%"));
+      PB.stat("al-o-g", small(PB.fmt(gTop, 3), "nm"));
+      PB.stat("al-o-d", small(PB.fmt(gTop * N, 3) + " / " + PB.fmt(gBot * N, 3), "nm"));
+      PB.stat("al-o-w", g.low > 0 ? "<span class='warn-t'>저온: 응축 또는 불완전 반응</span>" : g.high > 0.005 ? "<span class='bad-t'>고온: 전구체 분해 (CVD 유사)</span>" : "<span class='ok-t'>ALD 윈도우 범위 내</span>");
+    }, { aspect: 0.55, minHeight: 320, maxHeight: 440 });
+  })();
+
+  /* ---------------- wafer bow */
+  (function () {
+    var cv, rr = function () { cv && cv.redraw(); };
+    var gS = PB.range("bw-s", function (v) { return (v > 0 ? "+" : "") + v + " MPa"; }, rr);
+    var gT = PB.range("bw-t", function (v) { return PB.fmt(v, 3) + " µm"; }, rr);
+    var gTs = PB.range("bw-ts", function (v) { return v + " µm"; }, rr);
+    var gD = PB.seg("bw-d", rr);
+    PB.seg("bw-q", function (v) { var a = v.split(","); gS.set(+a[0]); gT.set(+a[1]); });
+    cv = PB.canvas("#bw-cv", function (ctx, w, h) {
+      var P = PB.palette(), sig = gS() * 1e6, tf = gT() * 1e-6, ts = gTs() * 1e-6, D = +gD() * 1e-3, Ebi = 180e9;
+      var R = sig === 0 ? Infinity : Ebi * ts * ts / (6 * Math.abs(sig) * tf);
+      var bow = D * D / (8 * R) * 1e6; // µm
+      var cx = w / 2, cy = h / 2 + 10, half = Math.min(w * 0.42, 260);
+      var exag = Math.min(80, Math.max(4, bow * 0.8)) * (sig >= 0 ? -1 : 1);  // Tension: film side is concave (edges rise)
+      ctx.strokeStyle = P.axis; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(cx - half, cy); ctx.lineTo(cx + half, cy); ctx.stroke(); ctx.setLineDash([]);
+      var curve = function (off) { ctx.beginPath(); for (var i = 0; i <= 100; i++) { var u = -1 + 2 * i / 100, x = cx + u * half, y = cy + off + exag * (1 - u * u) * (sig === 0 ? 0 : 1) * -1; if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y); } };
+      // Wafer (thickness exaggerated)
+      var tpx = 14;
+      ctx.fillStyle = "#8f99aa";
+      ctx.beginPath();
+      for (var i = 0; i <= 100; i++) { var u = -1 + 2 * i / 100; ctx.lineTo(cx + u * half, cy - exag * (1 - u * u)); }
+      for (var j = 100; j >= 0; j--) { var u2 = -1 + 2 * j / 100; ctx.lineTo(cx + u2 * half, cy - exag * (1 - u2 * u2) + tpx); }
+      ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = sig > 0 ? "#e2b05a" : "#bcd8f0"; ctx.lineWidth = 5; ctx.beginPath();
+      for (var k = 0; k <= 100; k++) { var u3 = -1 + 2 * k / 100; var yy = cy - exag * (1 - u3 * u3) - 2.5; if (k) ctx.lineTo(cx + u3 * half, yy); else ctx.moveTo(cx + u3 * half, yy); }
+      ctx.stroke(); ctx.lineWidth = 1;
+      ctx.fillStyle = P.dim; ctx.font = PB.font(12); ctx.textAlign = "center";
+      ctx.fillText(sig > 0 ? "인장 박막: 수축으로 박막 쪽이 오목해짐" : sig < 0 ? "압축 박막: 팽창으로 박막 쪽이 볼록해짐" : "응력 없음", cx, 24);
+      ctx.fillText("(휨 과장 표시; 박막은 위쪽)", cx, h - 16);
+      PB.stat("bw-o-r", isFinite(R) ? small(PB.fmt(R, 3), "m") : "∞");
+      PB.stat("bw-o-b", small(PB.fmt(bow, 3), "µm"));
+      PB.stat("bw-o-j", bow < 50 ? "<span class='ok-t'>이 모델에서는 우려 없음</span>" : bow < 150 ? "<span class='warn-t'>척 고정 및 오버레이 확인</span>" : "<span class='bad-t'>노광 장비 취급 범위를 초과할 수 있음</span>");
+    }, { aspect: 0.5, minHeight: 260, maxHeight: 380 });
+  })();
+})();
+</script>
+</body>
+</html>

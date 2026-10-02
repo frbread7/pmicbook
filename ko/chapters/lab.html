@@ -1,0 +1,566 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
+     Executable code: MIT (see ../../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc":"BCD 공정 모듈과 교육용 nLDMOS 단면을 편집 가능한 셀 격자 모델로 탐색합니다.","libs":["xsec"],"lang":"ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BCD 공정 실험실 · PMICBook</title>
+<meta name="description" content="BCD 공정 모듈과 교육용 nLDMOS 단면을 편집 가능한 셀 격자 모델로 탐색합니다.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/lab.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/lab.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/lab.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/lab.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="BCD 공정 실험실 · PMICBook">
+<meta property="og:description" content="BCD 공정 모듈과 교육용 nLDMOS 단면을 편집 가능한 셀 격자 모델로 탐색합니다.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/lab.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/lab.html#chapter","name":"BCD 공정 실험실","headline":"BCD 공정 실험실 · PMICBook","description":"BCD 공정 모듈과 교육용 nLDMOS 단면을 편집 가능한 셀 격자 모델로 탐색합니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/lab.html","position":24,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"24. BCD 공정 실험실","item":"https://frbread7.github.io/pmicbook/ko/chapters/lab.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<script src="../../js/xsec.js"></script>
+<!--head:end-->
+<style>
+  .lab-form { display: grid; gap: 12px; }
+  .lab-form .ctrl select { width: 100%; }
+  .lab-fields { display: grid; gap: 12px 18px; padding: 12px; border: 1px dashed var(--border); border-radius: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); align-content: start; }
+  #lab .xs-below { grid-template-columns: minmax(0, 300px) minmax(0, 1fr); border-top: 1px solid var(--border); }
+  @media (max-width: 720px) { #lab .xs-below { grid-template-columns: minmax(0, 1fr); } }
+  .lab-ops { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+  .lab-ops button { font: inherit; font-size: 12.5px; padding: 7px 4px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text-dim); cursor: pointer; }
+  .lab-ops button.on { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); font-weight: 700; }
+  .preset-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); margin: 18px 0; }
+  .preset-grid button { text-align: left; font: inherit; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-elev); color: var(--text); cursor: pointer; line-height: 1.5; }
+  .preset-grid button:hover { border-color: var(--accent); }
+  .preset-grid button b { display: block; font-size: 15.5px; margin-bottom: 2px; }
+  .preset-grid button span { font-size: 13.5px; color: var(--text-dim); }
+  #lab .steps-list { max-height: 250px; }
+  .lab-share { display: flex; gap: 6px; flex-wrap: wrap; }
+  .lab-msg { font-size: 12.5px; color: var(--text-faint); min-height: 1.2em; }
+  .ldmos-figure svg { display: block; width: 100%; height: auto; color: var(--text); }
+  .ldmos-figure text { font: 13px system-ui, sans-serif; fill: currentColor; }
+  .ldmos-figure .small { font-size: 11px; }
+  .ldmos-figure .leader { stroke: currentColor; stroke-width: 1; fill: none; }
+  .ldmos-figure .sub { fill: #d8dce5; }
+  .ldmos-figure .nw { fill: #b8d9f0; }
+  .ldmos-figure .drift { fill: #8dc5eb; }
+  .ldmos-figure .pb { fill: #c5e6c0; }
+  .ldmos-figure .nplus { fill: #347daf; }
+  .ldmos-figure .gate { fill: #4b5868; }
+  .ldmos-figure .oxide { fill: #f5c98b; }
+  .ldmos-figure .metal { fill: #e2a735; }
+  .ldmos-figure .contact { fill: #9b8064; }
+  @media (prefers-color-scheme: dark) {
+    .ldmos-figure .sub { fill: #414958; }
+    .ldmos-figure .nw { fill: #265a79; }
+    .ldmos-figure .drift { fill: #347aa1; }
+    .ldmos-figure .pb { fill: #426b49; }
+  }
+</style>
+</head>
+<body data-chapter="lab">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">24장 · BCD 공정 실험실</div>
+    <h1>BCD 공정 실험실</h1>
+    <p class="lead">전력 IC의 단면은 웰과 절연, 드리프트·바디 주입, 게이트와 전계 구조, 소스·드레인, 콘택트와 금속의 연결된 공정으로 만들어집니다. 편집 가능한 실험실에서 단순화한 공정 단계가 재료·도펀트 지도를 어떻게 바꾸는지 보고, 주석이 붙은 <strong>교육용 LDMOS 구조</strong>와 연결해 보세요. 예시는 파운드리 레시피가 아닙니다.</p>
+    <ul class="objectives">
+      <li>BCD 소자 영역과 이를 형성하는 공정 모듈을 연결합니다.</li>
+      <li>마스크 위치, 주입 조건, 증착, 식각, 어닐이 교육용 단면을 어떻게 바꾸는지 비교합니다.</li>
+      <li>고전압 nLDMOS 모듈 예시를 사용하면서 도펀트 그림과 전계·항복 계산을 구분합니다.</li>
+    </ul>
+  </header>
+
+  <section id="how">
+    <h2>공정 모델이 나타내는 것</h2>
+    <p>실험실은 작은 2차원 영역을 정사각형 셀로 나눕니다. 각 셀에는 재료 하나와 단순화한 도펀트 농도를 저장하고, 공정 단계마다 근사 규칙을 격자에 적용합니다.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>모듈</th><th>교육용 모델</th><th>조절 예시</th></tr></thead>
+        <tbody>
+          <tr><td>식각</td><td>방향성 이온과 등방성 라디칼의 기여를 근사하고 재료 선택비에 따라 노출된 셀을 제거합니다. 습식 식각은 등방성으로 표현합니다.</td><td>화학 조합, 속도, 시간, 이방성, 각도 분포, 기울기</td></tr>
+          <tr><td>증착</td><td>가시도와 부착 계수로 표면 성장을 근사합니다. 균일 피복과 방향성 증착의 극한을 비교하여 단차 피복과 입구 막힘을 보여줍니다.</td><td>재료, 방법, 두께, 부착 계수, 방향성</td></tr>
+          <tr><td>리소그래피</td><td>단순한 1차원 공중상, 감광막 흡수, 정재파, 베이크·현상 모델로 개구나 남는 선을 만듭니다.</td><td>장비 모델, 패턴, 폭, 노광량, 초점, 두께</td></tr>
+          <tr><td>이온 주입</td><td>단순한 정지 깊이 근사로 노출된 실리콘에 가우시안 투영 범위 분포를 놓습니다. 측방 확산도 근사입니다.</td><td>이온 종, 에너지, 도즈, 기울기, 채널링 꼬리</td></tr>
+          <tr><td>어닐·산화</td><td>단순화한 열 확산 길이와 교육용 Deal–Grove 근사로 도펀트 이동과 산화 계면 진행을 나타냅니다.</td><td>온도, 시간, 분위기</td></tr>
+          <tr><td>CMP</td><td>정지막이나 목표 높이보다 위의 셀을 제거하고 선택적으로 단순 디싱 항을 적용합니다.</td><td>정지막, 과연마, 디싱</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout warn"><strong>모델의 한계</strong><p>기존 셀 격자 엔진은 공정 경향에 대한 정성적 직관을 위한 것입니다. 완전한 BCD 레시피, 보정된 주입 활성화, 3차원 레이아웃, 전계 집중, 항복 전압, 소자 성능을 계산하는 공정 TCAD가 아닙니다. 격자 계단과 모서리 아티팩트가 생길 수 있으며 프리셋의 수치는 모두 교육용 가정입니다.</p></div>
+  </section>
+
+  <section id="ldmos-cross-section">
+    <h2>주석으로 살펴보는 BCD nLDMOS 예시</h2>
+    <p>이 일반적인 단면은 고전압 웰, p바디, n형 드리프트 영역, 게이트, 필드 산화막, 소스·드레인이 어떻게 배치되는지 보여줍니다. 실제 BCD 플랫폼은 웰, 절연, 전계 제어, 주입 모듈이 서로 다르므로 이 그림은 제조 레시피가 아니라 교육용 개념도입니다.</p>
+    <figure class="ldmos-figure">
+      <svg viewBox="0 0 840 330" role="img" aria-labelledby="ldmos-title ldmos-desc">
+        <title id="ldmos-title">교육용 BCD nLDMOS 단면</title>
+        <desc id="ldmos-desc">p바디 안의 n⁺ 소스, 채널 위 게이트, 고전압 n웰의 n형 드리프트, 필드 산화막과 필드 플레이트, n⁺ 드레인, p형 기판을 보여주는 n채널 수평 DMOS 개념도입니다.</desc>
+        <rect x="45" y="166" width="750" height="125" rx="3" class="sub" stroke="currentColor"/>
+        <path d="M130 165 Q130 112 190 112 H684 Q744 112 744 165 V225 H130 Z" class="nw" stroke="#267aa4" stroke-width="2"/>
+        <rect x="162" y="118" width="177" height="62" rx="22" class="pb" stroke="#43814d" stroke-width="2"/>
+        <rect x="372" y="120" width="273" height="45" class="drift" stroke="#267aa4" stroke-width="2"/>
+        <rect x="184" y="111" width="53" height="33" class="nplus" stroke="#1d5f89" stroke-width="2"/>
+        <rect x="652" y="111" width="53" height="34" class="nplus" stroke="#1d5f89" stroke-width="2"/>
+        <rect x="314" y="99" width="76" height="10" class="oxide" stroke="#9d681d"/>
+        <rect x="322" y="68" width="60" height="30" class="gate" stroke="#293544"/>
+        <rect x="390" y="98" width="230" height="19" class="oxide" stroke="#9d681d"/>
+        <rect x="435" y="75" width="129" height="12" class="metal" stroke="#946c19"/>
+        <rect x="198" y="84" width="22" height="27" class="contact" stroke="#755a40"/>
+        <rect x="346" y="84" width="18" height="14" class="contact" stroke="#755a40"/>
+        <rect x="669" y="84" width="22" height="27" class="contact" stroke="#755a40"/>
+        <path d="M211 52 L211 80 M353 52 L353 80 M680 52 L680 80" class="leader"/>
+        <text x="174" y="42">소스 콘택트</text><text x="326" y="42">게이트 콘택트</text><text x="645" y="42">드레인 콘택트</text>
+        <path d="M204 151 L178 203 M264 142 L264 233 M486 142 L500 247 M599 92 L594 64 M502 75 L502 54" class="leader"/>
+        <text x="75" y="216">n⁺ 소스</text><text x="213" y="248">p바디</text>
+        <text x="426" y="269">n⁻ 드리프트 영역</text><text x="521" y="49">필드 플레이트</text>
+        <text x="562" y="64">필드 산화막</text>
+        <text x="450" y="211">고전압 n웰</text><text x="65" y="280">p형 기판</text>
+        <text x="648" y="157">n⁺ 드레인</text>
+        <text x="297" y="310" class="small">개념 형상 · 축척 아님 · 모듈 순서와 구조는 공정마다 다름</text>
+      </svg>
+      <figcaption>nLDMOS의 개념적 구조입니다. 필드 플레이트와 절연 방식은 플랫폼별로 다릅니다. 아래 XS 프리셋은 일부 마스크·주입·어닐의 관계를 나타낼 뿐 전계나 항복 전압을 계산하지 않습니다.</figcaption>
+    </figure>
+    <div class="table-wrap"><table>
+      <thead><tr><th>소자 영역</th><th>관련 공정 모듈</th><th>PMIC에서 중요한 이유</th></tr></thead>
+      <tbody>
+        <tr><td>고전압 웰과 절연</td><td><a href="wafer.html">기판 / 웰</a>, <a href="oxidation.html">절연막</a>, <a href="integration.html">통합 순서</a></td><td>전압 도메인과 기생 접합 경계를 정합니다.</td></tr>
+        <tr><td>p바디와 채널</td><td><a href="litho.html">리소그래피</a>, <a href="implant.html">주입</a>, <a href="anneal.html">활성화</a></td><td>채널 제어를 정하고 문턱 전압, 바디 효과, 래치업 경로와 상호작용합니다.</td></tr>
+        <tr><td>n⁻ 드리프트와 전계 구조</td><td><a href="litho.html">마스크 위치</a>, <a href="implant.html">드리프트 주입</a>, <a href="oxidation.html">필드 산화막</a>, <a href="deposition.html">필드 플레이트 스택</a></td><td>전압 지지 능력과 온저항·전계 집중 사이의 균형을 정합니다.</td></tr>
+        <tr><td>소스·드레인, 콘택트, 금속</td><td><a href="etch.html">패턴 전사</a>, <a href="anneal.html">열 예산</a>, <a href="metal.html">콘택트와 최상층 금속</a></td><td>직렬 저항, 전류 밀도, 발열, 신뢰성 한계에 영향을 줍니다.</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>BCD nLDMOS 모듈</strong> 프리셋으로 웰의 대리 표현, 바디, 드리프트, 소스·드레인 주입의 이상적인 마스크 개구와 어닐 예시를 살펴보세요. 격자의 너비 1.6 µm와 1 µm보다 얕은 깊이는 작은 교육용 관찰 창이며 실제 고전압 웰의 치수나 도핑 규격이 아닙니다. 도펀트 형상을 주석 그림 및 <a href="hv-devices.html">고전압 MOS와 LDMOS</a> 장의 정성적 상충 관계와 비교하세요.</p>
+  </section>
+
+  <section id="lab-sec">
+    <h2>편집 가능한 공정 실험대</h2>
+    <p>제어 패널에서 모듈과 조건을 고른 뒤 <b>단계 추가</b>를 누르면 재료·도펀트 지도가 바뀝니다. 앞선 단계를 선택하면 당시 상태를 볼 수 있고, 단계를 제거하면 그 이후 기록도 지워집니다. 과거 상태에서 새 단계를 추가하면 이후 기록을 대체합니다.</p>
+    <div class="preset-grid" id="presets"></div>
+    <div id="lab"></div>
+    <p style="font-size:14px;color:var(--text-dim)">실험 설정은 URL 조각(#r=…)에 저장됩니다. 링크 복사로 같은 교육용 공정 순서를 공유할 수 있습니다.</p>
+  </section>
+
+  <section id="ideas">
+    <h2>해 볼 만한 실험</h2>
+    <ol>
+      <li><strong>드리프트 마스크 위치.</strong> BCD nLDMOS 프리셋에서 개구 폭이나 주입 에너지를 바꿔 도펀트 자국을 비교하세요. 이 격자는 분포를 항복 전압으로 바꾸지 않습니다.</li>
+      <li><strong>열 예산.</strong> nLDMOS 순서의 활성화 온도나 시간을 바꿔 보세요. 확산 반응은 단순 경향이며 보정된 활성화 모델이 아닙니다.</li>
+      <li><strong>절연과 전계 구조.</strong> STI와 LOCOS 템플릿을 비교한 뒤 <a href="bcd.html">BCD 구조</a> 및 <a href="hv-devices.html">고전압 소자</a> 장에서 절연·웰 경계와 전계 제어를 연결하세요.</li>
+      <li><strong>콘택트 충전.</strong> 콘택트 보이드 템플릿의 증착 부착 계수를 높여 보세요. 방향성이 강하거나 부착이 빠른 모델에서 좁은 개구가 먼저 막힐 수 있습니다.</li>
+    </ol>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>BCD 소자는 웰, 절연, 드리프트, 게이트, 접합, 콘택트, 금속 모듈을 연결해 만듭니다.</li>
+      <li>마스크 위치, 식각 선택비, 증착 피복, 주입, 열 이력은 형상과 도펀트 지도에 영향을 줍니다.</li>
+      <li>XS 셀 격자 실험실은 일부 공정 경향을 설명하지만 보정된 TCAD나 항복·전계 해석기가 아닙니다.</li>
+      <li>nLDMOS 주석 그림과 소자 장으로 구조·동작 직관을 익히고 프리셋 숫자는 예시로만 해석하세요.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q"><p>BCD nLDMOS 프리셋으로 확인할 수 있는 것은 무엇인가요?</p><div class="opts">
+        <button class="opt">보정된 항복 전압 예측</button>
+        <button class="opt" data-correct>웰, 바디, 드리프트, 소스·드레인의 일부 공정을 단순화한 재료·도펀트 순서</button>
+        <button class="opt">파운드리 인증을 받은 주입 레시피</button>
+        <button class="opt">3차원 전계 해석 결과</button>
+      </div><div class="quiz-exp">프리셋은 마스크별 주입과 어닐을 셀 격자 모델로 보여줍니다. 전계, 항복 전압, 공정별 실제 구조는 계산하지 않습니다.</div></div>
+      <div class="quiz-q"><p>단순 등방성 식각 모델에서 등방성 성분이 커지면 보통 어떤 경향이 나타나나요?</p><div class="opts">
+        <button class="opt">수직 식각 속도만 커지고 옆벽은 그대로입니다.</button>
+        <button class="opt" data-correct>마스크 아래의 측방 언더컷이 커질 수 있습니다.</button>
+        <button class="opt">주입 에너지가 자동으로 줄어듭니다.</button>
+        <button class="opt">검증된 플라즈마 화학 시뮬레이션으로 바뀝니다.</button>
+      </div><div class="quiz-exp">등방성 성분은 수직과 측방의 노출 재료를 제거하므로 마스크 아래쪽도 깎을 수 있습니다. 이 모델은 정성적입니다.</div></div>
+      <div class="quiz-q"><p>확산 계수 D가 일정한 제곱근 확산 모델에서 어닐 시간을 네 배로 늘리면 확산 길이는 약 얼마가 되나요?</p><div class="opts">
+        <button class="opt">4배</button><button class="opt" data-correct>2배</button><button class="opt">변하지 않음</button><button class="opt">16배</button>
+      </div><div class="quiz-exp">이상화한 확산 길이는 √(Dt)에 비례하므로 D가 일정할 때 시간 네 배는 길이 두 배입니다. 실제 활성화와 확산은 더 복잡합니다.</div></div>
+    </div>
+  </section>
+  <aside class="callout"><strong>출처와 재사용</strong><p>이 페이지는 ProcessBook 공정 실험실을 수정·번역했습니다. MIT 라이선스의 XS 편집기와 교육용 공정 템플릿을 유지하면서 PMIC/BCD 맥락, nLDMOS 모듈 예시, 해설과 문제를 추가했습니다. 기존 교육 자료는 CC BY 4.0으로 제공됩니다. 원본: <a href="https://github.com/geniuskey/processbook/blob/0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff/chapters/lab.html">기준 커밋의 ProcessBook 공정 실험실</a>. 새 PMICBook 그림과 해설도 CC BY 4.0이며 공통 코드의 MIT 표시는 유지됩니다.</p></aside>
+</main>
+<script>
+(function () {
+  "use strict";
+  var MATK = ["si", "ox", "nit", "poly", "pr", "w", "cu", "al", "tin", "hk", "sil", "epi", "lowk", "acl"];
+  var MAT_KO = { si: "실리콘", ox: "산화막", nit: "질화막", poly: "폴리실리콘", pr: "감광막", w: "텅스텐", cu: "구리", al: "알루미늄", tin: "TiN", hk: "고유전율 절연막", sil: "실리사이드", epi: "SiGe 에피택시", lowk: "저유전율 절연막", acl: "탄소 하드마스크" };
+  var matName = function (k) { return MAT_KO[k] || XS.MATS[XS.ID[k]].name; };
+
+  /* -------------------------------------------------- 공정 정의: 입력 필드 → 단계 객체 */
+  var CHEM = {
+    si:   { name: "실리콘 식각 (HBr/Cl₂)", sel: { si: 1, poly: 1, epi: 1, sil: 0.3, ox: 0.02, nit: 0.04, pr: 0.25, acl: 0.08, hk: 0.02, tin: 0.05 } },
+    ox:   { name: "산화막 식각 (CF₄/CHF₃)", sel: { ox: 1, lowk: 1.3, nit: 0.2, si: 0.04, poly: 0.04, pr: 0.2, acl: 0.06, hk: 0.05 } },
+    nit:  { name: "질화막 식각 (CH₂F₂/O₂)", sel: { nit: 1, ox: 0.15, si: 0.1, poly: 0.1, pr: 0.25, acl: 0.1 } },
+    met:  { name: "금속 식각 (Cl₂/BCl₃)", sel: { al: 1, tin: 0.8, w: 0.6, cu: 0.05, pr: 0.35, ox: 0.04, nit: 0.05 } },
+    ash:  { name: "O₂ 애싱 (감광막·탄소)", sel: { pr: 1, acl: 1, cfx: 1 } },
+    hf:   { name: "습식 HF (산화막)", wet: true, sel: { ox: 1, lowk: 0.8, nit: 0.01 } },
+    h3po4:{ name: "습식 인산 (질화막)", wet: true, sel: { nit: 1, ox: 0.03 } },
+    tmah: { name: "습식 실리콘 (등방)", wet: true, sel: { si: 1, poly: 1, epi: 1 } }
+  };
+  var TOOLS = {
+    iline: { name: "i-line 365 nm / NA 0.6", wl: 365, NA: 0.6 },
+    krf: { name: "KrF 248 nm / NA 0.8", wl: 248, NA: 0.8 },
+    arf: { name: "ArF 193 nm / NA 0.93", wl: 193, NA: 0.93 },
+    arfi: { name: "ArF 액침 / NA 1.35", wl: 193, NA: 1.35 },
+    euv: { name: "EUV 13.5 nm / NA 0.33", wl: 13.5, NA: 0.33 }
+  };
+  var opt = function (o) { return Object.keys(o).map(function (k) { return [k, o[k].name || o[k]]; }); };
+  var matOpts = MATK.map(function (k) { return [k, matName(k)]; });
+
+  var OPS = {
+    depo: { name: "증착", fields: [
+      { id: "mat", label: "재질", type: "select", opts: matOpts.filter(function (o) { return o[0] !== "pr"; }), v: "ox" },
+      { id: "mode", label: "방식", type: "select", opts: [["cvd", "CVD (부착 계수 조절)"], ["ald", "ALD (완전 컨포멀)"], ["pvd", "PVD 스퍼터 (직진성)"], ["epi", "에피택시 (실리콘 위만)"], ["spin", "스핀 코팅 (평탄)"]], v: "cvd" },
+      { id: "thick", label: "두께", type: "range", min: 2, max: 200, step: 1, v: 30, unit: "nm" },
+      { id: "stick", label: "부착 계수 s (CVD)", type: "range", min: 0.01, max: 1, step: 0.01, v: 0.3, fmt: 2 },
+      { id: "cosn", label: "PVD 지향성 cosⁿ", type: "range", min: 0.5, max: 12, step: 0.5, v: 1, fmt: 1 }
+    ], build: function (v) {
+      var label = matName(v.mat) + " " + v.thick + " nm " + ({ cvd: "CVD", ald: "ALD", pvd: "PVD", epi: "에피", spin: "스핀 코팅" })[v.mode];
+      if (v.mode === "spin") return { op: "coat", mat: v.mat, thick: v.thick, k: "DEP", label: label, desc: "점성 있는 액체를 회전 도포해 굴곡을 메우고 평평한 윗면을 만든다." };
+      return { op: "depo", mat: v.mat, mode: v.mode, thick: v.thick, stick: v.stick, cosn: v.cosn, k: "DEP", label: label + (v.mode === "cvd" ? " (s=" + v.stick + ")" : ""),
+        desc: v.mode === "ald" ? "자기 제한 반응으로 모든 면에 같은 두께가 쌓인다." : v.mode === "pvd" ? "타깃에서 튀어나온 원자가 직선으로 날아와 위를 향한 면과 입구 모서리에 많이 쌓인다." : v.mode === "epi" ? "드러난 실리콘 결정 위에서만 결정을 이어 성장시킨다." : "부착 계수가 낮을수록 기체가 여러 번 튕기며 깊은 곳까지 고르게 쌓인다." };
+    } },
+    litho: { name: "노광", fields: [
+      { id: "tool", label: "노광 장비", type: "select", opts: opt(TOOLS), v: "krf" },
+      { id: "pat", label: "패턴 (양성 감광막)", type: "select", opts: [["open", "개구 하나 (트렌치·홀)"], ["two", "개구 두 개"], ["line", "고립 라인 (남김)"], ["ls", "라인/스페이스 1:1"]], v: "open" },
+      { id: "w", label: "개구·라인 폭", type: "range", min: 10, max: 400, step: 2, v: 160, unit: "nm" },
+      { id: "pitch", label: "피치 (개구 두 개, L/S)", type: "range", min: 40, max: 600, step: 2, v: 300, unit: "nm" },
+      { id: "dose", label: "도즈", type: "range", min: 5, max: 120, step: 1, v: 40, unit: "mJ/cm²" },
+      { id: "focus", label: "디포커스", type: "range", min: -400, max: 400, step: 10, v: 0, unit: "nm" },
+      { id: "thick", label: "감광막 두께", type: "range", min: 30, max: 400, step: 5, v: 150, unit: "nm" }
+    ], build: function (v, sim) {
+      var Wn = sim.W * sim.dx, c = Wn / 2, T = TOOLS[v.tool], step = { op: "litho", thick: v.thick, wl: T.wl, NA: T.NA, sigma: 0.6, dose: v.dose, focus: v.focus, swing: 0.15, peb: 8, dev: 40, k: "LITH" };
+      if (v.pat === "open") step.clear = [[c - v.w / 2, c + v.w / 2]];
+      else if (v.pat === "two") step.clear = [[c - v.pitch / 2 - v.w / 2, c - v.pitch / 2 + v.w / 2], [c + v.pitch / 2 - v.w / 2, c + v.pitch / 2 + v.w / 2]];
+      else if (v.pat === "line") step.chrome = [[c - v.w / 2, c + v.w / 2]];
+      else { var p = v.w * 2, n = Math.max(1, Math.round(Wn / p)); p = Wn / n; step.chrome = []; for (var i = 0; i < n; i++) step.chrome.push([i * p + p / 4, i * p + 3 * p / 4]); }
+      step.label = "감광막 " + v.thick + " nm · " + ({ open: "개구 ", two: "개구 2개 ", line: "라인 ", ls: "L/S " })[v.pat] + v.w + " nm · " + v.dose + " mJ";
+      step.desc = T.name + "로 노광하고 현상한다. 빛을 받은 감광막이 현상액에 녹는다(양성). 도즈가 크면 개구가 넓어지고, 디포커스가 크면 옆벽이 기울어진다.";
+      return step;
+    } },
+    etch: { name: "식각", fields: [
+      { id: "chem", label: "화학 (선택비)", type: "select", opts: opt(CHEM), v: "si" },
+      { id: "rate", label: "식각 속도 (기준 재질)", type: "range", min: 0.5, max: 20, step: 0.5, v: 5, unit: "nm/s", fmt: 1 },
+      { id: "time", label: "시간", type: "range", min: 2, max: 200, step: 1, v: 40, unit: "s" },
+      { id: "ion", label: "이방성 (이온 지배 비율)", type: "range", min: 0, max: 1, step: 0.05, v: 0.9, fmt: 2 },
+      { id: "sigma", label: "이온 각도 퍼짐 σ", type: "range", min: 0.5, max: 20, step: 0.5, v: 3, unit: "°", fmt: 1 },
+      { id: "tilt", label: "틸트", type: "range", min: -20, max: 20, step: 1, v: 0, unit: "°" }
+    ], build: function (v) {
+      var ch = CHEM[v.chem];
+      return { op: "etch", sel: ch.sel, wet: !!ch.wet, rate: v.rate, time: v.time, ion: v.ion, sigma: v.sigma, tilt: v.tilt, k: "ETCH",
+        label: ch.name.replace(/ \(.*\)/, "") + " " + v.time + " s" + (ch.wet ? "" : " · 이방성 " + v.ion),
+        desc: ch.wet ? "용액이 닿는 모든 면을 같은 속도로 녹인다. 방향성이 없어 마스크 밑으로 파고든다." : "플라즈마의 이온이 수직으로 때려 바닥을 깎고, 라디칼이 모든 방향에서 반응한다. 선택비 표에 따라 마스크와 아래 막도 조금씩 깎인다." };
+    } },
+    implant: { name: "주입", fields: [
+      { id: "species", label: "이온 종", type: "select", opts: [["B", "붕소 B⁺ (p형)"], ["BF2", "BF₂⁺ (p형, 얕게)"], ["P", "인 P⁺ (n형)"], ["As", "비소 As⁺ (n형, 얕게)"]], v: "As" },
+      { id: "E", label: "에너지", type: "range", min: 1, max: 200, step: 1, v: 30, unit: "keV" },
+      { id: "logd", label: "도즈 (log₁₀)", type: "range", min: 11, max: 16, step: 0.1, v: 15, fmt: 1 },
+      { id: "tilt", label: "틸트", type: "range", min: -30, max: 30, step: 1, v: 7, unit: "°" },
+      { id: "channel", label: "채널링 꼬리", type: "range", min: 0, max: 0.3, step: 0.01, v: 0, fmt: 2 }
+    ], build: function (v) {
+      var r = XS.range(v.species, v.E);
+      return { op: "implant", species: v.species, E: v.E, dose: Math.pow(10, v.logd), tilt: v.tilt, channel: v.channel, k: "IMP",
+        label: v.species + " " + v.E + " keV · " + Math.pow(10, v.logd).toExponential(0).replace("e+", "e") + " cm⁻²",
+        desc: "실리콘 속 투사 거리 Rp ≈ " + MB_f(r.Rp) + " nm, 표준편차 ΔRp ≈ " + MB_f(r.dRp) + " nm. 감광막·산화막이 덮인 곳은 그만큼 얕게 들어가거나 막힌다." };
+    } },
+    anneal: { name: "열처리", fields: [
+      { id: "amb", label: "분위기", type: "select", opts: [["n2", "N₂ (확산만)"], ["dry", "건식 O₂ (산화)"], ["wet", "습식 H₂O (빠른 산화)"]], v: "n2" },
+      { id: "T", label: "온도", type: "range", min: 700, max: 1200, step: 10, v: 1000, unit: "°C" },
+      { id: "time", label: "시간", type: "range", min: 1, max: 3600, step: 1, v: 10, unit: "s" }
+    ], build: function (v) {
+      var amb = v.amb === "n2" ? "" : v.amb;
+      return { op: "anneal", T: v.T, time: v.time, ambient: amb, k: amb ? "OX" : "ANL",
+        label: (amb ? (amb === "wet" ? "습식 산화 " : "건식 산화 ") : "어닐 ") + v.T + " °C · " + (v.time >= 120 ? Math.round(v.time / 60) + " min" : v.time + " s"),
+        desc: amb ? "산화제가 산화막을 뚫고 실리콘 표면까지 확산해 반응한다. 실리콘 1 nm가 소모될 때 산화막은 약 2.27 nm 생긴다. 질화막은 산화제를 막는다." : "도펀트가 실리콘 안에서 √(Dt)만큼 퍼지고 격자 자리로 들어가 활성화된다." };
+    } },
+    cmp: { name: "CMP", fields: [
+      { id: "stop", label: "정지막", type: "select", opts: [["", "없음 (높이 지정)"]].concat(matOpts), v: "nit" },
+      { id: "level", label: "목표 높이 (정지막 없을 때, 표면 기준)", type: "range", min: -300, max: 100, step: 2, v: 0, unit: "nm" },
+      { id: "over", label: "과연마", type: "range", min: 0, max: 40, step: 1, v: 0, unit: "nm" },
+      { id: "dmat", label: "디싱 재질", type: "select", opts: [["", "없음"]].concat(matOpts), v: "" },
+      { id: "dish", label: "최대 디싱", type: "range", min: 0, max: 60, step: 1, v: 15, unit: "nm" }
+    ], build: function (v) {
+      var st = { op: "cmp", stop: v.stop || null, level: v.level, over: v.over, k: "CMP", label: "CMP " + (v.stop ? matName(v.stop) + " 정지" : v.level + " nm 높이") + (v.over ? " +" + v.over + " nm" : ""), desc: "회전하는 패드와 슬러리가 튀어나온 곳부터 갈아 내 표면을 평평하게 만든다." };
+      if (v.dmat) { st.dish = {}; st.dish[v.dmat] = v.dish; }
+      return st;
+    } },
+    strip: { name: "제거", fields: [
+      { id: "mat", label: "제거할 재질 (전부)", type: "select", opts: matOpts, v: "pr" }
+    ], build: function (v) {
+      return { op: "strip", mat: v.mat, k: "STRIP", label: matName(v.mat) + " 제거", desc: "해당 재질만 완전히 녹이는 선택적 제거(애싱·습식 스트립)를 이상화했다." };
+    } },
+    sil: { name: "실리사이드", fields: [
+      { id: "depth", label: "반응 깊이", type: "range", min: 2, max: 40, step: 1, v: 12, unit: "nm" }
+    ], build: function (v) {
+      return { op: "silicide", depth: v.depth, k: "SIL", label: "자기 정렬 실리사이드 " + v.depth + " nm", desc: "금속(Ni·Co·Ti)을 입히고 가열하면 드러난 실리콘·폴리와만 반응한다. 반응하지 않은 금속을 지우면 실리사이드만 남는다(살리사이드)." };
+    } }
+  };
+  function MB_f(x) { return PB.fmt(x, 3); }
+
+  /* -------------------------------------------------- 도메인 */
+  var DOM = {
+    fine: { W: 150, H: 150, dx: 2, surf: 70, name: "300 × 300 nm (2 nm 셀)" },
+    std: { W: 160, H: 130, dx: 4, surf: 60, name: "640 × 520 nm (4 nm 셀)" },
+    wide: { W: 160, H: 110, dx: 10, surf: 45, name: "1.6 × 1.1 µm (10 nm 셀)" }
+  };
+  var dom = "std";
+  function make() { var d = DOM[dom]; return new XS.Sim({ W: d.W, H: d.H, dx: d.dx, surf: d.surf, bgType: "p", bgConc: 1e15 }); }
+
+  /* -------------------------------------------------- 레시피 */
+  function L(o) { return OPS.litho.build(Object.assign({ tool: "krf", pat: "open", w: 160, pitch: 300, dose: 40, focus: 0, thick: 150 }, o), make()); }
+  function E(o) { return OPS.etch.build(Object.assign({ chem: "si", rate: 5, time: 40, ion: 0.9, sigma: 3, tilt: 0 }, o)); }
+  function D(o) { return OPS.depo.build(Object.assign({ mat: "ox", mode: "cvd", thick: 30, stick: 0.3, cosn: 1 }, o)); }
+  function maskedImplant(species, E, dose, windows, label) {
+    return { op: "implant", species: species, E: E, dose: dose, tilt: 0, channel: 0,
+      windows: windows, k: "IMP", label: label,
+      desc: "이상적인 마스크는 지정한 창으로만 이온 빔을 통과시킵니다. 격자의 가우시안 도펀트 분포는 교육용이며 깊이, 활성화, 측방 마스크 경계, 전계는 보정되지 않았습니다." };
+  }
+  var PRESETS = {
+    ldmos: { name: "BCD nLDMOS 모듈", d: "웰 대리 표현, p바디, n드리프트, n⁺ 소스·드레인, 어닐, 게이트·전계 구조의 예시", dom: "wide", steps: function () { return [
+      maskedImplant("P", 200, 2e11, [[150, 1450]], "고전압 웰 대리 창 · P 200 keV, 2e11 cm⁻²"),
+      maskedImplant("B", 30, 5e11, [[230, 680]], "p바디 창 · B 30 keV, 5e11 cm⁻²"),
+      maskedImplant("P", 70, 4e11, [[700, 1280]], "n드리프트 창 · P 70 keV, 4e11 cm⁻²"),
+      maskedImplant("As", 35, 1e14, [[260, 390], [1300, 1430]], "n⁺ 소스·드레인 창 · As 35 keV, 1e14 cm⁻²"),
+      { op: "anneal", T: 1000, time: 30, ambient: "", k: "ANL", label: "활성화·재분포 예시 · 1000 °C, 30초", desc: "단순 확산 계산으로 저장된 도펀트를 재분포합니다. 활성화 비율이나 검증된 열 예산은 모델링하지 않습니다." },
+      { op: "rect", mat: "ox", x0: 590, x1: 780, y0: -20, y1: 0, k: "OX", label: "게이트 절연막 영역", desc: "도식적 절연막 배치입니다. 실제 두께와 공정 순서는 BCD 플랫폼마다 다릅니다." },
+      { op: "rect", mat: "poly", x0: 610, x1: 720, y0: -60, y1: -20, k: "GATE", label: "게이트 전극 영역", desc: "게이트는 p바디·채널 경계에서 드리프트 쪽으로 뻗습니다. 구조 설명용 형상이며 트랜지스터 해석기가 아닙니다." },
+      { op: "rect", mat: "ox", x0: 820, x1: 1210, y0: -40, y1: 0, k: "FIELD", label: "드리프트 영역 위의 필드 절연막", desc: "필드 절연막과 선택적 필드 플레이트는 기술마다 다릅니다. 이 사각형은 전계 제어를 계산하지 않습니다." }
+    ]; } },
+    sti: { name: "STI 트렌치", d: "패드 산화막·질화막 → 노광 → 실리콘 식각 → 산화막 채움 → CMP", dom: "std", steps: function () { return [
+      D({ mat: "ox", mode: "ald", thick: 8 }), D({ mat: "nit", mode: "cvd", thick: 40, stick: 0.2 }),
+      L({ w: 140, thick: 160, dose: 24 }),
+      E({ chem: "nit", time: 10, rate: 6 }), E({ chem: "ox", time: 4, rate: 4 }),
+      E({ chem: "si", time: 36, rate: 6, ion: 0.88, sigma: 4 }),
+      OPS.strip.build({ mat: "pr" }),
+      D({ mat: "ox", mode: "cvd", thick: 130, stick: 0.12 }),
+      OPS.cmp.build({ stop: "nit", level: 0, over: 4, dmat: "ox", dish: 6 }),
+      E({ chem: "h3po4", time: 30, rate: 2 })
+    ]; } },
+    locos: { name: "LOCOS 버즈 빅", d: "패드 산화막 + 질화막 마스크로 국부 열산화. 질화막 가장자리 밑으로 새 부리 모양이 자란다.", dom: "wide", steps: function () { return [
+      D({ mat: "ox", mode: "ald", thick: 20 }), D({ mat: "nit", mode: "cvd", thick: 100, stick: 0.2 }),
+      L({ w: 560, thick: 300, dose: 22, tool: "iline" }),
+      E({ chem: "nit", time: 25, rate: 5 }), OPS.strip.build({ mat: "pr" }),
+      OPS.anneal.build({ amb: "wet", T: 1000, time: 1800 }),
+      E({ chem: "h3po4", time: 70, rate: 2 })
+    ]; } },
+    spacer: { name: "스페이서 · SADP", d: "맨드릴 라인 위 ALD 질화막 → 이방성 에치백 → 맨드릴 제거로 피치 절반", dom: "std", steps: function () { return [
+      D({ mat: "ox", mode: "ald", thick: 20 }), D({ mat: "poly", mode: "cvd", thick: 80, stick: 0.2 }),
+      L({ pat: "ls", w: 80, thick: 120, dose: 22, tool: "arfi" }),
+      E({ chem: "si", time: 22, rate: 5, ion: 0.95, sigma: 2 }), OPS.strip.build({ mat: "pr" }),
+      D({ mat: "nit", mode: "ald", thick: 36 }),
+      E({ chem: "nit", time: 9, rate: 5, ion: 1, sigma: 1.5 }),
+      E({ chem: "si", time: 30, rate: 5, ion: 0.3, sigma: 3 })
+    ]; } },
+    damascene: { name: "구리 다마신", d: "산화막에 트렌치 → TiN 배리어 → 구리 채움 → CMP (넓은 배선은 디싱)", dom: "std", steps: function () { return [
+      D({ mat: "nit", mode: "cvd", thick: 16, stick: 0.2 }), D({ mat: "ox", mode: "cvd", thick: 140, stick: 0.2 }),
+      L({ pat: "two", w: 120, pitch: 320, thick: 160, dose: 24 }),
+      E({ chem: "ox", time: 34, rate: 5, ion: 0.92, sigma: 3 }), OPS.strip.build({ mat: "pr" }),
+      D({ mat: "tin", mode: "pvd", thick: 10, cosn: 3 }),
+      D({ mat: "cu", mode: "cvd", thick: 120, stick: 0.05 }),
+      OPS.cmp.build({ stop: "", level: -150, over: 0, dmat: "cu", dish: 14 })
+    ]; } },
+    void: { name: "콘택 보이드", d: "좁고 깊은 콘택 홀을 부착 계수가 높은 조건으로 채우면 입구가 먼저 막힌다", dom: "std", steps: function () { return [
+      D({ mat: "ox", mode: "cvd", thick: 200, stick: 0.1 }),
+      L({ w: 64, thick: 120, dose: 26, tool: "arfi" }),
+      E({ chem: "ox", time: 48, rate: 4.5, ion: 0.96, sigma: 2 }), OPS.strip.build({ mat: "pr" }),
+      D({ mat: "w", mode: "cvd", thick: 50, stick: 0.8 })
+    ]; } },
+    sd: { name: "소스·드레인", d: "게이트 → LDD 주입 → 스페이서 → 소스·드레인 주입 → 활성화 어닐", dom: "std", steps: function () { return [
+      D({ mat: "ox", mode: "ald", thick: 4 }), D({ mat: "poly", mode: "cvd", thick: 90, stick: 0.2 }),
+      L({ pat: "line", w: 90, thick: 120, dose: 22, tool: "arfi" }),
+      E({ chem: "si", time: 20, rate: 5, ion: 0.95, sigma: 2 }), OPS.strip.build({ mat: "pr" }),
+      OPS.implant.build({ species: "As", E: 8, logd: 14.5, tilt: 0, channel: 0 }),
+      D({ mat: "nit", mode: "ald", thick: 30 }), E({ chem: "nit", time: 7.5, rate: 5, ion: 1, sigma: 1.5 }),
+      OPS.implant.build({ species: "As", E: 30, logd: 15.5, tilt: 0, channel: 0 }),
+      OPS.anneal.build({ amb: "n2", T: 1050, time: 5 })
+    ]; } }
+  };
+
+  /* -------------------------------------------------- UI 조립 */
+  var ctrlHTML =
+    '<div class="lab-form"><div class="ctrl"><span>영역 크기</span><select id="lab-dom">' + Object.keys(DOM).map(function (k) { return '<option value="' + k + '"' + (k === dom ? " selected" : "") + ">" + DOM[k].name + "</option>"; }).join("") + "</select></div>" +
+    '<div class="ctrl"><span>추가할 공정</span><div class="lab-ops" id="lab-ops">' + Object.keys(OPS).map(function (k, i) { return '<button data-op="' + k + '"' + (i === 0 ? ' class="on"' : "") + ">" + OPS[k].name + "</button>"; }).join("") + "</div></div>" +
+    '<div class="btn-row"><button class="btn primary" id="lab-add">단계 추가 ▶</button><button class="btn" id="lab-clear">초기화</button><button class="btn" id="lab-link">링크 복사</button></div><span class="lab-msg" id="lab-msg"></span></div>' +
+    '<div class="lab-fields" id="lab-fields"></div>';
+
+  var S = XS.stepper("#lab", {
+    title: "공정 실험대", tag: "실험", make: make, steps: [], editable: true,
+    legend: ["si", "ox", "nit", "poly", "pr", "w", "cu", "tin", "sil", "epi", "acl"],
+    aspect: 0.8, minHeight: 360, maxHeight: 560, below: ctrlHTML,
+    startDesc: "p형 실리콘 웨이퍼(1e15 cm⁻³). 오른쪽에서 공정을 골라 추가하세요.",
+    note: "셀 기반 교육용 근사 모델입니다. 계산 중에는 아래쪽 막대가 진행률을 표시합니다. 넓은 영역의 긴 습식 산화는 몇 초 걸릴 수 있습니다."
+  });
+
+  var curOp = "depo", fieldGet = {};
+  function renderFields() {
+    var host = document.getElementById("lab-fields");
+    var f = OPS[curOp].fields;
+    host.innerHTML = f.map(function (d) {
+      if (d.type === "select") return '<div class="ctrl"><span>' + d.label + '</span><select id="lf-' + d.id + '">' + d.opts.map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === d.v ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select></div>";
+      return '<label class="ctrl"><span>' + d.label + ' <output id="lf-' + d.id + '-out"></output></span><input type="range" id="lf-' + d.id + '" min="' + d.min + '" max="' + d.max + '" step="' + d.step + '" value="' + d.v + '"></label>';
+    }).join("");
+    fieldGet = {};
+    f.forEach(function (d) {
+      if (d.type === "select") { var el = document.getElementById("lf-" + d.id); fieldGet[d.id] = function () { return el.value; }; el.addEventListener("change", function () { d.v = el.value; }); }
+      else { var g = PB.range("lf-" + d.id, function (v) { return (d.fmt != null ? v.toFixed(d.fmt) : v) + (d.unit ? " " + d.unit : ""); }, function (v) { d.v = v; }); fieldGet[d.id] = g; }
+    });
+  }
+  document.getElementById("lab-ops").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    curOp = b.dataset.op;
+    [].forEach.call(this.children, function (c) { c.classList.toggle("on", c === b); });
+    renderFields();
+  });
+  document.getElementById("lab-add").addEventListener("click", function () {
+    if (S.steps().length >= 100) {
+      document.getElementById("lab-msg").textContent = "실험실 공정 순서는 최대 100단계입니다. 단계를 지우거나 초기화한 뒤 추가하세요.";
+      return;
+    }
+    var v = {}; Object.keys(fieldGet).forEach(function (k) { v[k] = fieldGet[k](); });
+    S.add(OPS[curOp].build(v, make()));
+    saveHash();
+  });
+  document.getElementById("lab-clear").addEventListener("click", function () { S.setSteps([], 0); saveHash(); });
+  document.getElementById("lab-dom").addEventListener("change", function () { dom = this.value; var st = S.steps().slice(); S.setSteps(st, 0); saveHash(); });
+  renderFields();
+
+  // 프리셋 버튼
+  var pg = document.getElementById("presets");
+  pg.innerHTML = Object.keys(PRESETS).map(function (k) { return '<button data-p="' + k + '"><b>' + PRESETS[k].name + "</b><span>" + PRESETS[k].d + "</span></button>"; }).join("");
+  pg.addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    var P = PRESETS[b.dataset.p];
+    dom = P.dom; document.getElementById("lab-dom").value = dom;
+    var st = P.steps();
+    S.setSteps(st, 0);
+    S.go(st.length);
+    saveHash();
+    document.getElementById("lab").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  // 해시 저장/복원
+  function saveFailure(message, error) {
+    if (error) console.error("PMICBook 실험실 공유 링크 저장 오류:", error);
+    document.getElementById("lab-msg").textContent = message;
+    return false;
+  }
+  function saveHash() {
+    var steps;
+    try { steps = S.steps(); }
+    catch (e) { return saveFailure("공유 링크를 인코딩하지 못했습니다. 현재 실험 순서는 그대로 사용할 수 있습니다.", e); }
+    if (steps.length > 100) return saveFailure("공유 링크에 담기에는 순서가 너무 큽니다. 초기화하거나 단계를 줄이세요.");
+    var enc;
+    try {
+      var data = JSON.stringify({ d: dom, s: steps });
+      enc = btoa(unescape(encodeURIComponent(data)));
+    } catch (e) {
+      return saveFailure("공유 링크를 인코딩하지 못했습니다. 현재 실험 순서는 그대로 사용할 수 있습니다.", e);
+    }
+    if (enc.length > 65536) return saveFailure("공유 링크에 담기에는 순서가 너무 큽니다. 초기화하거나 단계를 줄이세요.");
+    try {
+      history.replaceState(null, "", "#r=" + enc);
+      return true;
+    } catch (e) {
+      return saveFailure("공유 링크를 갱신하지 못했습니다. 현재 실험 순서는 그대로 사용할 수 있습니다.", e);
+    }
+  }
+  document.getElementById("lab-link").addEventListener("click", function () {
+    var msg = document.getElementById("lab-msg");
+    if (!saveHash()) return;
+    try { navigator.clipboard.writeText(location.href).then(function () { msg.textContent = "복사했습니다."; }, function () { msg.textContent = "주소창의 링크를 복사하세요."; }); }
+    catch (e) { msg.textContent = "주소창의 링크를 복사하세요."; }
+  });
+  function validSharedSteps(steps) {
+    if (!Array.isArray(steps) || steps.length > 100) return false;
+    var materials = Object.keys(XS.ID);
+    var common = ["op", "label", "desc", "k"];
+    var fields = {
+      depo: ["mat", "mode", "thick", "stick", "cosn"],
+      coat: ["mat", "thick", "planar"],
+      litho: ["thick", "wl", "NA", "sigma", "dose", "focus", "swing", "peb", "dev", "clear", "chrome"],
+      etch: ["sel", "wet", "rate", "time", "ion", "sigma", "tilt"],
+      implant: ["species", "E", "dose", "tilt", "channel", "windows"],
+      anneal: ["T", "time", "ambient"],
+      cmp: ["stop", "level", "over", "dish"],
+      strip: ["mat"],
+      silicide: ["depth"],
+      rect: ["mat", "x0", "x1", "y0", "y1"]
+    };
+    function isMat(value) { return typeof value === "string" && materials.indexOf(value) >= 0; }
+    function inRange(value, min, max) { return typeof value === "number" && Number.isFinite(value) && value >= min && value <= max; }
+    function isPairList(value) {
+      return Array.isArray(value) && value.length > 0 && value.length <= 80 && value.every(function (pair) {
+        return Array.isArray(pair) && pair.length === 2 && inRange(pair[0], -500, 5000) && inRange(pair[1], -500, 5000) && pair[0] < pair[1];
+      });
+    }
+    return steps.every(function (step) {
+      if (!step || typeof step !== "object" || Array.isArray(step) || !Object.prototype.hasOwnProperty.call(fields, step.op)) return false;
+      if (step.label != null && (typeof step.label !== "string" || step.label.length > 300)) return false;
+      if (step.desc != null && (typeof step.desc !== "string" || step.desc.length > 1000)) return false;
+      if (step.k != null && (typeof step.k !== "string" || step.k.length > 40)) return false;
+      var allowed = common.concat(fields[step.op]);
+      if (!Object.keys(step).every(function (key) { return allowed.indexOf(key) >= 0; })) return false;
+      switch (step.op) {
+        case "depo": return isMat(step.mat) && ["cvd", "ald", "pvd", "epi"].indexOf(step.mode) >= 0 && inRange(step.thick, 2, 200) && inRange(step.stick, 0.01, 1) && inRange(step.cosn, 0.5, 12);
+        case "coat": return isMat(step.mat) && inRange(step.thick, 2, 200) && (step.planar == null || inRange(step.planar, 0, 1));
+        case "litho": {
+          return inRange(step.thick, 30, 400) && [13.5, 193, 248, 365].indexOf(step.wl) >= 0 && inRange(step.NA, 0.1, 1.35) && inRange(step.sigma, 0, 1) && inRange(step.dose, 5, 120) && inRange(step.focus, -400, 400) && inRange(step.swing, 0, 1) && inRange(step.peb, 0, 60) && inRange(step.dev, 0, 200) && (step.clear == null) !== (step.chrome == null) && (step.clear == null || isPairList(step.clear)) && (step.chrome == null || isPairList(step.chrome));
+        }
+        case "etch": return step.sel && typeof step.sel === "object" && !Array.isArray(step.sel) && Object.keys(step.sel).length > 0 && Object.keys(step.sel).every(function (key) { return isMat(key) && inRange(step.sel[key], 0, 10); }) && (step.wet == null || typeof step.wet === "boolean") && inRange(step.rate, 0.5, 20) && inRange(step.time, 2, 200) && inRange(step.ion, 0, 1) && inRange(step.sigma, 0.5, 20) && inRange(step.tilt, -20, 20);
+        case "implant": return ["B", "BF2", "P", "As"].indexOf(step.species) >= 0 && inRange(step.E, 1, 200) && inRange(step.dose, 1e11, 1e16) && inRange(step.tilt, -30, 30) && inRange(step.channel, 0, 0.3) && (step.windows == null || isPairList(step.windows));
+        case "anneal": return inRange(step.T, 700, 1200) && inRange(step.time, 1, 3600) && ["", "dry", "wet"].indexOf(step.ambient) >= 0;
+        case "cmp": return (step.stop == null || isMat(step.stop)) && inRange(step.level, -300, 100) && inRange(step.over, 0, 40) && (step.dish == null || (step.dish && typeof step.dish === "object" && !Array.isArray(step.dish) && Object.keys(step.dish).length <= materials.length && Object.keys(step.dish).every(function (key) { return isMat(key) && inRange(step.dish[key], 0, 60); })));
+        case "strip": return isMat(step.mat);
+        case "silicide": return inRange(step.depth, 2, 40);
+        case "rect": return isMat(step.mat) && inRange(step.x0, -500, 5000) && inRange(step.x1, -500, 5000) && inRange(step.y0, -500, 5000) && inRange(step.y1, -500, 5000) && step.x0 < step.x1 && step.y0 < step.y1;
+        default: return false;
+      }
+    });
+  }
+  function loadDefaultLab(message) {
+    dom = PRESETS.ldmos.dom;
+    document.getElementById("lab-dom").value = dom;
+    var initial = PRESETS.ldmos.steps();
+    S.setSteps(initial, 0);
+    S.go(initial.length);
+    if (message) document.getElementById("lab-msg").textContent = message;
+  }
+  (function restore() {
+    var m = location.hash.match(/#r=([^&]*)/);
+    if (!m) {
+      loadDefaultLab();
+      return;
+    }
+    try {
+      if (m[1].length > 65536) throw new Error("공유 실험실 상태가 너무 큽니다");
+      var data = JSON.parse(decodeURIComponent(escape(atob(m[1]))));
+      if (!data || typeof data !== "object" || Array.isArray(data) || Object.keys(data).some(function (key) { return key !== "d" && key !== "s"; }) || typeof data.d !== "string" || !Object.prototype.hasOwnProperty.call(DOM, data.d) || !validSharedSteps(data.s)) throw new Error("잘못된 공유 실험실 상태");
+      dom = data.d;
+      document.getElementById("lab-dom").value = dom;
+      S.setSteps(data.s, 0); S.go(data.s.length);
+    } catch (e) {
+      loadDefaultLab("공유 실험실 링크가 올바르지 않거나 너무 큽니다. 기본 BCD nLDMOS 프리셋을 불러왔습니다.");
+    }
+  })();
+})();
+</script>
+</body>
+</html>

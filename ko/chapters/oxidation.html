@@ -1,0 +1,405 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
+     Executable code: MIT (see ../../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc":"PMIC/BCD를 위한 열산화: 산화막 성장, 필드 절연, 게이트 절연막, 계면 전하와 열 예산의 절충.","libs":["xsec"],"lang":"ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>게이트 절연막 및 전계 구조 · PMICBook</title>
+<meta name="description" content="PMIC/BCD를 위한 열산화: 산화막 성장, 필드 절연, 게이트 절연막, 계면 전하와 열 예산의 절충.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/oxidation.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/oxidation.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/oxidation.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/oxidation.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="게이트 절연막 및 전계 구조 · PMICBook">
+<meta property="og:description" content="PMIC/BCD를 위한 열산화: 산화막 성장, 필드 절연, 게이트 절연막, 계면 전하와 열 예산의 절충.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/oxidation.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/oxidation.html#chapter","name":"게이트 절연막 및 전계 구조","headline":"게이트 절연막 및 전계 구조 · PMICBook","description":"PMIC/BCD를 위한 열산화: 산화막 성장, 필드 절연, 게이트 절연막, 계면 전하와 열 예산의 절충.","url":"https://frbread7.github.io/pmicbook/ko/chapters/oxidation.html","position":10,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"10. 게이트 절연막 및 전계 구조","item":"https://frbread7.github.io/pmicbook/ko/chapters/oxidation.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<script src="../../js/xsec.js"></script>
+<!--head:end-->
+<style>
+  .ox-swatch { display: flex; gap: 14px; align-items: center; padding: 12px 18px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+  .ox-swatch .big { width: 64px; height: 64px; border-radius: 12px; border: 1px solid var(--border); box-shadow: inset 0 0 0 1px rgba(0,0,0,.06); }
+  .ox-swatch .txt { font-size: 14px; color: var(--text-dim); flex: 1; min-width: 200px; }
+</style>
+</head>
+<body data-chapter="oxidation">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">제10장 · BCD 공정 기초</div>
+    <h1>열산화, 절연 및 게이트 절연막</h1>
+    <p class="lead">PMIC 및 BCD 통합에서 이산화규소는 게이트 절연막, 필드 절연막 또는 공정 마스크로 사용할 수 있습니다. 산화막 두께, 계면 품질과 열 이력은 소자 동작 및 후속 접합 프로파일에 영향을 줍니다. 이 장에서는 교육용 Deal–Grove 모델, 광학 두께 단서, 국부 산화와 산화막 전하를 소개합니다. 모델 수치는 예시이며 파운드리 레시피가 아닙니다.</p>
+    <ul class="objectives">
+      <li>건식·습식 산화 반응과 실리콘 소모 비율(0.44)을 설명합니다.</li>
+      <li>Deal–Grove 관계식으로 계면 반응 지배 성장과 확산 지배 성장을 구분합니다.</li>
+      <li>온도, 분위기, 결정 방향과 초기 산화막이 성장에 미치는 영향을 살펴봅니다.</li>
+      <li>간섭색과 산화막 두께 측정의 관계를 설명합니다.</li>
+      <li>LOCOS의 새부리 침범, 트렌치 절연의 역할, 산화막 전하가 소자에 미치는 영향을 설명합니다.</li>
+    </ul>
+  </header>
+
+  <section id="reaction">
+    <h2>실리콘 계면에서의 산화막 성장</h2>
+    <p>열산화는 일반적으로 퍼니스나 급속 열처리 장비에서 실리콘 웨이퍼를 산화 분위기로 가열해 이산화규소를 형성합니다. 산소를 사용하는 건식 산화와 수증기를 사용하는 습식 산화는 성장 속도 및 산화막·계면 특성이 서로 다릅니다.</p>
+    <div class="formula">$$\mathrm{Si + O_2 \rightarrow SiO_2}\quad(\text{건식}), \qquad \mathrm{Si + 2H_2O \rightarrow SiO_2 + 2H_2}\quad(\text{습식})$$</div>
+    <p>반응은 실리콘/산화막 계면에서 일어납니다. 산화제가 실리콘과 반응하기 전에 기존 산화막을 통과해 확산합니다. 성장 과정에서 기판 일부가 소모되고 산화막 일부는 원래 표면 위로 팽창합니다. BCD 통합에서는 접합 깊이, 절연 형상 및 게이트 절연막 아래 계면에 영향을 줍니다.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 780 260" role="img" aria-label="산화 중 실리콘 소모와 산화막 체적 팽창">
+        <g transform="translate(40,20)">
+          <rect x="0" y="80" width="200" height="120" class="m-si"/>
+          <path d="M0 80H200" class="s-dash"/>
+          <text x="100" y="60" text-anchor="middle" class="lbl-b">산화 전</text>
+          <text x="210" y="84" class="t-mono">원래 표면</text>
+        </g>
+        <g transform="translate(330,20)">
+          <rect x="0" y="124" width="200" height="76" class="m-si"/>
+          <rect x="0" y="24" width="200" height="100" class="m-ox"/>
+          <path d="M-20 80H220" class="s-dash"/>
+          <text x="100" y="12" text-anchor="middle" class="lbl-b">산화 후(두께 x)</text>
+          <path d="M235 24V80" class="s-acc"/><path d="M230 24H240M230 80H240" class="s-acc"/>
+          <text x="245" y="56" class="lbl-acc">위쪽으로 0.56 x</text>
+          <path d="M235 80V124" class="s-acc2"/><path d="M230 124H240" class="s-acc2"/>
+          <text x="245" y="108" class="lbl-acc2">실리콘 0.44 x 소모</text>
+          <g class="t-dim"><text x="100" y="76" text-anchor="middle">O₂ / H₂O 확산 ↓</text></g>
+          <path d="M70 40V112 M100 40V112 M130 40V112" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3 4"/>
+          <text x="100" y="160" text-anchor="middle" class="lbl-dim">새 Si/SiO₂ 계면에서 반응</text>
+        </g>
+      </svg>
+      <figcaption><b>그림 10-1.</b> 산화막 두께가 \(x\)만큼 성장할 때 실리콘은 약 \(0.44x\)만큼 소모됩니다. SiO₂의 몰 부피가 실리콘의 약 2.27배이기 때문입니다(실리콘 원자 밀도 5.0×10²² cm⁻³, SiO₂ 분자 밀도 2.2×10²² cm⁻³). 나머지 \(0.56x\)는 원래 표면 위로 성장합니다.</figcaption>
+    </figure>
+  </section>
+
+  <section id="dg">
+    <h2>Deal–Grove 모델</h2>
+    <p>1965년 Bruce Deal과 Andrew Grove는 산화를 세 가지 플럭스가 관여하는 정상 상태 과정으로 모델링했습니다. 기체에서 표면으로의 전달 \(F_1\), 산화막을 통한 확산 \(F_2\), 실리콘 계면에서의 반응 \(F_3\)을 함께 고려합니다.</p>
+    <div class="formula">$$F_1 = h\,(C^* - C_0), \qquad F_2 = D\,\frac{C_0 - C_i}{x}, \qquad F_3 = k_s\,C_i$$
+      <div class="where">\(C^*\)는 헨리 법칙에 따라 분압에 비례하는 산화막 표면의 평형 산화제 농도입니다. \(C_0\)와 \(C_i\)는 각각 산화막 표면과 실리콘 계면의 농도입니다. \(D\)는 산화막 내 확산 계수이며 \(k_s\)는 계면 반응 속도 상수입니다. 정상 상태에서는 \(F_1=F_2=F_3=F\)입니다.</div>
+    </div>
+    <p>세 플럭스 식을 결합하고 \(C_i\)를 소거한 뒤 성장 속도 \(dx/dt=F/N_1\)를 적분하면 선형-포물선 관계식이 나옵니다. 여기서 \(N_1\)은 산화막 단위 부피에 포함되는 산화제 분자 수입니다(건식 산화막 약 2.2×10²² cm⁻³, 습식 산화막 약 4.4×10²² cm⁻³).</p>
+    <div class="formula">$$x^2 + A\,x = B\,(t + \tau), \qquad B = \frac{2DC^*}{N_1}, \qquad \frac{B}{A} = \frac{C^*}{N_1}\cdot\frac{k_s h}{k_s + h} \approx \frac{k_sC^*}{N_1}$$
+      <div class="where">\(B\)는 확산 지배 포물선 속도 상수이고 \(B/A\)는 계면 반응 지배 선형 속도 상수입니다. \(\tau\)는 초기 산화막 두께 \(x_i\)를 반영하는 시간 보정값으로 \(\tau=(x_i^2+Ax_i)/B\)입니다. 두 상수는 아레니우스 형태 \(C e^{-E_a/kT}\)를 따릅니다. B의 활성화 에너지는 산화막 내 확산과 관련되고(건식 1.23 eV, 습식 0.71~0.78 eV), B/A는 Si–Si 결합 절단과 관련됩니다(약 2.0 eV).</div>
+    </div>
+    <p>얇은 막에서는 \(x \ll A\)이고 계면 반응이 지배해 성장이 대략 선형입니다: \(x \approx (B/A)t\). 두꺼운 막에서는 \(x \gg A\)이고 산화막을 통한 확산이 성장을 제한합니다: \(x \approx \sqrt{Bt}\). 따라서 두께를 두 배로 키우려면 대략 네 배의 시간이 필요합니다.</p>
+    <div class="sim" id="sim-dg">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>Deal–Grove 산화막 두께 계산기</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="dg-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="ctrl"><span>분위기</span><div class="seg" id="dg-a"><button data-value="dry" class="on">건식 O₂</button><button data-value="wet">습식 H₂O</button></div></div>
+          <div class="ctrl"><span>결정 방향</span><div class="seg" id="dg-o"><button data-value="100" class="on">(100)</button><button data-value="111">(111)</button></div></div>
+          <label class="ctrl"><span>온도 <output id="dg-T-out"></output></span><input type="range" id="dg-T" min="700" max="1200" step="5" value="1000"></label>
+          <label class="ctrl"><span>시간 <output id="dg-t-out"></output></span><input type="range" id="dg-t" min="-1" max="2.3" step="0.01" value="0"></label>
+          <label class="ctrl"><span>초기 산화막 <output id="dg-xi-out"></output></span><input type="range" id="dg-xi" min="0" max="300" step="1" value="0"></label>
+          <label class="ctrl"><span>압력 <output id="dg-p-out"></output></span><input type="range" id="dg-p" min="1" max="20" step="1" value="1"></label>
+          <label class="check"><input type="checkbox" id="dg-tau"> 건식 산화 초기 급성장 보정 (x<sub>i</sub> ≈ 25 nm)</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">산화막 두께</span><span class="v" id="dg-o-x">—</span></div>
+        <div class="stat"><span class="k">실리콘 소모량</span><span class="v" id="dg-o-si">—</span></div>
+        <div class="stat"><span class="k">B(포물선 항)</span><span class="v" id="dg-o-b">—</span></div>
+        <div class="stat"><span class="k">B/A(선형 항)</span><span class="v" id="dg-o-ba">—</span></div>
+        <div class="stat"><span class="k">속도 지배 구간</span><span class="v" id="dg-o-reg">—</span></div>
+      </div>
+      <div class="sim-note">모델 살펴보기: 1000 °C에서 한 시간 산화하면 대표 계수에 따라 건식 산화는 약 50 nm, 습식 산화는 약 400 nm 성장합니다. 시간이 길어질수록 성장 거동은 거의 선형에서 시간의 제곱근에 가까운 구간으로 이동합니다. 점선 \(x=A\)은 전이 규모를 나타냅니다. 결정 방향과 압력도 계산된 성장 속도에 영향을 줍니다. 표시된 계수는 교육용 근사치이며 공정 레시피가 아닙니다.</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>계수((100) Si, 1 atm)</th><th>건식 O₂</th><th>습식 H₂O</th></tr></thead>
+        <tbody>
+          <tr><td>B = C₁ exp(−E₁/kT)</td><td>C₁ = 7.72×10² µm²/h, E₁ = 1.23 eV</td><td>C₁ = 3.86×10² µm²/h, E₁ = 0.78 eV</td></tr>
+          <tr><td>B/A = C₂ exp(−E₂/kT)</td><td>C₂ = 6.23×10⁶ µm/h, E₂ = 2.0 eV</td><td>C₂ = 1.63×10⁸ µm/h, E₂ = 2.05 eV</td></tr>
+          <tr><td>(111) 보정</td><td colspan="2">B/A × 1.68 (B는 동일)</td></tr>
+          <tr><td>용도</td><td>게이트 산화막·패드 산화막(얇고 치밀하며 계면 특성이 우수함)</td><td>필드·절연 산화막(교육 모델에서는 더 두껍고 빠르게 성장)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout deep"><strong>얇은 산화막에서 Deal–Grove 근사의 한계</strong><p>건식 산화의 초기 20~30 nm 구간은 Deal–Grove 식보다 훨씬 빠르게 성장합니다. 원인으로 계면 응력, 원자 산소, 산화막 내 미세 통로 등이 거론되지만 완전히 합의되지는 않았습니다. 실무에서는 초기 두께를 \(x_i \approx 25\) nm로 두어 \(\tau\)로 보정하거나 Massoud 지수항을 추가합니다. 오늘날 게이트 절연막 두께는 1~2 nm이므로 초기 성장 구간이 전체 두께에 해당합니다. 이에 따라 고온 급속 산화(RTO), 플라즈마 산화, 라디칼 산화(ISSG: 웨이퍼에서 수소와 산소를 직접 반응시키는 방법)처럼 원자 단위 두께 제어 기법을 사용합니다.</p></div>
+  </section>
+
+  <section id="color">
+    <h2>산화막 두께와 광학 간섭</h2>
+    <p>공기/산화막과 산화막/실리콘 계면에서 반사된 빛이 간섭하므로 산화막 두께에 따라 색이 변합니다. 왕복 광학 경로차 \(2nx\)에 의해 파장에 따라 보강 또는 상쇄 간섭이 일어납니다. 색은 대략적인 시각적 단서이며 타원편광법과 반사 분광법(<a href="metrology.html">제20장</a>)은 같은 광학 응답을 더 체계적으로 측정합니다.</p>
+    <div class="formula">$$r = \frac{r_{01} + r_{12}\,e^{-2i\delta}}{1 + r_{01}r_{12}\,e^{-2i\delta}}, \qquad \delta = \frac{2\pi n_1 x}{\lambda}, \qquad R = |r|^2$$
+      <div class="where">\(r_{01}\)은 공기/산화막 계면의 반사 계수이고, \(r_{12}\)는 산화막/실리콘 계면의 Fresnel 반사 계수(수직 입사)입니다. \(n_1 \approx 1.46\)은 산화막의 굴절률입니다. 실리콘의 복소 굴절률은 파장에 따라 변합니다(400 nm에서 약 5.6 − 0.39i, 600 nm에서 약 3.9 − 0.02i).</div>
+    </div>
+    <div class="sim" id="sim-col">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>산화막 간섭색 차트</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="cc-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>산화막 두께 <output id="cc-x-out"></output></span><input type="range" id="cc-x" min="0" max="1200" step="1" value="300"></label>
+          <label class="ctrl"><span>박막 굴절률 <output id="cc-n-out"></output></span><input type="range" id="cc-n" min="1.38" max="2.1" step="0.01" value="1.46"></label>
+          <div class="ctrl"><span>간편 선택</span><div class="seg" id="cc-q"><button data-value="1.46">SiO₂</button><button data-value="2.0">Si₃N₄</button></div></div>
+        </div>
+      </div>
+      <div class="ox-swatch"><div class="big" id="cc-sw"></div><div class="txt" id="cc-txt"></div></div>
+      <div class="sim-note">모델 살펴보기: 간섭색은 산화막 두께와 굴절률에 따라 달라집니다. 광학 두께가 증가하면 색이 반복되므로 한 가지 색만으로 막 두께를 유일하게 결정할 수 없습니다. 굴절률이 높은 막은 같은 물리 두께에서도 광학 경로가 더 깁니다. 이 시각화는 수직 입사를 가정하고 표준 관찰자의 색 일치를 근사합니다.</div>
+    </div>
+  </section>
+
+  <section id="locos">
+    <h2>LOCOS, 새부리 침범과 트렌치 절연</h2>
+    <p>트랜지스터를 전기적으로 분리하려면 사이에 두꺼운 절연막이 필요합니다. 1970~1990년대 대표 방식인 LOCOS(실리콘 국부 산화)에서는 실리콘 위에 얇은 패드 산화막과 질화막을 형성하고, 소자를 배치할 영역만 질화막을 열어 둔 채 습식 산화를 진행합니다. 질화막은 산화제 투과를 거의 막으므로 노출된 영역에서만 두꺼운 필드 산화막이 성장합니다.</p>
+    <p>문제는 가장자리에서 발생합니다. 산화제가 얇은 패드 산화막을 따라 질화막 아래로 옆 방향으로 침투해 그곳의 실리콘도 산화합니다. 부피 팽창으로 질화막 끝이 들리며 단면이 새 부리처럼 보여 새부리(bird’s beak)라고 부릅니다. 옆 방향 침범은 활성 영역을 소모하므로 소자 크기가 작아질수록 불리합니다.</p>
+    <div class="sim" id="sim-locos">
+      <div class="sim-head"><span class="sim-tag">단면 시뮬레이터</span><h3>LOCOS 단면 시뮬레이터</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="lo-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>패드 산화막 <output id="lo-pad-out"></output></span><input type="range" id="lo-pad" min="10" max="60" step="5" value="20"></label>
+          <label class="ctrl"><span>질화막 두께 <output id="lo-nit-out"></output></span><input type="range" id="lo-nit" min="40" max="200" step="10" value="100"></label>
+          <label class="ctrl"><span>습식 산화 시간(1000 °C) <output id="lo-t-out"></output></span><input type="range" id="lo-t" min="5" max="90" step="5" value="40"></label>
+          <label class="check"><input type="checkbox" id="lo-strip"> 질화막과 패드 산화막 제거 후 보기</label>
+          <div class="lab-msg" id="lo-msg" style="font-size:12.5px;color:var(--text-faint)"></div>
+        </div>
+      </div>
+      <div class="mat-legend" id="lo-lg"></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">필드 산화막 두께</span><span class="v" id="lo-o-x">—</span></div>
+        <div class="stat"><span class="k">Deal–Grove 1D 예측</span><span class="v" id="lo-o-dg">—</span></div>
+        <div class="stat"><span class="k">새부리 길이(한쪽)</span><span class="v" id="lo-o-bb">—</span></div>
+        <div class="stat"><span class="k">실리콘 표면 아래 깊이</span><span class="v" id="lo-o-si">—</span></div>
+      </div>
+      <div class="sim-note">간략화된 2D 모델에서 패드 산화막 두께, 질화막 두께와 산화 시간이 옆 방향 침범에 미치는 영향을 살펴보세요. 격자 기반 단면은 정성적 설명용이며 파운드리 절연 프로파일을 예측하지 않습니다.</div>
+    </div>
+    <p>1990년대 후반부터 LOCOS를 대체한 얕은 트렌치 절연(STI)은 실리콘에 얕은 트렌치를 식각해 CVD 산화막으로 채운 다음 CMP로 평탄화합니다. 이 방식은 새부리가 생기지 않고 표면이 평탄합니다. 트렌치 벽에 얇은 열산화막(라이너)을 성장시키는 단계에는 산화 공정을 계속 사용합니다. STI는 <a href="integration.html">제18장</a>에서 다룹니다.</p>
+  </section>
+
+  <section id="charge">
+    <h2>산화막 전하, 계면 및 소자 동작</h2>
+    <p>SiO₂는 완벽한 절연체가 아니며 여러 종류의 전하를 포함할 수 있습니다. 이 전하는 트랜지스터 문턱 전압을 이동시키고 신뢰성을 낮출 수 있으므로 산화 조건과 후속 열처리로 관리합니다.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>전하 유형</th><th>위치</th><th>원인</th><th>저감 방법</th></tr></thead>
+        <tbody>
+          <tr><td>계면 포획 전하 Q<sub>it</sub></td><td>Si/SiO₂ 계면</td><td>끊어진 Si 결합(댕글링 본드)</td><td>수소 어닐(FGA, 400~450 °C H₂/N₂)로 Si–H 결합을 형성하고 (100) 면 사용</td></tr>
+          <tr><td>고정 전하 Q<sub>f</sub></td><td>계면 부근 산화막 약 2 nm</td><td>불완전 산화된 Si 이온</td><td>고온 산화 후 불활성 가스 어닐, 산화 온도 높이기</td></tr>
+          <tr><td>이동 이온 Q<sub>m</sub></td><td>산화막 전체</td><td>Na⁺, K⁺ 오염</td><td>충분한 세정, HCl 산화 첨가(염소가 이온을 포획)</td></tr>
+          <tr><td>산화막 포획 전하 Q<sub>ot</sub></td><td>산화막 전체</td><td>방사선과 높은 전계 스트레스로 생긴 결함</td><td>공정 중 플라즈마 손상 최소화</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>산화는 실리콘 내 도펀트에도 영향을 줍니다. 계면에서 도펀트는 산화막과 실리콘 중 한쪽에 더 분배됩니다(편석 계수 \(m=C_{Si}/C_{SiO_2}\)). 붕소(m ≈ 0.3)는 산화막 쪽으로 분배되어 표면 농도가 낮아집니다. 인과 비소(m ≈ 10)는 산화막에서 밀려나와 계면에 축적(pile-up)됩니다. 산화 중 실리콘 격자 원자가 계면 밖으로 밀려나면서 붕소와 인의 확산이 빨라질 수도 있습니다. 이를 산화 촉진 확산(OED)이라 하며 <a href="anneal.html">제15장</a>에서 다시 다룹니다.</p>
+      <div class="callout"><strong>절연막 선택과 열 예산</strong><p>BCD에서는 게이트 절연막과 필드 절연막이 서로 다른 전기적·절연 요구사항을 만족해야 합니다. 절연막 형성에 따른 열 이력은 웰, 드리프트 주입층과 접합을 재분포시킬 수 있습니다. High-k/금속 게이트 적층은 기술에 따라 선택하는 옵션이지 모든 BCD의 필수 요건은 아닙니다. 계면 품질, 누설, 항복과 공정 열 예산을 함께 평가하세요(<a href="advanced.html">제23장</a>).</p></div>
+  </section>
+
+  <aside class="callout"><strong>상류 저작물 출처</strong><p>ProcessBook의 “Thermal Oxidation”에서 가져와 수정했습니다(<a href="https://github.com/geniuskey/processbook/blob/0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff/chapters/oxidation.html">불변 기준 커밋 0bc4314d의 원본 장</a>). 원본은 CC BY 4.0으로 제공됩니다. 이 장은 PMIC/BCD 교육용으로 번역·수정했습니다. 시뮬레이터 매개변수는 예시이며 파운드리 레시피가 아닙니다.</p></aside>
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>산화제는 산화막을 통과해 실리콘 계면에서 반응합니다. 두께 \(x\)의 산화막을 만들 때 실리콘 약 \(0.44x\)가 소모됩니다.</li>
+      <li>Deal–Grove 관계식 \(x^2 + Ax = B(t+\tau)\)은 얇은 막의 계면 반응 지배 선형 성장과 두꺼운 막의 확산 지배 성장을 설명합니다.</li>
+      <li>일반적으로 습식 산화는 건식 산화보다 빠릅니다. 성장 계수는 온도, 결정 방향, 압력과 기술에 따라서도 달라집니다.</li>
+      <li>간섭색은 두께에 대한 정성적 단서입니다. 타원편광법은 관련 광학 원리로 두께를 측정합니다.</li>
+      <li>LOCOS에서는 마스크 가장자리 아래로 새부리가 옆 방향으로 침범할 수 있습니다. 많은 공정에서 트렌치 절연은 확장성이 더 좋은 다른 절연 형상을 제공합니다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>이해도 확인</h2>
+    <div class="quiz">
+      <div class="quiz-q"><p>산화막 200 nm를 성장시킬 때 실리콘은 얼마나 소모되나요?</p><div class="opts">
+        <button class="opt">200 nm</button><button class="opt" data-correct>약 88 nm</button><button class="opt">약 112 nm</button><button class="opt">소모되지 않음</button>
+      </div><div class="quiz-exp">0.44 × 200 ≈ 88 nm가 소모됩니다. 나머지 112 nm는 원래 표면 위로 성장합니다.</div></div>
+      <div class="quiz-q"><p>확산 지배 구간에서 산화 시간을 네 배로 늘리면 산화막 두께는 어떻게 되나요?</p><div class="opts">
+        <button class="opt">4배</button><button class="opt" data-correct>약 2배</button><button class="opt">약 1.4배</button><button class="opt">변화 없음</button>
+      </div><div class="quiz-exp">확산 지배 구간에서는 \(x \approx \sqrt{Bt}\)이므로 시간이 네 배가 되면 두께는 대략 두 배가 됩니다.</div></div>
+      <div class="quiz-q"><p>습식 산화가 일반적으로 건식 산화보다 빠른 이유는 무엇인가요?</p><div class="opts">
+        <button class="opt">수증기 분자가 더 작아 확산 계수가 훨씬 크기 때문</button>
+        <button class="opt" data-correct>산화막 내 H₂O의 평형 용해도 \(C^*\)가 O₂보다 훨씬 커 B와 B/A가 모두 증가하기 때문</button>
+        <button class="opt">수소가 실리콘을 식각하기 때문</button>
+        <button class="opt">반응 온도가 더 높기 때문</button>
+      </div><div class="quiz-exp">1000 °C에서 H₂O의 \(C^*\)는 약 3×10¹⁹ cm⁻³로 O₂(약 5×10¹⁶)보다 수백 배 큽니다. 확산 계수는 비슷하거나 오히려 더 작습니다.</div></div>
+      <div class="quiz-q"><p>LOCOS에서 새부리 길이를 늘리는 조건은 무엇인가요?</p><div class="opts">
+        <button class="opt">질화막을 두껍게 할 때</button><button class="opt" data-correct>패드 산화막을 두껍게 할 때</button><button class="opt">산화 시간을 줄일 때</button><button class="opt">건식 산화를 사용할 때</button>
+      </div><div class="quiz-exp">패드 산화막은 산화제가 질화막 아래로 옆 방향으로 이동하는 통로입니다. 통로가 두꺼울수록 옆 방향 산화가 쉬워집니다.</div></div>
+    </div>
+  </section>
+</main>
+<script>
+(function () {
+  "use strict";
+  function small(v, u) { return v + "<small>" + u + "</small>"; }
+  function nmf(x) { return x >= 1000 ? small(PB.fmt(x / 1000, 3), "µm") : small(PB.fmt(x, 3), "nm"); }
+
+  /* ---------------- Deal–Grove */
+  (function () {
+    var cv, rr = function () { cv && cv.redraw(); };
+    var gA = PB.seg("dg-a", rr), gO = PB.seg("dg-o", rr);
+    var gT = PB.range("dg-T", function (v) { return v + " °C"; }, rr);
+    var gt = PB.range("dg-t", function (v) { var h = Math.pow(10, v); return h < 1 ? Math.round(h * 60) + " 분" : PB.fmt(h, 3) + " 시간"; }, rr);
+    var gXi = PB.range("dg-xi", function (v) { return v + " nm"; }, rr);
+    var gP = PB.range("dg-p", function (v) { return v + " atm"; }, rr);
+    var cTau = document.getElementById("dg-tau"); cTau.addEventListener("change", rr);
+    function coef(T, amb, ori, p) { var c = XS.dealGrove(T, amb, ori); return { B: c.B * p, BA: c.BA * p, A: c.A }; }
+    function thick(c, th, xi) { return XS.dgThickness(c.B, c.A, th, xi); }
+    cv = PB.canvas("#dg-cv", function (ctx, w, h) {
+      var P = PB.palette(), T = gT(), amb = gA(), ori = gO(), p = gP(), th = Math.pow(10, gt());
+      var xi = gXi() / 1000;
+      if (amb === "dry" && cTau.checked) xi = Math.max(xi, 0.025);
+      var c = coef(T, amb, ori, p), c2 = coef(T, amb, ori === "100" ? "111" : "100", p), c3 = coef(T, amb === "dry" ? "wet" : "dry", ori, p);
+      var tmax = Math.max(th * 1.6, 0.2);
+      var s1 = [], s2 = [], s3 = [];
+      var xi3 = amb === "wet" && cTau.checked ? Math.max(gXi() / 1000, 0.025) : gXi() / 1000;
+      for (var i = 0; i <= 200; i++) { var t = tmax * i / 200; s1.push([t * 60, thick(c, t, xi) * 1000]); s2.push([t * 60, thick(c2, t, xi) * 1000]); s3.push([t * 60, thick(c3, t, amb === "dry" ? gXi() / 1000 : xi3) * 1000]); }
+      var x = thick(c, th, xi) * 1000;
+      var ymax = Math.max(x, s1[200][1], s2[200][1]) * 1.15;
+      if (amb === "dry") ymax = Math.max(ymax, 10);
+      var yTop = Math.min(ymax, Math.max(s3[120][1], ymax));
+      var ch = PB.chart(ctx, null, { x: [0, tmax * 60], y: [0, ymax], xLabel: "시간(분)", yLabel: "산화막 두께 (nm)",
+        series: [{ data: s2, color: P.accent2, width: 1.8, dash: [6, 4] }, { data: s1, color: P.accent, width: 3 }],
+        hlines: [{ y: c.A * 1000, color: P.faint, label: "x = A = " + PB.fmt(c.A * 1000, 3) + " nm" }],
+        points: [{ x: th * 60, y: x, color: P.accent, r: 5, label: PB.fmt(x, 3) + " nm" }] });
+      ctx.font = PB.font(12); ctx.textAlign = "right"; ctx.textBaseline = "bottom";
+      ctx.fillStyle = P.accent; ctx.fillText("━ " + (amb === "dry" ? "건식 O₂" : "습식 H₂O") + " (" + ori + ")", w - 24, h - 74);
+      ctx.fillStyle = P.accent2; ctx.fillText("╍ 같은 분위기, 다른 결정 방향(" + (ori === "100" ? "111" : "100") + ")", w - 24, h - 56);
+      var x3 = thick(c3, th, amb === "dry" ? gXi() / 1000 : xi3) * 1000;
+      ctx.fillStyle = P.dim; ctx.fillText("같은 시간, " + (amb === "dry" ? "습식" : "건식") + ": " + PB.fmt(x3, 3) + " nm", w - 24, h - 92);
+      PB.stat("dg-o-x", nmf(x));
+      PB.stat("dg-o-si", nmf(0.44 * (x - gXi())));
+      PB.stat("dg-o-b", small(PB.fmt(c.B, 3), "µm²/h"));
+      PB.stat("dg-o-ba", small(PB.fmt(c.BA, 3), "µm/h"));
+      PB.stat("dg-o-reg", x < 0.3 * c.A * 1000 ? "계면 반응 지배(선형)" : x > 3 * c.A * 1000 ? "확산 지배(포물선)" : "전이 구간");
+    }, { aspect: 0.62, minHeight: 300, maxHeight: 440 });
+  })();
+
+  /* ---------------- Interference color */
+  (function () {
+    // CIE 1931 color matching function (Wyman–Sloan–Shirley multiple Gaussian approximation)
+    function g(x, mu, s1, s2) { var t = (x - mu) / (x < mu ? s1 : s2); return Math.exp(-0.5 * t * t); }
+    function xbar(l) { return 1.056 * g(l, 599.8, 37.9, 31.0) + 0.362 * g(l, 442.0, 16.0, 26.7) - 0.065 * g(l, 501.1, 20.4, 26.2); }
+    function ybar(l) { return 0.821 * g(l, 568.8, 46.9, 40.5) + 0.286 * g(l, 530.9, 16.3, 31.1); }
+    function zbar(l) { return 1.217 * g(l, 437.0, 11.8, 36.0) + 0.681 * g(l, 459.0, 26.0, 13.8); }
+    function D65(l) { return 100 + 0.0 * l; } // White point correction after flat approximation
+    var SI = [[380, 6.0, 0.6], [400, 5.57, 0.39], [450, 4.67, 0.14], [500, 4.30, 0.073], [550, 4.08, 0.04], [600, 3.94, 0.022], [650, 3.85, 0.016], [700, 3.78, 0.012], [780, 3.70, 0.008]];
+    function siN(l) { for (var i = 1; i < SI.length; i++) if (l <= SI[i][0]) { var a = SI[i - 1], b = SI[i], t = (l - a[0]) / (b[0] - a[0]); return [a[1] + t * (b[1] - a[1]), a[2] + t * (b[2] - a[2])]; } return [3.7, 0.008]; }
+    // complex number
+    function C(re, im) { return { re: re, im: im }; }
+    function add(a, b) { return C(a.re + b.re, a.im + b.im); }
+    function mul(a, b) { return C(a.re * b.re - a.im * b.im, a.re * b.im + a.im * b.re); }
+    function div(a, b) { var d = b.re * b.re + b.im * b.im; return C((a.re * b.re + a.im * b.im) / d, (a.im * b.re - a.re * b.im) / d); }
+    function R(l, x, n1) {
+      var s = siN(l), n2 = C(s[0], -s[1]);
+      var r01 = C((1 - n1) / (1 + n1), 0);
+      var r12 = div(C(n1 - n2.re, -n2.im), C(n1 + n2.re, n2.im));
+      var d = 2 * Math.PI * n1 * x / l, e = C(Math.cos(-2 * d), Math.sin(-2 * d));
+      var num = add(r01, mul(r12, e)), den = add(C(1, 0), mul(mul(r01, r12), e));
+      var r = div(num, den); return r.re * r.re + r.im * r.im;
+    }
+    var W0 = (function () { var X = 0, Y = 0, Z = 0; for (var l = 380; l <= 780; l += 5) { X += xbar(l); Y += ybar(l); Z += zbar(l); } return [X, Y, Z]; })();
+    function rgb(x, n1, gain) {
+      var X = 0, Y = 0, Z = 0;
+      for (var l = 380; l <= 780; l += 5) { var r = R(l, x, n1); X += r * xbar(l); Y += r * ybar(l); Z += r * zbar(l); }
+      X /= W0[1]; Y /= W0[1]; Z /= W0[1];
+      X *= gain; Y *= gain; Z *= gain;
+      var rl = 3.2406 * X - 1.5372 * Y - 0.4986 * Z, gl = -0.9689 * X + 1.8758 * Y + 0.0415 * Z, bl = 0.0557 * X - 0.2040 * Y + 1.0570 * Z;
+      var f = function (u) { u = Math.max(0, u); u = u <= 0.0031308 ? 12.92 * u : 1.055 * Math.pow(u, 1 / 2.4) - 0.055; return Math.round(255 * Math.min(1, u)); };
+      return [f(rl), f(gl), f(bl)];
+    }
+    var gX = PB.range("cc-x", function (v) { return v + " nm"; }, function () { cv.redraw(); });
+    var gN = PB.range("cc-n", function (v) { return v.toFixed(2); }, function () { strip = null; cv.redraw(); });
+    PB.seg("cc-q", function (v) { gN.set(+v); });
+    var strip = null, stripN = 0;
+    var cv = PB.canvas("#cc-cv", function (ctx, w, h) {
+      var P = PB.palette(), x = gX(), n1 = gN(), gain = 1.6;
+      var x0 = 40, x1 = w - 16, sh = 54, y0 = 26;
+      if (!strip || stripN !== n1) { strip = []; for (var i = 0; i <= 600; i++) strip.push(rgb(i * 2, n1, gain)); stripN = n1; }
+      var rows = 2, span = 600;
+      for (var r = 0; r < rows; r++) {
+        var yy = y0 + r * (sh + 34);
+        for (var px = x0; px < x1; px++) {
+          var t = r * span + (px - x0) / (x1 - x0) * span, c = strip[Math.min(600, Math.round(t / 2))];
+          ctx.fillStyle = "rgb(" + c[0] + "," + c[1] + "," + c[2] + ")"; ctx.fillRect(px, yy, 1.5, sh);
+        }
+        ctx.strokeStyle = P.border; ctx.strokeRect(x0 + 0.5, yy + 0.5, x1 - x0 - 1, sh - 1);
+        ctx.fillStyle = P.dim; ctx.font = PB.font(11, true); ctx.textAlign = "center"; ctx.textBaseline = "top";
+        for (var k = 0; k <= 6; k++) { var tx = x0 + k / 6 * (x1 - x0); ctx.fillText((r * span + k * 100) + "", tx, yy + sh + 4); }
+        if (x >= r * span && x <= (r + 1) * span) {
+          var mx = x0 + (x - r * span) / span * (x1 - x0);
+          ctx.strokeStyle = P.text; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(mx, yy - 6); ctx.lineTo(mx, yy + sh + 2); ctx.stroke(); ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(mx - 5, yy - 10); ctx.lineTo(mx + 5, yy - 10); ctx.lineTo(mx, yy - 3); ctx.closePath(); ctx.fillStyle = P.text; ctx.fill();
+        }
+      }
+      ctx.save(); ctx.translate(14, y0 + sh + 17); ctx.rotate(-Math.PI / 2); ctx.textAlign = "center"; ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.fillText("두께(nm)", 0, 0); ctx.restore();
+      // reflection spectrum
+      var by = y0 + 2 * (sh + 34) + 10, bh = h - by - 40;
+      var spec = []; for (var l = 380; l <= 780; l += 4) spec.push([l, R(l, x, n1) * 100]);
+      PB.chart(ctx, { x: x0 + 18, y: by, w: x1 - x0 - 18, h: bh }, { x: [380, 780], y: [0, 70], xLabel: "파장(nm) · 반사 스펙트럼", yLabel: "", series: [{ data: spec, color: P.accent, width: 2.4 }], bands: [] });
+      ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left"; ctx.fillText("R (%)", x0 + 22, by + 4);
+      var c = rgb(x, n1, gain);
+      document.getElementById("cc-sw").style.background = "rgb(" + c.join(",") + ")";
+      var m = [], prev = 0;
+      for (var q = 400; q <= 760; q += 2) { var a = R(q - 2, x, n1), b = R(q, x, n1), d = R(q + 2, x, n1); if (b < a && b < d) m.push(q); }
+      document.getElementById("cc-txt").innerHTML = "두께 <b>" + x + " nm</b>, n = " + n1.toFixed(2) + "; 광학 경로 2nx = " + Math.round(2 * n1 * x) + " nm" + (m.length ? "; 반사 최소점 " + m.join(", ") + " nm(보색이 더 뚜렷하게 보임)" : "");
+    }, { aspect: 0.62, minHeight: 330, maxHeight: 440 });
+  })();
+
+  /* ---------------- LOCOS */
+  (function () {
+    var W = 140, DX = 10, H = 60, SURF = 34;
+    document.getElementById("lo-lg").innerHTML = XS.legend(["si", "ox", "nit"], false);
+    var res = null, busy = 0, cv;
+    var run = PB.debounce(function () {
+      var pad = gPad(), nit = gNit(), t = gT(), strip = document.getElementById("lo-strip").checked;
+      var msg = document.getElementById("lo-msg"); msg.textContent = "계산 중...";
+      setTimeout(function () {
+        var s = new XS.Sim({ W: W, H: H, dx: DX, surf: SURF });
+        var c = W * DX / 2, half = 300;
+        s.rect("ox", 0, W * DX, -pad, 0);
+        s.rect("nit", 0, c - half, -pad - nit, -pad); s.rect("nit", c + half, W * DX, -pad - nit, -pad);
+        s.run({ op: "ox", T: 1000, time: t, ambient: "wet", diffuse: false });
+        // measurement
+        var col = Math.round(c / DX), top = s.surfRow(col), bot = top;
+        while (bot < H && s.mat[bot * W + col] === XS.ID.ox) bot++;
+        var xf = (bot - top) * DX, siBelow = (bot - SURF) * DX;
+        // Bird’s-beak: Inward from the edge of the mask, the distance where the oxide thickness exceeds 1.5 times the pad.
+        var edge = Math.round((c - half) / DX), bb = 0;
+        for (var x = edge; x > 0; x--) {
+          var n = 0; for (var y = 0; y < H; y++) if (s.mat[y * W + x] === XS.ID.ox) n++;
+          if (n * DX > pad * 1.5 + 5) bb = (edge - x + 1) * DX; else break;
+        }
+        if (strip) { s.strip("nit"); s.run({ op: "etch", wet: true, sel: { ox: 1 }, rate: 2, time: pad / 2 + 2 }); }
+        var dg = XS.dealGrove(1000, "wet");
+        res = { s: s, xf: xf, bb: bb, si: siBelow, dg: XS.dgThickness(dg.B, dg.A, t / 60, pad / 1000) * 1000 };
+        msg.textContent = "";
+        cv.redraw();
+      }, 20);
+    }, 150);
+    var gPad = PB.range("lo-pad", function (v) { return v + " nm"; }, run);
+    var gNit = PB.range("lo-nit", function (v) { return v + " nm"; }, run);
+    var gT = PB.range("lo-t", function (v) { return v + " 분"; }, run);
+    document.getElementById("lo-strip").addEventListener("change", run);
+    cv = PB.canvas("#lo-cv", function (ctx, w, h) {
+      if (!res) return;
+      var m = XS.draw(ctx, res.s, { x: 6, y: 6, w: w - 12, h: h - 12 }, { doping: false, y0nm: -280, y1nm: 240 });
+      var P = PB.palette();
+      ctx.strokeStyle = P.accent2; ctx.setLineDash([4, 3]); ctx.beginPath(); ctx.moveTo(m.ox, m.Y(0)); ctx.lineTo(m.ox + m.pw, m.Y(0)); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = P.accent2; ctx.font = PB.font(11, true); ctx.textAlign = "right"; ctx.fillText("원래 실리콘 표면", m.ox + m.pw - 6, m.Y(0) - 4);
+      PB.stat("lo-o-x", small(res.xf, "nm"));
+      PB.stat("lo-o-dg", small(Math.round(res.dg), "nm"));
+      PB.stat("lo-o-bb", small(res.bb, "nm"));
+      PB.stat("lo-o-si", small(res.si, "nm"));
+    }, { aspect: 0.55, minHeight: 260, maxHeight: 420 });
+    run();
+  })();
+})();
+</script>
+</body>
+</html>

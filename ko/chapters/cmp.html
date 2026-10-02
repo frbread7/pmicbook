@@ -1,0 +1,236 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
+     Executable code: MIT (see ../../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc":"PMIC 배선 통합에서 화학 기계적 평탄화, 패턴 밀도, 금속 디싱, 절연막 침식과 레이아웃 밀도를 다룹니다.","libs":[],"lang":"ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>평탄화와 CMP · PMICBook</title>
+<meta name="description" content="PMIC 배선 통합에서 화학 기계적 평탄화, 패턴 밀도, 금속 디싱, 절연막 침식과 레이아웃 밀도를 다룹니다.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/cmp.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/cmp.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/cmp.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/cmp.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="평탄화와 CMP · PMICBook">
+<meta property="og:description" content="PMIC 배선 통합에서 화학 기계적 평탄화, 패턴 밀도, 금속 디싱, 절연막 침식과 레이아웃 밀도를 다룹니다.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/cmp.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/cmp.html#chapter","name":"평탄화와 CMP","headline":"평탄화와 CMP · PMICBook","description":"PMIC 배선 통합에서 화학 기계적 평탄화, 패턴 밀도, 금속 디싱, 절연막 침식과 레이아웃 밀도를 다룹니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/cmp.html","position":16,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"16. 평탄화와 CMP","item":"https://frbread7.github.io/pmicbook/ko/chapters/cmp.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="cmp">
+<main class="chapter">
+<header class="chapter-hero"><div class="eyebrow">제16장 · 표면 평탄화</div><h1>화학 기계적 평탄화(CMP)</h1><p class="lead">CMP는 패드 접촉, 슬러리 화학 작용과 기계적 운동을 결합해 표면 단차를 제거합니다. PMIC 레이아웃에는 고밀도 전력 소자, 절연부, 콘택트와 두꺼운 배선 영역이 저밀도 영역과 함께 배치됩니다. 패턴에 따라 제거량이 달라지면 잔류 단차, 디싱 또는 침식이 생겨 리소그래피, 콘택트 형성, 저항과 신뢰성에 영향을 줄 수 있습니다.</p><ul class="objectives"><li>제거 과정에서 압력, 상대 속도와 슬러리가 하는 정성적 역할을 설명합니다.</li><li>패턴 밀도와 형상 폭을 평탄화 불균일도와 연결합니다.</li><li>디싱, 침식 및 잔류 표면 형상을 구분합니다.</li><li>레이아웃 밀도와 더미 패턴이 국부 편차를 줄이는 원리를 설명합니다.</li></ul></header>
+<section id="mechanics"><h2>패드, 슬러리와 압력</h2><p>경험적으로 사용하는 프레스턴 관계식은 보정된 운전 범위에서 제거율이 압력과 상대 속도에 대략 비례한다고 설명합니다. 슬러리 화학 작용과 패드 상태는 비례 상수와 선택비에 영향을 줍니다. 직관을 돕는 관계식이지 보편적 물리 법칙이나 장비 레시피는 아닙니다.</p><div class="formula">$$R=k_P\,P\,v$$<div class="where">프레스턴 계수 \(k_P\)는 패드, 슬러리, 재료, 패드 컨디셔닝 및 공정 창에 따라 달라집니다. 대화형 모델은 정규화했거나 대표값으로 둔 제거율만 사용합니다.</div></div></section>
+<section id="density"><h2>패턴 밀도와 국부 평탄화</h2><p>고밀도 영역은 패드와 더 많이 접촉할 수 있어 노출 재료가 저밀도 영역과 다른 속도로 제거됩니다. 그 결과 생기는 국부 단차 차이를 패턴 의존 평탄화라고도 합니다. BCD 공정에서는 칩 내 절연 구조의 표면 형상, 콘택트 배열과 소자 밀도가 위치에 따라 달라지므로 국부 균일도와 웨이퍼 규모의 균일도를 모두 고려해야 합니다.</p><div class="sim" id="sim-sh">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>패턴 밀도에 따른 단차 제거</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sh-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>초기 단차 높이 <output id="sh-h-out"></output></span><input type="range" id="sh-h" min="100" max="1000" step="10" value="500"></label>
+          <label class="ctrl"><span>패턴 밀도 ρ (영역 A) <output id="sh-r1-out"></output></span><input type="range" id="sh-r1" min="0.1" max="0.9" step="0.05" value="0.2"></label>
+          <label class="ctrl"><span>패턴 밀도 ρ (영역 B) <output id="sh-r2-out"></output></span><input type="range" id="sh-r2" min="0.1" max="0.9" step="0.05" value="0.8"></label>
+          <label class="ctrl"><span>접촉 높이 h<sub>c</sub> (패드 순응도) <output id="sh-c-out"></output></span><input type="range" id="sh-c" min="20" max="400" step="10" value="120"></label>
+          <label class="ctrl"><span>연마 시간 <output id="sh-t-out"></output></span><input type="range" id="sh-t" min="10" max="300" step="5" value="150"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">잔류 단차 높이, A</span><span class="v" id="sh-o-a">—</span></div>
+        <div class="stat"><span class="k">잔류 단차 높이, B</span><span class="v" id="sh-o-b">—</span></div>
+        <div class="stat"><span class="k">A–B 돌출 형상 높이 차이 (칩 내 편차)</span><span class="v" id="sh-o-d">—</span></div>
+      </div>
+      <div class="sim-note">접촉 높이, 초기 단차와 시간을 바꾸며 저밀도 및 고밀도 영역의 정규화된 단차 제거를 비교하세요. 제거율과 패드 응답 함수는 교육용이며 특정 CMP 공정에 맞춰 보정하지 않았습니다.</div>
+    </div><p>접촉 높이, 초기 단차와 연마 시간에 따라 고밀도와 저밀도 영역을 비교하세요. 이 모델은 접촉 응답을 정성적으로 나타낼 뿐 실제 패드나 슬러리를 예측하지 않습니다.</p></section>
+<section id="dishing"><h2>금속 디싱과 절연막 침식</h2><p>폭이 넓은 금속 형상을 연마하면 패드가 형상 안으로 휘어 들어가 주변 절연막 표면보다 낮게 금속을 제거할 수 있습니다. 이 현상을 <strong>디싱</strong>이라고 합니다. 고밀도 배열에서는 주변 필드 절연막이 국부 표면보다 낮아질 수도 있습니다. 이를 <strong>침식</strong>이라고 합니다. 두 현상 모두 치수 여유를 줄이며 배선 저항이나 절연막 두께를 바꿀 수 있습니다.</p><div class="sim" id="sim-dish">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>선폭, 밀도 및 과연마에 따른 디싱과 침식</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ds-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>구리 배선 폭 <output id="ds-w-out"></output></span><input type="range" id="ds-w" min="0.05" max="50" step="0.05" value="2"></label>
+          <label class="ctrl"><span>금속 밀도 (구리 면적 비율) <output id="ds-r-out"></output></span><input type="range" id="ds-r" min="0.1" max="0.9" step="0.05" value="0.5"></label>
+          <label class="ctrl"><span>과연마 <output id="ds-o-out"></output></span><input type="range" id="ds-o" min="0" max="100" step="5" value="30"></label>
+          <label class="ctrl"><span>구리 대 산화막 선택비 <output id="ds-s-out"></output></span><input type="range" id="ds-s" min="2" max="50" step="1" value="10"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">디싱 (배선 중앙)</span><span class="v" id="ds-o-d">—</span></div>
+        <div class="stat"><span class="k">침식 (필드 산화막 손실)</span><span class="v" id="ds-o-e">—</span></div>
+        <div class="stat"><span class="k">구리 두께 감소 → 저항 증가</span><span class="v" id="ds-o-rr">—</span></div>
+      </div>
+      <div class="sim-note">배선 폭, 밀도, 과연마 및 선택비에 따른 디싱과 침식의 정성적 경향을 살펴보세요. 경험적 상수는 예시값입니다. 슬라이더 끝값에서는 계산된 침식이 가정한 금속 두께 200 nm를 넘어서 저항 변화가 물리적으로 성립하지 않을 수 있습니다. 공정 결정을 내리지 말고 정성적 경향을 확인하는 용도로만 사용하세요.</div>
+    </div><div class="callout"><strong>공정 통합에 미치는 영향</strong><p>PMIC 전력 경로에는 저저항 금속과 안정적인 절연막이 필요합니다. 금속 함몰, 두께 손실 또는 불균일도는 저항, 정전용량과 신뢰성 여유를 바꿀 수 있으므로 영향을 정량화하려면 전기적 특성 평가가 필요합니다.</p></div></section>
+<section id="density-fill"><h2>평탄화 길이와 레이아웃 밀도</h2><p>짧은 범위의 표면 형상을 제거해도 더 긴 범위의 패턴 밀도 차이는 연마 후 남을 수 있습니다. 더미 패턴은 전기적·열적·설계 규칙 제약을 지키면서 밀도를 균형 있게 만들어 공정 균일도를 높이기 위해 추가하는 비기능 형상입니다.</p><div class="sim" id="sim-fill">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>레이아웃 밀도 → 연마 후 두께 지도</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="fl-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>평탄화 길이 <output id="fl-l-out"></output></span><input type="range" id="fl-l" min="0.5" max="8" step="0.1" value="2.5"></label>
+          <label class="check"><input type="checkbox" id="fl-f"> 더미 패턴 적용 (저밀도 영역 밀도 증가)</label>
+          <label class="ctrl"><span>더미 패턴 목표 밀도 <output id="fl-t-out"></output></span><input type="range" id="fl-t" min="0.2" max="0.7" step="0.05" value="0.45"></label>
+          <button class="btn" id="fl-re">새 레이아웃 생성</button>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">유효 밀도 범위</span><span class="v" id="fl-o-r">—</span></div>
+        <div class="stat"><span class="k">연마 후 두께 범위 (최대−최소)</span><span class="v" id="fl-o-t">—</span></div>
+      </div>
+      <div class="sim-note">그림은 선택한 평탄화 길이에 걸쳐 흐리게 만든 합성 밀도장입니다. 더미 패턴은 밀도의 하한을 적용한 단순화 모델이며 설계 규칙을 구현하지 않습니다.</div>
+    </div><p>시뮬레이터는 조절 가능한 길이 범위에서 합성 밀도 지도를 흐리게 처리합니다. 단위와 제거 응답은 예시일 뿐 파운드리 설계 규칙이 아닙니다.</p></section>
+<section id="defects"><h2>결함과 CMP 후 세정</h2><p>CMP에서 주의할 결함에는 긁힘, 입자, 슬러리 잔류물, 부식, 디싱, 침식과 박리가 있습니다. 연마 후에는 세정과 검사를 수행하며 합격 기준은 재료 적층과 후속 공정에 따라 달라집니다. PMIC 배선에서는 형상 편차와 배선 저항 또는 누설 같은 전기적 결과를 함께 검사해야 합니다.</p></section>
+<section class="keypoints" id="summary"><h2>핵심 정리</h2><ol><li>CMP는 화학 작용, 패드 역학과 상대 운동을 결합하며 프레스턴 관계식은 경험적 근사입니다.</li><li>패턴 밀도와 형상 치수는 국부 제거량과 잔류 표면 형상에 영향을 줍니다.</li><li>디싱은 폭이 넓은 금속 형상을 낮추고 침식은 고밀도 패턴 주변의 절연막을 낮춥니다.</li><li>더미 패턴은 밀도 균형을 높일 수 있지만 레이아웃과 전기적 제약을 따라야 합니다.</li><li>교육용 모델은 경향만 보여줍니다. 실제 공정 거동은 측정으로 보정해야 합니다.</li></ol></section>
+<section class="quiz-sec" id="quiz"><h2>이해도 확인</h2><div class="quiz">
+<div class="quiz-q"><p>금속 디싱이란 무엇인가요?</p><div class="opts"><button class="opt">절연막보다 위로 돌출한 금속</button><button class="opt" data-correct>연마 뒤 폭이 넓은 금속 형상이 주변 절연막보다 낮게 들어간 상태</button><button class="opt">웨이퍼를 관통하는 긁힘</button><button class="opt">도펀트 확산 현상</button></div><div class="quiz-exp">패드가 휘고 재료가 제거되면서 폭이 넓은 금속 형상이 함몰될 수 있습니다.</div></div>
+<div class="quiz-q"><p>레이아웃 더미 패턴이 CMP에 도움이 되는 이유는 무엇인가요?</p><div class="opts"><button class="opt">웨이퍼 지름을 바꿉니다</button><button class="opt" data-correct>국부 패턴 밀도를 균일하게 해 밀도에 따른 두께 편차를 줄일 수 있습니다</button><button class="opt">디싱을 완전히 없앱니다</button><button class="opt">모든 기생 정전용량을 없앱니다</button></div><div class="quiz-exp">밀도 균형은 도움이 될 수 있지만 더미 패턴은 레이아웃과 회로 제약을 만족해야 합니다.</div></div>
+<div class="quiz-q"><p>프레스턴 관계식은 무엇을 나타내나요?</p><div class="opts"><button class="opt">정확하고 보편적인 CMP 레시피</button><button class="opt" data-correct>제거율, 압력 및 상대 속도 사이에서 보정한 경험적 관계</button><button class="opt">이온 주입 모델</button><button class="opt">항복 전압 방정식</button></div><div class="quiz-exp">비례 계수는 재료와 공정 조건에 따라 달라집니다.</div></div>
+</div></section>
+<section class="callout" id="attribution"><h2>저작물 출처 및 이용 조건</h2><p>ProcessBook의 CMP 장을 바탕으로 작성했습니다. 원문은 <a href="https://github.com/geniuskey/processbook/blob/0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff/chapters/cmp.html">업스트림 기준 커밋 0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff의 페이지입니다</a>. CC BY 4.0에 따라 번역·수정하여 PMIC 배선과 레이아웃 밀도 문제에 맞췄습니다. 업스트림의 평탄화, 금속 디싱·침식 및 밀도 지도 시뮬레이터를 유지했습니다. 다음을 참조하세요: <a href="../../LICENSE-CC-BY-4.0">CC BY 4.0 라이선스</a>. 모델 상수는 예시값이며 특정 파운드리 기술에 해당하지 않습니다.</p></section>
+</main>
+<script>
+(function () {
+  "use strict";
+  function small(v, u) { return v + "<small>" + u + "</small>"; }
+
+  /* ---------------- step-height removal */
+  (function () {
+    var cv, rr = function () { cv && cv.redraw(); };
+    var gH = PB.range("sh-h", function (v) { return v + " nm"; }, rr);
+    var g1 = PB.range("sh-r1", function (v) { return v.toFixed(2); }, rr);
+    var g2 = PB.range("sh-r2", function (v) { return v.toFixed(2); }, rr);
+    var gC = PB.range("sh-c", function (v) { return v + " nm"; }, rr);
+    var gT = PB.range("sh-t", function (v) { return v + " s"; }, rr);
+    var R0 = 5;
+    function sim(rho, h0, hc, T) {
+      var up = 0, dn = -h0, out = [], dt = 0.5;
+      for (var t = 0; t <= T + 1e-9; t += dt) {
+        out.push([t, up, dn]);
+        var h = up - dn, ru, rd;
+        if (h >= hc) { ru = R0 / rho; rd = 0; }
+        else { var f = h / hc; ru = R0 / (rho + (1 - rho) * (1 - f)); rd = ru * (1 - f); }
+        up -= ru * dt; dn -= rd * dt; if (dn > up) dn = up;
+      }
+      return out;
+    }
+    cv = PB.canvas("#sh-cv", function (ctx, w, h) {
+      var P = PB.palette(), h0 = gH(), hc = gC(), T = gT();
+      var A = sim(g1(), h0, hc, 300), B = sim(g2(), h0, hc, 300);
+      var ymin = Math.min(A[A.length - 1][2], B[B.length - 1][2]) - 50;
+      PB.chart(ctx, null, { x: [0, 300], y: [ymin, 30], xLabel: "연마 시간 (s)", yLabel: "표면 높이 (nm; 초기 형상 상단 = 0)",
+        series: [{ data: A.map(function (p) { return [p[0], p[1]]; }), color: P.accent, width: 2.6 }, { data: A.map(function (p) { return [p[0], p[2]]; }), color: P.accent, width: 1.6, dash: [5, 4] },
+          { data: B.map(function (p) { return [p[0], p[1]]; }), color: P.accent2, width: 2.6 }, { data: B.map(function (p) { return [p[0], p[2]]; }), color: P.accent2, width: 1.6, dash: [5, 4] }],
+        vlines: [{ x: T, color: P.faint, label: T + " s" }] });
+      ctx.font = PB.font(12); ctx.textAlign = "right";
+      ctx.fillStyle = P.accent; ctx.fillText("A (ρ=" + g1().toFixed(2) + ") 실선: 형상 상단 · 점선: 함몰부", w - 24, h - 80);
+      ctx.fillStyle = P.accent2; ctx.fillText("B (ρ=" + g2().toFixed(2) + ")", w - 24, h - 62);
+      var ia = Math.round(T / 0.5), a = A[ia], b = B[ia];
+      PB.stat("sh-o-a", small(Math.round(a[1] - a[2]), "nm"));
+      PB.stat("sh-o-b", small(Math.round(b[1] - b[2]), "nm"));
+      PB.stat("sh-o-d", small(Math.round(Math.abs(a[1] - b[1])), "nm"));
+    }, { aspect: 0.62, minHeight: 300, maxHeight: 440 });
+  })();
+
+  /* ---------------- 디싱 and 침식 */
+  (function () {
+    var cv, rr = function () { cv && cv.redraw(); };
+    var gW = PB.range("ds-w", function (v) { return v < 1 ? Math.round(v * 1000) + " nm" : v + " µm"; }, rr);
+    var gR = PB.range("ds-r", function (v) { return v.toFixed(2); }, rr);
+    var gO = PB.range("ds-o", function (v) { return v + "%"; }, rr);
+    var gS = PB.range("ds-s", function (v) { return v + " : 1"; }, rr);
+    function calc(wum, rho, oe, S) {
+      var Dmax = 60 * oe / 30 * (1 + 4 / S);                      // wide-line saturated 디싱 (nm)
+      var dish = Dmax * (1 - Math.exp(-wum / 3));
+      var ero = 8 * oe / 30 * rho / (1 - rho) * (10 / S + 0.6);   // increases with density
+      return { dish: dish, ero: ero };
+    }
+    cv = PB.canvas("#ds-cv", function (ctx, w, h) {
+      var P = PB.palette(), wum = gW(), rho = gR(), oe = gO(), S = gS(), r = calc(wum, rho, oe, S);
+      // Top: cross-section of four lines
+      var top = 30, H = 200, sch = 0.5; // px/nm
+      var area = { x: 20, w: w - 40 }, pitch = wum / rho, n = 4, scx = area.w / (n * pitch);
+      var y0 = top + 30;
+      ctx.fillStyle = "#bcd8f0"; ctx.fillRect(area.x, y0 + r.ero * sch, area.w, H * sch + 40 - r.ero * sch);
+      ctx.fillStyle = "#bcd8f0"; ctx.globalAlpha = 0.45; ctx.fillRect(area.x, y0, area.w, r.ero * sch); ctx.globalAlpha = 1;
+      for (var i = 0; i < n; i++) {
+        var x0 = area.x + (i + 0.5) * pitch * scx - wum * scx / 2, ww = wum * scx;
+        ctx.fillStyle = "#c9a227"; ctx.fillRect(x0 - 2, y0 + r.ero * sch, ww + 4, H * sch + 2);
+        ctx.fillStyle = "#cc7a3a"; ctx.beginPath(); ctx.moveTo(x0, y0 + H * sch);
+        for (var k = 0; k <= 40; k++) { var u = k / 40, d = r.dish * (1 - Math.pow(2 * u - 1, 2)); ctx.lineTo(x0 + u * ww, y0 + r.ero * sch + d * sch); }
+        ctx.lineTo(x0 + ww, y0 + H * sch); ctx.closePath(); ctx.fill();
+      }
+      ctx.strokeStyle = P.accent2; ctx.setLineDash([4, 3]); ctx.beginPath(); ctx.moveTo(area.x, y0); ctx.lineTo(area.x + area.w, y0); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left"; ctx.fillText("점선: 목표 높이 · 세로 배율 ×" + sch.toFixed(1) + " px/nm · 가로 축은 선폭/피치 비율에 따름", area.x, top + 14);
+      // Bottom: 디싱 versus line width
+      var box = { x: 58, y: y0 + H * sch + 60, w: w - 76, h: h - (y0 + H * sch + 60) - 46 };
+      var d1 = [], d2 = [];
+      for (var e = -1.3; e <= 1.7; e += 0.03) { var ww2 = Math.pow(10, e), c = calc(ww2, rho, oe, S); d1.push([ww2, c.dish]); }
+      PB.chart(ctx, box, { x: [0.05, 50], y: [0, Math.max(20, calc(50, rho, oe, S).dish * 1.2)], logX: true, xLabel: "구리 배선 폭 (µm)", yLabel: "디싱 (nm)", series: [{ data: d1, color: P.accent, width: 2.6 }], points: [{ x: wum, y: r.dish, color: P.accent }] });
+      PB.stat("ds-o-d", small(r.dish.toFixed(1), "nm"));
+      PB.stat("ds-o-e", small(r.ero.toFixed(1), "nm"));
+      var loss = r.ero + r.dish * 2 / 3;
+      PB.stat("ds-o-rr", small((loss / 200 * 100).toFixed(0), "% 두께 감소 → 저항 증가" + (200 / (200 - loss) * 100 - 100).toFixed(0) + "%"));
+    }, { aspect: 0.75, minHeight: 360, maxHeight: 520 });
+  })();
+
+  /* ---------------- dummy fill */
+  (function () {
+    var N = 64, seed = 5, layout = null, cv;
+    var rr = function () { cv && cv.redraw(); };
+    var gL = PB.range("fl-l", function (v) { return v.toFixed(1) + " mm"; }, rr);
+    var gT = PB.range("fl-t", function (v) { return v.toFixed(2); }, rr);
+    var fill = document.getElementById("fl-f"); fill.addEventListener("change", rr);
+    document.getElementById("fl-re").addEventListener("click", function () { seed++; gen(); rr(); });
+    function gen() {
+      var rnd = PB.rng(seed * 101); layout = new Float32Array(N * N);
+      for (var i = 0; i < N * N; i++) layout[i] = 0.05 + 0.1 * rnd();
+      for (var b = 0; b < 9; b++) {
+        var w = 6 + Math.floor(rnd() * 22), h = 6 + Math.floor(rnd() * 22), x = Math.floor(rnd() * (N - w)), y = Math.floor(rnd() * (N - h)), d = 0.2 + 0.7 * rnd();
+        for (var yy = y; yy < y + h; yy++) for (var xx = x; xx < x + w; xx++) layout[yy * N + xx] = d;
+      }
+    }
+    gen();
+    function blur(a, sig) {
+      var R = Math.ceil(3 * sig), k = []; for (var i = -R; i <= R; i++) k.push(Math.exp(-0.5 * i * i / (sig * sig)));
+      var t = new Float32Array(N * N), o = new Float32Array(N * N);
+      for (var y = 0; y < N; y++) for (var x = 0; x < N; x++) { var s = 0, ws = 0; for (var d = -R; d <= R; d++) { var xx = x + d; if (xx < 0 || xx >= N) continue; s += a[y * N + xx] * k[d + R]; ws += k[d + R]; } t[y * N + x] = s / ws; }
+      for (var y2 = 0; y2 < N; y2++) for (var x2 = 0; x2 < N; x2++) { var s2 = 0, ws2 = 0; for (var d2 = -R; d2 <= R; d2++) { var yy = y2 + d2; if (yy < 0 || yy >= N) continue; s2 += t[yy * N + x2] * k[d2 + R]; ws2 += k[d2 + R]; } o[y2 * N + x2] = s2 / ws2; }
+      return o;
+    }
+    function color(v, lo, hi) { var t = PB.clamp((v - lo) / (hi - lo || 1), 0, 1); var a = [47, 99, 216], b = [240, 240, 240], c = [194, 85, 12]; var m = t < 0.5 ? [a, b, t * 2] : [b, c, t * 2 - 1]; return "rgb(" + m[0].map(function (q, i) { return Math.round(q + (m[1][i] - q) * m[2]); }).join(",") + ")"; }
+    cv = PB.canvas("#fl-cv", function (ctx, w, h) {
+      var P = PB.palette(), L = gL(), tgt = gT();
+      var dens = layout.slice(); if (fill.checked) for (var i = 0; i < dens.length; i++) if (dens[i] < tgt) dens[i] = tgt;
+      var eff = blur(dens, L / 20 * N / 2.5 / 1.0 * 0.4 * 2.5);  // die width 20 mm = N cells
+      var lo = Infinity, hi = -Infinity; for (var j = 0; j < eff.length; j++) { lo = Math.min(lo, eff[j]); hi = Math.max(hi, eff[j]); }
+      // thickness ∝ 초기 단차 높이 × effective density (raised-feature residual increases with density)
+      var thk = function (v) { return 500 * v; };
+      var narrow = w < 520, size = narrow ? Math.min(w - 30, (h - 70) / 2) : Math.min((w - 50) / 2, h - 50);
+      var x1 = narrow ? (w - size) / 2 : 16, y1 = 24, x2 = narrow ? x1 : x1 + size + 18, y2 = narrow ? y1 + size + 30 : y1, cs = size / N;
+      for (var y = 0; y < N; y++) for (var x = 0; x < N; x++) {
+        ctx.fillStyle = color(dens[y * N + x], 0, 1); ctx.fillRect(x1 + x * cs, y1 + y * cs, cs + 0.5, cs + 0.5);
+        ctx.fillStyle = color(eff[y * N + x], lo, hi); ctx.fillRect(x2 + x * cs, y2 + y * cs, cs + 0.5, cs + 0.5);
+      }
+      ctx.fillStyle = P.dim; ctx.font = PB.font(12); ctx.textAlign = "left";
+      ctx.fillText("레이아웃 국부 밀도 (파랑 0 → 주황 1)", x1, y1 - 8);
+      ctx.fillText("연마 후 두께 (색상 범위 = 최소~최대)", x2, y2 - 8);
+      PB.stat("fl-o-r", small(lo.toFixed(2) + " ~ " + hi.toFixed(2), ""));
+      PB.stat("fl-o-t", small(Math.round(thk(hi) - thk(lo)), "nm"));
+    }, { aspect: 0.55, minHeight: 300, maxHeight: 420 });
+  })();
+})();
+</script>
+</body>
+</html>

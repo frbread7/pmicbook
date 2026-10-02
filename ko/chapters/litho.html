@@ -1,0 +1,327 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
+     Executable code: MIT (see ../../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc":"리소그래피로 BCD 웰, 드리프트 영역, 절연, 필드 플레이트, 게이트와 콘택트 패턴을 형성하는 원리와 노광 모델을 학습합니다.","libs":["optics"],"lang":"ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>리소그래피와 포토레지스트 패터닝 · PMICBook</title>
+<meta name="description" content="리소그래피로 BCD 웰, 드리프트 영역, 절연, 필드 플레이트, 게이트와 콘택트 패턴을 형성하는 원리와 노광 모델을 학습합니다.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/litho.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/litho.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/litho.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/litho.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="리소그래피와 포토레지스트 패터닝 · PMICBook">
+<meta property="og:description" content="리소그래피로 BCD 웰, 드리프트 영역, 절연, 필드 플레이트, 게이트와 콘택트 패턴을 형성하는 원리와 노광 모델을 학습합니다.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/litho.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/litho.html#chapter","name":"리소그래피와 포토레지스트 패터닝","headline":"리소그래피와 포토레지스트 패터닝 · PMICBook","description":"리소그래피로 BCD 웰, 드리프트 영역, 절연, 필드 플레이트, 게이트와 콘택트 패턴을 형성하는 원리와 노광 모델을 학습합니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/litho.html","position":11,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"11. 리소그래피와 포토레지스트 패터닝","item":"https://frbread7.github.io/pmicbook/ko/chapters/litho.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<script src="../../js/optics.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="litho">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">제11장 · BCD 제조 공정</div>
+    <h1>리소그래피와 포토레지스트 패터닝</h1>
+    <p class="lead">리소그래피는 마스크 레이아웃을 포토레지스트의 임시 패턴으로 옮깁니다. 이 패턴은 이온 주입, 식각 또는 증착 관련 단계에서 웨이퍼의 선택 영역을 노출하거나 보호합니다. BCD 공정에서는 반복 패터닝으로 웰, 절연 개구, 드리프트 영역, 게이트, 콘택트와 금속 형상을 정의합니다. 정확한 순서와 치수는 기술에 따라 달라지며 이 장은 파운드리 레시피를 제시하지 않고 영상 형성 원리를 설명합니다.</p>
+    <ul class="objectives">
+      <li>마스크에서 레지스트를 거쳐 소자까지 이어지는 패턴 전사를 추적하고 노광과 후속 전사 단계를 구분합니다.</li>
+      <li>회절, 개구수와 조명을 바탕으로 영상 대비와 인쇄 가능한 피치를 이해합니다.</li>
+      <li>초점과 노광량 변화가 단순화된 임계 치수 모델에 미치는 영향을 살펴봅니다.</li>
+      <li>리소그래피 선택을 BCD 웰, 절연, 드리프트 경계, 필드 플레이트, 게이트 및 콘택트와 연결합니다.</li>
+    </ul>
+  </header>
+
+  <section id="pattern-transfer">
+    <h2>BCD 레이아웃에서 패턴 형성까지</h2>
+    <p>마스크(레티클)는 한 층의 기하 정보를 담습니다. 투영 광학계는 웨이퍼에 도포된 레지스트 위에 영상을 만들고, 노광과 현상 뒤 남은 레지스트가 다음 공정을 위한 임시 마스크가 됩니다. 예를 들어 개구부를 통해 웰 또는 드리프트 이온 주입 영역의 실리콘을 노출하고 보호 영역에는 인접 소자 영역으로 주입되지 않도록 합니다. 후속 마스크는 게이트와 콘택트 영역을 정의합니다. 이는 완성된 트랜지스터를 직접 인쇄하는 것이 아니라 패턴을 반복해서 전사하는 과정입니다.</p>
+    <div class="callout deep"><strong>BCD에서 패턴 위치가 중요한 이유</strong><p>고전압 소자의 동작은 채널, 드리프트 영역, 절연 및 전계를 조절하는 구조의 상대적 위치에 따라 달라집니다. 따라서 리소그래피 경계는 후속 이온 주입이나 식각 형상을 거쳐 전기적 특성에 영향을 줄 수 있습니다. 이 관계는 공정마다 다르므로 마스크 치수가 최종 접합, 게이트 또는 콘택트 치수와 항상 같지는 않습니다.</p></div>
+    <p>해상도는 여러 요구사항 중 하나입니다. 연속 마스크 간 오버레이, 단차에 따른 초점, 레지스트 거동, 식각·이온 주입 바이어스와 공정 여유가 모두 최종 구조에 영향을 줍니다. 아래 대화형 모델은 광학 영상 효과만 분리해 보여주며 특정 BCD 공정을 예측하거나 공정 특성 평가를 대신하지 않습니다.</p>
+  </section>
+
+  <section id="resist-track">
+    <h2>레지스트 공정: 도포, 노광, 현상 및 패턴 전사</h2>
+    <p>레지스트는 완성된 소자층이 아니라 임시 패터닝 재료입니다. 일반적인 공정에서는 웨이퍼를 준비하고 레지스트를 회전 도포한 뒤 소프트 베이크로 용매를 제거합니다. 마스크 영상을 정렬·노광하고 필요한 경우 노광 후 베이크를 거쳐 현상합니다. 다음 이온 주입이나 식각 전에 치수를 확인합니다. 마스크 역할을 마친 레지스트는 제거합니다. 재료와 상세 조건은 층과 플랫폼에 따라 달라집니다.</p>
+    <div class="table-wrap"><table><thead><tr><th>단계</th><th>변화 항목</th><th>BCD와의 관련성</th></tr></thead><tbody>
+      <tr><td>도포와 소프트 베이크</td><td>회전 속도, 점도, 단차와 용매 제거가 막 두께 및 균일도에 영향을 줍니다.</td><td>웰과 드리프트 이온 주입에서는 의도한 개구부 바깥을 레지스트로 덮어야 하며 후속 콘택트 마스크는 다른 단차를 마주합니다.</td></tr>
+      <tr><td>노광과 노광 후 베이크</td><td>광학 영상이 레지스트 화학 반응을 바꿉니다. 베이크는 작은 변화를 완화할 수 있지만 경계를 흐리게 만들 수도 있습니다.</td><td>경계가 이동하면 후속 이온 주입 위치나 필드 구조의 식각 위치가 달라집니다.</td></tr>
+      <tr><td>현상과 검사</td><td>현상액은 용해 가능한 영역을 제거합니다. 노광량, 초점, 화학 조성과 시간이 최종 레지스트 프로파일을 결정합니다.</td><td>웰, 게이트, 콘택트 또는 금속 패턴을 전사하기 전에 개구 폭과 오버레이를 확인합니다.</td></tr>
+      <tr><td>전사와 제거</td><td>이온 주입이나 식각에는 레지스트 또는 전사된 하드 마스크를 사용하며 이후 임시 마스크를 제거합니다.</td><td>최종 접합과 측벽 위치는 이온 주입 퍼짐, 식각 바이어스와 열 이력에도 좌우됩니다.</td></tr>
+    </tbody></table></div>
+    <figure class="diagram"><svg viewBox="0 0 760 210" role="img" aria-labelledby="resist-track-title resist-track-desc"><title id="resist-track-title">마스크, 레지스트 개구부 및 이온 주입 영역</title><desc id="resist-track-desc">단순화한 세 단계로 마스크 개구부가 레지스트에 투영되고 후속 이온 주입이 노출된 실리콘에 들어가는 모습을 보여줍니다.</desc>
+      <rect x="20" y="132" width="210" height="45" fill="#a6adba"/><rect x="20" y="105" width="210" height="27" fill="#d489aa"/><rect x="20" y="44" width="80" height="18" fill="#565f70"/><rect x="150" y="44" width="80" height="18" fill="#565f70"/><text x="20" y="199" fill="currentColor">1 마스크 영상</text>
+      <rect x="275" y="132" width="210" height="45" fill="#a6adba"/><rect x="275" y="105" width="75" height="27" fill="#d489aa"/><rect x="410" y="105" width="75" height="27" fill="#d489aa"/><text x="275" y="199" fill="currentColor">2 현상된 개구부</text>
+      <rect x="530" y="132" width="210" height="45" fill="#a6adba"/><rect x="530" y="105" width="75" height="27" fill="#d489aa"/><rect x="665" y="105" width="75" height="27" fill="#d489aa"/><ellipse cx="635" cy="148" rx="34" ry="14" fill="#7db7df"/><text x="530" y="199" fill="currentColor">3 예시 이온 주입</text>
+    </svg><figcaption>예시 패턴 전사이며 치수 레시피가 아닙니다. 이온 주입 깊이와 측방 퍼짐은 별도의 모델과 공정 데이터로 평가해야 합니다.</figcaption></figure>
+    <p>포지티브형 레지스트에서는 노광된 영역이 더 잘 용해되고 네거티브형 화학에서는 노광된 영역이 남습니다. 레지스트 대비 곡선은 노광량에 따라 남은 막 두께가 얼마나 급격히 변하는지 나타냅니다. 그러나 광학 경계가 날카롭다고 해서 현상 또는 패턴 전사 후에도 경계가 그대로 날카로운 것은 아닙니다. 정상파, 막 반사, 베이크 중 확산과 현상 속도가 측벽을 바꿀 수 있습니다. 이 장의 초점-노광 위젯에서 문턱 레지스트 규칙은 이상화된 비교일 뿐입니다. 별도의 정성적 레지스트 프로파일 단계는 <a href="lab.html">공정 실험실</a>에서, 도펀트 퍼짐은 <a href="implant.html">이온 주입 장</a>에서 살펴보세요.</p>
+  </section>
+
+  <section id="diffraction">
+    <h2>회절과 공중상</h2>
+    <p>주기적인 선·공간 마스크는 회절 격자처럼 동작합니다. 회절 차수는 공간 정보를 담고 투영 동공은 그중 일부만 통과시킵니다. 웨이퍼 영상은 통과한 빛의 간섭으로 형성되므로 마스크 패턴이 완벽하게 날카로운 복사본으로 전달되지는 않습니다. 1차 해상도 모델인 Rayleigh 관계식 \(R=k_1\lambda/\mathrm{NA}\)에서 파장과 개구수는 광학계를 나타내고 \(k_1\)은 패턴과 공정 효과를 요약합니다. 이는 스케일링 모델이지 인쇄 치수를 보장하는 식은 아닙니다.</p>
+    <div class="formula">$$R = k_1\,\frac{\lambda}{\mathrm{NA}}, \qquad \mathrm{DOF} \propto \frac{\lambda}{\mathrm{NA}^2}$$
+      <div class="where">여기서 \(R\)은 대표 하프피치, \(\lambda\)는 노광 파장, NA는 개구수입니다. 비례 상수는 영상 조건과 선택한 공정 창에 따라 달라집니다. NA가 커지면 해상도가 향상될 수 있지만 초점 여유는 줄어듭니다.</div>
+    </div>
+    <div class="sim" id="sim-pupil">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>회절 차수와 공중상</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="pu-cv" aria-label="동공과 공중상 애니메이션"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>예시 광학 장비 모델</span><select id="pu-tool"><option value="iline">i-line 365 nm · NA 0.6</option><option value="krf">KrF 248 nm · NA 0.8</option><option value="arf">ArF 193 nm · NA 0.93</option><option value="arfi" selected>ArF 액침 193 nm · NA 1.35</option><option value="euv">EUV 13.5 nm · NA 0.33</option><option value="hna">High-NA EUV · NA 0.55</option></select></label>
+          <label class="ctrl"><span>마스크 피치 <output id="pu-p-out"></output></span><input type="range" id="pu-p" min="20" max="600" step="2" value="120"></label>
+          <label class="ctrl"><span>선폭 / 피치 <output id="pu-d-out"></output></span><input type="range" id="pu-d" min="0.2" max="0.8" step="0.05" value="0.5"></label>
+          <label class="ctrl"><span>조명</span><select id="pu-src"><option value="conv">일반 조명</option><option value="annular">환형 조명</option><option value="dipole">쌍극자 조명</option><option value="quad">사중극자 조명</option></select></label>
+          <label class="ctrl"><span>외측 σ <output id="pu-s-out"></output></span><input type="range" id="pu-s" min="0.1" max="0.98" step="0.02" value="0.5"></label>
+          <label class="ctrl"><span>마스크 모델</span><select id="pu-m"><option value="binary">이진 마스크</option><option value="att">감쇠 위상 이동</option><option value="alt">교번 위상 이동</option></select></label>
+          <label class="ctrl"><span>초점 이탈 <output id="pu-f-out"></output></span><input type="range" id="pu-f" min="-1" max="1" step="0.02" value="0"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">하프피치 k₁</span><span class="v" id="pu-o-k1">—</span></div>
+        <div class="stat"><span class="k">동공을 통과한 회절 차수</span><span class="v" id="pu-o-ord">—</span></div>
+        <div class="stat"><span class="k">영상 대비</span><span class="v" id="pu-o-c">—</span></div>
+        <div class="stat"><span class="k">문턱값 0.3에서의 NILS</span><span class="v" id="pu-o-n">—</span></div>
+      </div>
+      <div class="sim-note">살펴보기: 피치를 줄이면 회절 차수가 동공 밖으로 밀려나고 영상 대비가 낮아지는 것을 확인할 수 있습니다. 조명 형상과 \(\sigma\)를 바꾸어 통과하는 회절 차수가 어떻게 달라지는지 비교하세요. 초점 이탈은 차수 사이의 상대 위상을 바꿉니다. 이 플롯은 스칼라 부분 결맞음 영상 근사와 이상화된 마스크 투과율을 사용합니다. 선택 가능한 파장/NA 조합은 도구 예시이지 공정 권고가 아닙니다.</div>
+    </div>
+    <p>영상 대비는 밝은 영역과 어두운 영역의 강도 차이를 비교합니다. <span class="term">NILS</span>(정규화 영상 로그 기울기)는 영상 경계의 기울기를 특징 폭으로 정규화한 값입니다. 경계 기울기가 크면 작은 노광량 변화에 인쇄 경계가 덜 민감할 수 있지만, 최종 임계 치수는 레지스트 화학과 후속 패턴 전사에도 영향을 받습니다.</p>
+    <div class="formula">$$\mathrm{NILS} = w\left|\frac{d\ln I}{dx}\right|_{\mathrm{edge}}$$
+      <div class="where">\(w\)는 목표 형상의 폭이고 \(I(x)\)는 공중상의 강도입니다. 이는 영상 품질 지표이며 BCD 소자 치수를 직접 예측하지 않습니다.</div>
+    </div>
+  </section>
+
+  <section id="focus">
+    <h2>초점, 노광량 및 공정 창</h2>
+    <p>웨이퍼 단차, 막 두께 편차와 장비 레벨링은 초점 여유를 소모합니다. 노광량도 사용 가능한 범위 안에서 변합니다. 초점-노광 매트릭스(FEM)는 두 변수를 함께 샘플링합니다. 초점 곡선과 공정 창 지도는 단순화된 모델에서 선택한 CD 허용 오차를 만족하는 영역을 보여줍니다. 실제 공정에서는 레지스트, 마스크, 식각, 이온 주입과 오버레이 효과를 함께 고려해야 합니다.</p>
+    <div class="sim" id="sim-fem">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>초점-노광 공정 창</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="fe-cv" aria-label="초점 곡선과 공정 창"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>예시 광학 장비 모델</span><select id="fe-tool"><option value="krf">KrF 248 nm · NA 0.8</option><option value="arf">ArF 193 nm · NA 0.93</option><option value="arfi" selected>ArF 액침 193 nm · NA 1.35</option><option value="euv">EUV 13.5 nm · NA 0.33</option><option value="hna">High-NA EUV · NA 0.55</option></select></label>
+          <label class="ctrl"><span>목표 하프피치(1:1 선/공간) <output id="fe-p-out"></output></span><input type="range" id="fe-p" min="8" max="200" step="1" value="50"></label>
+          <label class="ctrl"><span>조명</span><select id="fe-src"><option value="conv">일반 조명 σ 0.5</option><option value="annular" selected>환형 조명 0.6/0.9</option><option value="dipole">쌍극자 조명 0.8</option></select></label>
+          <label class="ctrl"><span>CD 허용 오차 <output id="fe-t-out"></output></span><input type="range" id="fe-t" min="5" max="15" step="1" value="10"></label>
+          <label class="check"><input type="checkbox" id="fe-iso"> 고립 선(피치 × 5)</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">k₁</span><span class="v" id="fe-o-k1">—</span></div>
+        <div class="stat"><span class="k">목표 CD에서의 상대 노광량</span><span class="v" id="fe-o-e">—</span></div>
+        <div class="stat"><span class="k">최적 초점에서의 노광 허용 범위</span><span class="v" id="fe-o-el">—</span></div>
+        <div class="stat"><span class="k">노광 허용 범위 5%에서의 초점 심도</span><span class="v" id="fe-o-dof">—</span></div>
+        <div class="stat"><span class="k">기준 λ/NA²</span><span class="v" id="fe-o-th">—</span></div>
+      </div>
+      <div class="sim-note">목표 하프피치가 달라질 때 계산된 초점-노광 공정 창을 비교하세요. 계산된 영상 강도에 이상화된 문턱 레지스트 규칙을 적용했습니다. 실제 레지스트 화학, 마스크 결함, 패턴 의존 식각 바이어스, 오버레이와 장비별 보정은 포함하지 않았으며 수치는 교육용 비교값입니다.</div>
+    </div>
+    <div class="callout warn"><strong>패턴 전사와 소자의 연결</strong><p>레지스트 경계는 중간 단계의 경계입니다. 이온 주입의 스트래글과 확산, 식각 프로파일, 산화 및 후속 열처리는 최종 접합이나 구조 경계를 바꿀 수 있습니다. 리소그래피 모델로 영상과 초점 경향을 이해한 뒤, 실제 구조는 관련 공정·소자 모델과 측정 데이터로 평가하세요. <a href="implant.html">이온 주입</a>, <a href="anneal.html">어닐링</a>, <a href="integration.html">공정 통합</a>, <a href="bcd.html">BCD 소자</a> 장을 참고하세요.</p></div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>리소그래피는 후속 공정에서 전사되는 임시 레지스트 패턴을 만듭니다.</li>
+      <li>회절과 투영 동공이 공중상을 결정합니다. 피치, 조명, 마스크 모델과 초점은 영상 대비를 바꿉니다.</li>
+      <li>개구수를 높이면 해상도가 좋아질 수 있지만 초점 심도는 감소합니다.</li>
+      <li>BCD 마스크는 웰, 절연, 드리프트 영역, 게이트, 콘택트 및 금속 영역을 정의하지만 최종 소자 형상은 후속 공정에도 좌우됩니다.</li>
+      <li>도포, 베이크, 노광, 현상, 전사와 제거 단계가 함께 임시 마스크의 기능을 결정합니다.</li>
+      <li>시뮬레이터는 광학 경향을 보여주며 파운드리 레시피를 포함하거나 인쇄 치수를 보장하지 않습니다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>이해도 확인</h2>
+    <div class="quiz">
+      <div class="quiz-q"><p>일반적인 이온 주입 패터닝에서 레지스트 패턴은 어떤 역할을 하나요?</p><div class="opts">
+        <button class="opt">최종 도펀트 프로파일을 직접 형성합니다</button><button class="opt" data-correct>이온 주입 중 선택 영역을 임시로 가립니다</button><button class="opt">마스크 레이아웃을 대체합니다</button><button class="opt">광학 장비의 개구수를 설정합니다</button>
+      </div><div class="quiz-exp">레지스트는 임시 마스크입니다. 이온 주입과 후속 열처리가 최종 도펀트 분포를 결정합니다.</div></div>
+      <div class="quiz-q"><p>NA를 높이면 초점 제어가 더 까다로워질 수 있는 이유는 무엇인가요?</p><div class="opts">
+        <button class="opt">노광 파장을 늘리기 때문</button><button class="opt">정렬이 필요 없어지기 때문</button><button class="opt" data-correct>초점 심도는 대략 파장을 NA의 제곱으로 나눈 값에 비례하기 때문</button><button class="opt">마스크 패턴의 회절을 막기 때문</button>
+      </div><div class="quiz-exp">단순 스케일링 모델에서 DOF는 λ/NA²에 비례하므로 파장이 고정되면 NA가 클수록 초점 범위가 줄어듭니다.</div></div>
+      <div class="quiz-q"><p>포지티브형 레지스트 공정에서 현상은 무엇을 제거하나요?</p><div class="opts">
+        <button class="opt" data-correct>노광으로 용해성이 높아진 영역</button><button class="opt">아래쪽 실리콘만</button><button class="opt">노광량과 관계없이 모든 레지스트</button><button class="opt">후속 금속 배선</button>
+      </div><div class="quiz-exp">노광은 포지티브형 레지스트의 화학 상태를 바꾸어 충분히 노광된 영역이 현상 중 녹게 합니다. 남은 임시 마스크를 패턴 전사에 사용합니다.</div></div>
+      <div class="quiz-q"><p>이 페이지의 시뮬레이터 결과를 가장 잘 설명하는 문장은 무엇인가요?</p><div class="opts">
+        <button class="opt">모든 BCD 파운드리에 적용되는 정확한 예측입니다</button><button class="opt" data-correct>단순화된 가정에서 광학 경향을 보여줍니다</button><button class="opt">양산 마스크 규칙을 지정합니다</button><button class="opt">최종 접합 치수를 보장합니다</button>
+      </div><div class="quiz-exp">이 모델은 기술별 레지스트와 공정 전사 거동을 포함하지 않으므로 결과는 교육용 근사값으로 해석해야 합니다.</div></div>
+    </div>
+  </section>
+  <aside class="callout"><strong>저작물 출처</strong><p>ProcessBook의 <a href="https://github.com/geniuskey/processbook/blob/0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff/chapters/litho.html">리소그래피</a> 및 <a href="https://github.com/geniuskey/processbook/blob/0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff/chapters/resist.html">레지스트 패터닝</a> 장을 바탕으로 했으며 CC BY 4.0 조건으로 제공합니다. 내용은 BCD 공정 맥락에 맞춰 번역·수정했고 레지스트 공정, 패턴 전사 그림과 점검 문제는 새로 작성하거나 추가했습니다. 광학 시뮬레이터 구현은 ProcessBook에서 MIT 조건으로 유지했습니다. 저장소의 라이선스와 출처 고지를 참고하세요.</p></aside>
+</main>
+<script>
+(function () {
+  "use strict";
+  function small(v, u) { return v + "<small>" + u + "</small>"; }
+  function srcOf(kind, s) {
+    if (kind === "conv") return { type: "conv", sigma: s };
+    if (kind === "annular") return { type: "annular", so: s, si: Math.max(0, s - 0.3) };
+    if (kind === "dipole") return { type: "dipole", sc: Math.max(0.15, s - 0.15), sr: 0.15 };
+    return { type: "quad", sc: Math.max(0.15, s - 0.15), sr: 0.15 };
+  }
+
+  /* ---------------- Pupil and aerial image */
+  (function () {
+    var cv, rr = function () { cv && cv.redraw(); };
+    var tool = document.getElementById("pu-tool"), srcSel = document.getElementById("pu-src"), mSel = document.getElementById("pu-m");
+    var gP = PB.range("pu-p", function (v) { return v + " nm"; }, rr);
+    var gD = PB.range("pu-d", function (v) { return v.toFixed(2); }, rr);
+    var gS = PB.range("pu-s", function (v) { return v.toFixed(2); }, rr);
+    var gF = PB.range("pu-f", function (v) { return (v >= 0 ? "+" : "") + v.toFixed(2) + " × DOF"; }, rr);
+    function fitPitch() {
+      var t = OPT.TOOLS[tool.value];
+      var lo = Math.max(10, Math.round(0.42 * t.wl / t.NA)), hi = Math.round(4 * t.wl / t.NA);
+      gP.el.min = lo; gP.el.max = hi; gP.el.step = hi > 300 ? 2 : 1;
+      gP.set(Math.round(1.0 * t.wl / t.NA));
+    }
+    tool.addEventListener("change", fitPitch); srcSel.addEventListener("change", rr); mSel.addEventListener("change", rr);
+    fitPitch();
+    cv = PB.canvas("#pu-cv", function (ctx, w, h) {
+      var P = PB.palette(), t = OPT.TOOLS[tool.value], p = gP(), d = gD(), s = gS(), mk = mSel.value;
+      var src = srcOf(srcSel.value, s), pts = OPT.source(src);
+      var dof = t.wl / (t.NA * t.NA), z = gF() * dof;
+      var o = { pitch: p, cd: p * d, type: mk, wl: t.wl, NA: t.NA, n: t.n, focus: z, N: 160 };
+      var img = OPT.image(o, pts);
+      // Pupil diagram
+      var narrow = w < 520;
+      var R = narrow ? Math.min(w * 0.3, 90) : Math.min(h * 0.36, w * 0.18);
+      var cx = narrow ? w / 2 : R + 24, cy = narrow ? R + 26 : h / 2 - 6;
+      ctx.beginPath(); ctx.arc(cx, cy, R, 0, 6.283); ctx.fillStyle = P.surface; ctx.fill(); ctx.strokeStyle = P.axis; ctx.lineWidth = 1.5; ctx.stroke();
+      // Source points (zero-order position)
+      ctx.fillStyle = P.accent; ctx.globalAlpha = 0.35;
+      pts.forEach(function (q) { ctx.fillRect(cx + q.sx * R - 1.5, cy - q.sy * R - 1.5, 3, 3); });
+      ctx.globalAlpha = 1;
+      // Diffraction orders: source shape shifted by order (sampled at source points)
+      var Pd = mk === "alt" ? 2 * p : p, fc = t.NA / t.wl, step = 1 / (Pd * fc);
+      var shown = [];
+      for (var m = -6; m <= 6; m++) {
+        var ox = m * step; if (Math.abs(ox) > 2.2) continue;
+        // Relative amplitude from the mask spectrum
+        var mt = OPT.maskT(o, 256), re = 0, im = 0; for (var i = 0; i < 256; i++) { var a = -2 * Math.PI * m * (i + 0.5) / 256; re += mt.t[i] * Math.cos(a); im += mt.t[i] * Math.sin(a); }
+        var amp = Math.hypot(re, im) / 256; if (amp < 0.02) continue;
+        var inside = pts.filter(function (q) { return Math.hypot(q.sx + ox, q.sy) <= 1; }).length / pts.length;
+        shown.push([m, inside]);
+        ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, R, 0, 6.283); ctx.clip();
+        ctx.fillStyle = m === 0 ? P.accent : P.accent2; ctx.globalAlpha = 0.25 + 0.5 * Math.min(1, amp * 2);
+        pts.forEach(function (q) { ctx.fillRect(cx + (q.sx + ox) * R - 1.5, cy - q.sy * R - 1.5, 3, 3); });
+        ctx.restore();
+        ctx.globalAlpha = 1; ctx.fillStyle = inside > 0 ? P.text : P.faint; ctx.font = PB.font(11, true); ctx.textAlign = "center";
+        var lx = cx + ox * R; if (Math.abs(ox) <= 1.25) ctx.fillText(m === 0 ? "0" : (m > 0 ? "+" : "") + m, lx, cy + R + 14);
+      }
+      ctx.fillStyle = P.dim; ctx.font = PB.font(12); ctx.textAlign = "center";
+      ctx.fillText("동공(NA = " + t.NA + ")", cx, cy - R - 8);
+      // Aerial image
+      var bx = narrow ? 50 : cx + R + 64, by = narrow ? cy + R + 40 : 20, bw = w - bx - 16, bh = narrow ? h - by - 44 : h - 64;
+      var data = [], N = img.I.length;
+      var periods = 2;
+      for (var k = 0; k <= periods * N; k++) data.push([k / N * img.P - img.P, img.I[k % N]]);
+      var ymax = Math.max(1.05, Math.max.apply(null, Array.from(img.I)) * 1.1);
+      var c = PB.chart(ctx, { x: bx, y: by, w: bw, h: bh }, { x: [-img.P, img.P], y: [0, ymax], xLabel: "위치(nm)", yLabel: "",
+        series: [{ data: data, color: P.accent, width: 2.6, fill: PB.color("accent-soft") }], hlines: [{ y: 0.3, color: P.faint, label: "문턱값 0.3" }] });
+      // Mask pattern
+      ctx.save();
+      for (var q = -2; q <= 2; q++) {
+        var x0 = q * p - o.cd / 2, x1 = q * p + o.cd / 2;
+        var a0 = Math.max(-img.P, x0), a1 = Math.min(img.P, x1);
+        if (a1 > a0) { ctx.fillStyle = mk === "att" ? "rgba(90,90,110,.45)" : "rgba(60,60,70,.75)"; ctx.fillRect(c.X(a0), by - 10, c.X(a1) - c.X(a0), 7); }
+      }
+      if (mk === "alt") { ctx.fillStyle = P.accent2; ctx.font = PB.font(10, true); ctx.textAlign = "center"; for (var q2 = -2; q2 <= 1; q2++) { var xc = (q2 + 0.5) * p; if (xc > -img.P && xc < img.P) ctx.fillText(Math.abs(q2) % 2 ? "180°" : "0°", c.X(xc), by - 13); } }
+      ctx.restore();
+      ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left"; ctx.fillText("공중상 I(x) · 위쪽은 마스크(1× 축척)", bx + 6, by + 12);
+      var cc = OPT.contrast(img);
+      PB.stat("pu-o-k1", ((p / 2) * t.NA / t.wl).toFixed(3));
+      PB.stat("pu-o-ord", shown.filter(function (s) { return s[1] > 0; }).map(function (s) { return s[0]; }).join(", ") || "—");
+      PB.stat("pu-o-c", cc.c < 0.005 ? "<span class='bad-t'>0(영상 대비 없음)</span>" : cc.c.toFixed(2));
+      var nl = OPT.nils(img, 0.3, p * d);
+      PB.stat("pu-o-n", nl ? nl.toFixed(2) : "—");
+    }, { aspect: 0.5, minHeight: 330, maxHeight: 440 });
+  })();
+
+  /* ---------------- FEM / Bossung-style focus curves */
+  (function () {
+    var cv, rr = PB.debounce(function () { cv && cv.redraw(); }, 60);
+    var tool = document.getElementById("fe-tool"), srcSel = document.getElementById("fe-src"), iso = document.getElementById("fe-iso");
+    var gP = PB.range("fe-p", function (v) { return v + " nm"; }, rr);
+    var gT = PB.range("fe-t", function (v) { return "±" + v + "%"; }, rr);
+    function fit() { var t = OPT.TOOLS[tool.value]; var lo = Math.max(6, Math.round(0.26 * t.wl / t.NA)), hi = Math.round(1.2 * t.wl / t.NA); gP.el.min = lo; gP.el.max = hi; gP.set(Math.round(0.36 * t.wl / t.NA)); }
+    tool.addEventListener("change", function () { fit(); rr(); }); srcSel.addEventListener("change", rr); iso.addEventListener("change", rr);
+    fit();
+    var SRC = { conv: { type: "conv", sigma: 0.5 }, annular: { type: "annular", so: 0.9, si: 0.6 }, dipole: { type: "dipole", sc: 0.8, sr: 0.15 } };
+    cv = PB.canvas("#fe-cv", function (ctx, w, h) {
+      var P = PB.palette(), t = OPT.TOOLS[tool.value], hp = gP(), tgt = hp, tol = gT() / 100;
+      var pitch = iso.checked ? hp * 10 : hp * 2;
+      var pts = OPT.source(Object.assign({ step: 0.1 }, SRC[srcSel.value]));
+      var dof0 = t.wl / (t.NA * t.NA), F = 1.6 * dof0;
+      var NF = 33, focuses = [];
+      for (var i = 0; i < NF; i++) focuses.push(-F + 2 * F * i / (NF - 1));
+      var imgs = focuses.map(function (z) { return OPT.image({ pitch: pitch, cd: hp, type: "binary", wl: t.wl, NA: t.NA, n: t.n, focus: z, N: 128 }, pts); });
+      // Threshold at best focus (0) that gives the target CD; this sets the dose reference.
+      var i0 = (NF - 1) / 2, lo = 0.02, hi = 0.98;
+      var cd0 = function (th) { return OPT.cd(imgs[i0], th); };
+      if (cd0(hi) < tgt || cd0(lo) > tgt) { lo = 0.02; hi = 0.98; }
+      for (var k = 0; k < 50; k++) { var m = (lo + hi) / 2; if (cd0(m) > tgt) hi = m; else lo = m; }
+      var th0 = (lo + hi) / 2, ok0 = Math.abs(cd0(th0) - tgt) < tgt * 0.05;
+      var doses = [0.85, 0.9, 0.95, 1, 1.05, 1.1, 1.15];
+      var narrow = w < 560;
+      var b1 = narrow ? { x: 54, y: 14, w: w - 70, h: h / 2 - 50 } : { x: 54, y: 14, w: w / 2 - 80, h: h - 60 };
+      var b2 = narrow ? { x: 54, y: h / 2 + 18, w: w - 70, h: h / 2 - 62 } : { x: w / 2 + 26, y: 14, w: w / 2 - 44, h: h - 60 };
+      var series = doses.map(function (d, j) {
+        return { data: focuses.map(function (z, i) { return [z, OPT.cd(imgs[i], th0 / d)]; }), color: d === 1 ? P.accent : j < 3 ? P.accent2 : P.warn, width: d === 1 ? 2.8 : 1.4 };
+      });
+      PB.chart(ctx, b1, { x: [-F, F], y: [0, tgt * 2], xLabel: "초점(nm)", yLabel: "선 CD(nm)", series: series,
+        bands: [], hlines: [{ y: tgt * (1 + tol), color: P.ok }, { y: tgt * (1 - tol), color: P.ok }, { y: tgt, color: P.faint, label: "목표 " + tgt }] });
+      ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left";
+      ctx.fillText("노광량 −15 … +15%(파랑 = 낮음, 주황 = 높음)", b1.x + 6, b1.y + 12);
+      // Process-window map
+      var ND = 41, dmin = 0.8, dmax = 1.2, grid = [];
+      for (var a = 0; a < NF; a++) { grid.push([]); for (var b = 0; b < ND; b++) { var dd = dmin + (dmax - dmin) * b / (ND - 1); var c = OPT.cd(imgs[a], th0 / dd); grid[a].push(Math.abs(c - tgt) <= tgt * tol); } }
+      var cw = b2.w / NF, chh = b2.h / ND;
+      ctx.fillStyle = P.surface; ctx.fillRect(b2.x, b2.y, b2.w, b2.h);
+      for (var a2 = 0; a2 < NF; a2++) for (var b3 = 0; b3 < ND; b3++) if (grid[a2][b3]) { ctx.fillStyle = PB.color("accent-soft"); ctx.fillRect(b2.x + a2 * cw, b2.y + b2.h - (b3 + 1) * chh, cw + 0.5, chh + 0.5); }
+      // EL at best focus
+      var run = grid[i0].reduce(function (acc, v) { if (v) acc.c++; else acc.c = 0; acc.m = Math.max(acc.m, acc.c); return acc; }, { c: 0, m: 0 }).m;
+      var EL = run > 0 ? (run - 1) * (dmax - dmin) / (ND - 1) * 100 : 0;
+      // 노광 허용 범위 5%에서의 초점 심도: longest focus interval inside a fixed 5% dose-width rectangle.
+      var need = Math.ceil(0.05 / ((dmax - dmin) / (ND - 1))), bestLen = 0, bestRect = null;
+      for (var b4 = 0; b4 + need < ND; b4++) {
+        var cur = 0, st = 0;
+        for (var a3 = 0; a3 < NF; a3++) {
+          var all = true; for (var q = b4; q <= b4 + need; q++) if (!grid[a3][q]) { all = false; break; }
+          if (all) { if (!cur) st = a3; cur++; if (cur > bestLen) { bestLen = cur; bestRect = [st, a3, b4, b4 + need]; } } else cur = 0;
+        }
+      }
+      var DOF = bestLen > 1 ? (bestLen - 1) * (2 * F / (NF - 1)) : 0;
+      ctx.strokeStyle = P.axis; ctx.strokeRect(b2.x + 0.5, b2.y + 0.5, b2.w, b2.h);
+      if (bestRect) { ctx.strokeStyle = P.accent; ctx.lineWidth = 2; ctx.strokeRect(b2.x + bestRect[0] * cw, b2.y + b2.h - (bestRect[3] + 1) * chh, (bestRect[1] - bestRect[0] + 1) * cw, (bestRect[3] - bestRect[2] + 1) * chh); ctx.lineWidth = 1; }
+      ctx.fillStyle = P.dim; ctx.font = PB.font(11, true); ctx.textAlign = "center"; ctx.textBaseline = "top";
+      [-F, -F / 2, 0, F / 2, F].forEach(function (z) { ctx.fillText(Math.round(z), b2.x + (z + F) / (2 * F) * b2.w, b2.y + b2.h + 6); });
+      ctx.textAlign = "right"; ctx.textBaseline = "middle";
+      [0.8, 0.9, 1, 1.1, 1.2].forEach(function (d) { ctx.fillText(Math.round((d - 1) * 100) + "%", b2.x - 6, b2.y + b2.h - (d - dmin) / (dmax - dmin) * b2.h); });
+      ctx.font = PB.font(12); ctx.textAlign = "center"; ctx.textBaseline = "bottom"; ctx.fillStyle = P.dim;
+      ctx.fillText("초점(nm) · 음영 = CD ±" + gT() + "% 허용 범위 · 사각형 = 노광 허용 범위 5% 창", b2.x + b2.w / 2, b2.y + b2.h + 40);
+      PB.stat("fe-o-k1", (hp * t.NA / t.wl).toFixed(3));
+      PB.stat("fe-o-e", ok0 ? small("1 / " + th0.toFixed(2), "(기준 문턱값)") : "<span class='bad-t'>목표 CD를 계산할 수 없음</span>");
+      PB.stat("fe-o-el", small(EL.toFixed(1), "%"));
+      PB.stat("fe-o-dof", DOF > 0 ? small(Math.round(DOF), "nm") : "<span class='bad-t'>0</span>");
+      PB.stat("fe-o-th", small(Math.round(dof0), "nm"));
+    }, { aspect: 0.55, minHeight: 360, maxHeight: 460 });
+  })();
+})();
+</script>
+</body>
+</html>

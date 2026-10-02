@@ -1,6 +1,6 @@
 # Upstream origin and attribution
 
-**Project status:** PMICBook transformation is in progress. The table records implemented English-route reuse and will be audited again after Korean translation and final validation.
+**Project status:** The English and Korean PMICBook v1 chapter set is implemented and validated. The tables below describe the implemented English-route reuse and paired Korean translations; validation evidence is recorded in [CURRENT_MILESTONE.md](CURRENT_MILESTONE.md).
 
 ## Origin and baseline
 
@@ -52,14 +52,20 @@ Every source filename below refers to the immutable [ProcessBook baseline tree](
 
 No upstream chapter is planned to remain unchanged as a PMICBook product chapter. For code, retain the upstream MIT notices in the corresponding source files when reuse is made. For adapted or translated educational content, record the precise source and modifications at the relevant chapter/asset and keep the summary here current.
 
+### Other retained or newly authored educational assets
+
+- [`favicon.svg`](../favicon.svg) is retained unchanged from ProcessBook and remains CC BY 4.0 educational artwork. Source: [ProcessBook favicon at the immutable baseline](https://github.com/geniuskey/processbook/blob/0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff/favicon.svg). Changes: none.
+- `og.svg` and the generated `og.png` are PMICBook-authored title-card artwork, not ProcessBook figures. They are included with PMICBook's CC BY 4.0 educational contributions.
+- The PMIC power-tree and chapter diagrams authored for this fork are PMICBook contributions under CC BY 4.0. Adapted ProcessBook figures or simulator-generated educational illustrations remain identified in their chapter notes.
+
 ## New PMICBook chapter content
 
 The following lesson content was newly authored for PMICBook and is not ProcessBook educational content. The page shell and shared styles remain derived from ProcessBook under MIT. The new lesson material follows this repository's CC BY 4.0 content license, and public technical sources are cited in the chapters and indexed in [REFERENCES.md](REFERENCES.md).
 
 | PMICBook chapter | Content status |
 |---|---|
-| `fundamentals.html`, `references-ldo.html`, `switching.html` | New requirements, reference/LDO, and switching-converter lessons. |
-| `devices.html`, `bcd.html`, `hv-devices.html`, `passives.html` | New PMIC device, BCD, HV/LDMOS, and passive-device lessons. |
-| `layout.html`, `reliability.html`, `failure-analysis.html` | New layout/parasitics, reliability, and failure-analysis introductions. |
+| `fundamentals.html`, `references-ldo.html`, `switching.html` | New requirements, reference/LDO, and switching-converter lessons, with paired Korean translations. |
+| `devices.html`, `bcd.html`, `hv-devices.html`, `passives.html` | New PMIC device, BCD, HV/LDMOS, and passive-device lessons, with paired Korean translations. |
+| `layout.html`, `reliability.html`, `failure-analysis.html` | New layout/parasitics, reliability, and failure-analysis introductions, with paired Korean translations. |
 
-The English pages above are implemented but await final browser validation. Korean route parity and lesson translation are separate v1 work; a language metadata change alone does not count as translation or content adaptation.
+All 25 subject chapters have matching English and Korean routes with localized lesson text, controls, metadata, and knowledge checks. The Korean pages are translations or adaptations with language-specific edits, not metadata-only copies. Final browser validation of interactive behavior is tracked in [CURRENT_MILESTONE.md](CURRENT_MILESTONE.md).

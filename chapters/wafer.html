@@ -2,27 +2,30 @@
 <!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
      Executable code: MIT (see ../LICENSE-MIT).
      Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
-<html lang="ko">
+<html lang="en">
 <head>
-<!--head:start {"desc": "모래에서 단결정 실리콘 웨이퍼까지. 초크랄스키 성장과 편석 계수, 비저항과 도핑, 결정 방향과 노치, 웨이퍼 가공, RCA 세정과 오염 관리를 시뮬레이터로 익힌다."}-->
+<!--head:start {"desc": "Starting substrates, crystal growth, epitaxy, wafer preparation and contamination control for PMIC and BCD devices.", "libs": [], "lang": "en"}-->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>실리콘 웨이퍼와 세정 · ProcessBook</title>
-<meta name="description" content="모래에서 단결정 실리콘 웨이퍼까지. 초크랄스키 성장과 편석 계수, 비저항과 도핑, 결정 방향과 노치, 웨이퍼 가공, RCA 세정과 오염 관리를 시뮬레이터로 익힌다.">
-<link rel="canonical" href="https://processbook.euiyun.com/chapters/wafer.html">
+<title>Starting Substrate, Wells, and Isolation · PMICBook</title>
+<meta name="description" content="Starting substrates, crystal growth, epitaxy, wafer preparation and contamination control for PMIC and BCD devices.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/chapters/wafer.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/wafer.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/wafer.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/wafer.html">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <meta name="theme-color" content="#c2550c">
 <meta property="og:type" content="article">
-<meta property="og:site_name" content="ProcessBook">
-<meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="실리콘 웨이퍼와 세정 · ProcessBook">
-<meta property="og:description" content="모래에서 단결정 실리콘 웨이퍼까지. 초크랄스키 성장과 편석 계수, 비저항과 도핑, 결정 방향과 노치, 웨이퍼 가공, RCA 세정과 오염 관리를 시뮬레이터로 익힌다.">
-<meta property="og:url" content="https://processbook.euiyun.com/chapters/wafer.html">
-<meta property="og:image" content="https://processbook.euiyun.com/og.png">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Starting Substrate, Wells, and Isolation · PMICBook">
+<meta property="og:description" content="Starting substrates, crystal growth, epitaxy, wafer preparation and contamination control for PMIC and BCD devices.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/chapters/wafer.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://processbook.euiyun.com/chapters/wafer.html#chapter","name":"실리콘 웨이퍼와 세정","headline":"실리콘 웨이퍼와 세정 · ProcessBook","description":"모래에서 단결정 실리콘 웨이퍼까지. 초크랄스키 성장과 편석 계수, 비저항과 도핑, 결정 방향과 노치, 웨이퍼 가공, RCA 세정과 오염 관리를 시뮬레이터로 익힌다.","url":"https://processbook.euiyun.com/chapters/wafer.html","position":2,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공대 학부","image":"https://processbook.euiyun.com/og.png","dateModified":"2026-10-01","isPartOf":{"@type":"Book","@id":"https://processbook.euiyun.com/#book","name":"ProcessBook · 반도체 제조 공정 교과서","url":"https://processbook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ProcessBook","item":"https://processbook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"2. 실리콘 웨이퍼와 세정","item":"https://processbook.euiyun.com/chapters/wafer.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/wafer.html#chapter","name":"Starting Substrate, Wells, and Isolation","headline":"Starting Substrate, Wells, and Isolation · PMICBook","description":"Starting substrates, crystal growth, epitaxy, wafer preparation and contamination control for PMIC and BCD devices.","url":"https://frbread7.github.io/pmicbook/chapters/wafer.html","position":9,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"9. Starting Substrate, Wells, and Isolation","item":"https://frbread7.github.io/pmicbook/chapters/wafer.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -33,112 +36,112 @@
 <body data-chapter="wafer">
 <main class="chapter">
   <header class="chapter-hero">
-    <div class="eyebrow">Chapter 02</div>
-    <h1>실리콘 웨이퍼와 세정</h1>
-    <p class="lead">모든 칩은 거의 완벽한 결정 한 덩어리에서 출발한다. 순도 99.999999999%(일레븐 나인), 원자 10¹¹개 중 불순물이 하나 남짓인 실리콘을 녹여 지름 300 mm, 길이 2 m에 이르는 단결정 기둥으로 키우고, 0.775 mm 두께로 썰어 원자 몇 개 높이까지 평평하게 간다. 그 위에서 수백 번의 공정이 이어지는 동안 웨이퍼는 백 번 넘게 씻긴다. 이 장은 기판 그 자체와 그것을 깨끗하게 지키는 기술을 다룬다.</p>
+    <div class="eyebrow">Chapter 09 · BCD process foundation</div>
+    <h1>Substrate, Epitaxy &amp; Wafer Preparation</h1>
+    <p class="lead">PMIC process integration starts with the substrate: crystal orientation, resistivity, defects, isolation and contamination all constrain the devices that can be built. This chapter follows silicon from crystal growth through wafer preparation, then connects those choices to the wells, drift regions and isolated devices used in BCD technologies. Numerical examples are representative educational approximations.</p>
     <ul class="objectives">
-      <li>초크랄스키(CZ) 성장 과정과 편석 계수가 잉곳의 도핑 분포를 어떻게 정하는지 계산한다.</li>
-      <li>비저항과 도핑 농도의 관계(이동도 모델)를 이해하고 웨이퍼 사양을 읽는다.</li>
-      <li>결정 방향 (100)·(111)·(110)과 노치·플랫의 의미, 웨이퍼 크기의 변천을 안다.</li>
-      <li>슬라이싱부터 연마까지의 웨이퍼 가공과 평탄도 지표를 설명한다.</li>
-      <li>RCA 세정(SC1·SC2·HF)이 각각 무엇을 제거하는지, 금속 오염이 왜 치명적인지 안다.</li>
+      <li>Explain how crystal growth and segregation affect substrate dopant uniformity.</li>
+      <li>Relate resistivity to doping and mobility, and interpret substrate and epitaxial-layer specifications.</li>
+      <li>Describe how crystal orientation and wafer preparation affect device and process integration.</li>
+      <li>Connect epitaxy, wafer flatness and defects to BCD wells and high-voltage device structures.</li>
+      <li>Distinguish common contamination classes and the purpose of cleaning steps.</li>
     </ul>
   </header>
 
   <section id="si">
-    <h2>모래에서 일레븐 나인까지</h2>
-    <p>실리콘은 지각에서 산소 다음으로 흔한 원소다. 원료는 규사(SiO₂)이고, 탄소와 함께 전기로에서 2000 °C 가까이 가열해 환원하면 순도 98~99%의 <span class="term">금속급 실리콘</span><span class="en">(MG-Si)</span>이 된다. 이것을 염화수소와 반응시켜 액체인 트리클로로실레인(SiHCl₃)으로 바꾸고, 증류로 불순물을 걸러 낸 뒤 수소로 다시 환원해 가는 실리콘 막대 위에 석출시킨다(지멘스 공정). 이렇게 얻은 <span class="term">다결정 실리콘</span><span class="en">(Polysilicon, EG-Si)</span>은 불순물이 ppb(10⁻⁹) 아래, 반도체용은 11N 수준이다.</p>
+    <h2>Silicon Feedstock and Single-Crystal Substrates</h2>
+    <p>Silicon for semiconductor wafers is refined from silica. Metallurgical-grade silicon is converted to trichlorosilane, purified by distillation, then decomposed to deposit high-purity polysilicon rods (the Siemens process). This electronic-grade polysilicon is the feedstock for growing single-crystal ingots.</p>
     <div class="formula">$$\mathrm{SiO_2 + 2C \rightarrow Si + 2CO}, \qquad \mathrm{Si + 3HCl \rightarrow SiHCl_3 + H_2}, \qquad \mathrm{SiHCl_3 + H_2 \rightarrow Si + 3HCl}$$</div>
-    <p>하지만 다결정은 작은 결정 알갱이의 집합이라 경계마다 결함이 있다. 트랜지스터를 만들려면 원자가 처음부터 끝까지 한 방향으로 정렬된 <span class="term">단결정</span><span class="en">(Single crystal)</span>이 필요하다.</p>
+    <p>However, polycrystals are a collection of small crystal grains, so there are defects at each boundary. PMIC devices also require a <span class="term">single crystal</span><span class="en">(Single crystal)</span> whose atoms are aligned in one direction from start to finish.</p>
   </section>
 
   <section id="cz">
-    <h2>초크랄스키 성장과 편석</h2>
-    <p>오늘날 웨이퍼의 대부분은 <span class="term">초크랄스키법</span><span class="en">(Czochralski, CZ)</span>으로 만든다. 석영 도가니에 다결정 실리콘과 도펀트(붕소나 인)를 넣고 1414 °C 이상으로 녹인 뒤, 원하는 결정 방향으로 깎은 씨앗 결정<span class="en">(Seed)</span>을 표면에 담갔다가 천천히 회전시키며 끌어 올린다. 녹은 실리콘이 씨앗의 원자 배열을 따라 굳으면서 단결정 기둥, 즉 <span class="term">잉곳</span><span class="en">(Ingot)</span>이 자란다. 처음에 지름을 수 mm로 확 줄이는 “넥킹”은 씨앗에서 넘어온 전위를 빼내는 요령이다.</p>
+    <h2>Czochralski Growth and Dopant Segregation</h2>
+    <p>Most silicon wafers are made by the <span class="term">Czochralski method</span> (CZ). High-purity polysilicon and a controlled dopant are melted in a quartz crucible. A seed crystal with the chosen orientation is dipped into the melt, then slowly rotated and pulled upward. Silicon solidifies in alignment with the seed to form a single-crystal <span class="term">ingot</span>. A narrow neck at the start helps reduce dislocations propagated from the seed.</p>
     <figure class="diagram">
-      <svg viewBox="0 0 780 320" role="img" aria-label="초크랄스키 성장 장치와 잉곳의 도핑 분포">
+      <svg viewBox="0 0 780 320" role="img" aria-label="Doping distribution of Czochralski growth device and ingot">
         <!-- puller -->
         <rect x="60" y="210" width="220" height="90" rx="6" class="f-surface"/>
         <path d="M80 220 Q80 290 170 290 Q260 290 260 220 Z" fill="#e9e3d0" stroke="var(--border)"/>
         <path d="M86 232 Q90 284 170 284 Q250 284 254 232 Z" fill="#f2a65a" opacity=".85"/>
-        <text x="170" y="268" text-anchor="middle" class="lbl-dim">용융 실리콘 1414 °C+</text>
+        <text x="170" y="268" text-anchor="middle" class="lbl-dim">Molten Silicon 1414 °C+</text>
         <rect x="140" y="80" width="60" height="150" rx="4" class="m-si"/>
         <path d="M140 222 Q170 238 200 222" fill="#f2a65a"/>
         <rect x="164" y="40" width="12" height="40" class="m-si"/>
         <rect x="167" y="14" width="6" height="26" class="s-line" fill="var(--text-dim)"/>
         <path d="M186 22 a14 6 0 1 1 -1 0" class="s-acc"/>
-        <text x="215" y="30" class="lbl-dim">회전하며 인상 (~1 mm/분)</text>
-        <text x="215" y="66" class="lbl-dim">넥킹 (전위 제거)</text>
-        <text x="215" y="140" class="lbl">단결정 잉곳</text>
-        <text x="40" y="316" class="t-mono">석영 도가니 · 흑연 히터 · 아르곤 분위기</text>
+        <text x="215" y="30" class="lbl-dim">Rotational pull rate (~1 mm/min)</text>
+        <text x="215" y="66" class="lbl-dim">Necking (dislocation removal)</text>
+        <text x="215" y="140" class="lbl">Single crystal ingot</text>
+        <text x="40" y="316" class="t-mono">Quartz crucible · Graphite heater · Argon atmosphere</text>
         <!-- segregation sketch -->
         <g transform="translate(360,40)">
           <path d="M0 230 H380" class="s-axis"/><path d="M0 230 V0" class="s-axis"/>
-          <text x="190" y="262" text-anchor="middle" class="lbl-dim">굳은 비율 f (씨앗 쪽 0 → 꼬리 쪽 1)</text>
-          <text x="-14" y="115" class="lbl-dim" transform="rotate(-90 -14 115)" text-anchor="middle">도핑 C_s / C₀</text>
+          <text x="190" y="262" text-anchor="middle" class="lbl-dim">Solidified fraction f (seed end 0 → tail end 1)</text>
+          <text x="-14" y="115" class="lbl-dim" transform="rotate(-90 -14 115)" text-anchor="middle">Doping C_s / C₀</text>
           <path d="M0 160 C120 155 230 140 300 110 S360 40 375 5" class="s-acc"/>
           <path d="M0 50 C150 54 280 64 375 80" class="s-acc2"/>
-          <text x="240" y="100" class="lbl-acc">인 P (k₀≈0.35)</text>
-          <text x="240" y="54" class="lbl-acc2">붕소 B (k₀≈0.8)</text>
+          <text x="240" y="100" class="lbl-acc">In P (k₀≈0.35)</text>
+          <text x="240" y="54" class="lbl-acc2">Boron B (k₀≈0.8)</text>
         </g>
       </svg>
-      <figcaption><b>그림 2-1.</b> 왼쪽: CZ 성장. 녹은 실리콘에 담근 씨앗 결정을 돌리며 끌어 올린다. 오른쪽: 편석 때문에 잉곳의 꼬리 쪽으로 갈수록 도핑 농도가 올라간다. 편석 계수가 1에서 멀수록(인, 비소) 이 경향이 심하다.</figcaption>
+      <figcaption><b>Figure 9-1.</b> Left: CZ growth. The seed crystal dipped in the molten silicon is rotated and pulled up. Right: Due to segregation, the dopant concentration increases toward the tail of the ingot. The further the segregation coefficient is from 1 (phosphorus, arsenic), the more severe this tendency is.</figcaption>
     </figure>
-    <p>액체가 고체로 굳을 때 불순물은 액체에 남으려는 경향이 있다. 경계면에서 고체 쪽 농도와 액체 쪽 농도의 비를 <span class="term">평형 편석 계수</span><span class="en">(Segregation coefficient)</span> \(k_0 = C_s/C_l\)라고 한다. \(k_0<1\)인 불순물은 결정이 자랄수록 남은 용융액에 쌓이므로, 잉곳은 꼬리로 갈수록 도핑이 진해진다. 용융액이 잘 섞인다고 가정하면 <span class="term">샤일 식</span><span class="en">(Scheil equation)</span>이 성립한다.</p>
+    <p>As liquid silicon solidifies, some dopants preferentially remain in the melt. The equilibrium segregation coefficient is the ratio of solid-side to liquid-side concentration at the interface, \(k_0=C_s/C_l\). For \(k_0<1\), dopant accumulates in the remaining melt, so concentration can rise toward the ingot tail. Under the well-mixed-melt approximation, the Scheil equation describes this trend.</p>
     <div class="formula">$$C_s(f) = k_0\,C_0\,(1-f)^{k_0-1}$$
-      <div class="where">\(C_0\)는 처음 용융액의 도펀트 농도, \(f\)는 이미 굳은 비율이다. 대표 값: B 0.8, P 0.35, As 0.3, Sb 0.023, O 약 0.25~1, C 0.07, Fe 8×10⁻⁶. 금속 불순물은 \(k_0\)가 극히 작아 거의 모두 용융액에 남는다. 이 성질을 이용해 정제하는 것이 존 정제(FZ)다.</div>
+      <div class="where">\(C_0\) is the initial dopant concentration in the melt and \(f\) is the fraction of the melt that has solidified. Representative equilibrium segregation coefficients include B ≈ 0.8, P ≈ 0.35, As ≈ 0.3 and Sb ≈ 0.023; values depend on conditions. Some metallic impurities have very small coefficients and preferentially remain in the melt. Float-zone (FZ) growth uses a moving molten zone and does not use a quartz crucible.</div>
     </div>
     <div class="sim" id="sim-seg">
-      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>잉곳 길이에 따른 도핑과 비저항</h3></div>
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>Doping and resistivity along ingot length</h3></div>
       <div class="sim-body side">
         <div class="sim-view"><canvas id="sg-cv"></canvas></div>
         <div class="sim-controls">
-          <div class="ctrl"><span>도펀트</span><div class="seg" id="sg-sp"><button data-value="B" class="on">B</button><button data-value="P">P</button><button data-value="As">As</button><button data-value="Sb">Sb</button></div></div>
-          <label class="ctrl"><span>목표 비저항 (씨앗 쪽) <output id="sg-r-out"></output></span><input type="range" id="sg-r" min="-2" max="2" step="0.05" value="1"></label>
-          <label class="ctrl"><span>사양 허용 범위 <output id="sg-t-out"></output></span><input type="range" id="sg-t" min="5" max="50" step="1" value="20"></label>
-          <label class="ctrl"><span>잉곳 질량 <output id="sg-m-out"></output></span><input type="range" id="sg-m" min="50" max="500" step="10" value="300"></label>
+          <div class="ctrl"><span>Dopant</span><div class="seg" id="sg-sp"><button data-value="B" class="on">B</button><button data-value="P">P</button><button data-value="As">As</button><button data-value="Sb">Sb</button></div></div>
+          <label class="ctrl"><span>Target resistivity (seed side) <output id="sg-r-out"></output></span><input type="range" id="sg-r" min="-2" max="2" step="0.05" value="1"></label>
+          <label class="ctrl"><span>Specification allowable range <output id="sg-t-out"></output></span><input type="range" id="sg-t" min="5" max="50" step="1" value="20"></label>
+          <label class="ctrl"><span>Ingot mass <output id="sg-m-out"></output></span><input type="range" id="sg-m" min="50" max="500" step="10" value="300"></label>
         </div>
       </div>
       <div class="sim-readout">
-        <div class="stat"><span class="k">씨앗 쪽 도핑</span><span class="v" id="sg-o-c">—</span></div>
-        <div class="stat"><span class="k">f = 0.9 도핑 / 씨앗 대비</span><span class="v" id="sg-o-e">—</span></div>
-        <div class="stat"><span class="k">사양 안의 길이 비율</span><span class="v" id="sg-o-y">—</span></div>
-        <div class="stat"><span class="k">사양 안 웨이퍼 (대략)</span><span class="v" id="sg-o-n">—</span></div>
+        <div class="stat"><span class="k">Seed side doping</span><span class="v" id="sg-o-c">—</span></div>
+        <div class="stat"><span class="k">f = 0.9 doping/seed contrast</span><span class="v" id="sg-o-e">—</span></div>
+        <div class="stat"><span class="k">Length ratio in specification</span><span class="v" id="sg-o-y">—</span></div>
+        <div class="stat"><span class="k">Wafer in specification (approx.)</span><span class="v" id="sg-o-n">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 붕소(k₀ = 0.8)는 잉곳의 90%가 굳어도 농도가 1.6배 남짓이라 ±20% 사양에 잉곳의 대부분이 들어온다. ② 인(0.35)이나 비소(0.3)로 바꾸면 꼬리 쪽 농도가 4~5배로 치솟아 쓸 수 있는 길이가 크게 줄어든다. ③ 안티몬(0.023)은 극단적이다. 그래서 n형 웨이퍼는 사양 관리가 더 어렵다. (용융액 완전 혼합 가정, 웨이퍼 수는 300 mm·두께 0.775 mm·커프 손실 0.2 mm 기준 대략값)</div>
+      <div class="sim-note">Explore: With boron (k₀ = 0.8), this well-mixed-melt model predicts about 1.6× the seed-end concentration at f = 0.9. Phosphorus (0.35) and arsenic (0.3) show stronger tail enrichment, reducing the ingot fraction within a fixed resistivity tolerance; antimony (0.023) is more extreme. These curves illustrate segregation and do not imply a universal n-type wafer tolerance. Wafer count is approximate and assumes a 300 mm ingot, 0.775 mm wafer thickness and 0.2 mm kerf.</div>
     </div>
-    <p>CZ 결정에는 석영 도가니에서 녹아 나온 산소가 10¹⁷~10¹⁸ cm⁻³ 들어간다. 산소는 웨이퍼를 기계적으로 단단하게 하고, 열처리 중 웨이퍼 내부에 석출물을 만들어 금속 불순물을 붙잡는 <span class="term">내부 게터링</span><span class="en">(Intrinsic gettering)</span> 역할도 한다. 산소가 문제가 되는 전력 소자나 검출기에는 도가니 없이 녹이는 <span class="term">FZ</span><span class="en">(Float zone)</span> 웨이퍼를 쓰지만 300 mm로 키우기 어렵다.</p>
+    <p>A CZ crystal contains 10¹⁷~10¹⁸ cm⁻³ of oxygen dissolved from a quartz crucible. Oxygen mechanically hardens the wafer and also plays an internal gettering role by forming precipitates inside the wafer during heat treatment to trap metal impurities. For power devices or detectors where oxygen is a problem, <span class="term">FZ</span><span class="en">(Float zone)</span> wafers, which are melted without a crucible, are used, but it is difficult to grow them to 300 mm.</p>
   </section>
 
   <section id="rho">
-    <h2>비저항과 도핑 농도</h2>
-    <p>웨이퍼 사양서의 첫 줄은 도전형과 <span class="term">비저항</span><span class="en">(Resistivity)</span>이다. 예를 들어 “p형 (100), 1~10 Ω·cm”는 붕소가 대략 10¹⁵~10¹⁶ cm⁻³ 들어 있다는 뜻이다. 비저항은 캐리어 농도와 이동도의 곱에 반비례한다.</p>
+    <h2>Resistivity and Dopant Concentration</h2>
+    <p>Wafer specifications commonly identify conductivity type, orientation and resistivity. Resistivity is inversely related to carrier concentration times mobility, and provides an indirect check on substrate or epitaxial-layer doping.</p>
     <div class="formula">$$\rho = \frac{1}{q\,(n\mu_n + p\mu_p)} \approx \frac{1}{q N \mu(N)}, \qquad \mu(N) = \mu_{\min} + \frac{\mu_{\max}-\mu_{\min}}{1 + (N/N_{\mathrm{ref}})^{\alpha}}$$
-      <div class="where">이동도는 도핑이 진할수록 이온화된 불순물 산란 때문에 줄어든다(Caughey–Thomas 모델). 실온 실리콘: 전자 \(\mu_{\max}\) ≈ 1414, \(\mu_{\min}\) ≈ 68.5 cm²/V·s, \(N_{\mathrm{ref}}\) ≈ 9.2×10¹⁶, \(\alpha\) ≈ 0.71. 정공 470.5, 44.9, 2.23×10¹⁷, 0.72.</div>
+      <div class="where">Mobility decreases as the doping increases due to scattering of ionized impurities (Caughey–Thomas model). Room temperature silicon: electrons \(\mu_{\max}\) ≈ 1414, \(\mu_{\min}\) ≈ 68.5 cm²/V·s, \(N_{\mathrm{ref}}\) ≈ 9.2×10¹⁶, \(\alpha\) ≈ 0.71. Hole 470.5, 44.9, 2.23×10¹⁷, 0.72.</div>
     </div>
     <div class="sim" id="sim-rho">
-      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>어빈 곡선: 도핑 ↔ 비저항 ↔ 면저항</h3></div>
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>Irvin curve: doping ↔ resistivity ↔ sheet resistance</h3></div>
       <div class="sim-body side">
         <div class="sim-view"><canvas id="rh-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>도핑 농도 log₁₀ N <output id="rh-n-out"></output></span><input type="range" id="rh-n" min="13" max="20.5" step="0.05" value="15.5"></label>
-          <label class="ctrl"><span>층 두께 (면저항 계산) <output id="rh-t-out"></output></span><input type="range" id="rh-t" min="-2" max="2.89" step="0.01" value="-1.5"></label>
+          <label class="ctrl"><span>Doping concentration log₁₀ N <output id="rh-n-out"></output></span><input type="range" id="rh-n" min="13" max="20.5" step="0.05" value="15.5"></label>
+          <label class="ctrl"><span>Layer thickness (sheet resistance calculation) <output id="rh-t-out"></output></span><input type="range" id="rh-t" min="-2" max="2.89" step="0.01" value="-1.5"></label>
         </div>
       </div>
       <div class="sim-readout">
-        <div class="stat"><span class="k">n형 비저항 / 이동도</span><span class="v" id="rh-o-n">—</span></div>
-        <div class="stat"><span class="k">p형 비저항 / 이동도</span><span class="v" id="rh-o-p">—</span></div>
-        <div class="stat"><span class="k">n형 면저항 R<sub>s</sub></span><span class="v" id="rh-o-rs">—</span></div>
+        <div class="stat"><span class="k">n-type resistivity / mobility</span><span class="v" id="rh-o-n">—</span></div>
+        <div class="stat"><span class="k">p-type resistivity / mobility</span><span class="v" id="rh-o-p">—</span></div>
+        <div class="stat"><span class="k">n-type sheet resistance R<sub>s</sub></span><span class="v" id="rh-o-rs">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 같은 도핑에서 p형 비저항이 n형의 약 3배다. 정공 이동도가 작기 때문이다. ② 10¹⁸ cm⁻³ 위로 가면 이동도가 급격히 줄어 비저항이 도핑에 정비례해 떨어지지 않는다. ③ 소스·드레인처럼 얕고 진한 층(2×10²⁰, 30 nm)의 면저항은 약 100 Ω/□ 안팎이다. 면저항 \(R_s = \rho / t\)는 9장의 4탐침 측정과 연결된다. (전체 도펀트 이온화, 300 K 가정)</div>
+      <div class="sim-note">Explore: At equal doping, p-type silicon generally has higher resistivity because hole mobility is lower. At high doping, mobility also falls, so resistivity does not scale simply as 1/N. Sheet resistance relates layer resistivity to thickness through \(R_s=\rho/t\). Assumptions: complete dopant ionization and 300 K; outputs are illustrative.</div>
     </div>
   </section>
 
   <section id="orient">
-    <h2>결정 방향, 노치, 그리고 크기</h2>
-    <p>실리콘은 다이아몬드 구조(격자 상수 0.543 nm)다. 웨이퍼 표면이 어떤 결정면인지에 따라 성질이 다르다. MOS 트랜지스터에는 계면 결함 밀도가 가장 낮은 <strong>(100)</strong> 면을 쓰고, 바이폴라와 일부 전력 소자는 (111)을 썼다. 결정면에 따라 산화 속도(<a href="oxidation.html">3장</a>), 습식 식각 속도(KOH에서 (100)이 (111)보다 수십~백 배 빠름), 전자·정공 이동도가 다르다. FinFET과 GAA 시대에는 채널 옆면의 방향도 중요해졌다.</p>
+    <h2>Crystal orientation, notch, and size</h2>
+    <p>Silicon has a diamond-cubic lattice, and wafer orientation affects interface, oxidation and etching behavior. The (100) surface is commonly selected for MOS structures because it can provide a favorable Si/SiO₂ interface. BCD platforms may select substrate and epitaxial-layer orientations to meet the needs of integrated bipolar, CMOS and high-voltage devices.</p>
     <figure class="diagram">
-      <svg viewBox="0 0 780 250" role="img" aria-label="결정면과 웨이퍼 노치, 웨이퍼 크기 비교">
+      <svg viewBox="0 0 780 250" role="img" aria-label="Crystal plane and wafer notch, wafer size comparison">
         <!-- cube planes -->
         <g transform="translate(30,30)">
           <g transform="translate(0,20)">
@@ -156,7 +159,7 @@
             <path d="M20 60 L80 120 L110 100 L50 40 Z" class="f-acc-soft"/>
             <text x="60" y="150" text-anchor="middle" class="lbl-b">(110)</text>
           </g>
-          <text x="200" y="200" text-anchor="middle" class="lbl-dim">MOS 소자는 (100) — 계면 결함 밀도가 가장 낮다</text>
+          <text x="200" y="200" text-anchor="middle" class="lbl-dim">MOS devices (100) — have the lowest interfacial defect density</text>
         </g>
         <!-- wafers -->
         <g transform="translate(470,20)">
@@ -167,103 +170,104 @@
           <text x="150" y="113" text-anchor="middle" class="t-mono">150</text>
           <text x="150" y="168" text-anchor="middle" class="t-mono">200 mm</text>
           <text x="150" y="30" text-anchor="middle" class="t-mono">300 mm</text>
-          <text x="168" y="206" class="t-mono">노치 &lt;110&gt;</text>
+          <text x="168" y="206" class="t-mono">Notch <110></text>
         </g>
       </svg>
-      <figcaption><b>그림 2-2.</b> 왼쪽: 입방 격자의 세 결정면. 오른쪽: 웨이퍼 크기 비교(축척 맞춤). 200 mm까지는 결정 방향과 도전형을 가장자리를 깎은 “플랫”으로 표시했고, 300 mm부터는 작은 V자 홈인 “노치”로 표시해 면적 손실을 줄인다.</figcaption>
+      <figcaption><b>Figure 9-2.</b> Left: Three crystal planes of a cubic lattice. Right: Wafer size comparison (to scale). Up to 200 mm, the crystal direction and conductivity type are indicated by a “flat” with cut edges, and from 300 mm, they are indicated by a “notch”, a small V-shaped groove, to reduce area loss.</figcaption>
     </figure>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>지름</th><th>두께 (표준)</th><th>면적</th><th>양산 시기</th><th>비고</th></tr></thead>
+        <thead><tr><th>Diameter</th><th>Representative thickness</th><th>Area</th><th>Approximate production era</th><th>Remarks</th></tr></thead>
         <tbody>
-          <tr><td class="num">100 mm</td><td class="num">525 µm</td><td class="num">79 cm²</td><td>1970년대 후반</td><td>“4인치”</td></tr>
-          <tr><td class="num">150 mm</td><td class="num">675 µm</td><td class="num">177 cm²</td><td>1980년대</td><td>SiC 전력 반도체는 아직 150~200 mm</td></tr>
-          <tr><td class="num">200 mm</td><td class="num">725 µm</td><td class="num">314 cm²</td><td>1990년대</td><td>성숙 공정·아날로그·MEMS에 여전히 많음</td></tr>
-          <tr><td class="num">300 mm</td><td class="num">775 µm</td><td class="num">707 cm²</td><td>2001년~</td><td>첨단 로직·메모리의 표준</td></tr>
-          <tr><td class="num">450 mm</td><td class="num">925 µm</td><td class="num">1590 cm²</td><td>—</td><td>2010년대 개발 후 사실상 중단</td></tr>
+          <tr><td class="num">100 mm</td><td class="num">525 µm</td><td class="num">79 cm²</td><td>Late 1970s</td><td>“4 inches”</td></tr>
+          <tr><td class="num">150 mm</td><td class="num">675 µm</td><td class="num">177 cm²</td><td>1980s</td><td>SiC power semiconductors were still 150~200 mm</td></tr>
+          <tr><td class="num">200 mm</td><td class="num">725 µm</td><td class="num">314 cm²</td><td>1990s</td><td>Still many in mature process, analog, and MEMS</td></tr>
+          <tr><td class="num">300 mm</td><td class="num">775 µm</td><td class="num">707 cm²</td><td>2001~</td><td>Standard for advanced logic and memory</td></tr>
+          <tr><td class="num">450 mm</td><td class="num">925 µm</td><td class="num">1590 cm²</td><td>—</td><td>Virtually discontinued after development in the 2010s</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
   <section id="shape">
-    <h2>잉곳에서 웨이퍼로</h2>
-    <p>잉곳은 지름을 맞춰 깎고(그라인딩), 노치를 낸 뒤 다이아몬드 와이어로 수백 장을 한 번에 썬다(와이어 소). 썬 웨이퍼는 표면이 거칠고 손상층이 있으므로 양면을 갈고(래핑), 화학적으로 손상층을 녹이고(에칭), 가장자리를 둥글게 다듬은 다음(에지 그라인딩, 깨짐 방지), 마지막으로 CMP와 같은 원리의 연마<span class="en">(Polishing)</span>로 거울면을 만든다. 첨단 공정용 300 mm 웨이퍼는 국소 평탄도가 수십 nm 이하, 표면 거칠기는 0.1 nm대다.</p>
+    <h2>From ingot to wafer</h2>
+    <p>The ingot is ground to diameter, notched, and sliced into wafers with a diamond wire. Slicing leaves surface roughness and subsurface damage. Lapping, chemical etching, edge rounding and polishing remove damage and produce a mirror finish. Wafer flatness and surface finish are specified according to the intended process; requirements vary by product and technology.</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>지표</th><th>뜻</th><th>왜 중요한가</th></tr></thead>
+        <thead><tr><th>Indicator</th><th>Meaning</th><th>Why is it important</th></tr></thead>
         <tbody>
-          <tr><td>TTV</td><td>총 두께 편차 (최대 − 최소)</td><td>노광 초점 심도(수십~100 nm)를 잡아먹는다</td></tr>
-          <tr><td>SFQR</td><td>노광 영역(예: 26×8 mm) 안의 국소 평탄도</td><td>스캐너 한 번의 노광 안에서 초점이 맞아야 한다</td></tr>
-          <tr><td>Bow / Warp</td><td>웨이퍼 전체의 휨</td><td>척에 붙인 뒤 오버레이 왜곡, 막 응력으로 커진다(<a href="deposition.html">7장</a>)</td></tr>
-          <tr><td>나노토포그래피</td><td>mm 파장의 미세 굴곡</td><td>CMP 후 막 두께 편차로 이어진다(<a href="cmp.html">10장</a>)</td></tr>
-          <tr><td>COP·LPD</td><td>결정 기원 구멍·표면 입자</td><td>게이트 산화막 결함, 수율 저하</td></tr>
+          <tr><td>TTV</td><td>Total thickness deviation (maximum − minimum)</td><td>Use exposure depth of focus (tens to 100 nm)</td></tr>
+          <tr><td>SFQR</td><td>Local flatness within the exposure area (e.g. 26×8 mm)</td><td>Must be in focus within one scanner exposure</td></tr>
+          <tr><td>Bow / Warp</td><td>Bending of the entire wafer</td><td>After attaching to the chuck, it increases due to overlay distortion and film stress (<a href="deposition.html">Chapter 13</a>)</td></tr>
+          <tr><td>Nanotopography</td><td>Micro bending of mm wavelength</td><td>Leads to film thickness deviation after CMP (<a href="cmp.html">Chapter 16</a>)</td></tr>
+          <tr><td>COP·LPD</td><td>Crystal origin holes/surface particles</td><td>Gate oxide film defects, low yield</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="callout deep"><strong>에피 웨이퍼와 SOI</strong><p>연마한 웨이퍼 위에 같은 실리콘을 수 µm 에피택시로 길러(<a href="deposition.html">7장</a>) 결함이 적은 표면층을 만든 것이 <strong>에피 웨이퍼</strong>로, CMOS 이미지 센서와 로직에 많이 쓴다. <strong>SOI</strong><span class="en">(Silicon On Insulator)</span>는 얇은 실리콘 층과 기판 사이에 산화막(BOX)을 끼운 웨이퍼다. 수소 이온을 일정 깊이에 주입한 웨이퍼를 다른 산화 웨이퍼에 붙이고 가열해 그 깊이에서 쪼개는 <span class="term">스마트 컷</span><span class="en">(Smart Cut)</span>으로 만든다. FD-SOI 트랜지스터와 RF 소자, 실리콘 포토닉스에 쓰인다.</p></div>
+    <div class="callout deep"><strong>Epitaxy, BCD substrates and SOI</strong><p>An epitaxial silicon layer can be grown on a polished substrate to provide a controlled device layer. In BCD technologies, the substrate and epitaxial layer form part of the starting architecture for wells, isolation and high-voltage drift structures. Their polarity, resistivity, thickness and sequence are platform-dependent; this chapter assigns no foundry recipe. <strong>SOI</strong><span class="en">(Silicon On Insulator)</span> places a buried oxide (BOX) beneath a thin silicon layer. Smart Cut is one method for forming such a layer. SOI is used in some transistor and RF technologies.</p></div>
   </section>
 
   <section id="clean">
-    <h2>세정: 공정의 3분의 1</h2>
-    <p>웨이퍼 표면을 더럽히는 것은 크게 네 가지다. <strong>입자</strong>(먼지, 장비에서 떨어진 조각), <strong>유기물</strong>(감광막 찌꺼기, 사람의 피지), <strong>금속</strong>(Fe, Cu, Ni, Na, K…), 그리고 <strong>자연 산화막</strong>(공기 중에서 저절로 생기는 1~2 nm의 SiO₂)이다. 전체 공정 단계의 약 20~30%가 세정이고, 웨이퍼는 완성될 때까지 100~200번 씻긴다.</p>
-    <p>1965년 RCA의 Werner Kern이 개발한 <span class="term">RCA 세정</span>은 반세기가 지난 지금도 습식 세정의 기본이다.</p>
+    <h2>Cleaning and Contamination Control</h2>
+    <p>Common wafer-surface contaminants include <strong>particles</strong> (dust or equipment debris), <strong>organic residues</strong> (including resist residue), <strong>metals</strong> (such as Fe, Cu, Ni, Na and K), and <strong>native oxide</strong> that forms on exposed silicon. Cleaning is repeated at selected points in fabrication; its sequence and frequency depend on the process flow.</p>
+    <p><span class="term">RCA cleaning</span>, developed by Werner Kern of RCA in 1965, is still the basis of wet cleaning even after half a century.</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>단계</th><th>용액 (부피비)</th><th>온도</th><th>제거 대상</th><th>원리</th></tr></thead>
+        <thead><tr><th>Step</th><th>Solution (volume ratio)</th><th>Temperature</th><th>Material removed</th><th>Principle</th></tr></thead>
         <tbody>
-          <tr><td>SPM (피라냐)</td><td>H₂SO₄ : H₂O₂ = 4:1</td><td>120 °C</td><td>유기물, 감광막 잔류물</td><td>강산화로 탄소를 태워 CO₂로</td></tr>
-          <tr><td>SC1 (APM)</td><td>NH₄OH : H₂O₂ : H₂O = 1:1:5</td><td>70~80 °C</td><td>입자, 유기물</td><td>표면을 얇게 산화·식각하며 입자를 들어 올리고, 같은 부호의 표면 전하로 재부착을 막는다</td></tr>
-          <tr><td>DHF</td><td>HF : H₂O = 1:50~100</td><td>실온</td><td>자연 산화막, 산화막에 갇힌 금속</td><td>SiO₂ 식각, 표면을 수소로 종결(소수성)</td></tr>
-          <tr><td>SC2 (HPM)</td><td>HCl : H₂O₂ : H₂O = 1:1:6</td><td>70~80 °C</td><td>금속 이온 (Fe, Al, Mg, Na…)</td><td>금속을 녹는 염화물 착이온으로</td></tr>
+          <tr><td>SPM (Piranha)</td><td>H₂SO₄ : H₂O₂ = 4:1</td><td>120 °C</td><td>Organic matter, photoresist residue</td><td>Burn carbon into CO₂ by strong oxidation</td></tr>
+          <tr><td>SC1 (APM)</td><td>NH₄OH : H₂O₂ : H₂O = 1:1:5</td><td>70~80 °C</td><td>Particles, organic matter</td><td>Thinly oxidizes and etches the surface, lifts the particles, and reattaches them with a surface charge of the same sign to reduce re-adhesion.</td></tr>
+          <tr><td>DHF</td><td>HF : H₂O = 1:50~100</td><td>Room temperature</td><td>Natural oxide film, metal trapped in the oxide film</td><td>SiO₂ etching, surface terminated with hydrogen (hydrophobic)</td></tr>
+          <tr><td>SC2 (HPM)</td><td>HCl : H₂O₂ : H₂O = 1:1:6</td><td>70~80 °C</td><td>Metal ions (Fe, Al, Mg, Na…)</td><td>Forms soluble chloride complexes with many metals</td></tr>
         </tbody>
       </table>
     </div>
-    <p>왜 금속이 그토록 치명적일까. 철이나 구리 같은 전이 금속은 실리콘 밴드갭 한가운데에 에너지 준위를 만들어 전자와 정공이 재결합하는 정거장이 된다. 10¹⁰ atoms/cm² 수준의 표면 금속만으로도 게이트 산화막의 절연 파괴 전압과 소수 캐리어 수명이 눈에 띄게 나빠지고, DRAM은 리텐션 시간이 짧아진다. 나트륨·칼륨 같은 알칼리 이온은 산화막 속을 움직이며 문턱 전압을 흔든다.</p>
+    <p>Why does metallic contamination matter? Transition metals such as iron or copper create an energy level in the middle of the silicon band gap, which becomes a station where electrons and holes recombine. Even low levels of transition-metal contamination can introduce recombination centers and degrade minority-carrier lifetime; mobile alkali ions can shift MOS thresholds. Alkaline ions such as sodium and potassium move through the oxide film and shake the threshold voltage.</p>
     <div class="sim" id="sim-life">
-      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>금속 오염과 소수 캐리어 수명</h3></div>
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>Metal contamination and minority carrier lifetime</h3></div>
       <div class="sim-body side">
         <div class="sim-view"><canvas id="lf-cv"></canvas></div>
         <div class="sim-controls">
-          <div class="ctrl"><span>오염 금속</span><div class="seg" id="lf-m"><button data-value="Fe" class="on">Fe</button><button data-value="Au">Au</button><button data-value="Cu">Cu</button><button data-value="Ni">Ni</button></div></div>
-          <label class="ctrl"><span>벌크 오염 농도 log₁₀ N<sub>t</sub> <output id="lf-n-out"></output></span><input type="range" id="lf-n" min="9" max="14" step="0.1" value="11"></label>
-          <label class="ctrl"><span>SC2 세정 제거율 <output id="lf-e-out"></output></span><input type="range" id="lf-e" min="0" max="99.9" step="0.1" value="0"></label>
+          <div class="ctrl"><span>Contaminated metals</span><div class="seg" id="lf-m"><button data-value="Fe" class="on">Fe</button><button data-value="Au">Au</button><button data-value="Cu">Cu</button><button data-value="Ni">Ni</button></div></div>
+          <label class="ctrl"><span>Bulk contaminant concentration log₁₀ N<sub>t</sub> <output id="lf-n-out"></output></span><input type="range" id="lf-n" min="9" max="14" step="0.1" value="11"></label>
+          <label class="ctrl"><span>SC2 cleaning removal rate <output id="lf-e-out"></output></span><input type="range" id="lf-e" min="0" max="99.9" step="0.1" value="0"></label>
         </div>
       </div>
       <div class="sim-readout">
-        <div class="stat"><span class="k">세정 후 농도</span><span class="v" id="lf-o-n">—</span></div>
-        <div class="stat"><span class="k">SRH 수명 τ</span><span class="v" id="lf-o-t">—</span></div>
-        <div class="stat"><span class="k">확산 거리 L = √(Dτ)</span><span class="v" id="lf-o-l">—</span></div>
+        <div class="stat"><span class="k">Concentration after cleaning</span><span class="v" id="lf-o-n">—</span></div>
+        <div class="stat"><span class="k">SRH Lifetime τ</span><span class="v" id="lf-o-t">—</span></div>
+        <div class="stat"><span class="k">Diffusion distance L = √(Dτ)</span><span class="v" id="lf-o-l">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 철 10¹¹ cm⁻³(10억 개의 실리콘 원자 중 2개 꼴!)만으로 수명이 수백 µs에서 수십 µs로 떨어진다. ② 금은 포획 단면적이 커서 같은 농도에서 더 치명적이다(옛날에는 일부러 넣어 스위칭을 빠르게 했다). ③ 세정으로 99%를 제거해야 수명이 한 자릿수 회복된다. τ = 1/(σ v<sub>th</sub> N<sub>t</sub>), v<sub>th</sub> ≈ 10⁷ cm/s, 포획 단면적은 문헌 대표값(교육용 근사).</div>
+      <div class="sim-note">Explore the SRH lifetime approximation as contaminant concentration and removal fraction change. Its output depends on the selected metal and assumed capture cross-section; it is a teaching model, not a cleaning-efficiency specification.</div>
     </div>
-    <p>습식 세정 뒤에는 초순수<span class="en">(UPW, Ultra Pure Water, 비저항 18.2 MΩ·cm)</span>로 헹구고 말린다. 건조 과정에서 물방울 자국(워터마크)이 남거나, 가늘고 높은 패턴 사이에서 물의 표면 장력이 패턴을 넘어뜨리는 <span class="term">패턴 붕괴</span><span class="en">(Pattern collapse)</span>가 생길 수 있어 IPA 증기 건조나 초임계 CO₂ 건조를 쓴다. 최근에는 화학 약품 사용을 줄이는 오존수·수소수 세정, 메가소닉·이류체 분사 같은 물리적 세정, 플라즈마·증기 HF 같은 건식 세정이 함께 쓰인다.</p>
-    <div class="callout warn"><strong>세정의 딜레마</strong><p>더 세게 씻으면 더 깨끗해지지만, 미세 패턴은 그만큼 다친다. SC1은 실리콘과 산화막을 회당 수 Å씩 녹이고, 메가소닉 에너지가 크면 가는 선이 부러진다. 3 nm 공정에서 게이트 주변을 씻는 세정 단계 하나가 수 Å의 막 손실만 허용하는 이유다.</p></div>
+    <p>After wet cleaning, wafers are rinsed with ultrapure water (UPW; nominal resistivity 18.2 MΩ·cm) and dried. Drying can leave watermarks, while capillary forces can cause <span class="term">pattern collapse</span> in narrow, high-aspect-ratio structures. IPA-assisted or supercritical CO₂ drying can reduce these risks in suitable processes. Ozonated water, megasonic agitation, plasma and vapor HF are among other cleaning approaches used for specific materials and residues.</p>
+    <div class="callout warn"><strong>Cleaning Dilemma</strong><p>Cleaning must balance residue removal against loss or damage to exposed films and structures. The acceptable window depends on materials, geometry and process; no single recipe applies to every technology.</p></div>
   </section>
 
+  <aside class="callout"><strong>Upstream attribution</strong><p>Adapted from ProcessBook, “Silicon Wafer and Cleaning” (<a href="https://github.com/geniuskey/processbook/blob/0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff/chapters/wafer.html">immutable upstream chapter at 0bc4314d</a>), licensed under CC BY 4.0. This chapter has been translated and adapted for PMIC/BCD education. Simulator parameters are illustrative and are not a foundry recipe.</p></aside>
   <section class="keypoints" id="summary">
-    <h2>핵심 정리</h2>
+    <h2>Key Takeaways</h2>
     <ol>
-      <li>반도체 웨이퍼는 11N 다결정 실리콘을 CZ법으로 단결정 잉곳으로 키워 만든다. 지름 300 mm, 두께 775 µm가 표준이다.</li>
-      <li>편석 계수 \(k_0<1\)인 도펀트는 잉곳 꼬리로 갈수록 진해진다: \(C_s = k_0C_0(1-f)^{k_0-1}\). 붕소(0.8)는 고르고, 인·비소(0.3대)는 편차가 크다.</li>
-      <li>비저항은 \(1/(qN\mu)\)이고 이동도는 도핑이 진할수록 떨어진다. 같은 농도에서 p형 비저항이 n형의 약 3배다.</li>
-      <li>MOS 소자는 계면 결함이 적은 (100) 웨이퍼를 쓴다. 평탄도(TTV·SFQR)는 노광 초점 심도를 직접 잡아먹는다.</li>
-      <li>RCA 세정: SPM(유기물) → SC1(입자) → DHF(산화막) → SC2(금속). 금속 오염은 밴드갭 중간 준위로 수명을 깎는다.</li>
+      <li>High-purity polysilicon is grown into a single-crystal ingot, commonly by the CZ method. Wafer diameter and thickness depend on the production platform.</li>
+      <li>For dopants with segregation coefficient \(k_0<1\), concentration tends to increase toward the ingot tail in the well-mixed-melt model. Boron is more uniform than phosphorus or arsenic in the representative examples shown.</li>
+      <li>Resistivity is \(1/(qN\mu)\) and mobility decreases at high doping. At the same concentration, the p-type resistivity is about 3 times that of the n-type.</li>
+      <li>(100) silicon is widely used for MOS structures because it can provide a favorable Si/SiO₂ interface. Wafer flatness metrics such as TTV and SFQR affect lithographic focus control.</li>
+      <li>Cleaning chemistry depends on residue and process module. Oxidative cleans target organics, dilute HF removes oxide, and acidic peroxide cleans target many metallic residues. Transition-metal contamination can introduce recombination centers or mobile charge.</li>
     </ol>
   </section>
 
   <section class="quiz-sec" id="quiz">
-    <h2>확인 퀴즈</h2>
+    <h2>Knowledge Check</h2>
     <div class="quiz">
-      <div class="quiz-q"><p>인(k₀ ≈ 0.35)으로 도핑한 CZ 잉곳에서 잉곳의 75%가 굳었을 때 그 지점의 도핑은 씨앗 쪽의 약 몇 배인가?</p><div class="opts">
-        <button class="opt">0.35배</button><button class="opt">약 1.3배</button><button class="opt" data-correct>약 2.5배</button><button class="opt">약 10배</button>
-      </div><div class="quiz-exp">\(C_s(f)/C_s(0) = (1-f)^{k_0-1} = 0.25^{-0.65} \approx 2.46\). 비저항은 그만큼 낮아진다.</div></div>
-      <div class="quiz-q"><p>RCA 세정에서 금속 이온 제거를 주로 맡는 단계는?</p><div class="opts">
-        <button class="opt">SC1 (NH₄OH/H₂O₂)</button><button class="opt" data-correct>SC2 (HCl/H₂O₂)</button><button class="opt">DHF</button><button class="opt">초순수 헹굼</button>
-      </div><div class="quiz-exp">SC2의 염산이 금속을 수용성 염화물 착이온으로 만들어 녹여 낸다. SC1은 입자와 유기물, DHF는 산화막 담당이다.</div></div>
-      <div class="quiz-q"><p>MOS 트랜지스터용 웨이퍼로 (100) 면을 쓰는 가장 큰 이유는?</p><div class="opts">
-        <button class="opt">가장 빨리 산화되므로</button><button class="opt" data-correct>Si/SiO₂ 계면 결함(계면 준위) 밀도가 가장 낮으므로</button><button class="opt">가장 싸게 성장시킬 수 있으므로</button><button class="opt">정공 이동도가 가장 높으므로</button>
-      </div><div class="quiz-exp">(100) 면은 표면의 끊어진 결합이 적어 계면 준위가 (111)보다 한 자릿수 가까이 적다. 오히려 산화 속도는 (111)이 더 빠르다(3장).</div></div>
+      <div class="quiz-q"><p>In a CZ ingot doped with phosphorus (k₀ ≈ 0.35), when 75% of the ingot has solidified, about how much doping at that point is on the seed side?</p><div class="opts">
+        <button class="opt">0.35 times</button><button class="opt">about 1.3 times</button><button class="opt" data-correct>about 2.5 times</button><button class="opt">about 10 times</button>
+      </div><div class="quiz-exp">\(C_s(f)/C_s(0) = (1-f)^{k_0-1} = 0.25^{-0.65} \approx 2.46\). The resistivity decreases accordingly.</div></div>
+      <div class="quiz-q"><p>Which step is mainly responsible for metal ion removal in RCA cleaning?</p><div class="opts">
+        <button class="opt">SC1 (NH₄OH/H₂O₂)</button><button class="opt" data-correct>SC2 (HCl/H₂O₂)</button><button class="opt">DHF</button><button class="opt">Ultrapure Rinse</button>
+      </div><div class="quiz-exp">The hydrochloric acid in SC2 dissolves the metal by forming a water-soluble chloride complex ion. SC1 is responsible for particles and organic matter, and DHF is responsible for oxide film.</div></div>
+      <div class="quiz-q"><p>What is the biggest reason for using a (100) wafer for MOS transistors?</p><div class="opts">
+        <button class="opt">Because it oxidizes the fastest</button><button class="opt" data-correct>Because the Si/SiO₂ interface defect (interface level) density is lowest</button><button class="opt">Because it can be grown the cheapest</button><button class="opt">Because it has the highest hole mobility</button>
+      </div><div class="quiz-exp">The (100) orientation can provide a favorable Si/SiO₂ interface for MOS structures. Oxidation rate also depends on orientation; this qualitative comparison is not a process specification.</div></div>
     </div>
   </section>
 </main>
@@ -277,14 +281,14 @@
     return t === "n" ? 68.5 + (1414 - 68.5) / (1 + Math.pow(N / 9.2e16, 0.711)) : 44.9 + (470.5 - 44.9) / (1 + Math.pow(N / 2.23e17, 0.719));
   }
   function rho(N, t) { return 1 / (1.602e-19 * N * mob(N, t)); }
-  function Nfrom(r, t) { // 이분법
+  function Nfrom(r, t) { // dichotomy
     var lo = 10, hi = 22;
     for (var i = 0; i < 60; i++) { var m = (lo + hi) / 2; if (rho(Math.pow(10, m), t) > r) lo = m; else hi = m; }
     return Math.pow(10, (lo + hi) / 2);
   }
   var sup = function (x) { var e = Math.floor(Math.log10(x)), m = x / Math.pow(10, e); return m.toFixed(1) + "×10<sup>" + e + "</sup>"; };
 
-  /* ---------------- 편석 */
+  /* ---------------- Segregation */
   (function () {
     var cv, rr = function () { cv && cv.redraw(); };
     var gS = PB.seg("sg-sp", rr);
@@ -301,24 +305,24 @@
         if (Math.abs(r / r0 - 1) <= tol) inSpec++;
       }
       var box = { x: 58, y: 16, w: w - 76, h: h - 62 };
-      PB.chart(ctx, box, { x: [0, 1], y: [0.1, 10], logY: true, xLabel: "굳은 비율 f (씨앗 → 꼬리)", yLabel: "씨앗 쪽 대비 비", series: [
+      PB.chart(ctx, box, { x: [0, 1], y: [0.1, 10], logY: true, xLabel: "Solidified fraction f (seed → tail)", yLabel: "ratio to seed end", series: [
         { data: cs, color: P.accent, width: 2.5 }, { data: rs, color: P.accent2, width: 2.5, dash: [6, 4] }],
         bands: [], hlines: [{ y: 1 + tol, color: P.ok, label: "+" + gT() + "%" }, { y: 1 - tol, color: P.ok, label: "−" + gT() + "%" }],
         yTicks: [0.1, 0.2, 0.5, 1, 2, 5, 10], yFmt: function (v) { return v; } });
-      ctx.font = PB.font(12); ctx.textAlign = "left"; ctx.fillStyle = P.accent; ctx.fillText("도핑 농도", box.x + 8, box.y + 14);
-      ctx.fillStyle = P.accent2; ctx.fillText("비저항 (점선)", box.x + 90, box.y + 14);
+      ctx.font = PB.font(12); ctx.textAlign = "left"; ctx.fillStyle = P.accent; ctx.fillText("Dopant concentration", box.x + 8, box.y + 14);
+      ctx.fillStyle = P.accent2; ctx.fillText("Resistivity (dashed)", box.x + 90, box.y + 14);
       var frac = inSpec / (n + 1) * 0.98;
-      // 웨이퍼 수: 300 mm 잉곳, 밀도 2.33 → 길이
+      // Number of wafers: 300 mm ingot, density 2.33 → length
       var L = gM() * 1000 / (2.33 * Math.PI * 15 * 15) * 10; // mm
       var nw = Math.floor(L * 0.8 / 0.975);
       PB.stat("sg-o-c", sup(Cs0) + "<small>cm⁻³</small>");
-      PB.stat("sg-o-e", small(PB.fmt(Math.pow(0.1, k - 1), 3), "배"));
+      PB.stat("sg-o-e", small(PB.fmt(Math.pow(0.1, k - 1), 3), "×"));
       PB.stat("sg-o-y", small((frac * 100).toFixed(0), "%"));
-      PB.stat("sg-o-n", small(Math.round(nw * frac / 0.98), "장"));
+      PB.stat("sg-o-n", small(Math.round(nw * frac / 0.98), "wafers"));
     }, { aspect: 0.62, minHeight: 300, maxHeight: 420 });
   })();
 
-  /* ---------------- 어빈 곡선 */
+  /* ---------------- Irvine curve */
   (function () {
     var cv, rr = function () { cv && cv.redraw(); };
     var gN = PB.range("rh-n", function (v) { return v.toFixed(2); }, rr);
@@ -328,12 +332,12 @@
       var P = PB.palette(), N = Math.pow(10, gN());
       var dn = [], dp = [];
       for (var e = 13; e <= 21; e += 0.05) { var x = Math.pow(10, e); dn.push([x, rho(x, "n")]); dp.push([x, rho(x, "p")]); }
-      PB.chart(ctx, null, { x: [1e13, 1e21], y: [1e-4, 1e3], logX: true, logY: true, xLabel: "도핑 농도 N (cm⁻³)", yLabel: "비저항 ρ (Ω·cm)",
+      PB.chart(ctx, null, { x: [1e13, 1e21], y: [1e-4, 1e3], logX: true, logY: true, xLabel: "Doping concentration N (cm⁻³)", yLabel: "Resistivity ρ (Ω·cm)",
         series: [{ data: dn, color: P.accent2, width: 2.5 }, { data: dp, color: P.bad, width: 2.5 }],
         vlines: [{ x: N, color: P.accent }], points: [{ x: N, y: rho(N, "n"), color: P.accent2 }, { x: N, y: rho(N, "p"), color: P.bad }] });
       ctx.font = PB.font(12); ctx.textAlign = "right";
-      ctx.fillStyle = P.accent2; ctx.fillText("n형 (인·비소)", w - 26, 34);
-      ctx.fillStyle = P.bad; ctx.fillText("p형 (붕소)", w - 26, 52);
+      ctx.fillStyle = P.accent2; ctx.fillText("n-type (phosphorus, arsenic)", w - 26, 34);
+      ctx.fillStyle = P.bad; ctx.fillText("p-type (boron)", w - 26, 52);
       var t = gT() * 1e-4;
       PB.stat("rh-o-n", small(PB.fmt(rho(N, "n"), 3), "Ω·cm · " + Math.round(mob(N, "n")) + " cm²/Vs"));
       PB.stat("rh-o-p", small(PB.fmt(rho(N, "p"), 3), "Ω·cm · " + Math.round(mob(N, "p")) + " cm²/Vs"));
@@ -341,7 +345,7 @@
     }, { aspect: 0.62, minHeight: 300, maxHeight: 420 });
   })();
 
-  /* ---------------- 수명 */
+  /* ---------------- Lifespan */
   (function () {
     var SIG = { Fe: 5e-14, Au: 1e-13, Cu: 3e-15, Ni: 1e-14 };
     var cv, rr = function () { cv && cv.redraw(); };
@@ -355,14 +359,14 @@
         var d = []; for (var e = 8; e <= 15; e += 0.1) { var x = Math.pow(10, e); d.push([x, Math.min(1e-2, tau(x, SIG[k]))]); }
         return { data: d, color: k === m ? P.accent : P.border, width: k === m ? 3 : 1.4 };
       });
-      var c = PB.chart(ctx, null, { x: [1e8, 1e15], y: [1e-8, 1e-2], logX: true, logY: true, xLabel: "금속 농도 Nₜ (cm⁻³)", yLabel: "소수 캐리어 수명 τ (s)", series: series,
+      var c = PB.chart(ctx, null, { x: [1e8, 1e15], y: [1e-8, 1e-2], logX: true, logY: true, xLabel: "Metal concentration Nₜ (cm⁻³)", yLabel: "Minority carrier lifetime τ (s)", series: series,
         points: [{ x: Math.max(1e8, N), y: Math.min(1e-2, tau(Math.max(1e8, N), SIG[m])), color: P.accent, r: 6 }], vlines: [{ x: 5e10, color: P.faint, label: "1 ppt ≈ 5×10¹⁰", dash: [3, 3] }] });
       ctx.font = PB.font(11, true); ctx.fillStyle = P.dim; ctx.textAlign = "left";
       Object.keys(SIG).forEach(function (k) { var y = c.Y(tau(1e13, SIG[k])); ctx.fillStyle = k === m ? P.accent : P.dim; ctx.fillText(k, c.X(1e13) + 4, y - 4); });
       var t = tau(N, SIG[m]);
       PB.stat("lf-o-n", sup(Math.max(N, 1)) + "<small>cm⁻³</small>");
       PB.stat("lf-o-t", t > 1e-3 ? small(PB.fmt(t * 1e3, 3), "ms") : small(PB.fmt(t * 1e6, 3), "µs"));
-      var L = Math.sqrt(30 * t) * 1e4; // 전자 D≈30 cm²/s, µm
+      var L = Math.sqrt(30 * t) * 1e4; // electron D≈30 cm²/s, µm
       PB.stat("lf-o-l", L > 1000 ? small(PB.fmt(L / 1000, 3), "mm") : small(PB.fmt(L, 3), "µm"));
     }, { aspect: 0.62, minHeight: 300, maxHeight: 420 });
   })();

@@ -989,14 +989,41 @@
       rng.style.setProperty("--fill", (steps.length ? (shownK / steps.length) * 100 : 0) + "%");
       kout.textContent = shownK + " / " + steps.length;
       const st = shownK > 0 ? steps[shownK - 1] : null;
-      desc.innerHTML = st ? `<b>${st.label}</b><br>${st.desc || ""}` : `<b>${tr("Start", "시작")}</b><br>${o.startDesc || tr("Start with a clean silicon wafer.", "깨끗한 규소 웨이퍼에서 시작합니다.")}`;
-      PB.stat(uid + "-o1", st ? st.label : tr("Start", "시작"));
+      if (st) {
+        const title = document.createElement("b");
+        title.textContent = st.label || st.op || "";
+        desc.replaceChildren(title, document.createElement("br"), document.createTextNode(st.desc || ""));
+      } else {
+        desc.innerHTML = `<b>${tr("Start", "시작")}</b><br>${o.startDesc || tr("Start with a clean silicon wafer.", "깨끗한 규소 웨이퍼에서 시작합니다.")}`;
+      }
+      const output = document.getElementById(uid + "-o1");
+      if (output) output.textContent = st ? (st.label || st.op || "") : tr("Start", "시작");
       [...list.children].forEach((li, i) => { li.classList.toggle("cur", i === shownK - 1); li.classList.toggle("future", i >= shownK); });
       const cur = list.children[shownK - 1];
       if (cur && list.scrollHeight > list.clientHeight) { const top = cur.offsetTop - list.offsetTop; if (top < list.scrollTop || top > list.scrollTop + list.clientHeight - 30) list.scrollTop = top - 60; }
     }
     function renderList() {
-      list.innerHTML = steps.map((s, i) => `<li data-i="${i}"><span class="k">${s.k || s.op.toUpperCase()}</span><span class="d">${s.label}</span>${o.editable ? `<button class="x" title="${tr("Delete from this step", "이 단계부터 삭제")}" aria-label="${tr("Delete", "삭제")}">×</button>` : ""}</li>`).join("");
+      const items = steps.map((s, i) => {
+        const li = document.createElement("li");
+        li.dataset.i = i;
+        const key = document.createElement("span");
+        key.className = "k";
+        key.textContent = s.k || (s.op ? s.op.toUpperCase() : "");
+        const label = document.createElement("span");
+        label.className = "d";
+        label.textContent = s.label || s.op || "";
+        li.append(key, label);
+        if (o.editable) {
+          const remove = document.createElement("button");
+          remove.className = "x";
+          remove.title = tr("Delete from this step", "이 단계부터 삭제");
+          remove.setAttribute("aria-label", tr("Delete", "삭제"));
+          remove.textContent = "×";
+          li.append(remove);
+        }
+        return li;
+      });
+      list.replaceChildren(...items);
     }
     list.addEventListener("click", (e) => {
       const li = e.target.closest("li"); if (!li) return;

@@ -2,27 +2,30 @@
 <!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
      Executable code: MIT (see ../LICENSE-MIT).
      Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
-<html lang="ko">
+<html lang="en">
 <head>
-<!--head:start {"desc": "공정을 재고 지키는 기술. CD-SEM·OCD·엘립소미터·오버레이 계측, 결함 검사, SPC 관리도와 Cpk, 오버레이 보정 모델, 결함 군집과 수율 모델을 시뮬레이터로 익힌다."}-->
+<!--head:start {"desc": "Characterize PMIC DC behavior, transients, efficiency, wafer monitors, die sort and production screens.", "libs": [], "lang": "en"}-->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>계측·결함·수율 · ProcessBook</title>
-<meta name="description" content="공정을 재고 지키는 기술. CD-SEM·OCD·엘립소미터·오버레이 계측, 결함 검사, SPC 관리도와 Cpk, 오버레이 보정 모델, 결함 군집과 수율 모델을 시뮬레이터로 익힌다.">
-<link rel="canonical" href="https://processbook.euiyun.com/chapters/metrology.html">
+<title>Characterization and Production Test · PMICBook</title>
+<meta name="description" content="Characterize PMIC DC behavior, transients, efficiency, wafer monitors, die sort and production screens.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/chapters/metrology.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/metrology.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/metrology.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/metrology.html">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <meta name="theme-color" content="#c2550c">
 <meta property="og:type" content="article">
-<meta property="og:site_name" content="ProcessBook">
-<meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="계측·결함·수율 · ProcessBook">
-<meta property="og:description" content="공정을 재고 지키는 기술. CD-SEM·OCD·엘립소미터·오버레이 계측, 결함 검사, SPC 관리도와 Cpk, 오버레이 보정 모델, 결함 군집과 수율 모델을 시뮬레이터로 익힌다.">
-<meta property="og:url" content="https://processbook.euiyun.com/chapters/metrology.html">
-<meta property="og:image" content="https://processbook.euiyun.com/og.png">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Characterization and Production Test · PMICBook">
+<meta property="og:description" content="Characterize PMIC DC behavior, transients, efficiency, wafer monitors, die sort and production screens.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/chapters/metrology.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://processbook.euiyun.com/chapters/metrology.html#chapter","name":"계측·결함·수율","headline":"계측·결함·수율 · ProcessBook","description":"공정을 재고 지키는 기술. CD-SEM·OCD·엘립소미터·오버레이 계측, 결함 검사, SPC 관리도와 Cpk, 오버레이 보정 모델, 결함 군집과 수율 모델을 시뮬레이터로 익힌다.","url":"https://processbook.euiyun.com/chapters/metrology.html","position":14,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공대 학부","image":"https://processbook.euiyun.com/og.png","dateModified":"2026-10-01","isPartOf":{"@type":"Book","@id":"https://processbook.euiyun.com/#book","name":"ProcessBook · 반도체 제조 공정 교과서","url":"https://processbook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ProcessBook","item":"https://processbook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"14. 계측·결함·수율","item":"https://processbook.euiyun.com/chapters/metrology.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/metrology.html#chapter","name":"Characterization and Production Test","headline":"Characterization and Production Test · PMICBook","description":"Characterize PMIC DC behavior, transients, efficiency, wafer monitors, die sort and production screens.","url":"https://frbread7.github.io/pmicbook/chapters/metrology.html","position":20,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"20. Characterization and Production Test","item":"https://frbread7.github.io/pmicbook/chapters/metrology.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -33,161 +36,174 @@
 <body data-chapter="metrology">
 <main class="chapter">
   <header class="chapter-hero">
-    <div class="eyebrow">Chapter 14</div>
-    <h1>계측·결함·수율</h1>
-    <p class="lead">재지 못하는 것은 만들 수 없다. 팹에서는 거의 모든 공정 뒤에 계측<span class="en">(Metrology)</span>과 검사<span class="en">(Inspection)</span>가 붙는다. 막 두께가 맞는지, 선폭이 목표 안인지, 아래층과 위층이 정렬됐는지, 웨이퍼 어딘가에 결함이 생기지 않았는지를 확인하고, 벗어나면 곧바로 장비를 세우거나 다음 웨이퍼의 조건을 고친다. 이 장은 무엇을 어떻게 재는지, 잰 숫자로 공정을 어떻게 관리하는지, 그리고 그 모든 것이 결국 수율이라는 하나의 숫자로 어떻게 모이는지를 다룬다.</p>
+    <div class="eyebrow">Chapter 20 · Characterization and production test</div>
+    <h1>Characterization and Production Test</h1>
+    <p class="lead">A PMIC must be characterized across operating conditions, not judged by a single nominal reading. This chapter connects DC regulation, load and line response, quiescent current, transient behavior, efficiency, switching waveforms, wafer-level monitors and production screening. The retained process-monitor examples show how measurements inform engineering decisions; product limits and qualification procedures come from the applicable specification and public standard.</p>
     <ul class="objectives">
-      <li>CD-SEM, OCD(산란 계측), 엘립소미터·반사 분광, 오버레이 계측의 원리와 용도를 구분한다.</li>
-      <li>반사 스펙트럼 피팅으로 막 두께를 구하는 과정을 직접 해 본다.</li>
-      <li>오버레이 오차를 평행 이동·회전·배율 성분으로 분해하고 보정 후 잔차를 계산한다.</li>
-      <li>SPC 관리도와 판정 규칙, 공정 능력 지수 Cp·Cpk를 해석한다.</li>
-      <li>결함 군집을 반영한 수율 모델(푸아송·머피·음이항)을 비교한다.</li>
+      <li>Relate DC tests to line/load regulation, dropout, quiescent current and current limit.</li>
+      <li>Interpret transient and switching measurements alongside efficiency and thermal limits.</li>
+      <li>Connect wafer-level process-control monitors and electrical die sort to production screening.</li>
+      <li>Use optical fitting, overlay and SPC as supporting process-monitoring tools.</li>
+      <li>Recognize what simple capability and defect-yield models can and cannot establish.</li>
     </ul>
   </header>
 
   <section id="tools">
-    <h2>무엇을, 어떻게 재는가</h2>
+    <h2>PMIC characterization and production-test map</h2>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>계측</th><th>원리</th><th>재는 것</th><th>특징</th></tr></thead>
+        <thead><tr><th>Test</th><th>Stimulus / measurement</th><th>Useful result</th><th>Engineering question</th></tr></thead>
         <tbody>
-          <tr><td>CD-SEM</td><td>저에너지 전자빔으로 표면을 훑어 이차 전자 영상</td><td>선폭, 홀 지름, LER/LWR</td><td>위에서 본 모습만, 전자빔 손상·수축(감광막), 느림</td></tr>
-          <tr><td>OCD (산란 계측)</td><td>주기 무늬의 반사 스펙트럼을 전자기 시뮬레이션 라이브러리와 맞춤</td><td>CD, 높이, 측벽 각, 여러 층 두께</td><td>비파괴·빠름, 모델이 정확해야 함</td></tr>
-          <tr><td>엘립소미터 · 반사 분광</td><td>편광 상태(Ψ, Δ) 또는 반사율 스펙트럼을 박막 간섭 모델로 피팅</td><td>막 두께, 굴절률</td><td>Å 수준 정밀도, 블랭킷·큰 패드</td></tr>
-          <tr><td>오버레이 계측</td><td>위·아래층 표식(박스 인 박스, 회절 격자)의 상대 위치</td><td>층간 정렬 오차</td><td>영상 기반(IBO)·회절 기반(DBO), 수 Å 정밀도</td></tr>
-          <tr><td>X선 (XRF, XRR, XRD)</td><td>형광·반사·회절</td><td>조성, 밀도, 두께, 변형</td><td>금속막·SiGe 조성</td></tr>
-          <tr><td>4탐침 · 비접촉 전기</td><td>전류·전압</td><td>면저항, 주입 도즈</td><td>주입·실리사이드 관리</td></tr>
-          <tr><td>TEM · AFM</td><td>단면 투과 전자 현미경, 원자간력 현미경</td><td>실제 단면, 표면 거칠기</td><td>파괴적·느림, 기준 측정용</td></tr>
+          <tr><td>DC regulation</td><td>Sweep input voltage and load current; measure output voltage</td><td>Line/load regulation, dropout, current limit</td><td>Does the rail stay within its specified operating window?</td></tr>
+          <tr><td>Quiescent current</td><td>Measure input current at defined enable, load and switching states</td><td>Iq, shutdown current, mode transitions</td><td>Are state, temperature and load conditions stated?</td></tr>
+          <tr><td>Transient response</td><td>Apply a controlled load step and capture output voltage and recovery</td><td>Overshoot, undershoot, settling and ringing</td><td>Does the rail recover without violating system limits?</td></tr>
+          <tr><td>Efficiency and thermal</td><td>Measure input/output power and temperature at operating points</td><td>Efficiency, losses and thermal rise</td><td>Where does loss peak across input, load and operating mode?</td></tr>
+          <tr><td>Switching waveforms</td><td>Probe switch node, inductor current and relevant control signals</td><td>Duty cycle, ripple, ringing and protection behavior</td><td>Are bandwidth, grounding and probe-loop effects controlled?</td></tr>
+          <tr><td><a href="https://ecss.nl/item/?glossary_id=1796">WAT / PCM</a></td><td>Probe dedicated wafer-level structures before packaging</td><td>Threshold, leakage, resistance, breakdown and process monitors</td><td>Does the process remain within its control window across the wafer?</td></tr>
+          <tr><td><a href="https://semiconductor.samsung.com/support/tools-resources/dictionary/semiconductor-glossary-eds-process/">EDS / wafer sort</a></td><td>Contact each die through probe cards and run electrical tests</td><td>Pass/fail bins, parametric limits and die-sort data</td><td>Which dies meet product limits before assembly?</td></tr>
+          <tr><td>Production test</td><td>Automated tester applies specified vectors and analog conditions</td><td>Coverage, limits, test time and repeatability</td><td>Does the screen catch relevant defects at acceptable cost?</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
+  <section id="test-matrix">
+    <h2>Build a useful test matrix</h2>
+    <p>For each measurement, record stimulus, load, input range, temperature, operating mode, instrument bandwidth and acceptance criterion. A load-step waveform is meaningful only when step magnitude and edge rate are stated; efficiency requires input and output power measurements at the same operating point. These are general characterization practices, and product limits remain product-specific. See the public <a href="https://www.ti.com/lit/an/slva079/slva079.pdf">TI LDO basics application report</a> for LDO operating concepts and the <a href="https://www.nist.gov/publications/semiconductor-characterization-and-analytical-technology">NIST semiconductor characterization publication record</a> for public metrology context.</p>
+    <div class="table-wrap"><table><thead><tr><th>Test family</th><th>What to vary</th><th>What to capture</th><th>Interpretation</th></tr></thead><tbody>
+      <tr><td>DC</td><td>Input voltage, load current, enable and temperature</td><td>Output, input current, dropout and protection thresholds</td><td>Compare against product limits at matching conditions.</td></tr>
+      <tr><td>Dynamic</td><td>Load-step magnitude, edge rate and operating mode</td><td>Peak excursion, settling time and ringing</td><td>Separate regulator response from probe and board parasitics.</td></tr>
+      <tr><td>Efficiency</td><td>Input, load and switching mode</td><td>Input/output power and device temperature</td><td>Identify the operating region with greatest dissipation.</td></tr>
+      <tr><td>Wafer / production</td><td>Process-monitor structures and defined die-test conditions</td><td>Parametric distributions, test bins and retest rates</td><td>WAT and EDS serve different stages of the manufacturing flow.</td></tr>
+    </tbody></table></div>
+  </section>
+
   <section id="film">
-    <h2>반사 스펙트럼으로 막 두께 맞히기</h2>
-    <p>막 두께 계측은 3장에서 본 간섭색의 정량판이다. 측정한 반사 스펙트럼과 박막 간섭 모델이 계산한 스펙트럼의 차이(잔차)를 최소로 만드는 두께를 찾는다. 이것이 모든 광학 계측(엘립소미터, OCD)의 공통 구조인 <strong>모델 기반 피팅</strong>이다. 아래에서 측정 스펙트럼(점)에 모델(선)을 맞춰 보자.</p>
+    <h2>Optical fitting as a process monitor</h2>
+    <p>Optical film metrology estimates thickness by fitting a modeled spectrum to measured reflectance. The residual indicates fit quality, while thickness and refractive index can be correlated. This retained process-monitor example illustrates model-based measurement; it does not directly test PMIC electrical performance.</p>
     <div class="sim" id="sim-fit">
-      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>반사 분광 막 두께 피팅</h3></div>
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>Reflection spectroscopy film thickness fitting</h3></div>
       <div class="sim-body side">
         <div class="sim-view"><canvas id="ft-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>모델 두께 (추정) <output id="ft-x-out"></output></span><input type="range" id="ft-x" min="0" max="1500" step="1" value="300"></label>
-          <label class="ctrl"><span>모델 굴절률 <output id="ft-n-out"></output></span><input type="range" id="ft-n" min="1.4" max="1.55" step="0.005" value="1.46"></label>
-          <label class="ctrl"><span>측정 잡음 <output id="ft-s-out"></output></span><input type="range" id="ft-s" min="0" max="3" step="0.1" value="0.8"></label>
-          <div class="btn-row"><button class="btn primary" id="ft-auto">자동 피팅</button><button class="btn" id="ft-new">새 웨이퍼</button></div>
+          <label class="ctrl"><span>Model thickness (estimate) <output id="ft-x-out"></output></span><input type="range" id="ft-x" min="0" max="1500" step="1" value="300"></label>
+          <label class="ctrl"><span>Model refractive index <output id="ft-n-out"></output></span><input type="range" id="ft-n" min="1.4" max="1.55" step="0.005" value="1.46"></label>
+          <label class="ctrl"><span>Measurement noise <output id="ft-s-out"></output></span><input type="range" id="ft-s" min="0" max="3" step="0.1" value="0.8"></label>
+          <div class="btn-row"><button class="btn primary" id="ft-auto">Fit automatically</button><button class="btn" id="ft-new">New sample</button></div>
         </div>
       </div>
       <div class="sim-readout">
-        <div class="stat"><span class="k">잔차 RMS</span><span class="v" id="ft-o-r">—</span></div>
-        <div class="stat"><span class="k">피팅 두께</span><span class="v" id="ft-o-x">—</span></div>
-        <div class="stat"><span class="k">정답 (확인용)</span><span class="v" id="ft-o-t">숨김</span></div>
+        <div class="stat"><span class="k">Residual RMS</span><span class="v" id="ft-o-r">—</span></div>
+        <div class="stat"><span class="k">Fitted thickness</span><span class="v" id="ft-o-x">—</span></div>
+        <div class="stat"><span class="k">Reference thickness (reveal after fitting)</span><span class="v" id="ft-o-t">Hidden</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 슬라이더로 두께를 움직이며 잔차가 작아지는 곳을 찾아보자. 극소가 여러 군데다(간섭 차수). 그래서 실제 장비는 넓은 범위를 먼저 훑고 국소 최적화를 한다. ② “자동 피팅”은 전 범위 격자 탐색 + 미세 탐색을 한다. ③ 굴절률을 틀리게 가정하면 두께도 틀리게 맞춰진다(두께와 굴절률의 상관). 엘립소미터가 편광 두 성분을 함께 재는 이유다. (산화막/실리콘, 수직 입사)</div>
+      <div class="sim-note">Explore: Adjust thickness and watch the residual. Interference can produce multiple local minima, so the model searches broadly before refining a fit. An incorrect refractive-index assumption can bias thickness. The synthetic spectrum is an educational oxide-on-silicon example, not calibrated instrument data.</div>
     </div>
   </section>
 
   <section id="overlay">
-    <h2>오버레이: 층과 층이 맞았는가</h2>
-    <p>칩은 수십 장의 마스크로 찍은 층들의 겹침이다. 위층이 아래층에 맞게 찍혔는지가 <span class="term">오버레이</span><span class="en">(Overlay)</span>이고, 첨단 공정의 요구는 수 nm 이하다(최소 피치의 약 1/4~1/5). 오버레이 오차는 무작위 성분과 함께, 웨이퍼 전체에 걸친 체계적 성분을 갖는다. 대표적인 선형 모델은 다음과 같다.</p>
+    <h2>Overlay and process control</h2>
+    <p><span class="term">Overlay</span> is the relative alignment error between patterns on different layers. Wafer-level measurements can contain systematic components, such as translation, rotation and magnification, as well as random residual error. The following linear model illustrates those components; its ranges are not product specifications.</p>
     <div class="formula">$$\Delta x = T_x + M_x\,x - R\,y + \varepsilon_x, \qquad \Delta y = T_y + M_y\,y + R\,x + \varepsilon_y$$
-      <div class="where">\(T\)는 평행 이동, \(M\)은 배율(ppm), \(R\)은 회전(µrad). 스캐너는 측정한 오버레이로 이 계수를 추정해 다음 로트 노광에서 보정한다(APC). 웨이퍼 휨(<a href="deposition.html">7장</a>)·필드 안 렌즈 왜곡 같은 고차 성분은 더 많은 항으로 보정한다. 보정 후 남는 것이 잔차다.</div>
+      <div class="where">\(T\) is translation, \(M\) is magnification (ppm), and \(R\) is rotation (µrad). The simulator estimates a linear fit and shows its residual when correction is enabled. Real process control may also account for higher-order effects; this example is not a scanner correction recipe.</div>
     </div>
     <div class="sim" id="sim-ov">
-      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>웨이퍼 오버레이 벡터 지도와 선형 보정</h3></div>
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>Wafer overlay vector maps and linear correction</h3></div>
       <div class="sim-body side">
         <div class="sim-view"><canvas id="ov-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>평행 이동 T<sub>x</sub> <output id="ov-tx-out"></output></span><input type="range" id="ov-tx" min="-10" max="10" step="0.5" value="3"></label>
-          <label class="ctrl"><span>평행 이동 T<sub>y</sub> <output id="ov-ty-out"></output></span><input type="range" id="ov-ty" min="-10" max="10" step="0.5" value="-2"></label>
-          <label class="ctrl"><span>회전 R <output id="ov-r-out"></output></span><input type="range" id="ov-r" min="-0.1" max="0.1" step="0.005" value="0.04"></label>
-          <label class="ctrl"><span>배율 M <output id="ov-m-out"></output></span><input type="range" id="ov-m" min="-0.1" max="0.1" step="0.005" value="0.03"></label>
-          <label class="ctrl"><span>무작위 성분 σ <output id="ov-s-out"></output></span><input type="range" id="ov-s" min="0" max="5" step="0.1" value="1"></label>
-          <label class="check"><input type="checkbox" id="ov-c"> 선형 모델 보정 후 잔차 보기</label>
+          <label class="ctrl"><span>Translation T<sub>x</sub> <output id="ov-tx-out"></output></span><input type="range" id="ov-tx" min="-10" max="10" step="0.5" value="3"></label>
+          <label class="ctrl"><span>Translation T<sub>y</sub> <output id="ov-ty-out"></output></span><input type="range" id="ov-ty" min="-10" max="10" step="0.5" value="-2"></label>
+          <label class="ctrl"><span>Rotate R<output id="ov-r-out"></output></span><input type="range" id="ov-r" min="-0.1" max="0.1" step="0.005" value="0.04"></label>
+          <label class="ctrl"><span>Magnification M<output id="ov-m-out"></output></span><input type="range" id="ov-m" min="-0.1" max="0.1" step="0.005" value="0.03"></label>
+          <label class="ctrl"><span>random component σ<output id="ov-s-out"></output></span><input type="range" id="ov-s" min="0" max="5" step="0.1" value="1"></label>
+          <label class="check"><input type="checkbox" id="ov-c">View residuals after calibrating a linear model</label>
         </div>
       </div>
       <div class="sim-readout">
-        <div class="stat"><span class="k">|평균| + 3σ (x / y)</span><span class="v" id="ov-o-3">—</span></div>
-        <div class="stat"><span class="k">추정 계수 T<sub>x</sub>, T<sub>y</sub>, R, M</span><span class="v" id="ov-o-f" style="font-size:14px">—</span></div>
+        <div class="stat"><span class="k">|Mean| + 3σ (x / y)</span><span class="v" id="ov-o-3">—</span></div>
+        <div class="stat"><span class="k">Fitted coefficients: T<sub>x</sub>, T<sub>y</sub>, R, M</span><span class="v" id="ov-o-f" style="font-size:14px">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 회전은 웨이퍼 가장자리에서 원을 그리는 화살표, 배율은 바깥으로 퍼지는 화살표로 나타난다(300 mm 가장자리에서 0.04 ppm = 6 nm). ② “보정 후 잔차”를 켜면 최소제곱으로 추정한 선형 성분이 빠지고 무작위 성분만 남는다. 무작위 σ가 크면 아무리 보정해도 남는다. ③ 피치 20 nm대 공정의 오버레이 예산은 2~3 nm 수준이다. (화살표 길이는 과장, 단위 nm·ppm·µrad)</div>
+      <div class="sim-note">Explore: Rotation produces a tangential component; magnification grows with distance from wafer center. Enable residual view to subtract the least-squares linear fit. Arrow lengths are exaggerated and values are illustrative, not overlay targets.</div>
     </div>
   </section>
 
   <section id="spc">
-    <h2>SPC: 숫자로 공정을 지키기</h2>
-    <p>계측값은 하나하나 보는 것이 아니라 흐름으로 본다. <span class="term">통계적 공정 관리</span><span class="en">(SPC)</span>는 관리도에 측정값을 시간순으로 찍고, 평균 ±3σ의 관리 한계를 벗어나거나 이상한 패턴이 나타나면 원인을 찾는다. 관리 한계는 공정이 스스로 보이는 변동이고, 사양 한계(USL·LSL)는 제품이 요구하는 범위다. 둘의 관계가 <span class="term">공정 능력</span>이다.</p>
+    <h2>SPC: monitoring measurements over time</h2>
+    <p><span class="term">Statistical process control</span> (SPC) tracks measurements over time. Control limits summarize process variation in the selected chart, while specification limits (USL and LSL) come from product requirements. A control-chart signal prompts investigation; it does not by itself identify a cause. Capability indices compare process spread and centering with the specification window.</p>
     <div class="formula">$$C_p = \frac{\mathrm{USL}-\mathrm{LSL}}{6\sigma}, \qquad C_{pk} = \frac{\min(\mathrm{USL}-\mu,\ \mu-\mathrm{LSL})}{3\sigma}$$
-      <div class="where">Cpk = 1이면 사양 밖 비율이 약 0.27%(양쪽), 1.33이면 약 63 ppm, 1.67이면 약 0.6 ppm, 2.0이면 수 ppb다. 반도체 핵심 공정은 1.33~1.67 이상을 목표로 한다.</div>
+      <div class="where">These indices summarize a stable process under distributional assumptions. A capability value is not a guarantee of field failure rate, and a meaningful estimate requires suitable data, sampling and specification limits.</div>
     </div>
     <div class="sim" id="sim-spc">
-      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>관리도와 Cpk</h3></div>
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>Control charts and Cpk</h3></div>
       <div class="sim-body side">
         <div class="sim-view"><canvas id="sp-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>공정 σ <output id="sp-s-out"></output></span><input type="range" id="sp-s" min="0.2" max="2" step="0.05" value="0.6"></label>
-          <label class="ctrl"><span>평균 이동 (40번째 로트부터) <output id="sp-m-out"></output></span><input type="range" id="sp-m" min="-3" max="3" step="0.1" value="0"></label>
-          <label class="ctrl"><span>서서히 표류 (로트당) <output id="sp-d-out"></output></span><input type="range" id="sp-d" min="0" max="0.08" step="0.005" value="0"></label>
-          <label class="ctrl"><span>사양 ± (목표 50 nm) <output id="sp-t-out"></output></span><input type="range" id="sp-t" min="1" max="6" step="0.1" value="3"></label>
-          <button class="btn" id="sp-re">새 데이터</button>
+          <label class="ctrl"><span>Process standard deviation σ <output id="sp-s-out"></output></span><input type="range" id="sp-s" min="0.2" max="2" step="0.05" value="0.6"></label>
+          <label class="ctrl"><span>Mean shift from lot 40 <output id="sp-m-out"></output></span><input type="range" id="sp-m" min="-3" max="3" step="0.1" value="0"></label>
+          <label class="ctrl"><span>Drift per lot <output id="sp-d-out"></output></span><input type="range" id="sp-d" min="0" max="0.08" step="0.005" value="0"></label>
+          <label class="ctrl"><span>Specification half-width (target 50 nm) <output id="sp-t-out"></output></span><input type="range" id="sp-t" min="1" max="6" step="0.1" value="3"></label>
+          <button class="btn" id="sp-re">Generate data</button>
         </div>
       </div>
       <div class="sim-readout">
         <div class="stat"><span class="k">Cp / Cpk</span><span class="v" id="sp-o-c">—</span></div>
-        <div class="stat"><span class="k">예상 불량률</span><span class="v" id="sp-o-p">—</span></div>
-        <div class="stat"><span class="k">규칙 위반</span><span class="v" id="sp-o-r" style="font-size:14px">—</span></div>
+        <div class="stat"><span class="k">Modeled out-of-spec rate</span><span class="v" id="sp-o-p">—</span></div>
+        <div class="stat"><span class="k">Chart-rule signals</span><span class="v" id="sp-o-r" style="font-size:14px">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 평균 이동을 +1.5로 주면 40번째 로트 이후 점들이 중심선 한쪽에 몰린다. 관리 한계를 넘지 않아도 “한쪽에 연속 8점” 규칙(웨스턴 일렉트릭)이 먼저 경보를 낸다. ② 표류를 주면 점들이 서서히 기울어지는 추세가 보인다(장비 부품 마모, 챔버 벽 오염). ③ σ를 줄이면 같은 사양에서 Cpk가 커진다. 관리 한계(빨간 점선)는 처음 30개 로트로 정했다.</div>
+      <div class="sim-note">Explore: Apply a mean shift or drift and watch the chart rules respond. The control limits in this synthetic example are estimated from the first 30 points. The generated data illustrate signals and capability calculations; they are not a process-control plan.</div>
     </div>
   </section>
 
   <section id="defect">
-    <h2>결함 검사와 수율 모델</h2>
-    <p>결함 검사 장비는 웨이퍼 전체를 레이저 산란(블랭킷·패턴 웨이퍼)이나 광학 영상(명시야), 전자빔으로 훑어 이상 지점을 찾는다. 같은 칩이 반복되므로 이웃 다이와 영상을 비교(다이 투 다이)해 다른 곳을 결함 후보로 뽑고, 일부를 SEM으로 다시 보며 종류를 분류한다(리뷰). 결함은 무작위로 흩어지지 않고 뭉치는 경향이 있다(장비 하나의 문제, 웨이퍼 가장자리, 스크래치). 뭉칠수록 같은 결함 수에서도 수율은 높아진다. 결함이 이미 망가진 다이에 몰리기 때문이다.</p>
+    <h2>Defect screening and yield context</h2>
+    <p>Defect maps and electrical sort data provide different views of manufacturing outcomes. A defect-density yield model is a simplified way to explore how defect density, die area and clustering can affect expected yield. It is not a prediction for a specific PMIC process or product.</p>
     <div class="formula">$$Y_{\text{Poisson}} = e^{-AD_0}, \quad Y_{\text{Murphy}} = \left(\frac{1-e^{-AD_0}}{AD_0}\right)^2, \quad Y_{\text{NB}} = \left(1+\frac{AD_0}{\alpha}\right)^{-\alpha}$$
-      <div class="where">음이항(negative binomial) 모델의 \(\alpha\)는 군집 계수. \(\alpha \to \infty\)이면 푸아송, 작을수록 결함이 심하게 뭉친다(실측 α ≈ 0.5~5). 수율 = 기능 수율 × 파라메트릭 수율 × …로 곱으로 쌓인다.</div>
+      <div class="where">In the negative-binomial model, \(\alpha\) controls clustering: as \(\alpha\to\infty\), the expression approaches Poisson; smaller values represent stronger clustering in this model. These formulas illustrate assumptions and do not replace observed electrical yield data.</div>
     </div>
     <div class="sim" id="sim-ym">
-      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>수율 모델 비교와 결함 군집</h3></div>
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>Yield model comparison and defect clustering</h3></div>
       <div class="sim-body side">
         <div class="sim-view"><canvas id="ym-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>결함 밀도 D₀ <output id="ym-d-out"></output></span><input type="range" id="ym-d" min="0.02" max="1" step="0.01" value="0.2"></label>
-          <label class="ctrl"><span>군집 계수 α <output id="ym-a-out"></output></span><input type="range" id="ym-a" min="0.2" max="20" step="0.1" value="2"></label>
-          <label class="ctrl"><span>다이 면적 <output id="ym-A-out"></output></span><input type="range" id="ym-A" min="0.1" max="8" step="0.05" value="1.5"></label>
+          <label class="ctrl"><span>Defect density D₀ <output id="ym-d-out"></output></span><input type="range" id="ym-d" min="0.02" max="1" step="0.01" value="0.2"></label>
+          <label class="ctrl"><span>Clustering parameter α <output id="ym-a-out"></output></span><input type="range" id="ym-a" min="0.2" max="20" step="0.1" value="2"></label>
+          <label class="ctrl"><span>Die area <output id="ym-A-out"></output></span><input type="range" id="ym-A" min="0.1" max="8" step="0.05" value="1.5"></label>
         </div>
       </div>
       <div class="sim-readout">
-        <div class="stat"><span class="k">푸아송</span><span class="v" id="ym-o-p">—</span></div>
-        <div class="stat"><span class="k">머피</span><span class="v" id="ym-o-m">—</span></div>
-        <div class="stat"><span class="k">음이항 (α)</span><span class="v" id="ym-o-n">—</span></div>
+        <div class="stat"><span class="k">Poisson model</span><span class="v" id="ym-o-p">—</span></div>
+        <div class="stat"><span class="k">Murphy model</span><span class="v" id="ym-o-m">—</span></div>
+        <div class="stat"><span class="k">Negative binomial (α)</span><span class="v" id="ym-o-n">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 작은 다이(AD₀ ≪ 1)에서는 세 모델이 거의 같다. 큰 다이일수록 차이가 벌어진다. ② α를 0.5로 줄이면(심한 군집) 큰 다이의 수율이 푸아송 예측보다 훨씬 높다. ③ 수율 학습 곡선: 신규 공정의 D₀는 시간이 지나며 줄어든다. 같은 다이라도 양산 초기와 성숙기의 수율이 크게 다른 이유다.</div>
+      <div class="sim-note">Explore: Compare model curves as die area and clustering change. Treat them as conceptual cases; actual PMIC yield depends on product-specific defect and parametric distributions.</div>
     </div>
   </section>
 
+  <aside class="callout"><strong>Upstream attribution</strong><p>The optical fitting, overlay, SPC and defect-yield examples are translated and adapted from ProcessBook’s <a href="https://github.com/geniuskey/processbook/blob/0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff/chapters/metrology.html">metrology chapter at baseline 0bc4314d</a>, licensed under CC BY 4.0. They are presented as supporting process-monitor examples for PMIC characterization; simulator values are educational approximations.</p></aside>
   <section class="keypoints" id="summary">
-    <h2>핵심 정리</h2>
+    <h2>Key takeaways</h2>
     <ol>
-      <li>CD-SEM은 영상으로, OCD·엘립소미터는 스펙트럼 모델 피팅으로, 오버레이는 층간 표식의 상대 위치로 잰다.</li>
-      <li>광학 계측은 모델 기반 역문제다. 두께·굴절률처럼 상관된 변수와 여러 극소에 주의한다.</li>
-      <li>오버레이는 평행 이동·회전·배율 등 체계적 성분과 무작위 성분으로 나뉘며, 체계적 성분은 스캐너 보정으로 지운다.</li>
-      <li>SPC는 관리 한계(공정의 목소리)와 판정 규칙으로 이상을 조기에 잡고, Cpk는 사양 대비 공정 여유를 나타낸다.</li>
-      <li>수율은 결함 밀도·다이 면적·군집에 따라 모델이 달라진다. 결함이 뭉칠수록 같은 D₀에서 수율이 높다.</li>
+      <li>Specify input, load, operating mode, temperature and measurement setup alongside every electrical result.</li>
+      <li>Use DC, transient, switching and efficiency results together; one nominal point cannot characterize a PMIC rail.</li>
+      <li>WAT/PCM monitors process structures, while EDS/wafer sort screens individual dies before assembly.</li>
+      <li>SPC and guard bands help interpret variation; capability indices rely on assumptions and do not replace product limits.</li>
+      <li>Production-test coverage balances relevant defect screening, repeatability and test time.</li>
     </ol>
   </section>
 
   <section class="quiz-sec" id="quiz">
-    <h2>확인 퀴즈</h2>
+    <h2>Knowledge check</h2>
     <div class="quiz">
-      <div class="quiz-q"><p>평균이 목표에서 1σ 벗어나 있고 사양 폭이 ±4σ일 때 Cpk는?</p><div class="opts">
-        <button class="opt">1.33</button><button class="opt" data-correct>1.0</button><button class="opt">0.67</button><button class="opt">1.67</button>
-      </div><div class="quiz-exp">가까운 쪽 사양까지 거리 = 4σ − 1σ = 3σ, Cpk = 3σ/3σ = 1.0.</div></div>
-      <div class="quiz-q"><p>웨이퍼 가장자리로 갈수록 오버레이 화살표가 바깥을 향해 길어진다. 주 성분은?</p><div class="opts">
-        <button class="opt">평행 이동</button><button class="opt">회전</button><button class="opt" data-correct>배율</button><button class="opt">무작위 잡음</button>
-      </div><div class="quiz-exp">배율 오차는 중심에서의 거리에 비례해 바깥(또는 안쪽)을 향한다. 회전은 원주 방향이다.</div></div>
-      <div class="quiz-q"><p>결함이 심하게 뭉쳐 있을 때 푸아송 모델의 수율 예측은 실제보다?</p><div class="opts">
-        <button class="opt">높게 나온다</button><button class="opt" data-correct>낮게 나온다 (비관적)</button><button class="opt">같다</button><button class="opt">음수가 된다</button>
-      </div><div class="quiz-exp">뭉친 결함은 소수의 다이에 몰려 나머지 다이를 살린다. 그래서 큰 다이에는 머피·음이항 모델을 쓴다.</div></div>
+      <div class="quiz-q"><p>A regulator output changes as input voltage is swept while load is held constant. Which metric is being evaluated?</p><div class="opts">
+        <button class="opt" data-correct>Line regulation</button><button class="opt">Load regulation</button><button class="opt">Shutdown current</button><button class="opt">Die yield</button>
+      </div><div class="quiz-exp">Line regulation describes output change as input voltage changes with load and other conditions controlled.</div></div>
+      <div class="quiz-q"><p>Which capture is most useful for measuring recovery after a sudden increase in load current?</p><div class="opts">
+        <button class="opt">Static output-voltage reading only</button><button class="opt" data-correct>Load-step output waveform</button><button class="opt">Wafer orientation</button><button class="opt">Optical thickness spectrum</button>
+      </div><div class="quiz-exp">A controlled load-step waveform reveals undershoot, overshoot, ringing and recovery time.</div></div>
+      <div class="quiz-q"><p>What is the role of EDS or wafer sort in a production flow?</p><div class="opts">
+        <button class="opt">Measure only wafer thickness</button><button class="opt" data-correct>Electrically screen dies before packaging</button><button class="opt">Replace reliability qualification</button><button class="opt">Set foundry recipes</button>
+      </div><div class="quiz-exp">Wafer sort probes each die and bins its electrical results against defined product limits before assembly.</div></div>
     </div>
   </section>
 </main>
@@ -196,12 +212,12 @@
   "use strict";
   function small(v, u) { return v + "<small>" + u + "</small>"; }
 
-  /* ---------------- 반사 피팅 */
+  /* Optical fitting simulator */
   (function () {
     function R(l, x, n1) { var n2 = 3.9 + 1.6 * Math.max(0, (450 - l) / 70), k2 = 0.02 + 0.3 * Math.max(0, (450 - l) / 70); var r01 = (1 - n1) / (1 + n1); var ar = n1 - n2, ai = k2, br = n1 + n2, bi = -k2, d = br * br + bi * bi; var r12r = (ar * br + ai * bi) / d, r12i = (ai * br - ar * bi) / d; var ph = -4 * Math.PI * n1 * x / l, er = Math.cos(ph), ei = Math.sin(ph); var nr = r01 + r12r * er - r12i * ei, ni = r12r * ei + r12i * er; var dr = 1 + r01 * (r12r * er - r12i * ei), di = r01 * (r12r * ei + r12i * er); var D = dr * dr + di * di; var qr = (nr * dr + ni * di) / D, qi = (ni * dr - nr * di) / D; return qr * qr + qi * qi; }
     var truth = 0, meas = [], seed = 11, cv, fitX = null;
     var LS = []; for (var l = 400; l <= 800; l += 5) LS.push(l);
-    function newWafer() { var rnd = PB.rng(seed++); truth = Math.round(80 + rnd() * 1100); var s = gS() / 100; meas = LS.map(function (l) { var u = Math.sqrt(-2 * Math.log(rnd() + 1e-9)) * Math.cos(6.283 * rnd()); return R(l, truth, 1.46) + s * u; }); fitX = null; document.getElementById("ft-o-t").textContent = "숨김"; }
+    function newWafer() { var rnd = PB.rng(seed++); truth = Math.round(80 + rnd() * 1100); var s = gS() / 100; meas = LS.map(function (l) { var u = Math.sqrt(-2 * Math.log(rnd() + 1e-9)) * Math.cos(6.283 * rnd()); return R(l, truth, 1.46) + s * u; }); fitX = null; document.getElementById("ft-o-t").textContent = "Hidden"; }
     var rr = function () { cv && cv.redraw(); };
     var gX = PB.range("ft-x", function (v) { return v + " nm"; }, rr), gN = PB.range("ft-n", function (v) { return v.toFixed(3); }, rr), gS = PB.range("ft-s", function (v) { return v.toFixed(1) + "%"; }, function () { seed--; newWafer(); rr(); });
     function rms(x, n) { var s = 0; LS.forEach(function (l, i) { var d = R(l, x, n) - meas[i]; s += d * d; }); return Math.sqrt(s / LS.length); }
@@ -216,17 +232,17 @@
     cv = PB.canvas("#ft-cv", function (ctx, w, h) {
       var P = PB.palette(), x = gX(), n = gN();
       var b1 = { x: 58, y: 16, w: w - 76, h: (h - 100) * 0.62 }, b2 = { x: 58, y: b1.y + b1.h + 44, w: w - 76, h: (h - 100) * 0.38 };
-      PB.chart(ctx, b1, { x: [400, 800], y: [0, 0.6], xLabel: "파장 (nm)", yLabel: "반사율", series: [{ data: LS.map(function (l) { return [l, R(l, x, n)]; }), color: P.accent, width: 2.6 }], points: LS.map(function (l, i) { return { x: l, y: meas[i], color: P.accent2, r: 2.5 }; }) });
+      PB.chart(ctx, b1, { x: [400, 800], y: [0, 0.6], xLabel: "Wavelength (nm)", yLabel: "reflectivity", series: [{ data: LS.map(function (l) { return [l, R(l, x, n)]; }), color: P.accent, width: 2.6 }], points: LS.map(function (l, i) { return { x: l, y: meas[i], color: P.accent2, r: 2.5 }; }) });
       var curve = []; for (var t = 0; t <= 1500; t += 5) curve.push([t, rms(t, n)]);
       var mx = Math.max.apply(null, curve.map(function (c) { return c[1]; }));
-      PB.chart(ctx, b2, { x: [0, 1500], y: [0, mx * 1.05], xLabel: "모델 두께 (nm)", yLabel: "", series: [{ data: curve, color: P.dim, width: 1.6 }], vlines: [{ x: x, color: P.accent }] });
-      ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left"; ctx.fillText("잔차 RMS (두께 전 범위)", b2.x + 6, b2.y + 10);
+      PB.chart(ctx, b2, { x: [0, 1500], y: [0, mx * 1.05], xLabel: "Model thickness (nm)", yLabel: "", series: [{ data: curve, color: P.dim, width: 1.6 }], vlines: [{ x: x, color: P.accent }] });
+      ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left"; ctx.fillText("Residual RMS (over all thickness range)", b2.x + 6, b2.y + 10);
       PB.stat("ft-o-r", small((rms(x, n) * 100).toFixed(2), "%"));
-      PB.stat("ft-o-x", fitX != null ? small(fitX.toFixed(1), "nm") : small(x, "nm (수동)"));
+      PB.stat("ft-o-x", fitX != null ? small(fitX.toFixed(1), "nm") : small(x, "nm (manual)"));
     }, { aspect: 0.7, minHeight: 340, maxHeight: 500 });
   })();
 
-  /* ---------------- 오버레이 */
+  /* Overlay simulator */
   (function () {
     var cv, rr = function () { cv && cv.redraw(); };
     var g = {}; [["tx", " nm"], ["ty", " nm"], ["r", " µrad"], ["m", " ppm"], ["s", " nm"]].forEach(function (a) { g[a[0]] = PB.range("ov-" + a[0], function (v) { return (v > 0 && a[0] !== "s" ? "+" : "") + v + a[1]; }, rr); });
@@ -236,9 +252,9 @@
     function solve(A, b) { var n = A.length; for (var i = 0; i < n; i++) { var p = i; for (var j = i + 1; j < n; j++) if (Math.abs(A[j][i]) > Math.abs(A[p][i])) p = j; var t = A[i]; A[i] = A[p]; A[p] = t; var tb = b[i]; b[i] = b[p]; b[p] = tb; for (var j2 = i + 1; j2 < n; j2++) { var f = A[j2][i] / A[i][i]; for (var k = i; k < n; k++) A[j2][k] -= f * A[i][k]; b[j2] -= f * b[i]; } } var xx = new Array(n); for (var i2 = n - 1; i2 >= 0; i2--) { var s = b[i2]; for (var k2 = i2 + 1; k2 < n; k2++) s -= A[i2][k2] * xx[k2]; xx[i2] = s / A[i2][i2]; } return xx; }
     cv = PB.canvas("#ov-cv", function (ctx, w, h) {
       var P = PB.palette(), Tx = g.tx(), Ty = g.ty(), Rr = g.r() * 1e-6 * 1e6, M = g.m() * 1e-6 * 1e6, s = g.s();
-      // 위치 mm, 오차 nm: R(µrad)·y(mm) = nm, M(ppm)·x(mm) = nm
+      // Position mm, error nm: R(µrad)·y(mm) = nm, M(ppm)·x(mm) = nm
       var v = pts.map(function (p, i) { return [Tx + M * p[0] - Rr * p[1] + s * noise[i][0], Ty + M * p[1] + Rr * p[0] + s * noise[i][1]]; });
-      // 최소제곱: 미지수 Tx, Ty, R, M
+      // Least Squares: Unknowns Tx, Ty, R, M
       var A = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]], b = [0, 0, 0, 0];
       pts.forEach(function (p, i) {
         var rows = [[1, 0, -p[1], p[0], v[i][0]], [0, 1, p[0], p[1], v[i][1]]];
@@ -256,14 +272,14 @@
         ctx.fillStyle = P.dim; ctx.fillRect(x0 - 1, y0 - 1, 2, 2);
       });
       ctx.lineWidth = 1;
-      ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left"; ctx.fillText(corr.checked ? "보정 후 잔차" : "측정 오버레이", 10, 16);
+      ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left"; ctx.fillText(corr.checked ? "residual after correction" : "Measurement Overlay", 10, 16);
       var stat = function (k) { var a = show.map(function (q) { return q[k]; }), m = a.reduce(function (s1, x) { return s1 + x; }, 0) / a.length, sd = Math.sqrt(a.reduce(function (s1, x) { return s1 + (x - m) * (x - m); }, 0) / a.length); return Math.abs(m) + 3 * sd; };
       PB.stat("ov-o-3", small(stat(0).toFixed(1) + " / " + stat(1).toFixed(1), "nm"));
       PB.stat("ov-o-f", f[0].toFixed(1) + ", " + f[1].toFixed(1) + " nm · " + f[2].toFixed(3) + " µrad · " + f[3].toFixed(3) + " ppm");
     }, { aspect: 0.75, minHeight: 320, maxHeight: 480 });
   })();
 
-  /* ---------------- SPC */
+  /* Statistical process control simulator */
   (function () {
     var seed = 1, base = [], cv, rr = function () { cv && cv.redraw(); };
     function gen() { var r = PB.rng(seed * 97); base = []; for (var i = 0; i < 100; i++) base.push(Math.sqrt(-2 * Math.log(r() + 1e-9)) * Math.cos(6.283 * r())); }
@@ -278,17 +294,17 @@
       var UCL = m + 3 * sd, LCL = m - 3 * sd;
       var viol = [], flag = new Array(v.length).fill(false), run = 0, side = 0;
       v.forEach(function (x, i) {
-        if (x > UCL || x < LCL) { flag[i] = true; if (viol.indexOf("3σ 초과") < 0) viol.push("3σ 초과"); }
-        var sd2 = x > m ? 1 : -1; if (sd2 === side) run++; else { side = sd2; run = 1; } if (run >= 8) { flag[i] = true; if (viol.indexOf("한쪽 8연속") < 0) viol.push("한쪽 8연속"); }
-        if (i >= 2) { var n2 = [v[i], v[i - 1], v[i - 2]].filter(function (q) { return Math.abs(q - m) > 2 * sd && Math.sign(q - m) === Math.sign(x - m); }).length; if (n2 >= 2) { flag[i] = true; if (viol.indexOf("3점 중 2점 2σ 밖") < 0) viol.push("3점 중 2점 2σ 밖"); } }
-        if (i >= 5) { var inc = true, dec = true; for (var k = i - 5; k < i; k++) { if (!(v[k + 1] > v[k])) inc = false; if (!(v[k + 1] < v[k])) dec = false; } if (inc || dec) { flag[i] = true; if (viol.indexOf("6연속 추세") < 0) viol.push("6연속 추세"); } }
+        if (x > UCL || x < LCL) { flag[i] = true; if (viol.indexOf("Exceeding 3σ") < 0) viol.push("Exceeding 3σ"); }
+        var sd2 = x > m ? 1 : -1; if (sd2 === side) run++; else { side = sd2; run = 1; } if (run >= 8) { flag[i] = true; if (viol.indexOf("8 in a row on one side") < 0) viol.push("8 in a row on one side"); }
+        if (i >= 2) { var n2 = [v[i], v[i - 1], v[i - 2]].filter(function (q) { return Math.abs(q - m) > 2 * sd && Math.sign(q - m) === Math.sign(x - m); }).length; if (n2 >= 2) { flag[i] = true; if (viol.indexOf("2 out of 3 points 2σ out") < 0) viol.push("2 out of 3 points 2σ out"); } }
+        if (i >= 5) { var inc = true, dec = true; for (var k = i - 5; k < i; k++) { if (!(v[k + 1] > v[k])) inc = false; if (!(v[k + 1] < v[k])) dec = false; } if (inc || dec) { flag[i] = true; if (viol.indexOf("6 consecutive trends") < 0) viol.push("6 consecutive trends"); } }
       });
       var box = { x: 58, y: 16, w: w - 150, h: h - 62 };
       var ylo = tgt - tol * 1.6, yhi = tgt + tol * 1.6;
-      PB.chart(ctx, box, { x: [0, 100], y: [ylo, yhi], xLabel: "로트 순서", yLabel: "CD (nm)", series: [{ data: v.map(function (x, i) { return [i, x]; }), color: P.dim, width: 1.2 }],
+      PB.chart(ctx, box, { x: [0, 100], y: [ylo, yhi], xLabel: "lot order", yLabel: "CD (nm)", series: [{ data: v.map(function (x, i) { return [i, x]; }), color: P.dim, width: 1.2 }],
         hlines: [{ y: UCL, color: P.bad, label: "UCL" }, { y: LCL, color: P.bad, label: "LCL" }, { y: m, color: P.faint }, { y: tgt + tol, color: P.warn, dash: [], label: "USL" }, { y: tgt - tol, color: P.warn, dash: [], label: "LSL" }],
         points: v.map(function (x, i) { return { x: i, y: x, color: flag[i] ? P.bad : P.accent, r: flag[i] ? 4 : 2.5 }; }) });
-      // 히스토그램
+      // histogram
       var hx = box.x + box.w + 14, hw = w - hx - 10, bins = 24, cnt = new Array(bins).fill(0);
       v.forEach(function (x) { var b = Math.floor((x - ylo) / (yhi - ylo) * bins); if (b >= 0 && b < bins) cnt[b]++; });
       var mxc = Math.max.apply(null, cnt);
@@ -297,13 +313,13 @@
       var all = v.slice(40), mu = all.reduce(function (a, b) { return a + b; }, 0) / all.length, sg = Math.sqrt(all.reduce(function (a, b) { return a + (b - mu) * (b - mu); }, 0) / (all.length - 1));
       var Cp = 2 * tol / (6 * sg), Cpk = Math.min(tgt + tol - mu, mu - (tgt - tol)) / (3 * sg);
       var pfail = 0.5 * PB.erfc((tgt + tol - mu) / (sg * Math.SQRT2)) + 0.5 * PB.erfc((mu - tgt + tol) / (sg * Math.SQRT2));
-      PB.stat("sp-o-c", small(Cp.toFixed(2) + " / " + Cpk.toFixed(2), "(40번 이후)"));
+      PB.stat("sp-o-c", small(Cp.toFixed(2) + " / " + Cpk.toFixed(2), "(after number 40)"));
       PB.stat("sp-o-p", pfail > 1e-3 ? small((pfail * 100).toFixed(2), "%") : small(PB.fmt(pfail * 1e6, 3), "ppm"));
-      PB.stat("sp-o-r", viol.length ? "<span class='bad-t'>" + viol.join(", ") + "</span>" : "<span class='ok-t'>없음</span>");
+      PB.stat("sp-o-r", viol.length ? "<span class='bad-t'>" + viol.join(", ") + "</span>" : "<span class='ok-t'>None</span>");
     }, { aspect: 0.55, minHeight: 300, maxHeight: 420 });
   })();
 
-  /* ---------------- 수율 모델 */
+  /* Defect-yield model simulator */
   (function () {
     var cv, rr = function () { cv && cv.redraw(); };
     var gD = PB.range("ym-d", function (v) { return v.toFixed(2) + " /cm²"; }, rr), gA = PB.range("ym-a", function (v) { return v.toFixed(1); }, rr), gAr = PB.range("ym-A", function (v) { return v.toFixed(2) + " cm²"; }, rr);
@@ -312,9 +328,9 @@
       var P = PB.palette(), D0 = gD(), al = gA(), A = gAr();
       var s1 = [], s2 = [], s3 = [];
       for (var a = 0; a <= 8; a += 0.05) { var x = a * D0; s1.push([a, Yp(x)]); s2.push([a, Ym(x)]); s3.push([a, Yn(x, al)]); }
-      PB.chart(ctx, null, { x: [0, 8], y: [0, 1.02], xLabel: "다이 면적 (cm²)", yLabel: "수율", series: [{ data: s1, color: P.bad, width: 2.4 }, { data: s2, color: P.accent2, width: 2.4 }, { data: s3, color: P.accent, width: 3 }], vlines: [{ x: A, color: P.faint }] });
+      PB.chart(ctx, null, { x: [0, 8], y: [0, 1.02], xLabel: "Die area (cm²)", yLabel: "Yield", series: [{ data: s1, color: P.bad, width: 2.4 }, { data: s2, color: P.accent2, width: 2.4 }, { data: s3, color: P.accent, width: 3 }], vlines: [{ x: A, color: P.faint }] });
       ctx.font = PB.font(12); ctx.textAlign = "right";
-      ctx.fillStyle = P.bad; ctx.fillText("푸아송", w - 26, 30); ctx.fillStyle = P.accent2; ctx.fillText("머피", w - 26, 48); ctx.fillStyle = P.accent; ctx.fillText("음이항 α=" + al.toFixed(1), w - 26, 66);
+      ctx.fillStyle = P.bad; ctx.fillText("Poisson", w - 26, 30); ctx.fillStyle = P.accent2; ctx.fillText("Murphy", w - 26, 48); ctx.fillStyle = P.accent; ctx.fillText("Negative binomial α=" + al.toFixed(1), w - 26, 66);
       var x0 = A * D0;
       PB.stat("ym-o-p", small((Yp(x0) * 100).toFixed(1), "%")); PB.stat("ym-o-m", small((Ym(x0) * 100).toFixed(1), "%")); PB.stat("ym-o-n", small((Yn(x0, al) * 100).toFixed(1), "%"));
     }, { aspect: 0.6, minHeight: 300, maxHeight: 420 });
