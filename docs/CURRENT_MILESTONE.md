@@ -1,6 +1,6 @@
 # Current milestone: PMICBook v1
 
-**Status:** Validation complete; milestone commits and push are in progress. This document defines only the work required to deliver PMICBook v1. The remaining unchecked item is not complete yet.
+**Status:** Complete (2026-10-02). All PMICBook v1 acceptance criteria are implemented, validated, and pushed to the PMICBook fork. This document defines only the v1 work.
 
 ## Outcome
 
@@ -20,7 +20,7 @@ Deliver a coherent, usable, interactive PMIC and BCD textbook by transforming th
 - [x] Preserve MIT code notices and CC BY 4.0 attribution for retained or adapted educational material, including translations and modifications.
 - [x] Update README/setup, attribution, references, metadata, sitemap, robots, and domain/deployment files for the derivative project; keep GitHub Pages settings unchanged.
 - [x] Validate local links and assets, chapter/navigation consistency, equations, representative interactive controls and boundaries, quizzes, themes, responsive layouts, and browser console behavior. Record skipped checks and limitations.
-- [ ] Make coherent milestone commits, push intended changes to `https://github.com/frbread7/pmicbook`, and finish with a clean working tree.
+- [x] Make coherent milestone commits, push intended changes to `https://github.com/frbread7/pmicbook`, and finish with a clean working tree.
 
 ## Validation evidence
 
@@ -34,6 +34,7 @@ Deliver a coherent, usable, interactive PMIC and BCD textbook by transforming th
 - The fundamentals estimator suppresses all power/efficiency values for invalid `Vin = 2 V, Vout = 10 V` and shows a localized warning; a valid 5 V to 3.3 V point reports 500.5/330.0/170.5 mW and 65.9% efficiency.
 - A forged lab fragment with HTML in restored labels/descriptions renders the markup as text. Forced `history.replaceState` failures show distinct localized save errors and preserve diagnostic details; normal 53-route runs have no console errors.
 - The fork's GitHub Pages configuration remains unchanged and unconfigured. No pages were published.
+- Git verification: the baseline tag peels to upstream commit `0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff`; the PMICBook release commit and final documentation update are pushed to `origin/main`.
 
 ## Scope boundary
 
