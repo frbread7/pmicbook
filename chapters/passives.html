@@ -1,0 +1,47 @@
+<!doctype html>
+<!-- ProcessBook-derived site shell and shared styles: Copyright (c) 2026 geniuskey and ProcessBook contributors; MIT (see ../LICENSE-MIT).
+     Educational material authored for PMICBook is licensed under CC BY 4.0 (see ../LICENSE-CC-BY-4.0).
+     ProcessBook educational material is included only where identified in this page and docs/UPSTREAM_ATTRIBUTION.md. -->
+<html lang="en">
+<head>
+<!--head:start {"desc":"Integrated resistors, junction diodes, MOS and MIM capacitors, and the area and parasitic tradeoffs in PMIC design.","libs":[],"lang":"en"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Integrated Passive Devices · PMICBook</title>
+<meta name="description" content="Integrated resistors, junction diodes, MOS and MIM capacitors, and the area and parasitic tradeoffs in PMIC design.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/chapters/passives.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/passives.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/passives.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/passives.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Integrated Passive Devices · PMICBook">
+<meta property="og:description" content="Integrated resistors, junction diodes, MOS and MIM capacitors, and the area and parasitic tradeoffs in PMIC design.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/chapters/passives.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/passives.html#chapter","name":"Integrated Passive Devices","headline":"Integrated Passive Devices · PMICBook","description":"Integrated resistors, junction diodes, MOS and MIM capacitors, and the area and parasitic tradeoffs in PMIC design.","url":"https://frbread7.github.io/pmicbook/chapters/passives.html","position":8,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"8. Integrated Passive Devices","item":"https://frbread7.github.io/pmicbook/chapters/passives.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<!--head:end-->
+</head><body data-chapter="passives"><main class="chapter">
+  <header class="chapter-hero"><div class="eyebrow">Chapter 08 · BCD integration</div><h1>Integrated passive devices</h1>
+    <p class="lead">PMICs need more than transistors: reference dividers, compensation networks, decoupling, bootstrap storage, protection, and timing all use passive structures. Integrated passives save external parts and interconnect, but silicon area, tolerance, voltage dependence, parasitics, and substrate coupling determine which functions belong on die.</p>
+    <ul class="objectives"><li>Estimate resistor and capacitor behavior from first-order geometry.</li><li>Compare resistor, junction, MOS, and MIM implementations.</li><li>Recognize why inductors and large capacitors often remain external.</li></ul>
+  </header>
+  <section id="resistors"><h2>Resistors: geometry and matching</h2><p>A uniform resistor is described approximately by <code>R = R_s (L/W)</code>, where <code>R_s</code> is sheet resistance in Ω/□ and <code>L/W</code> is the number of squares. A longer, narrower resistor uses more area and can increase parasitic capacitance and sensitivity to geometry. Diffusion, well, and polysilicon resistors offer different sheet resistance, voltage coefficient, temperature coefficient, matching, and voltage limits; the available layers are technology-specific.</p><div class="formula">$$R=\rho\,\frac{L}{Wt}=R_s\frac{L}{W}$$<div class="where">Assumes a uniform film with current along L, width W, and thickness t. Contacts, bends, current crowding, temperature, and voltage-dependent properties can add error. Use a technology’s characterized sheet resistance for a real design.</div></div></section>
+  <section id="capacitors"><h2>Capacitors and diodes</h2><div class="fig-row"><article><h3>MOS capacitor</h3><p>Uses gate-to-semiconductor capacitance. Its capacitance can depend strongly on bias and operating region; useful as a compact capacitor when that variation is acceptable.</p></article><article><h3>MIM capacitor</h3><p>A metal-insulator-metal stack can provide a more nearly linear capacitor for analog and decoupling roles. Density, dielectric voltage coefficient, leakage, and breakdown are platform-dependent.</p></article><article><h3>Junction capacitor / diode</h3><p>A reverse-biased junction provides voltage-dependent depletion capacitance; the same structure may serve diode or protection functions, with leakage and substrate interaction to consider.</p></article></div>
+    <p>For an ideal parallel plate <code>C = εA/d</code>, so area scales with capacitance for a fixed dielectric. Real layouts include fringe fields, interconnect, and neighboring conductors. The ideal <code>E = ½CV²</code> energy relation is useful, but a capacitor’s permissible voltage and lifetime are set by its physical dielectric and design rules. A published example of MIM capacitors and inductors integrated in an advanced RF BEOL stack is described in this <a href="https://www.sciencedirect.com/science/article/pii/S0167931708001585">2008 technical paper</a>; its structures are specific examples, not a general BCD density or design rule.</p></section>
+  <section id="inductors"><h2>Inductors and the integration boundary</h2><p>On-chip spiral inductors can be valuable at high frequency, but they consume substantial area and incur metal resistance, substrate loss, and coupling. Their quality factor, self-resonance, and nearby switching currents affect behavior. Many power converters instead use an external inductor to obtain useful energy storage without dedicating a large die region. This is a system partitioning choice, not an absolute rule.</p><p>Passive values and parasitics connect directly to the <a href="layout.html">layout and parasitics chapter</a>; high-current routes and thermal paths are covered in <a href="metal.html">contacts and metal</a>. Their process structures belong in the <a href="integration.html">BCD integration overview</a>.</p></section>
+  <section class="keypoints" id="summary"><h2>Key points</h2><ol><li>Resistor value scales with sheet resistance and geometry; contacts and voltage/temperature effects add error.</li><li>MOS, MIM, and junction capacitors differ in bias dependence, density, linearity, and leakage.</li><li>Large energy-storage capacitors and inductors often remain external because of area and loss, while small analog passives integrate well.</li><li>Real passive models and limits depend on the selected technology and layout.</li></ol></section>
+  <section class="quiz-sec" id="quiz"><h2>Knowledge check</h2><div class="quiz"><div class="quiz-q"><p>A design increases a resistor’s length while holding width and sheet resistance constant. What happens in the first-order model?</p><div class="opts"><button class="opt">Resistance falls in proportion to length.</button><button class="opt" data-correct>Resistance rises in proportion to length, and the layout usually consumes more area.</button><button class="opt">Resistance stays fixed because only material matters.</button></div><div class="quiz-exp">With <code>R = R_s L/W</code>, doubling length doubles the number of squares and resistance. The simple model omits contacts, bends, and process variation.</div></div></div></section>
+  <nav class="chapter-links"><a href="hv-devices.html">← HV/LDMOS devices</a> · <a href="wafer.html">Next: BCD substrates and wells →</a></nav>
+</main></body></html>

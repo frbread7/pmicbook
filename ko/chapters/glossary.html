@@ -1,0 +1,427 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and 공정Book contributors.
+     Executable code: MIT (see ../../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE-CC-BY-4.0). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "PMIC 및 BCD 용어를 검색하고 핵심 개념을 최종 이해도 확인으로 복습합니다.", "libs": ["katex"], "lang": "ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>용어집 및 종합 지식 점검 · PMICBook</title>
+<meta name="description" content="PMIC 및 BCD 용어를 검색하고 핵심 개념을 최종 이해도 확인으로 복습합니다.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/glossary.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/glossary.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/glossary.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/glossary.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="용어집 및 종합 지식 점검 · PMICBook">
+<meta property="og:description" content="PMIC 및 BCD 용어를 검색하고 핵심 개념을 최종 이해도 확인으로 복습합니다.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/glossary.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/glossary.html#chapter","name":"용어집 및 종합 지식 점검","headline":"용어집 및 종합 지식 점검 · PMICBook","description":"PMIC 및 BCD 용어를 검색하고 핵심 개념을 최종 이해도 확인으로 복습합니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/glossary.html","position":25,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"25. 용어집 및 종합 지식 점검","item":"https://frbread7.github.io/pmicbook/ko/chapters/glossary.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<!--head:end-->
+<style>
+  [hidden] { display: none !important; }
+  .gl-tools { display: grid; gap: 10px; margin-bottom: 18px; }
+  .gl-tools .row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+  .gl-tools .lbl { font-size: 13px; color: var(--text-dim); }
+  .gl-tools .seg { flex-wrap: wrap; }
+  .gl-tools .seg button { font-size: 12.5px; padding: 4px 9px; }
+  .gl-search { margin-bottom: 0 !important; }
+  .gl-count { font-size: 13px; color: var(--text-faint); margin-left: auto; }
+  #gl-list { max-height: min(78vh, 980px); overflow-y: auto; overscroll-behavior: contain; padding: 2px 6px 2px 2px; border-radius: 12px; }
+  .gl-group { position: sticky; top: 0; z-index: 1; background: var(--bg); font-family: var(--mono); font-weight: 700; font-size: 13px; color: var(--accent); letter-spacing: .06em; margin: 14px 0 0; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
+  .gl-group:first-child { margin-top: 0; }
+  .gl-item h4 .abbr { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--accent-2); background: var(--accent-2-soft); border-radius: 5px; padding: 1px 6px; margin-left: 6px; vertical-align: 1px; }
+  .gl-item mark { background: color-mix(in srgb, var(--warn) 35%, transparent); color: inherit; border-radius: 3px; padding: 0 1px; }
+  .gl-empty { padding: 24px; text-align: center; color: var(--text-dim); border: 1px dashed var(--border); border-radius: 12px; }
+
+  .fq { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+  .fq-top { display: flex; justify-content: space-between; gap: 10px; padding: 12px 18px 8px; font-size: 13px; color: var(--text-dim); font-family: var(--mono); }
+  .fq-bar { height: 6px; background: var(--surface-2); margin: 0 18px; border-radius: 3px; overflow: hidden; }
+  .fq-bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .3s ease; }
+  .fq-card, .fq-result { padding: 18px 20px 20px; }
+  .fq-ch { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: .04em; margin-bottom: 6px; }
+  .fq-q { font-weight: 700; font-size: 17px; margin: 0 0 14px !important; }
+  .fq-opts { display: grid; gap: 8px; }
+  .fq-opt { text-align: left; font: inherit; font-size: 15px; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; line-height: 1.5; display: flex; gap: 10px; align-items: baseline; }
+  .fq-opt .n { font-family: var(--mono); font-size: 12px; color: var(--text-faint); flex: none; }
+  .fq-opt:hover:not(:disabled) { border-color: var(--accent); }
+  .fq-opt:disabled { cursor: default; }
+  .fq-opt.right { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 15%, transparent); font-weight: 600; }
+  .fq-opt.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 12%, transparent); }
+  .fq-exp { margin-top: 12px; font-size: 15px; color: var(--text-dim); padding: 12px 14px; border-radius: 8px; background: var(--surface); }
+  .fq-exp b.ok { color: var(--ok); } .fq-exp b.bad { color: var(--bad); }
+  .fq-nav { display: flex; justify-content: flex-end; margin-top: 14px; }
+  .fq-result { text-align: center; }
+  .fq-rank { font-size: 13px; letter-spacing: .12em; color: var(--text-faint); font-weight: 700; }
+  .fq-title { font-size: clamp(24px, 5vw, 32px); font-weight: 800; letter-spacing: -0.02em; margin: 4px 0; background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .fq-big { font-family: var(--mono); font-size: 40px; font-weight: 700; }
+  .fq-big small { font-size: 18px; color: var(--text-dim); }
+  .fq-chart { margin: 16px 0; text-align: left; background: var(--canvas-bg); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .fq-chart canvas { display: block; width: 100%; }
+  .fq-review { text-align: left; font-size: 14px; color: var(--text-dim); margin: 0 0 16px; }
+  .fq-review a { font-weight: 600; }
+</style>
+</head>
+<body data-chapter="glossary">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">제25장 · PMIC / BCD 참고 자료</div>
+    <h1>PMIC/BCD 용어집 및 최종 이해도 확인</h1>
+    <p class="lead">검색 가능한 이 용어집을 활용해 전력 시스템 요구사항, PMIC 회로, BCD 소자, 제조, 구현 제약, 특성 평가, 신뢰성을 연결해 보세요. 여러 주제를 다루는 최종 이해도 확인을 마치고 관련 강의 링크로 돌아가 복습할 수 있습니다.</p>
+    <ul class="objectives">
+      <li>PMIC·BCD 용어를 명칭이나 약어로 검색하고 결과에서 해당 장으로 이동합니다.</li>
+      <li>시스템 동작이 회로, 소자, BCD 통합, 레이아웃, 테스트와 어떻게 연결되는지 복습합니다.</li>
+      <li>틀린 답을 바탕으로 다시 볼 장을 찾습니다.</li>
+    </ul>
+    <p style="margin-top:16px"><a href="#glossary">→ 용어집으로 이동</a> · <a href="#final-quiz">→ 종합 퀴즈 바로 풀기</a></p>
+  </header>
+
+  <section id="glossary">
+    <h2>용어집</h2>
+    <p>용어, 약어, 정의를 검색하세요. 장별 필터로 결과를 좁힌 뒤 가나다순 또는 장 순서로 정렬할 수 있습니다.</p>
+    <div class="gl-tools">
+      <input type="search" class="gl-search" id="gl-q" placeholder="PMIC/BCD 용어 검색 (예: LDMOS, 드롭아웃, WAT)" autocomplete="off" aria-label="PMIC 및 BCD 용어 검색">
+      <div class="row">
+        <span class="lbl">장</span>
+        <div class="seg" id="gl-ch">
+          <button data-value="all" class="on">전체 주제</button>
+          <button data-value="overview">PMIC 시스템</button>
+          <button data-value="fundamentals">기초</button>
+          <button data-value="switching">회로</button>
+          <button data-value="devices">소자</button>
+          <button data-value="bcd">BCD</button>
+          <button data-value="hv-devices">고전압</button>
+          <button data-value="passives">수동소자</button>
+          <button data-value="wafer">기판</button>
+          <button data-value="oxidation">공정</button>
+          <button data-value="metal">금속 배선</button>
+          <button data-value="layout">레이아웃 / 열</button>
+          <button data-value="metrology">특성 평가</button>
+          <button data-value="reliability">신뢰성</button>
+          <button data-value="failure-analysis">고장 분석</button>
+          <button data-value="advanced">첨단 주제</button>
+        </div>
+      </div>
+      <div class="row">
+        <span class="lbl">배열</span>
+        <div class="seg" id="gl-sort"><button data-value="kor" class="on">가나다순</button><button data-value="ch">장 순서</button></div>
+        <span class="gl-count" id="gl-count"></span>
+      </div>
+    </div>
+    <div class="gl-list" id="gl-list" aria-live="polite"></div>
+  </section>
+
+  <section id="final-quiz">
+    <h2>최종 이해도 확인</h2>
+    <p>PMICBook의 여러 주제에서 뽑은 20문항에 답해 보세요. 각 답변에는 짧은 설명과 관련 장 링크가 제공됩니다. 마지막에는 주제별 결과를 확인할 수 있으며, 다시 풀면 문항과 선택지 순서가 바뀝니다.</p>
+    <div class="fq" id="fq">
+      <div class="fq-top"><span id="fq-count">문항 1 / 20</span><span id="fq-score">정답: 0</span></div>
+      <div class="fq-bar"><i id="fq-fill"></i></div>
+      <div class="fq-card" id="fq-card">
+        <div class="fq-ch" id="fq-ch"></div>
+        <p class="fq-q" id="fq-q"></p>
+        <div class="fq-opts" id="fq-opts"></div>
+        <div class="fq-exp" id="fq-exp" hidden aria-live="polite"></div>
+        <div class="fq-nav"><button class="btn primary" id="fq-next" hidden>다음 문항 →</button></div>
+      </div>
+      <div class="fq-result" id="fq-result" hidden>
+        <div class="fq-rank">나의 등급</div>
+        <div class="fq-title" id="fq-title"></div>
+        <div class="fq-big" id="fq-big"></div>
+        <p id="fq-msg" style="color:var(--text-dim)"></p>
+        <div class="fq-chart"><canvas id="cv-fq"></canvas></div>
+        <p class="fq-review" id="fq-review"></p>
+        <button class="btn primary" id="fq-retry">다시 풀기 (문항 섞기)</button>
+      </div>
+    </div>
+  </section>
+
+  <aside class="callout"><strong>원본 출처 표시</strong><p>검색 가능한 용어집과 최종 퀴즈 상호작용은 공정Book의 <a href="https://github.com/geniuskey/processbook/blob/0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff/chapters/glossary.html">기준 커밋 0bc4314d의 용어집 장</a>, CC BY 4.0 라이선스에 따라 이용할 수 있습니다. 용어 목록, 정의, 문항은 PMIC/BCD 교육에 맞게 다시 작성·각색했습니다.</p></aside>
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>PMIC 성능은 전원 도메인의 요구사항, 회로 선택, 소자 한계, 통합 절충과 연결됩니다.</li>
+      <li>BCD는 기술별 플랫폼에서 저전압 CMOS, 바이폴라 기능, 고전압 소자를 통합합니다.</li>
+      <li>제조 선택은 기생 성분, 전류 처리, 절연, 열 동작, 신뢰성을 좌우합니다.</li>
+      <li>특성 평가는 정해진 조건에서 전기 시험, 웨이퍼 모니터, 양산 선별을 함께 활용합니다.</li>
+      <li>모델과 시뮬레이터는 설계 직관을 돕지만 제품 사양이나 파운드리 데이터를 대신하지 않습니다.</li>
+    </ol>
+  </section>
+</main>
+<script>
+(function () {
+  "use strict";
+  /* PMIC and BCD glossary data */
+var TERMS = [
+    { ko:"전력관리 집적회로", en:"Power management integrated circuit", abbr:"PMIC", def:"전원 레일 하나 이상을 조절·변환·시퀀싱하거나 보호하는 집적회로.", ch:"overview", src:"PMIC Power management integrated circuit", srcDef:"An integrated circuit that regulates, converts, sequences or protects one or more power rails." },
+    { ko:"전원 도메인", en:"Supply domain", abbr:"", def:"함께 전력을 공급받고 제어되는 블록의 집합으로, 보통 자체 전압·시퀀싱·종료 동작을 갖습니다.", ch:"overview", src:"Power domain Supply domain", srcDef:"A group of blocks powered and controlled together, often with its own voltage, sequencing and shutdown behavior." },
+    { ko:"전원 시퀀싱", en:"Rail sequencing", abbr:"", def:"전원 레일과 리셋 신호를 켜거나 끌 때 요구되는 순서와 타이밍.", ch:"overview", src:"Power sequencing Rail sequencing", srcDef:"The required order and timing for enabling or disabling supply rails and reset signals." },
+    { ko:"대기 전류", en:"No-load operating current", abbr:"Iq", def:"정해진 동작 모드, 부하, 온도 조건에서 레귤레이터나 IC가 소비하는 입력 전류.", ch:"fundamentals", src:"Quiescent current No-load operating current", srcDef:"Input current consumed by a regulator or IC in a stated operating mode, load and temperature condition." },
+    { ko:"라인 레귤레이션", en:"Input-to-output regulation", abbr:"", def:"다른 시험 조건을 고정했을 때 입력 전압 변화에 따른 레귤레이션 출력의 변화.", ch:"fundamentals", src:"Line regulation Input-to-output regulation", srcDef:"Change in regulated output as input voltage changes, with other test conditions held fixed." },
+    { ko:"부하 레귤레이션", en:"Output change with load", abbr:"", def:"정해진 입력 및 온도 조건에서 부하 전류 변화에 따른 출력 전압의 변화.", ch:"fundamentals", src:"Load regulation Output change with load", srcDef:"Change in output voltage as load current changes under stated input and temperature conditions." },
+    { ko:"드롭아웃 전압", en:"Minimum headroom", abbr:"VDO", def:"레귤레이터가 지정된 출력 동작을 더 이상 유지할 수 없게 되는 입력-출력 간 최소 여유 전압.", ch:"references-ldo", src:"Dropout voltage Minimum headroom", srcDef:"The input-to-output headroom below which a regulator can no longer maintain its specified output behavior." },
+    { ko:"부하 과도 응답", en:"Load-step response", abbr:"", def:"제어된 부하 전류 변화 후 출력의 응답으로, 언더슈트·오버슈트·복구를 포함합니다.", ch:"fundamentals", src:"Load transient Load-step response", srcDef:"Output response after a controlled change in load current, including undershoot, overshoot and recovery." },
+    { ko:"전력 변환 효율", en:"Conversion efficiency", abbr:"η", def:"정해진 동작점에서 입력 전력 대비 출력 전력의 비율이며 손실은 열 등으로 소산됩니다.", ch:"switching", src:"Power efficiency Conversion efficiency", srcDef:"Output power divided by input power at a stated operating point; losses appear as heat and other dissipation." },
+    { ko:"벅 컨버터", en:"Step-down switching converter", abbr:"", def:"의도된 동작 범위에서 입력보다 낮은 평균 출력 전압을 만드는 스위칭 전력단.", ch:"switching", src:"Buck converter Step-down switching converter", srcDef:"A switching power stage that produces a lower average output voltage than its input over its intended operating range." },
+    { ko:"부스트 컨버터", en:"Step-up switching converter", abbr:"", def:"의도된 동작 범위에서 입력보다 높은 평균 출력 전압을 만드는 스위칭 전력단.", ch:"switching", src:"Boost converter Step-up switching converter", srcDef:"A switching power stage that produces a higher average output voltage than its input over its intended operating range." },
+    { ko:"차지 펌프", en:"Switched-capacitor converter", abbr:"", def:"스위칭 커패시터를 통해 전하를 전달해 자성 인덕터 없이 다른 전압을 만드는 컨버터.", ch:"switching", src:"Charge pump Switched-capacitor converter", srcDef:"A converter that transfers charge through switched capacitors to create a different voltage without a magnetic inductor." },
+    { ko:"저드롭아웃 레귤레이터", en:"Low-dropout regulator", abbr:"", def:"비교적 작은 입력-출력 여유 전압에서도 동작하도록 설계한 선형 레귤레이터입니다. 안정도와 드롭아웃은 구현과 조건에 따라 달라집니다.", ch:"references-ldo", src:"LDO Low-dropout regulator", srcDef:"A linear regulator designed to operate with relatively small input-to-output voltage headroom; stability and dropout depend on the implementation and conditions." },
+    { ko:"전류 제한", en:"Overcurrent limit", abbr:"", def:"부하나 고장이 허용 수준보다 큰 전류를 요구할 때 출력 전류를 제한하는 보호 동작.", ch:"switching", src:"Current limit Overcurrent limit", srcDef:"A protection behavior that restricts output current when a load or fault demands more than the allowed level." },
+    { ko:"저전압 차단", en:"Undervoltage lockout", abbr:"", def:"감시 중인 전원이 정해진 임계값 아래로 떨어지면 동작을 중단하거나 제한하는 회로 기능.", ch:"switching", src:"UVLO Undervoltage lockout", srcDef:"A circuit function that disables or constrains operation when a monitored supply falls below a defined threshold." },
+    { ko:"밴드갭 기준전압", en:"Temperature-compensated reference", abbr:"", def:"온도에 따라 달라지는 접합 전압 항들을 조합해 1차 온도 변화를 줄이는 기준전압 개념.", ch:"references-ldo", src:"Bandgap reference Temperature-compensated reference", srcDef:"A reference concept combining temperature-dependent junction and voltage terms to reduce first-order temperature variation." },
+    { ko:"MOSFET", en:"Metal-oxide-semiconductor field-effect transistor", abbr:"MOS", def:"게이트 전압으로 채널 전하를 제어해 소스와 드레인 사이의 도통을 조절하는 전계효과 소자.", ch:"devices", src:"MOSFET Metal-oxide-semiconductor field-effect transistor", srcDef:"A field-effect device whose gate voltage controls channel charge and conduction between source and drain." },
+    { ko:"바디 효과", en:"Back-gate effect", abbr:"", def:"MOS 소자에서 소스-바디 바이어스에 따라 문턱전압이 달라지는 현상.", ch:"devices", src:"Body effect Back-gate effect", srcDef:"Threshold-voltage dependence on source-to-body bias in a MOS device." },
+    { ko:"항복 전압", en:"Reverse-voltage breakdown", abbr:"BV", def:"소자 접합이나 구조에서 큰 전류 도통이 시작되는 전압 영역입니다. 시험 판정 기준을 함께 봐야 합니다.", ch:"hv-devices", src:"Breakdown voltage Reverse-voltage breakdown", srcDef:"A specified voltage region where a device junction or structure enters a strong current-conduction regime; the test criterion matters." },
+    { ko:"BCD 통합", en:"Bipolar-CMOS-DMOS integration", abbr:"BCD", def:"바이폴라, CMOS, 이중 확산 MOS 소자 옵션을 통합하는 기술 계열이며 세부 공정 모듈은 플랫폼마다 다릅니다.", ch:"bcd", src:"BCD Bipolar-CMOS-DMOS integration", srcDef:"A technology family integrating bipolar, CMOS and double-diffused MOS device options; exact modules vary by platform." },
+    { ko:"LDMOS", en:"Lateral double-diffused MOSFET", abbr:"", def:"드리프트 영역으로 전압을 지지하면서 온저항과 항복 특성의 균형을 맞추는 횡형 전력 MOS 구조.", ch:"hv-devices", src:"LDMOS Lateral double-diffused MOSFET", srcDef:"A lateral power MOS structure using a drift region to support voltage while balancing on-resistance and breakdown." },
+    { ko:"드리프트 영역", en:"Voltage-supporting region", abbr:"", def:"고전압 소자에서 전계를 분산하고 전압을 지지하는 저농도 도핑 영역으로, 면적과 저항 사이의 절충이 있습니다.", ch:"hv-devices", src:"Drift region Voltage-supporting region", srcDef:"A lightly doped region in a high-voltage device that spreads electric field and supports voltage, with an area and resistance trade-off." },
+    { ko:"RESURF", en:"Reduced surface field", abbr:"", def:"반도체 층의 전하 균형을 이용해 표면 전계 집중을 줄이는 전계 형상화 설계 원리.", ch:"hv-devices", src:"RESURF Reduced surface field", srcDef:"A field-shaping design principle that uses charge balance in a semiconductor layer to reduce surface electric-field concentration." },
+    { ko:"비저항 온저항", en:"Area-normalized on-resistance", abbr:"Ron,sp", def:"명시된 활성 면적과 온저항의 곱으로, 소자의 도통 성능과 면적 절충을 비교할 때 사용합니다.", ch:"hv-devices", src:"Specific on-resistance Area-normalized on-resistance", srcDef:"On-resistance multiplied by an explicitly stated active area, used to compare device conduction-area trade-offs." },
+    { ko:"접합 절연", en:"Isolation by reverse-biased junctions", abbr:"", def:"역바이어스 반도체 접합으로 전기적 영역을 분리하는 방식이며 바이어스 한계와 기생 경로를 고려해야 합니다.", ch:"bcd", src:"Junction isolation Isolation by reverse-biased junctions", srcDef:"Electrical separation using reverse-biased semiconductor junctions; bias limits and parasitic paths must be considered." },
+    { ko:"트리플 웰", en:"Nested-well isolation", abbr:"", def:"특정 공정 구조에서 독립적으로 바이어스할 수 있는 바디 영역을 제공하는 웰 구성.", ch:"bcd", src:"Triple well Nested-well isolation", srcDef:"A well arrangement that can provide an independently biased body region, subject to the particular process structure." },
+    { ko:"래치업", en:"Parasitic thyristor turn-on", abbr:"", def:"기생 바이폴라 경로의 재생성 도통으로 낮은 임피던스의 전원-접지 경로가 형성되는 현상.", ch:"reliability", src:"Latch-up Parasitic thyristor turn-on", srcDef:"Regenerative conduction involving parasitic bipolar paths that can create a low-impedance supply-to-ground path." },
+    { ko:"MIM 커패시터", en:"Metal-insulator-metal capacitor", abbr:"MIM", def:"유전체를 사이에 둔 금속 전극으로 만든 커패시터로, 면적·정격 전압·기생 성분은 공정 옵션에 따라 달라집니다.", ch:"passives", src:"MIM capacitor Metal-insulator-metal capacitor", srcDef:"A capacitor formed by metal electrodes separated by a dielectric; area, voltage rating and parasitics depend on the process option." },
+    { ko:"MOS 커패시터", en:"Gate-stack capacitor", abbr:"MOSCAP", def:"MOS 게이트 적층을 이용하며 측정 커패시턴스는 바이어스, 주파수, 반도체 응답에 따라 달라집니다.", ch:"passives", src:"MOS capacitor Gate-stack capacitor", srcDef:"A capacitor using a MOS gate stack whose measured capacitance depends on bias, frequency and semiconductor response." },
+    { ko:"집적 저항", en:"On-chip resistor", abbr:"", def:"공정 층이나 소자 구조를 이용해 구현하며 저항값, 허용오차, 전압 계수, 면적 사이에 절충이 있습니다.", ch:"passives", src:"Integrated resistor On-chip resistor", srcDef:"A resistor implemented using a process layer or device structure, with resistance, tolerance, voltage coefficient and area trade-offs." },
+    { ko:"열저항", en:"Temperature-rise per power", abbr:"Rθ", def:"정의된 열 경로와 경계 조건에서 온도차와 소산 전력의 관계를 나타내는 값.", ch:"layout", src:"Thermal resistance Temperature-rise per power", srcDef:"A measure relating temperature difference to dissipated power for a defined thermal path and boundary condition." },
+    { ko:"IR 강하", en:"Interconnect voltage drop", abbr:"", def:"전류가 흐르는 금속, 접점 등 도전 경로의 저항으로 발생하는 전원 전압 손실.", ch:"layout", src:"IR drop Interconnect voltage drop", srcDef:"Supply voltage loss caused by resistance in current-carrying metal, contacts and other conductive paths." },
+    { ko:"기판 결합", en:"Substrate noise coupling", abbr:"", def:"반도체 기판을 통해 원치 않는 신호나 스위칭 에너지가 다른 소자 영역으로 결합되는 현상.", ch:"layout", src:"기판 coupling 기판 noise coupling", srcDef:"Unwanted signal or switching energy coupled through the semiconductor substrate into other device regions." },
+    { ko:"웨이퍼 수락 시험", en:"Wafer acceptance test", abbr:"PCM", def:"공정의 전기적 특성을 감시하기 위해 전용 공정 관리 구조를 웨이퍼 수준에서 측정하는 시험.", ch:"metrology", src:"WAT Wafer acceptance test", srcDef:"Wafer-level measurement of dedicated process-control structures used to monitor electrical process characteristics." },
+    { ko:"전기적 다이 선별", en:"Electrical die sort", abbr:"Wafer sort", def:"패키징 전에 웨이퍼 상의 각 다이를 전기적으로 시험해 정해진 제품 한계에 따라 선별하는 과정.", ch:"metrology", src:"EDS Electrical die sort", srcDef:"Electrical testing of individual dies on a wafer before packaging to screen against defined product limits." },
+    { ko:"양산 테스트", en:"Automated product screening", abbr:"ATE", def:"정해진 한계에 따라 반복 가능한 전기 시험을 수행하는 과정으로, 커버리지·시험 시간·가드밴드·조건이 선별 성능에 영향을 줍니다.", ch:"metrology", src:"Production test Automated product screening", srcDef:"Repeatable electrical testing against specified limits; coverage, test time, guard bands and test conditions affect the screen." },
+    { ko:"가드밴드", en:"Test margin", abbr:"", def:"측정 및 공정 편차를 고려하기 위해 양산 시험 한계와 제품 사양 한계 사이에 두는 여유.", ch:"metrology", src:"Guard band Test margin", srcDef:"A margin between production-test limits and product specification limits used to account for measurement and process variation." },
+    { ko:"켈빈 센싱", en:"Four-wire voltage sensing", abbr:"", def:"전류를 흘리는 연결과 전압을 측정하는 연결을 분리해 저저항 측정에서 리드·접점 저항 오차를 줄이는 방식.", ch:"metrology", src:"Kelvin sensing Four-wire voltage sensing", srcDef:"Separate force and sense connections reduce lead/contact resistance error in low-resistance measurements." },
+    { ko:"관리도", en:"Statistical process control chart", abbr:"SPC", def:"시간 순서에 따른 공정 데이터와 계산된 관리 한계를 표시해 공정 변화 신호를 찾는 도구.", ch:"metrology", src:"Control chart Statistical process control chart", srcDef:"A time-ordered display of process data with calculated control limits used to identify signals of process change." },
+    { ko:"공정능력지수 Cpk", en:"Centered process capability index", abbr:"", def:"통계적 가정 아래 공정 산포와 평균 위치를 규격 한계와 비교하는 지수.", ch:"metrology", src:"Cpk Centered process capability index", srcDef:"An index comparing process spread and mean location with specification limits under its statistical assumptions." },
+    { ko:"일렉트로마이그레이션", en:"Current-driven metal transport", abbr:"EM", def:"전류 밀도와 온도에 좌우되는 금속 원자 이동으로 배선 열화를 일으킬 수 있습니다.", ch:"reliability", src:"Electromigration Current-driven metal transport", srcDef:"Current-density- and temperature-dependent metal transport that can contribute to interconnect wear-out." },
+    { ko:"시간 의존 절연막 파괴", en:"Time-dependent dielectric breakdown", abbr:"", def:"전계 스트레스에 따른 유전체 열화로, 수명은 재료·형상·전계·온도·시험 모델에 따라 달라집니다.", ch:"reliability", src:"TDDB Time-dependent dielectric breakdown", srcDef:"Dielectric wear-out under electric-field stress; lifetime depends on material, geometry, field, temperature and test model." },
+    { ko:"바이어스 온도 불안정성", en:"Bias temperature instability", abbr:"", def:"시간에 따라 관찰되는 바이어스·온도 관련 트랜지스터 파라미터 변화로, 스트레스와 회복 조건이 중요합니다.", ch:"reliability", src:"BTI Bias temperature instability", srcDef:"Bias- and temperature-related transistor parameter shifts observed over time; stress and recovery conditions matter." },
+    { ko:"핫 캐리어 주입", en:"Hot-carrier injection", abbr:"", def:"강한 전계 영역의 고에너지 캐리어와 관련된 트랜지스터 열화 기구.", ch:"reliability", src:"HCI Hot-carrier injection", srcDef:"A transistor degradation mechanism associated with energetic carriers in high-field regions." },
+    { ko:"인체 모델 ESD", en:"Human-body-model electrostatic discharge", abbr:"HBM", def:"표준화된 ESD 시험 모델입니다. 적용 표준 개정판과 소자별 인증 계획을 확인해야 합니다.", ch:"reliability", src:"HBM ESD Human-body-model electrostatic discharge", srcDef:"A standardized ESD test model; use the applicable standard revision and device-specific qualification plan." },
+    { ko:"전력 사이클링", en:"Repeated self-heating stress", abbr:"", def:"반복적인 전원 켜기·끄기 또는 부하 사이클링으로 온도 변화가 발생해 다이·배선·패키지 재료에 스트레스를 줄 수 있습니다.", ch:"reliability", src:"Power cycling Repeated self-heating stress", srcDef:"Repeated power on/off or load cycling that produces temperature swings and can stress die, interconnect and package materials." },
+    { ko:"고장 위치 특정", en:"Electrical-to-physical localization", abbr:"", def:"고장 구조의 위치를 좁히기 위해 전기 시험과 물리 분석 방법을 순차적으로 사용하는 과정.", ch:"failure-analysis", src:"Failure localization Electrical-to-physical localization", srcDef:"A sequence of electrical tests and physical methods used to narrow where a failing structure is located." },
+    { ko:"스마트 전력", en:"Integrated power and control", abbr:"", def:"전력 소자와 제어·센싱·보호 기능을 결합하는 통합 방식으로 구현 형태는 다양합니다.", ch:"advanced", src:"Smart power Integrated power and control", srcDef:"An integration approach combining power devices with control, sensing or protection functions; implementations vary widely." }
+  ];
+
+  /* PMICBook knowledge-check data */
+  var QUIZ = [
+    {ch:"overview",q:"PMIC 전원 레일이 무부하에서는 안정적이지만 대부하에서 허용 범위를 벗어납니다. 가장 직접적인 첫 비교는 무엇인가요?",o:["라인 레귤레이션", "부하 레귤레이션", "종료 전류", "웨이퍼 평탄도"],a:1,e:"부하 레귤레이션은 정해진 조건에서 부하 전류 변화에 따른 출력 변화를 측정합니다."},
+    {ch:"fundamentals",q:"대기 전류는 무엇을 나타내나요?",o:["출력 리플만", "정해진 동작 상태에서 IC가 소비하는 입력 전류", "인덕터 피크 전류", "웨이퍼 누설"],a:1,e:"Iq는 동작 모드, 부하, 인에이블 상태, 온도를 지정해야 의미가 있습니다."},
+    {ch:"references-ldo",q:"LDO가 드롭아웃에 들어가는 조건은 무엇인가요?",o:["지정 동작을 유지하기에 입력-출력 여유 전압이 부족할 때", "모든 설계에서 출력 커패시터가 너무 클 때", "부하 전류가 0일 때", "기준전압이 정확히 0일 때"],a:0,e:"드롭아웃은 지정된 레귤레이션을 더 이상 유지할 수 없는 여유 전압 상태입니다."},
+    {ch:"switching",q:"변환 효율은 어떻게 정의하나요?",o:["Pin/Pout", "Pout/Pin", "Vout/Vin만", "스위칭 주파수를 부하로 나눈 값"],a:1,e:"효율은 정해진 동작점에서 출력 전력을 입력 전력으로 나눈 값입니다."},
+    {ch:"fundamentals",q:"급격한 부하 증가 후의 복구를 가장 잘 보여주는 측정은 무엇인가요?",o:["직류 라인 스윕", "부하 과도 파형", "웨이퍼 두께", "개루프 이득만"],a:1,e:"제어된 부하 스텝은 언더슈트, 복구, 링잉, 안정화 동작을 보여줍니다."},
+    {ch:"switching",q:"이상적인 연속 전도 벅에서 듀티비와 출력/입력 전압의 관계는 무엇인가요?",o:["Vout/Vin은 대략 D", "Vout/Vin은 항상 1/D", "D와 무관", "스위칭 주파수와 같다"],a:0,e:"이상적인 CCM 관계는 Vout ≈ D·Vin입니다. 실제 손실과 제어 동작은 결과를 바꿉니다."},
+    {ch:"switching",q:"스위치 노드 링잉을 확인하는 데 도움이 되는 관찰은 무엇인가요?",o:["적절한 프로빙으로 측정한 스위치 노드 파형", "실온 직류 출력값만", "웨이퍼 노치 방향", "패키지 라벨"],a:0,e:"대역폭이 충분한 파형 측정으로 링잉을 확인할 수 있지만 프로브 접지와 측정 셋업의 기생 성분을 고려해야 합니다."},
+    {ch:"devices",q:"MOSFET의 도통을 제어하는 것은 무엇인가요?",o:["게이트가 제어하는 채널 전하", "기판 두께만", "기계식 스위치", "패키지 리드 길이만"],a:0,e:"게이트 전압이 채널 전하를 바꾸어 소스-드레인 도통을 조절합니다."},
+    {ch:"bcd",q:"BCD는 일반적으로 무엇을 통합하나요?",o:["바이폴라, CMOS, DMOS 소자 옵션", "벅, 차지 펌프, 디스플레이만", "금속층 세 개", "배터리, 커패시터, 다이오드만"],a:0,e:"BCD는 바이폴라, CMOS, DMOS 통합을 가리키며 실제 플랫폼의 제공 옵션은 서로 다릅니다."},
+    {ch:"hv-devices",q:"고전압 MOS 소자가 드리프트 영역을 사용하는 이유는 무엇인가요?",o:["전계를 분산해 전압을 지지하기 위해", "온저항을 모두 없애기 위해", "디지털 클록 주파수를 정하기 위해", "절연을 대체하기 위해"],a:0,e:"드리프트 영역은 전압을 지지하며 도통 저항과 면적 사이에 절충을 만듭니다."},
+    {ch:"hv-devices",q:"RESURF 설계 원리가 주로 다루는 것은 무엇인가요?",o:["전하 균형을 이용한 전계 형상화", "클록 도메인 교차", "테스트 소켓 선택", "LDO 보상"],a:0,e:"RESURF는 적합한 구조에서 전하 균형을 이용해 표면 전계 집중을 줄입니다."},
+    {ch:"passives",q:"MOS 커패시터의 측정 커패시턴스는 무엇에 따라 달라질 수 있나요?",o:["바이어스와 주파수", "웨이퍼 색상만", "다이 라벨", "본딩 와이어 루프 높이만"],a:0,e:"반도체 전하 응답 때문에 커패시턴스가 바이어스와 측정 주파수에 따라 달라집니다."},
+    {ch:"wafer",q:"일부 BCD 시작 구조에서 에피택시를 사용하는 이유는 무엇인가요?",o:["기판 위에 제어된 소자층을 제공하기 위해", "모든 마스크를 대체하기 위해", "모든 열 공정을 없애기 위해", "보편적인 소자 정격 하나를 보장하기 위해"],a:0,e:"에피택셜 층은 시작 웨이퍼 구조의 일부가 될 수 있습니다. 도전형과 두께는 플랫폼에 따라 다릅니다."},
+    {ch:"oxidation",q:"열산화로 SiO₂를 성장시킬 때 산화막 두께에 대한 실리콘 소모 두께는 대략 얼마인가요?",o:["산화막 두께의 0.44배", "산화막 두께 전체", "산화막 두께의 두 배", "없음"],a:0,e:"산화막 두께가 x일 때 실리콘 소모량은 대략 0.44x입니다."},
+    {ch:"metal",q:"전력 경로에서 IR 강하를 일으키는 것은 무엇인가요?",o:["전류가 흐르는 도체와 접점의 저항", "스위칭 주파수만", "광학 간섭", "MOS 문턱 기호"],a:0,e:"유한한 경로 저항에 전류가 흐르면 전압 강하가 발생합니다."},
+    {ch:"layout",q:"여러 동작점에서 온도를 측정해야 하는 이유는 무엇인가요?",o:["전력 손실과 열 경로가 입력, 부하, 모드에 따라 달라지기 때문", "온도는 회로도에서 고정되기 때문", "열저항은 항상 0이기 때문", "실온 시험만 유효하기 때문"],a:0,e:"손실과 열 흐름은 동작점과 경계 조건에 따라 달라집니다."},
+    {ch:"metrology",q:"WAT/PCM은 주로 무엇을 모니터링하나요?",o:["전용 웨이퍼 수준 전기 공정 구조", "패키지된 IC의 모든 실제 사용 사례", "칩 외관만", "고객 시스템의 배터리 용량"],a:0,e:"WAT/PCM 측정은 웨이퍼 수준 전용 공정 모니터 구조를 추적합니다."},
+    {ch:"metrology",q:"EDS 또는 웨이퍼 선별은 무엇을 시험하나요?",o:["패키징 전 개별 다이의 전기적 특성", "웨이퍼 결정 방향만", "현장 사용 후 완성 보드", "패키지 열저항만"],a:0,e:"전기적 다이 선별은 정해진 시험 한계로 조립 전 다이를 검사합니다."},
+    {ch:"reliability",q:"ESD 주장은 시험 모델과 표준을 명시해야 하는 이유가 무엇인가요?",o:["정의된 방법에 따라 스트레스와 합격 기준이 달라지기 때문", "모든 ESD 시험이 동일하기 때문", "ESD는 소프트웨어 문제뿐이기 때문", "표준이 파운드리 레시피를 규정하기 때문"],a:0,e:"서로 다른 모델과 개정판은 서로 다른 스트레스 조건과 판정 기준을 정의합니다."},
+    {ch:"failure-analysis",q:"PMIC 고장이 의심될 때 유용한 첫 단계는 무엇인가요?",o:["전기적 증상을 동작 조건과 대조하고 재현하기", "즉시 다이의 모든 층을 제거하기", "단일 근본 원인을 가정하기", "보드와 시험 셋업을 무시하기"],a:0,e:"재현 가능한 전기적 증거와 조건이 이후의 위치 특정 작업을 이끕니다."}
+  ];
+
+  /* Searchable glossary renderer */
+  var CH = {}; PB.CHAPTERS.forEach(function (c) { CH[c.slug] = c; });
+  var ORDER = {}; PB.CHAPTERS.forEach(function (c, i) { ORDER[c.slug] = i; });
+  var CHO = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ".split("");
+  function initial(s) { var c = (s[0] || ""); var n = c.charCodeAt(0); return /[0-9]/.test(c) ? "0–9" : n >= 0xAC00 && n <= 0xD7A3 ? CHO[Math.floor((n - 0xAC00) / 588)] : "#"; }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function norm(s) { return String(s).toLowerCase().replace(/[\s\-·_/()]/g, ""); }
+  function hl(text, q) {
+    var t = esc(text);
+    if (!q) return t;
+    var i = text.toLowerCase().indexOf(q);
+    if (i < 0) return t;
+    return esc(text.slice(0, i)) + "<mark>" + esc(text.slice(i, i + q.length)) + "</mark>" + esc(text.slice(i + q.length));
+  }
+  function gOrd(g) { var i = CHO.indexOf(g); return i >= 0 ? i : g === "가나다순" ? 100 : 101; }
+  TERMS.forEach(function (t) { t._key = norm(t.ko + " " + t.en + " " + t.abbr + " " + t.src); t._def = norm(t.def + " " + t.srcDef); t._ini = initial(t.ko); t._ini = initial(t.ko); });
+
+  var qEl = document.getElementById("gl-q"), listEl = document.getElementById("gl-list"), countEl = document.getElementById("gl-count");
+  var chSel = PB.seg("gl-ch", renderGlossary), sortSel = PB.seg("gl-sort", renderGlossary);
+  qEl.addEventListener("input", renderGlossary);
+
+  function chapterHref(slug) { return slug + ".html"; }
+  var CHKO = { overview:"PMIC 시스템", fundamentals:"기초", "references-ldo":"기준전압과 LDO", switching:"스위칭 회로", devices:"반도체 소자", bcd:"BCD 통합", "hv-devices":"고전압 소자", passives:"집적 수동소자", wafer:"웨이퍼와 기판", oxidation:"산화 공정", metal:"금속 배선", layout:"레이아웃과 열", metrology:"특성 평가", reliability:"신뢰성", "failure-analysis":"고장 분석", advanced:"첨단 주제", glossary:"용어집" };
+  function chapterLabel(slug) { return CHKO[slug] || (CH[slug] && (CH[slug].titleKo || CH[slug].title)) || slug; }
+  function renderGlossary() {
+    var raw = qEl.value.trim(), q = norm(raw), qLow = raw.toLowerCase(), ch = chSel(), mode = sortSel();
+    var items = TERMS.filter(function (t) {
+      if (ch !== "all" && t.ch !== ch) return false;
+      if (!q) return true;
+      return t._key.indexOf(q) >= 0 || t._def.indexOf(q) >= 0;
+    });
+    // Title matches before the defining match
+    var rank = function (t) { return q && t._key.indexOf(q) < 0 ? 1 : 0; };
+    items.sort(function (a, b) {
+      if (mode === "ch") { var d = ORDER[a.ch] - ORDER[b.ch]; if (d) return d; }
+      var r = rank(a) - rank(b); if (r && mode !== "ch") return r;
+      if (mode !== "ch") { var g = gOrd(a._ini) - gOrd(b._ini); if (g) return g; }
+      return a.ko.localeCompare(b.ko, "ko");
+    });
+    countEl.textContent = items.length + "개 용어";
+    if (!items.length) { listEl.innerHTML = '<div class="gl-empty">“일치하는 용어가 없습니다: ' + esc(raw) + '”. 다른 용어나 약어를 검색해 보세요.</div>'; return; }
+    var html = [], last = null;
+    items.forEach(function (t) {
+      var g = mode ==="ch" ? t.ch : (q && rank(t) ? "정의 일치" : t._ini);
+      if (g !== last) {
+        last = g;
+        html.push('<div class="gl-group">' + (mode === "ch" ? "제" + CH[g].num + "장 · " + esc(chapterLabel(g)) : esc(g)) + "</div>");
+      }
+      var c = CH[t.ch];
+      html.push('<div class="gl-item" id="term-' + TERMS.indexOf(t) + '"><h4>' + hl(t.ko, qLow) + '<span class="en">' + hl(t.en, qLow) + "</span>" +
+        (t.abbr ? '<span class="abbr">' + hl(t.abbr, qLow) + "</span>" : "") + "</h4><p>" + esc(t.def) + "</p>" +
+        '<a class="ch" href="' + chapterHref(t.ch) + '">→ 제' + c.num + " " + esc(chapterLabel(t.ch)) + "</a></div>");
+    });
+    listEl.innerHTML = html.join("");
+  }
+  renderGlossary();
+
+  /* ============================================================== Quiz logic */
+  var fq = {
+    order: [], i: 0, score: 0, answered: false, results: [], cv: null,
+    el: function (id) { return document.getElementById(id); },
+  };
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  var QN = 20;
+  function startQuiz(shuf) {
+    var idx = QUIZ.map(function (_, i) { return i; });
+    shuffle(idx); idx = idx.slice(0, QN);
+    fq.order = idx.map(function (qi) {
+      var perm = QUIZ[qi].o.map(function (_, k) { return k; });
+      shuffle(perm);
+      return { qi: qi, perm: perm };
+    });
+    fq.i = 0; fq.score = 0; fq.results = [];
+    fq.el("fq-card").hidden = false; fq.el("fq-result").hidden = true;
+    showQ();
+  }
+  function showQ() {
+    var item = fq.order[fq.i], Q = QUIZ[item.qi], c = CH[Q.ch];
+    fq.answered = false;
+    fq.el("fq-count").textContent = "문항 " + (fq.i + 1) + " / " + QN;
+    fq.el("fq-score").textContent = "정답: " + fq.score;
+    fq.el("fq-fill").style.width = (fq.i / QN) * 100 + "%";
+    fq.el("fq-ch").textContent = "제" + c.num + "장 · " + chapterLabel(Q.ch);
+    fq.el("fq-q").textContent = Q.q;
+    var box = fq.el("fq-opts");
+    box.innerHTML = "";
+    item.perm.forEach(function (k, n) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "fq-opt"; b.dataset.k = k;
+      b.innerHTML = '<span class="n">' + String.fromCharCode(65 + n) + "</span><span>" + esc(Q.o[k]) + "</span>";
+      b.addEventListener("click", function () { answer(k); });
+      box.appendChild(b);
+    });
+    fq.el("fq-exp").hidden = true;
+    fq.el("fq-next").hidden = true;
+  }
+  function answer(k) {
+    if (fq.answered) return;
+    fq.answered = true;
+    var item = fq.order[fq.i], Q = QUIZ[item.qi], ok = k === Q.a, c = CH[Q.ch];
+    if (ok) fq.score++;
+    fq.results.push({ ch: Q.ch, ok: ok });
+    [].forEach.call(fq.el("fq-opts").querySelectorAll(".fq-opt"), function (b) {
+      var bk = Number(b.dataset.k);
+      b.disabled = true;
+      if (bk === Q.a) b.classList.add("right");
+      else if (bk === k) b.classList.add("wrong");
+    });
+    var exp = fq.el("fq-exp");
+    exp.innerHTML = (ok ? '<b class="ok">정답입니다!</b> ' : '<b class="bad">오답입니다.</b> ') + esc(Q.e) +
+      ' <a href="' + chapterHref(Q.ch) + '">→ 제' + c.num + " " + esc(chapterLabel(Q.ch)) + " 복습</a>";
+    exp.hidden = false;
+    fq.el("fq-score").textContent = "정답: " + fq.score;
+    fq.el("fq-fill").style.width = ((fq.i + 1) / QN) * 100 + "%";
+    var nx = fq.el("fq-next");
+    nx.textContent = fq.i + 1 < QN ? "다음 문항 →" : "결과 보기 →";
+    nx.hidden = false;
+    nx.focus({ preventScroll: true });
+  }
+  fq.el("fq-next").addEventListener("click", function () {
+    if (!fq.answered) return;
+    if (fq.i + 1 < QN) { fq.i++; showQ(); } else showResult();
+  });
+  fq.el("fq-retry").addEventListener("click", function () {
+    startQuiz(true);
+    fq.el("final-quiz").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  var RANKS = [
+    [0, "시작 단계", "시스템 요구사항, 소자 기초, PMIC 신호 경로를 복습하세요."],
+    [8, "개념 다지기", "틀린 주제를 복습한 뒤 대화형 강의를 다시 풀어 보세요."],
+    [14, "설계 준비 완료", "시험 결과를 소자와 통합 동작에 연결할 수 있습니다."],
+    [18, "PMIC/BCD 통합 전문가", "시스템, 회로, 소자, 공정, 테스트를 연결했습니다."],
+  ];
+  function perChapter() {
+    var m = {};
+    fq.results.forEach(function (r) { (m[r.ch] = m[r.ch] || { n: 0, ok: 0 }); m[r.ch].n++; if (r.ok) m[r.ch].ok++; });
+    return PB.CHAPTERS.filter(function (c) { return m[c.slug]; }).map(function (c) { return { c: c, n: m[c.slug].n, ok: m[c.slug].ok }; });
+  }
+  var SHORT = { overview: "PMIC 시스템", fundamentals: "기초", "references-ldo": "기준전압 / LDO", switching: "전력 회로", devices: "소자", bcd: "BCD", "hv-devices": "고전압", passives: "수동소자", wafer: "기판", oxidation: "공정", metal: "금속 배선", layout: "레이아웃 / 열", metrology: "시험", reliability: "신뢰성", "failure-analysis": "고장 분석", advanced: "첨단 주제" };
+  function drawResult(ctx, w, h) {
+    var P = PB.palette(), rows = perChapter();
+    var left = Math.min(150, Math.max(92, w * 0.32)), right = 46, top = 12, rh = (h - top - 8) / Math.max(1, rows.length);
+    ctx.font = "12px " + PB.color("font");
+    ctx.textBaseline = "middle";
+    rows.forEach(function (r, i) {
+      var y = top + i * rh + rh / 2, frac = r.ok / r.n, bw = w - left - right;
+      var label = r.c.num + " " + (SHORT[r.c.slug] || r.c.title);
+      ctx.fillStyle = P.dim; ctx.textAlign = "right";
+      var maxLab = left - 10;
+      while (ctx.measureText(label).width > maxLab && label.length > 4) label = label.slice(0, -2) + "…";
+      ctx.fillText(label, left - 8, y);
+      ctx.fillStyle = P.surface; ctx.fillRect(left, y - rh * 0.3, bw, rh * 0.6);
+      ctx.fillStyle = frac >= 0.99 ? P.ok : frac >= 0.5 ? P.warn : P.bad;
+      ctx.fillRect(left, y - rh * 0.3, Math.max(2, bw * frac), rh * 0.6);
+      ctx.fillStyle = P.text; ctx.textAlign = "left"; ctx.font = "12px " + PB.color("mono");
+      ctx.fillText(r.ok + "/" + r.n, left + bw + 6, y);
+      ctx.font = "12px " + PB.color("font");
+    });
+  }
+  function showResult() {
+    fq.el("fq-card").hidden = true;
+    fq.el("fq-result").hidden = false;
+    fq.el("fq-fill").style.width = "100%";
+    fq.el("fq-count").textContent = "완료";
+    var s = fq.score, rank = RANKS[0];
+    RANKS.forEach(function (r) { if (s >= r[0]) rank = r; });
+    fq.el("fq-title").textContent = rank[1];
+    fq.el("fq-big").innerHTML = s + "<small> / " + QN + "</small>";
+    fq.el("fq-msg").textContent = "점수 " + Math.round((s / QN) * 100) + " % · " + rank[2];
+    var weak = perChapter().filter(function (r) { return r.ok < r.n; });
+    fq.el("fq-review").innerHTML = weak.length
+      ? "다음 장을 복습하세요: " + weak.map(function (r) { return '<a href="' + chapterHref(r.c.slug) + '">제' + r.c.num + " " + esc(chapterLabel(r.c.slug)) + "</a>"; }).join(" · ")
+      : "만점입니다! BCD 공정 실습을 다시 살펴보고 단면도를 탐색해 보세요.";
+    var rowsN = perChapter().length;
+    if (!fq.cv) fq.cv = PB.canvas("#cv-fq", drawResult, { height: rowsN * 28 + 20 });
+    else fq.cv.resize();
+    fq.el("fq-result").scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+  startQuiz(false);
+})();
+</script>
+</body>
+</html>

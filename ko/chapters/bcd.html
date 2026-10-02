@@ -1,0 +1,51 @@
+<!doctype html>
+<!-- ProcessBook-derived site shell and shared styles: Copyright (c) 2026 geniuskey and ProcessBook contributors; MIT (see ../LICENSE-MIT).
+     Educational material authored for PMICBook is licensed under CC BY 4.0 (see ../LICENSE-CC-BY-4.0).
+     ProcessBook educational material is included only where identified in this page and docs/UPSTREAM_ATTRIBUTION.md. -->
+<html lang="ko">
+<head>
+<!--head:start {"desc":"바이폴라, CMOS, DMOS 통합과 절연, 보호, 열 설계의 연관성을 살펴봅니다.","libs":[],"lang":"ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BCD 기술 아키텍처 · PMICBook</title>
+<meta name="description" content="바이폴라, CMOS, DMOS 통합과 절연, 보호, 열 설계의 연관성을 살펴봅니다.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/bcd.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/bcd.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/bcd.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/bcd.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="BCD 기술 아키텍처 · PMICBook">
+<meta property="og:description" content="바이폴라, CMOS, DMOS 통합과 절연, 보호, 열 설계의 연관성을 살펴봅니다.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/bcd.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/bcd.html#chapter","name":"BCD 기술 아키텍처","headline":"BCD 기술 아키텍처 · PMICBook","description":"바이폴라, CMOS, DMOS 통합과 절연, 보호, 열 설계의 연관성을 살펴봅니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/bcd.html","position":6,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"6. BCD 기술 아키텍처","item":"https://frbread7.github.io/pmicbook/ko/chapters/bcd.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<!--head:end-->
+</head><body data-chapter="bcd"><main class="chapter">
+  <header class="chapter-hero"><div class="eyebrow">제6장 · BCD 기술</div><h1>BCD 기술 아키텍처</h1>
+    <p class="lead">BCD는 바이폴라, CMOS, 이중 확산 MOS의 기능을 하나의 플랫폼에 통합해 전력 IC가 정밀 아날로그, 로직·제어, 전압·전류 처리 소자를 함께 사용하도록 합니다. “BCD”는 여러 통합 방식의 계열을 가리키며, 보편적인 단일 층 구조나 공정 순서를 뜻하지 않습니다. 공개된 업체 및 교육 자료는 이러한 통합의 배경을 설명하지만 세부 구조는 기술마다 다릅니다 (<a href="https://www.st.com/content/st_com/en/about/innovation-and-technology/bcd.html">STMicroelectronics BCD 개요</a>; <a href="https://resourcecenter.ieee.org/education/short-courses/sscstut20210202">IEEE BCD 튜토리얼 자료</a>).</p>
+    <ul class="objectives"><li>회로의 역할을 바이폴라, CMOS, DMOS 소자에 대응시킵니다.</li><li>전압 도메인, 웰 절연, 기생 상호작용을 설명합니다.</li><li>개념적인 BCD 단면을 뒤의 공정 통합 장과 연결합니다.</li></ul>
+  </header>
+  <section id="why"><h2>서로 다른 소자 계열을 통합하는 이유</h2><div class="fig-row"><article><h3>바이폴라</h3><p>기준회로, 이득단, 견고한 접합 동작 같은 특정 아날로그 기능에 유용합니다. 소자의 제공 여부와 성능은 플랫폼에 따라 다릅니다.</p></article><article><h3>CMOS</h3><p>비교기와 상태 기계부터 게이트 드라이버까지, 효율적인 로직과 아날로그 제어를 구현합니다. 서로 다른 산화막·문턱전압 옵션은 별도 전압 도메인에 대응할 수 있습니다.</p></article><article><h3>DMOS</h3><p>드리프트 영역과 이중 확산 구조는 전력 스위칭에 적합합니다. 전압 내량, 온저항, 면적, 스위칭 전하 사이에는 절충이 있습니다.</p></article></div>
+    <p>시스템 측면에서 통합의 이점은 외부 부품과 배선을 줄여 더 작은 전원 솔루션을 구현할 수 있다는 것입니다. 그 대가로 기판, 절연 방식, 공정 순서가 복잡해지고 소자 특성 간 절충이 필요합니다. 모든 PMIC에 모든 소자 계열이 필요한 것은 아닙니다.</p>
+  </section>
+  <section id="section"><h2>개념적 단면</h2><figure class="diagram"><svg viewBox="0 0 760 300" role="img" aria-label="저전압 CMOS, 절연된 바이폴라 영역, 고전압 횡형 DMOS를 보여주는 개념적 BCD 단면"><rect x="24" y="38" width="712" height="225" rx="12" fill="#d9dce4"/><text x="380" y="287" text-anchor="middle" class="lbl">공통 기판 / 에피택셜 영역(개념도)</text><rect x="52" y="64" width="198" height="90" rx="7" fill="#c9dcfa" stroke="#627da8"/><rect x="68" y="88" width="65" height="55" fill="#f1cccc" stroke="#a65c5c"/><rect x="166" y="88" width="65" height="55" fill="#d0e5d1" stroke="#56825b"/><text x="151" y="55" text-anchor="middle" class="lbl-b">저전압 CMOS 웰</text><text x="99" y="120" text-anchor="middle" class="lbl">pMOS</text><text x="197" y="120" text-anchor="middle" class="lbl">nMOS</text><rect x="278" y="62" width="162" height="175" rx="10" fill="#eee0ae" stroke="#a88c44"/><rect x="304" y="96" width="110" height="75" rx="5" fill="#d5e6d5"/><text x="359" y="83" text-anchor="middle" class="lbl-b">절연 영역</text><text x="359" y="136" text-anchor="middle" class="lbl">바이폴라</text><text x="359" y="155" text-anchor="middle" class="lbl">소자</text><path d="M267 65 V238 M451 65 V238" stroke="#b54b4b" stroke-width="5" stroke-dasharray="8 5"/><text x="359" y="220" text-anchor="middle" class="lbl">웰 / 접합 절연*</text><rect x="475" y="65" width="235" height="170" rx="7" fill="#d6e1f5" stroke="#627da8"/><rect x="508" y="85" width="160" height="35" rx="4" fill="#d8c4a2"/><rect x="551" y="128" width="125" height="85" fill="#acc3e9"/><rect x="615" y="167" width="62" height="46" fill="#f1c18f"/><rect x="505" y="129" width="45" height="84" fill="#cfc4df"/><text x="592" y="58" text-anchor="middle" class="lbl-b">고전압 횡형 DMOS</text><text x="590" y="105" text-anchor="middle" class="lbl">게이트</text><text x="573" y="191" text-anchor="middle" class="lbl">드리프트</text><text x="644" y="194" text-anchor="middle" class="lbl">드레인</text></svg><figcaption>개념 설명을 위한 구조이며 영역과 경계는 실제 비율이 아니고 제조 순서를 규정하지 않습니다. *기술에 따라 접합 절연, 유전체 절연 또는 두 방식의 조합을 사용할 수 있습니다.</figcaption></figure>
+    <p>회로의 서로 다른 부분은 각기 다른 전위에서 동작할 수 있습니다. 접합 절연은 역바이어스된 경계를 사용하며 깊은 웰은 특정 바디 접속과 기판 노이즈 관리를 위해 중첩 영역을 만들 수 있습니다. 트리플 웰은 흔히 쓰는 개념적 구성 중 하나지만 모든 기술에서 제공되거나 같은 구조를 갖는 것은 아닙니다. 절연 설계에서는 기생 바이폴라 경로와 래치업도 고려해야 합니다. <a href="devices.html">소자 기초</a>와 <a href="https://esdindustrycouncil.org/ic/en/index.php/documents/white-paper-5-latchup-survey-report">ESD Industry Council의 래치업 설문 보고서</a>을 참고하세요.</p>
+  </section>
+  <section id="tradeoffs"><h2>전압 도메인 간 설계</h2><ul><li><strong>저전압 코어:</strong> 면적 효율적인 로직·아날로그 소자는 제한된 게이트 및 접합 정격 안에서 동작합니다.</li><li><strong>고전압 도메인:</strong> 드리프트 영역, 전계 형상화, 간격을 이용해 전계를 분산합니다. 큰 소자는 대체로 더 많은 면적과 기생 커패시턴스를 차지합니다.</li><li><strong>절연과 보호:</strong> 웰, 가드 링, ESD 경로, 기판 접점은 전류 주입과 결합을 제어하는 데 도움을 줍니다.</li><li><strong>열·전류 경로:</strong> 전력 소자는 국부 발열을 일으키며 금속·접점·패키지가 다이에서 전류와 열이 빠져나가는 경로를 결정합니다.</li></ul><p>플랫폼은 저전압 소자와 더 높은 전압의 소자에 서로 다른 게이트 절연막 옵션을 제공할 수 있습니다. 더 얇은 등가 산화막은 게이트 제어를 강화하고 게이트 용량을 늘리지만 허용 게이트 전압 스트레스와 누설·신뢰성 제약은 두꺼운 고전압 옵션과 다릅니다. 두꺼운 절연막만으로 고전압 전력 소자가 만들어지는 것은 아닙니다. 드리프트, 접합, 전계 제어, 절연도 전압 내량을 정합니다. 공개된 <a href="https://ksp.etri.re.kr/ksp/article/read?id=15996">ETRI BCD 트렌치 게이트 보고서</a>는 특정 공정의 두꺼운 게이트 산화막 예시이며, <a href="https://ocw.mit.edu/courses/6-720j-integrated-microelectronic-devices-spring-2007/pages/lecture-notes/">MIT OCW MOS 강의</a>는 산화막 용량과 전계 스트레스를 설명합니다. 어느 자료의 치수도 다른 플랫폼에 그대로 적용해서는 안 됩니다.</p><p>단 하나의 “최고 BCD 공정 노드”가 있는 것은 아닙니다. 제품 전압, 스위칭 주파수, 아날로그 정확도, 부하 전류, 보호 기능, 다이 비용이 통합 선택을 서로 다른 방향으로 이끕니다.</p></section>
+  <section class="keypoints" id="summary"><h2>핵심 정리</h2><ol><li>BCD는 상호 보완적인 소자 기능을 통합하는 방식이며 단일 공정 레시피를 뜻하지 않습니다.</li><li>절연은 여러 전압 도메인을 가능하게 하는 동시에 기생 성분과 레이아웃 제약을 만듭니다.</li><li>고전압 소자, 정밀 아날로그, 디지털 제어, 보호, 열 경로는 면적과 공정 복잡도를 두고 절충합니다.</li><li>공개된 기술 설명은 참고 사례이며 다른 파운드리에 그대로 적용할 수 있는 사양이 아닙니다.</li></ol></section>
+  <section class="quiz-sec" id="quiz"><h2>이해도 확인</h2><div class="quiz"><div class="quiz-q"><p>로직 공정에 고전압 트랜지스터만 추가하는 것으로 BCD 플랫폼이 완성되지 않는 이유는 무엇인가요?</p><div class="opts"><button class="opt">고전압 소자가 모든 기판 결합을 없애기 때문입니다.</button><button class="opt" data-correct>웰, 절연, 기생 경로, 보호, 열·전류 배선이 다른 소자 계열과 함께 동작해야 하기 때문입니다.</button><button class="opt">바이폴라 소자는 0 V에서만 동작하기 때문입니다.</button></div><div class="quiz-exp">통합 자체가 과제입니다. 소자들이 기판과 공정 모듈을 공유하므로 절연, 기생 성분 제어, 보호, 배선을 함께 설계해야 합니다.</div></div></div></section>
+  <nav class="chapter-links"><a href="devices.html">← 소자 기초</a> · <a href="hv-devices.html">다음: 고전압/LDMOS →</a> · <a href="integration.html">BCD 공정 통합</a></nav>
+<p class="source-note">영문 원문: <a href="https://github.com/frbread7/pmicbook/blob/main/chapters/bcd.html">BCD technology architecture</a></p>
+</main></body></html>

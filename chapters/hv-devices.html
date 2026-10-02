@@ -1,0 +1,51 @@
+<!doctype html>
+<!-- ProcessBook-derived site shell and shared styles: Copyright (c) 2026 geniuskey and ProcessBook contributors; MIT (see ../LICENSE-MIT).
+     Educational material authored for PMICBook is licensed under CC BY 4.0 (see ../LICENSE-CC-BY-4.0).
+     ProcessBook educational material is included only where identified in this page and docs/UPSTREAM_ATTRIBUTION.md. -->
+<html lang="en">
+<head>
+<!--head:start {"desc":"How lateral DMOS drift regions and field shaping support voltage blocking, and why breakdown and on-resistance trade off.","libs":[],"lang":"en"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>High-Voltage MOS and LDMOS · PMICBook</title>
+<meta name="description" content="How lateral DMOS drift regions and field shaping support voltage blocking, and why breakdown and on-resistance trade off.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/chapters/hv-devices.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/hv-devices.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/hv-devices.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/hv-devices.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="High-Voltage MOS and LDMOS · PMICBook">
+<meta property="og:description" content="How lateral DMOS drift regions and field shaping support voltage blocking, and why breakdown and on-resistance trade off.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/chapters/hv-devices.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/hv-devices.html#chapter","name":"High-Voltage MOS and LDMOS","headline":"High-Voltage MOS and LDMOS · PMICBook","description":"How lateral DMOS drift regions and field shaping support voltage blocking, and why breakdown and on-resistance trade off.","url":"https://frbread7.github.io/pmicbook/chapters/hv-devices.html","position":7,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"7. High-Voltage MOS and LDMOS","item":"https://frbread7.github.io/pmicbook/chapters/hv-devices.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<!--head:end-->
+</head><body data-chapter="hv-devices"><main class="chapter">
+  <header class="chapter-hero"><div class="eyebrow">Chapter 07 · BCD devices</div><h1>HV MOS and LDMOS devices</h1>
+    <p class="lead">A low-voltage MOSFET places a short channel between source and drain. A high-voltage lateral DMOS (LDMOS) adds a lateral drift region so much of the off-state voltage can be supported away from the channel. That extra region takes silicon area and contributes resistance. The details depend on device architecture and process; an IEEE publication discusses LDMOS/RESURF structures, but its particular results should not be generalized to all platforms (<a href="https://ieeexplore.ieee.org/document/9813626/">IEEE Xplore document 9813626</a>).</p>
+    <ul class="objectives"><li>Locate the channel, drift region, and field-crowding locations.</li><li>Explain the qualitative breakdown-voltage / on-resistance tradeoff.</li><li>Understand RESURF as a field-distribution design idea, not a universal formula.</li></ul>
+  </header>
+  <section id="structure"><h2>Where the off-state voltage is supported</h2><figure class="diagram"><svg viewBox="0 0 740 250" role="img" aria-label="Conceptual LDMOS cross-section with source, gate, drift region, field plate and drain"><rect x="30" y="55" width="680" height="160" rx="10" fill="#d8e0ef"/><rect x="73" y="120" width="80" height="55" fill="#f1c6c6"/><rect x="480" y="115" width="70" height="60" fill="#f3c48c"/><rect x="150" y="75" width="165" height="45" rx="5" fill="#d3bd9b"/><rect x="315" y="80" width="150" height="42" fill="#e8edf7" stroke="#73819a" stroke-dasharray="5 4"/><path d="M152 142 H480" stroke="#6d94cf" stroke-width="30" opacity=".45"/><path d="M170 94 V134 H440" fill="none" stroke="#393d48" stroke-width="5"/><text x="110" y="195" text-anchor="middle" class="lbl-b">source</text><text x="233" y="68" text-anchor="middle" class="lbl-b">gate</text><text x="375" y="105" text-anchor="middle" class="lbl">field plate (example)</text><text x="370" y="164" text-anchor="middle" class="lbl-b">lateral drift region</text><text x="515" y="195" text-anchor="middle" class="lbl-b">drain</text><path d="M568 135 H660" stroke="#b84949" stroke-width="3" marker-end="url(#tip)"/><text x="613" y="120" text-anchor="middle" class="lbl">high field near drain</text><defs><marker id="tip" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0 0 L9 4 L0 8" fill="none" stroke="#b84949"/></marker></defs></svg><figcaption>Not to scale. The field plate and field distribution vary among LDMOS designs. This diagram is a teaching schematic, not a process cross-section specification.</figcaption></figure>
+    <p>In the off state, depletion extends into the drift region and spreads the voltage drop. Abrupt geometry and material interfaces can concentrate electric field (“field crowding”), often making the drain-side surface or junction a critical location. Field plates, graded doping, and charge balance are among the design tools used to shape that field.</p>
+  </section>
+  <section id="tradeoff"><h2>Breakdown versus specific on-resistance</h2><p>When on, current flows through the channel and drift region. A longer or more lightly doped drift region can support more voltage before avalanche, but it also adds resistance. A useful comparison is the specific on-resistance \(R_{on,sp}=R_{on}A\), usually reported in Ω·area (often mΩ·mm²). It normalizes resistance by active area but omits termination, contacts, metal, and temperature unless those are included in the measurement definition.</p>
+    <div class="formula">$$R_{on}=\frac{V_{DS}}{I_D}\quad[\Omega], \qquad R_{on,sp}=R_{on}A\quad[\Omega\,\mathrm{m}^2]$$<div class="where">Compare devices only at stated gate voltage, current, temperature, and breakdown criterion. No numerical product target is universal; the BV–Ron tradeoff depends on architecture, material, geometry, and process.</div></div>
+    <p>RESURF (“reduced surface field”) broadly describes approaches that use charge distribution and depletion to reduce peak surface field and use more of the drift region to support voltage. It is an intuition for field management, not a guarantee that one named structure will meet a specified breakdown voltage. Refer to the <a href="bcd.html">BCD architecture chapter</a> for where these devices sit alongside low-voltage and bipolar regions.</p>
+  </section>
+  <section id="implications"><h2>PMIC implications</h2><ul><li>Use blocking voltage with margin for transients and operating conditions; breakdown is not a recommended repetitive operating point.</li><li>Lower drift resistance can reduce conduction loss but may increase area, leakage, capacitance, or reduce voltage margin.</li><li>Switching loss also depends on gate charge, output capacitance, transition time, and driver strength.</li><li>Junction temperature changes resistance and reliability; characterization must match use conditions.</li></ul><p>For a converter stage, connect these device limits to the <a href="switching.html">switching chapter</a>, <a href="layout.html">current-path and thermal layout</a>, and <a href="integration.html">illustrative process integration</a>.</p></section>
+  <section class="keypoints" id="summary"><h2>Key points</h2><ol><li>The drift region supports off-state voltage and adds on-state resistance.</li><li>Field crowding can cause early breakdown; field shaping and charge design affect the result.</li><li>RESURF is a family of field-management ideas; no simple universal equation predicts every LDMOS.</li><li>Compare BV and \(R_{on,sp}\) only with test conditions and area definitions stated.</li></ol></section>
+  <section class="quiz-sec" id="quiz"><h2>Knowledge check</h2><div class="quiz"><div class="quiz-q"><p>Why does lengthening or lightly doping an LDMOS drift region often help voltage blocking but hurt conduction?</p><div class="opts"><button class="opt">It increases carrier mobility in every region.</button><button class="opt" data-correct>It can spread the off-state field, while the longer or less conductive path adds on-resistance.</button><button class="opt">It removes the drain junction.</button></div><div class="quiz-exp">Voltage support and current conduction use the same drift region, creating a central geometry/doping tradeoff.</div></div></div></section>
+  <nav class="chapter-links"><a href="bcd.html">← BCD architecture</a> · <a href="passives.html">Next: integrated passives →</a></nav>
+</main></body></html>

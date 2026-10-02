@@ -1,0 +1,48 @@
+<!doctype html>
+<!-- ProcessBook-derived site shell and shared styles: Copyright (c) 2026 geniuskey and ProcessBook contributors; MIT (see ../LICENSE-MIT).
+     Educational material authored for PMICBook is licensed under CC BY 4.0 (see ../LICENSE-CC-BY-4.0).
+     ProcessBook educational material is included only where identified in this page and docs/UPSTREAM_ATTRIBUTION.md. -->
+<html lang="ko">
+<head>
+<!--head:start {"desc":"집적 저항, 커패시터, 다이오드, 인덕터의 구현과 기생 성분을 살펴봅니다.","libs":[],"lang":"ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>집적 수동소자 · PMICBook</title>
+<meta name="description" content="집적 저항, 커패시터, 다이오드, 인덕터의 구현과 기생 성분을 살펴봅니다.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/passives.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/passives.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/passives.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/passives.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="집적 수동소자 · PMICBook">
+<meta property="og:description" content="집적 저항, 커패시터, 다이오드, 인덕터의 구현과 기생 성분을 살펴봅니다.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/passives.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/passives.html#chapter","name":"집적 수동소자","headline":"집적 수동소자 · PMICBook","description":"집적 저항, 커패시터, 다이오드, 인덕터의 구현과 기생 성분을 살펴봅니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/passives.html","position":8,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"8. 집적 수동소자","item":"https://frbread7.github.io/pmicbook/ko/chapters/passives.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<!--head:end-->
+</head><body data-chapter="passives"><main class="chapter">
+  <header class="chapter-hero"><div class="eyebrow">제8장 · BCD 통합</div><h1>집적 수동소자</h1>
+    <p class="lead">PMIC에는 트랜지스터 외에도 기준전압 분압기, 보상 네트워크, 디커플링, 부트스트랩 저장소, 보호, 타이밍 등에 수동 구조가 필요합니다. 집적 수동소자는 외부 부품과 배선을 줄이지만, 실리콘 면적, 허용오차, 전압 의존성, 기생 성분, 기판 결합을 고려해 다이에 넣을 기능을 정해야 합니다.</p>
+    <ul class="objectives"><li>1차 기하 모델로 저항과 커패시터 동작을 추정합니다.</li><li>저항·접합·MOS·MIM 구현을 비교합니다.</li><li>인덕터와 대용량 커패시터가 외부에 남는 경우가 많은 이유를 이해합니다.</li></ul>
+  </header>
+  <section id="resistors"><h2>저항: 형상과 매칭</h2><p>균일한 저항은 다음과 같이 근사할 수 있습니다: <code>R = R_s (L/W)</code>이며 <code>R_s</code>는 Ω/□ 단위의 면저항, <code>L/W</code>는 정사각형 수입니다. 길고 좁은 저항은 면적을 더 차지하고 기생 커패시턴스와 형상 민감도가 커질 수 있습니다. 확산·웰·폴리실리콘 저항은 면저항, 전압 계수, 온도 계수, 매칭, 전압 한계가 서로 다르며 사용 가능한 층은 기술에 따라 다릅니다.</p><div class="formula">$$R=\rho\,\frac{L}{Wt}=R_s\frac{L}{W}$$<div class="where">전류 방향 길이가 L이고 폭 W, 두께 t인 균일 박막을 가정합니다. 접점, 굴곡, 전류 집중, 온도, 전압 의존 특성이 오차를 더할 수 있습니다. 실제 설계에서는 해당 기술에서 특성화한 면저항을 사용하세요.</div></div></section>
+  <section id="capacitors"><h2>커패시터와 다이오드</h2><div class="fig-row"><article><h3>MOS 커패시터</h3><p>게이트와 반도체 사이의 커패시턴스를 이용합니다. 커패시턴스가 바이어스와 동작 영역에 크게 좌우될 수 있으므로 그 변화를 허용할 수 있을 때 소형 커패시터로 유용합니다.</p></article><article><h3>MIM 커패시터</h3><p>금속-절연체-금속 적층은 아날로그와 디커플링에 적합한 비교적 선형적인 커패시터를 제공할 수 있습니다. 밀도, 유전체 전압 계수, 누설, 항복은 플랫폼별로 다릅니다.</p></article><article><h3>접합 커패시터 / 다이오드</h3><p>역바이어스 접합은 전압에 따라 달라지는 공핍 커패시턴스를 제공합니다. 같은 구조를 다이오드나 보호 기능으로 사용할 수도 있지만 누설과 기판 상호작용을 고려해야 합니다.</p></article></div>
+    <p>이상적인 평행판 커패시터는 <code>C = εA/d</code>이며 유전체가 고정되면 면적은 커패시턴스에 비례합니다. 실제 레이아웃에는 프린징 전계, 배선, 주변 도체가 포함됩니다. 이상적인 에너지 식 <code>E = ½CV²</code>는 유용하지만 허용 전압과 수명은 실제 유전체와 설계 규칙으로 결정됩니다. 고급 RF 후공정 배선층(BEOL)에 MIM 커패시터와 인덕터를 집적한 사례가 이 <a href="https://www.sciencedirect.com/science/article/pii/S0167931708001585">2008년 기술 논문</a>에 소개되어 있습니다. 해당 구조는 특정 사례이지 일반 BCD 밀도나 설계 규칙이 아닙니다.</p></section>
+  <section id="inductors"><h2>인덕터와 집적의 경계</h2><p>칩 내 나선형 인덕터는 고주파에서 유용할 수 있지만 면적을 많이 차지하고 금속 저항, 기판 손실, 결합이 발생합니다. 품질 계수, 자기 공진, 주변 스위칭 전류가 동작에 영향을 줍니다. 많은 전력 컨버터는 큰 다이 영역을 쓰지 않고 필요한 에너지를 저장하기 위해 외부 인덕터를 사용합니다. 이는 시스템 분할의 선택이며 절대적인 규칙은 아닙니다.</p><p>수동소자 값과 기생 성분은 <a href="layout.html">레이아웃과 기생 성분 장</a>에 직접 연결됩니다. 대전류 배선과 열 경로는 <a href="metal.html">접점과 금속 배선</a>에서 다룹니다. 공정 구조는 <a href="integration.html">BCD 통합 개요</a>에 있습니다.</p></section>
+  <section class="keypoints" id="summary"><h2>핵심 정리</h2><ol><li>저항값은 면저항과 형상에 비례하며 접점과 전압·온도 영향이 오차를 더합니다.</li><li>MOS, MIM, 접합 커패시터는 바이어스 의존성, 밀도, 선형성, 누설이 다릅니다.</li><li>대용량 에너지 저장 커패시터와 인덕터는 면적과 손실 때문에 외부에 남는 경우가 많지만 작은 아날로그 수동소자는 집적하기 좋습니다.</li><li>실제 수동소자 모델과 한계는 선택한 기술과 레이아웃에 따라 달라집니다.</li></ol></section>
+  <section class="quiz-sec" id="quiz"><h2>이해도 확인</h2><div class="quiz"><div class="quiz-q"><p>폭과 면저항을 고정하고 저항 길이를 늘리면 1차 모델에서 어떤 변화가 생기나요?</p><div class="opts"><button class="opt">저항은 길이에 비례해 감소합니다.</button><button class="opt" data-correct>저항은 길이에 비례해 증가하고 레이아웃 면적도 대개 늘어납니다.</button><button class="opt">재료만 중요하므로 저항은 그대로입니다.</button></div><div class="quiz-exp"><code>R = R_s L/W</code>이므로 길이를 두 배로 늘리면 정사각형 수와 저항도 두 배가 됩니다. 단순 모델은 접점, 굴곡, 공정 편차를 생략합니다.</div></div></div></section>
+  <nav class="chapter-links"><a href="hv-devices.html">← 고전압/LDMOS 소자</a> · <a href="wafer.html">다음: BCD 기판과 웰 →</a></nav>
+<p class="source-note">영문 원문: <a href="https://github.com/frbread7/pmicbook/blob/main/chapters/passives.html">Integrated passive devices</a></p>
+</main></body></html>

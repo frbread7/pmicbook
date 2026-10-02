@@ -1,0 +1,153 @@
+<!doctype html>
+<!-- ProcessBook-derived site shell and shared styles: Copyright (c) 2026 geniuskey and ProcessBook contributors; MIT (see ../../LICENSE-MIT).
+     Educational material authored for PMICBook is licensed under CC BY 4.0 (see ../../LICENSE-CC-BY-4.0).
+     ProcessBook educational material is included only where identified in this page and docs/UPSTREAM_ATTRIBUTION.md. -->
+<html lang="ko">
+<head>
+<!--head:start {"desc":"전원, 레일, 부하, 시퀀싱을 연결하고 회로·소자·공정 선택으로 이어지는 PMIC 시스템을 살펴봅니다.","libs":["katex"],"lang":"ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PMIC 시스템과 전원 도메인 · PMICBook</title>
+<meta name="description" content="전원, 레일, 부하, 시퀀싱을 연결하고 회로·소자·공정 선택으로 이어지는 PMIC 시스템을 살펴봅니다.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/overview.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/overview.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/overview.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/overview.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="PMIC 시스템과 전원 도메인 · PMICBook">
+<meta property="og:description" content="전원, 레일, 부하, 시퀀싱을 연결하고 회로·소자·공정 선택으로 이어지는 PMIC 시스템을 살펴봅니다.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/overview.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/overview.html#chapter","name":"PMIC 시스템과 전원 도메인","headline":"PMIC 시스템과 전원 도메인 · PMICBook","description":"전원, 레일, 부하, 시퀀싱을 연결하고 회로·소자·공정 선택으로 이어지는 PMIC 시스템을 살펴봅니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/overview.html","position":1,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"1. PMIC 시스템과 전원 도메인","item":"https://frbread7.github.io/pmicbook/ko/chapters/overview.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="overview">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">1장 · 시스템 관점</div>
+    <h1>PMIC 시스템과 전원 도메인</h1>
+    <p class="lead">전력 관리 IC(PMIC)는 하나 이상의 전원에서 에너지를 받아 제품의 각 부분에 필요한 전압, 전류, 공급 시점, 보호 동작을 만듭니다. 칩을 이해하려면 먼저 입력 전원과 부하, 동작 상태, 전원 레일이 규격을 벗어날 때의 결과를 파악해야 합니다.</p>
+    <ul class="objectives">
+      <li>전원에서 변환·레귤레이션 단계를 거쳐 부하로 가는 전원 트리를 그립니다.</li>
+      <li>한 제품에 여러 전원 레일과 도메인이 필요한 이유를 설명합니다.</li>
+      <li>시퀀싱과 부하 과도 현상을 측정 가능한 레일 요구사항으로 바꿉니다.</li>
+      <li>레일 요구사항이 회로, 소자, 공정, 레이아웃 선택에 어떻게 이어지는지 추적합니다.</li>
+    </ul>
+  </header>
+
+  <section id="power-tree">
+    <h2>전원 레일은 시스템의 일부입니다</h2>
+    <p>배터리나 어댑터가 모든 부하에 직접 연결되는 경우는 드뭅니다. 제품에는 변환기, 선형 레귤레이터, 기준 전압, 로드 스위치, 충전기, 감시 및 보호 회로가 함께 쓰일 수 있습니다. 일부 기능은 한 PMIC에 통합되고 일부는 별도 칩으로 구현됩니다. 입력·출력 전압 범위, 전류, 잡음, 효율, 절연과 제품 제약이 분할 방식을 결정합니다.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 820 340" role="img" aria-labelledby="tree-title tree-desc">
+        <title id="tree-title">PMIC 전원 트리의 예</title>
+        <desc id="tree-desc">배터리와 어댑터가 전력 관리 블록에 연결됩니다. 스위칭 변환과 선형 레귤레이션은 디지털, 아날로그, 고전류 부하에 별도 레일을 공급합니다.</desc>
+        <defs><marker id="tree-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--accent-2)"/></marker></defs>
+        <g class="f-elev" stroke-width="2">
+          <rect x="24" y="118" width="126" height="84" rx="12"/><rect x="214" y="118" width="154" height="84" rx="12"/>
+          <rect x="438" y="32" width="150" height="76" rx="12"/><rect x="438" y="132" width="150" height="76" rx="12"/><rect x="438" y="232" width="150" height="76" rx="12"/>
+          <rect x="652" y="32" width="142" height="76" rx="12"/><rect x="652" y="132" width="142" height="76" rx="12"/><rect x="652" y="232" width="142" height="76" rx="12"/>
+        </g>
+        <g fill="var(--text)" text-anchor="middle" font-family="var(--font)">
+          <text x="87" y="151" class="lbl-b">입력 전원</text><text x="87" y="174" class="lbl-dim">배터리 · 어댑터</text>
+          <text x="291" y="150" class="lbl-b">전력 관리</text><text x="291" y="174" class="lbl-dim">변환 · 제어 · 보호</text>
+          <text x="513" y="64" class="lbl-b">스위칭 레귤레이터</text><text x="513" y="86" class="lbl-dim">고효율 전압 변환</text>
+          <text x="513" y="164" class="lbl-b">LDO / 기준 전압</text><text x="513" y="186" class="lbl-dim">국부 전압과 바이어스</text>
+          <text x="513" y="264" class="lbl-b">전원 경로 / 스위치</text><text x="513" y="286" class="lbl-dim">연결 · 제한 · 차단</text>
+          <text x="723" y="64" class="lbl-b">디지털 도메인</text><text x="723" y="86" class="lbl-dim">프로세서 · 메모리</text>
+          <text x="723" y="164" class="lbl-b">아날로그 도메인</text><text x="723" y="186" class="lbl-dim">센서 · 기준 회로</text>
+          <text x="723" y="264" class="lbl-b">고전류 도메인</text><text x="723" y="286" class="lbl-dim">모터 · LED · 구동기</text>
+        </g>
+        <g fill="none" stroke="var(--accent-2)" stroke-width="3" marker-end="url(#tree-arrow)">
+          <path d="M150 160H214"/><path d="M368 145C400 145 400 70 438 70"/><path d="M368 160H438"/><path d="M368 176C400 176 400 270 438 270"/>
+          <path d="M588 70H652"/><path d="M588 170H652"/><path d="M588 270H652"/>
+        </g>
+        <text x="410" y="328" text-anchor="middle" class="lbl-dim">개념도입니다. 제품마다 기능의 통합·분리·생략 방식이 다릅니다.</text>
+      </svg>
+      <figcaption>전원 트리로 전기적 관계를 먼저 확인한 뒤 회로 토폴로지와 소자를 선택합니다.</figcaption>
+    </figure>
+    <p>전원 도메인은 공급 전압, 잡음 허용치, 동작 조건이 비슷한 부하를 묶습니다. 센서에는 조용한 전원이 필요할 수 있지만 프로세서는 빠른 부하 변동을 일으키고 구동기는 훨씬 큰 전류를 사용합니다. 레일 분리나 국부 레귤레이션은 이런 차이를 다루는 방법이지만 손실, 면적, 핀 수, 시퀀싱 회로도 늘립니다.</p>
+    <div class="callout tip"><strong>공학적 직관</strong><p>부하에서 시작해 전원 방향으로 거슬러 올라가 보세요. 부하가 허용하는 전압 범위, 켜지는 시점, 전류 변화 속도, 견딜 수 있는 교란, 안전한 차단 여부가 PMIC 요구사항이 됩니다.</p></div>
+  </section>
+
+  <section id="requirements">
+    <h2>제품 요구사항을 레일 규격으로 바꾸기</h2>
+    <p>공칭 전압만으로 레일을 규정할 수 없습니다. 입력, 부하, 온도, 시간, 고장 조건에 따라 동작을 평가해야 합니다. 아래 용어는 레귤레이터, 스위칭, 특성 평가, 신뢰성 장에서도 다시 사용합니다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>시스템 질문</th><th>전기적 요구사항</th><th>중요한 이유</th></tr></thead>
+      <tbody>
+        <tr><td>입력 전압의 범위는?</td><td>입력 범위, UVLO, 드롭아웃 또는 변환비</td><td>전원 변화 중에도 시작하고 레귤레이션을 유지해야 합니다.</td></tr>
+        <tr><td>부하 전류의 크기는?</td><td>정상·피크·시동 전류와 전류 제한</td><td>스위치/패스 소자, 금속 경로, 패키지, 열 설계가 달라집니다.</td></tr>
+        <tr><td>허용 전압 오차는?</td><td>정확도, 라인 레귤레이션, 부하 레귤레이션</td><td>입력이나 출력 전류가 변할 때 부하에 전달되는 전압을 정합니다.</td></tr>
+        <tr><td>부하 변화 속도는?</td><td>과도 편차와 회복 시간</td><td>출력 커패시터, 제어 루프, 배선 임피던스가 영향을 줍니다.</td></tr>
+        <tr><td>잡음 허용 수준은?</td><td>리플, 출력 잡음, PSRR, EMI 제한</td><td>스위치 노드, 기판, 레일에서 민감한 회로로 결합될 수 있습니다.</td></tr>
+        <tr><td>고장·상태 전환 시 동작은?</td><td>시퀀싱, 돌입 전류, 역전류, OVP, 열 차단</td><td>도메인은 안전하게 켜지고 꺼져야 합니다.</td></tr>
+      </tbody>
+    </table></div>
+    <p>규격들은 서로 연결됩니다. 빠른 부하 변동 중 전압 오차를 줄이려면 대역폭이나 커패시터를 늘리거나 구조를 바꿔야 할 수 있습니다. 더 큰 부하 전류를 지원하면 도통 손실과 칩 면적도 늘 수 있습니다. 잡음을 줄이는 선택은 효율, 크기, 제어 복잡도에 영향을 줍니다. 따라서 용도와 관계없이 항상 최적인 레일 설계는 없습니다.</p>
+    <p>첫 전력 예산은 에너지 보존에서 시작합니다. 부하 전력이 \(P_{out}=V_{out}I_{out}\)이면 변환기 입력 전력은 \(P_{in}=P_{out}/\eta\)이고, 차이 \(P_{loss}=P_{in}-P_{out}\)은 손실입니다. 효율은 동작점에 따라 측정하거나 모델링해야 하며 모든 부하에서 일정한 값이 아닙니다.</p>
+    <div class="formula"><div>$$P_{out}=V_{out}I_{out},\qquad P_{in}=\frac{P_{out}}{\eta},\qquad P_{loss}=P_{in}-P_{out}$$</div><div class="where"><b>단위:</b> 볼트 × 암페어 = 와트. \(\eta\)는 0과 1 사이의 무차원 효율입니다. 이는 전력 수지식이며 변환기 손실 모델 자체는 아닙니다.</div></div>
+  </section>
+
+  <section id="implementation-chain">
+    <h2>요구사항을 실리콘까지 추적하기</h2>
+    <p>레일 요구사항은 회로도만 바꾸지 않습니다. 하이사이드 스위치는 코어 로직보다 높은 전압을 견디는 소자가 필요할 수 있습니다. 절연 구조와 웰은 서로 다른 소자를 전기적으로 구분합니다. 공정은 필요한 트랜지스터, 수동 소자, 보호 구조, 배선을 제공해야 합니다. 레이아웃의 저항과 인덕턴스는 실제 전달 전압, 리플, 발열을 바꿉니다.</p>
+    <div class="flow">
+      <div><b>시스템</b>입력 범위, 부하 프로파일, 시퀀싱, 잡음 제한</div>
+      <div><b>회로</b>변환기, LDO, 충전기, 기준 회로, 보호</div>
+      <div><b>소자</b>패스 소자, 스위치, 접합, 항복, 기생 성분</div>
+      <div><b>BCD 플랫폼</b>저전압 CMOS, 고전압 DMOS/LDMOS, 바이폴라, 절연, 수동 소자</div>
+      <div><b>제조</b>웰, 드리프트 영역, 게이트, 주입, 콘택, 금속</div>
+      <div><b>구현</b>전류 경로, 기판 결합, 열 경로, 시험</div>
+    </div>
+    <p><a href="bcd.html">BCD 기술</a>은 바이폴라, CMOS, DMOS 기능을 한 실리콘 플랫폼에 통합합니다. 실제 소자 종류와 전압 범위는 개별 공정에 따라 다릅니다(<a href="https://www.st.com/content/st_com/en/about/innovation-and-technology/bcd.html">STMicroelectronics, “BCD (Bipolar-CMOS-DMOS)”</a>). PMIC에서는 정밀 아날로그, 디지털 제어, 고전압 전력 소자를 함께 구현할 수 있지만 소자 옵션, 전압 도메인, 열 경로, 기생 상호작용을 함께 설계해야 합니다.</p>
+    <p>회로 동작은 <a href="references-ldo.html">기준 회로와 LDO</a> 및 <a href="switching.html">스위칭</a> 장에서 확인하고, <a href="devices.html">소자 기초</a>와 <a href="integration.html">BCD 공정 통합</a>으로 연결해 보세요. 물리 구현은 <a href="layout.html">레이아웃과 기생 성분</a> 장으로 이어집니다.</p>
+  </section>
+
+  <section id="system-checklist">
+    <h2>첫 설계 검토 목록</h2>
+    <ol>
+      <li>모든 입력 전원과 각각의 최소·공칭·최대 동작 조건을 기록합니다.</li>
+      <li>부하마다 허용 전압, 정상·피크 전류, 시동과 꺼진 상태의 동작을 기록합니다.</li>
+      <li>시퀀싱, 고장 차단, 역전류 방지, 전류 제한이 필요한 레일을 표시합니다.</li>
+      <li>과도 응답, 리플, 잡음, 열, 수명 조건을 제품 규격에서 확인합니다.</li>
+      <li>회로 후보별로 필요한 소자 전압·전류, 수동 소자, 패키지, 공정을 비교합니다.</li>
+      <li>각 요구사항을 벤치, 웨이퍼, 양산 단계에서 어떻게 확인할지 계획합니다.</li>
+    </ol>
+    <div class="callout warn"><strong>제품 분류와 수치 규격은 다릅니다</strong><p>“자동차용”, “저잡음”, “고전압”이라는 말만으로 공통의 숫자 요구사항이 정해지지 않습니다. 실제 한계는 제품 규격, 동작 조건, 적용 표준, 대상 공정에 따라 결정됩니다.</p></div>
+  </section>
+
+  <section class="keypoints" data-nonum>
+    <h2>핵심 정리</h2><ol>
+      <li>PMIC는 시스템의 부하와 동작 상태에 전력을 제공하는 기능들의 묶음입니다.</li>
+      <li>레일은 입력, 전류, 시간, 잡음, 온도, 시동, 고장 조건 전반에서 규정해야 합니다.</li>
+      <li>효율로 출력 전력에서 입력 전력과 손실을 계산하고 열 요구사항을 찾을 수 있습니다.</li>
+      <li>회로 선택은 소자, BCD 공정, 레이아웃, 특성 평가, 신뢰성으로 이어집니다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" data-nonum>
+    <h2>이해도 확인</h2>
+    <div class="quiz-q"><p>프로세서의 전류가 빠르게 변하는 동안 센서 전원은 조용해야 합니다. 먼저 무엇을 해야 할까요?</p><div class="opts">
+      <button class="opt">광고된 스위칭 주파수가 가장 높은 레귤레이터를 선택합니다.</button>
+      <button class="opt" data-correct>센서와 프로세서의 부하, 레일 허용치, 잡음 허용 수준, 과도 동작을 정의합니다.</button>
+      <button class="opt">두 블록이 같은 칩에 있으므로 하나의 전압을 공유해야 한다고 가정합니다.</button>
+    </div><div class="quiz-exp">시스템 요구사항이 있어야 레일 분리, 국부 레귤레이션, 필터링 등의 선택을 비교할 수 있습니다.</div></div>
+  </section>
+
+  <p class="source-note"><small>이 장의 본문과 그림은 PMICBook을 위해 새로 작성되었으며 ProcessBook의 교육용 문장이나 그림을 재사용하지 않았습니다. 사이트 구조와 공통 코드는 저장소에 명시한 라이선스에 따라 ProcessBook에서 파생되었습니다.</small></p>
+</main>
+</body>
+</html>

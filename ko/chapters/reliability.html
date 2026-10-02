@@ -1,0 +1,70 @@
+<!doctype html>
+<!-- ProcessBook-derived site shell and shared styles: Copyright (c) 2026 geniuskey and ProcessBook contributors; MIT (see ../LICENSE-MIT).
+     Educational material authored for PMICBook is licensed under CC BY 4.0 (see ../LICENSE-CC-BY-4.0).
+     ProcessBook educational material is included only where identified in this page and docs/UPSTREAM_ATTRIBUTION.md. -->
+<html lang="ko">
+<head>
+<!--head:start {"desc":"PMIC의 열화 기구, 전기적 스트레스, ESD, 래치업과 전력 사이클링을 설명합니다.","libs":[],"lang":"ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>신뢰성 · PMICBook</title>
+<meta name="description" content="PMIC의 열화 기구, 전기적 스트레스, ESD, 래치업과 전력 사이클링을 설명합니다.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/reliability.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/reliability.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/reliability.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/reliability.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="신뢰성 · PMICBook">
+<meta property="og:description" content="PMIC의 열화 기구, 전기적 스트레스, ESD, 래치업과 전력 사이클링을 설명합니다.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/reliability.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/reliability.html#chapter","name":"신뢰성","headline":"신뢰성 · PMICBook","description":"PMIC의 열화 기구, 전기적 스트레스, ESD, 래치업과 전력 사이클링을 설명합니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/reliability.html","position":21,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"21. 신뢰성","item":"https://frbread7.github.io/pmicbook/ko/chapters/reliability.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<!--head:end-->
+</head><body data-chapter="reliability"><main class="chapter">
+  <header class="chapter-hero"><div class="eyebrow">제21장 · 신뢰성</div><h1>전력관리 IC의 신뢰성</h1>
+    <p class="lead">신뢰성은 소자가 의도된 사용 기간 내내 전기적·안전 요구사항을 계속 충족하는지를 다룹니다. PMIC에는 얇은 산화막 제어 소자, 고전계 전력 소자, 고밀도 배선, 보호 구조, 상당한 자체 발열이 함께 있습니다. 스트레스는 전압, 전류, 스위칭 활동, 온도, 환경, 임무 프로파일에 따라 달라집니다. 이 장은 열화 기구와 설계 질문을 소개하며 제품 수명을 예측하거나 인증 한계를 정하지 않습니다.</p>
+    <ul class="objectives"><li>일반적인 열화 기구가 영향을 줄 수 있는 PMIC 구조를 연결합니다.</li><li>소자 열화, 배선 손상, ESD, 래치업 문제를 구분합니다.</li><li>적용 조건과 인증 증거를 명확히 해야 하는 이유를 이해합니다.</li></ul>
+  </header>
+  <section id="mechanisms"><h2>열화 기구와 물리적 징후</h2>
+    <div class="table-wrap"><table><thead><tr><th>기구</th><th>스트레스 / 영향받는 구조</th><th>가능한 전기적 증상</th></tr></thead><tbody>
+      <tr><td>일렉트로마이그레이션(EM)</td><td>금속·비아의 높은 전류 밀도와 온도</td><td>저항 증가, 간헐적 또는 영구 단선</td></tr>
+      <tr><td>시간 의존 절연막 파괴(TDDB)</td><td>절연 유전체에 가해지는 전계와 시간</td><td>누설 증가 또는 유전체 단락</td></tr>
+      <tr><td>바이어스 온도 불안정성(BTI)</td><td>MOS 게이트 적층의 바이어스와 온도</td><td>문턱전압 이동, 구동 전류 또는 타이밍 변화</td></tr>
+      <tr><td>핫 캐리어 효과(HCI)</td><td>소자 동작 중의 높은 횡방향 전계</td><td>트랜스컨덕턴스 또는 문턱전압 열화</td></tr>
+      <tr><td>열 피로 / 전력 사이클링</td><td>다이·패키지·계면에 반복되는 온도 변화</td><td>균열, 박리, 저항 또는 열 경로 변화</td></tr>
+      <tr><td>ESD 손상</td><td>보호 능력을 넘는 과도 방전</td><td>누설, 클램프 동작 변화, 단선 또는 단락</td></tr>
+    </tbody></table></div>
+    <p>이 기구들은 서로 바꿔 부를 수 없습니다. PMIC 전력 스위치는 저전압 제어 로직과 다른 방식으로 드리프트 영역, 게이트 유전체, 접점, 배선에 스트레스를 줄 수 있습니다. 고장 증상만으로 원인을 특정하기는 어렵습니다. 예를 들어 누설 증가는 접합, 유전체, 보호 소자, 오염, 물리적 손상에서 비롯될 수 있습니다.</p>
+    <p>공개된 신뢰성 개요는 신뢰성을 소자·회로·패키지·사용 조건이 상호작용하는 체계로 설명합니다. 다음 자료를 참고하세요:  <a href="https://www.esda.org/news/the-many-aspects-of-semiconductor-reliability-with-impact-on-esd-design/">ESD Association의 반도체 신뢰성 및 ESD 설계 설명</a>. 실제 인증 결정은 적용별 임무 프로파일과 해당 제품 표준을 따라야 합니다.</p>
+  </section>
+  <section id="interconnect"><h2>전류 밀도는 경고 지표이지 수명 계산기가 아닙니다</h2>
+    <p>균일한 도체에서 전류 밀도는 전류를 도체 단면적으로 나눈 값입니다:</p>
+    <div class="formula">$$J=\frac{I}{A}$$<div class="where">\(J\)의 단위는 A/m², \(I\)는 A, \(A\)는 m²입니다. 이 평균값은 비아, 모서리, 계면, 좁아지는 부분의 국부 전류 집중을 나타내지 않습니다. 일렉트로마이그레이션은 온도, 재료, 형상, 파형, 공정 세부사항에도 좌우됩니다.</div></div>
+    <p>전류 밀도와 온도가 높으면 배선 내 원자 이동이 빨라져 보이드나 힐록이 생길 수 있습니다. 다음 자료는 <a href="https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir6971.pdf">NIST 배선 일렉트로마이그레이션 보고서</a> 물리적·측정 맥락을 설명합니다. 위 식만으로 제품 수명을 추론하지 마세요. 수명 모델에는 보정된 공정별 파라미터와 정의된 시험·사용 조건이 필요합니다.</p>
+    <div class="callout warn"><strong>해석의 범위</strong><p>이 장에는 보편적인 전류 밀도 한계나 가속 스트레스 배수가 없습니다. 실제 제품에는 해당 기술 문서, 설계 규칙, 패키지 한계, 인증 증거를 적용하세요.</p></div>
+  </section>
+  <section id="system"><h2>PMIC 사용 조건이 중요한 이유</h2>
+    <p>같은 다이를 사용하는 두 시스템도 서로 다른 스트레스 이력을 줄 수 있습니다. 배터리 충전기는 높은 온도와 전류에서 오랜 시간 동작할 수 있고, 스위칭 레귤레이터에는 반복적인 전압 전이와 부하 과도가 나타날 수 있으며, 자동차 레일은 넓은 주변 온도 범위와 전원 교란을 겪을 수 있습니다. 따라서 신뢰성 평가는 동작 전압·전류 범위, 온도, 듀티 사이클, 부하·고장 상태, 스위칭 동작, 목표 수명, 패키지·보드 열 조건을 정의하는 것에서 시작합니다.</p>
+    <figure class="diagram"><svg viewBox="0 0 760 220" role="img" aria-label="사용 프로파일에서 스트레스 기구와 증거를 거쳐 설계 결정으로 이어지는 신뢰성 판단 흐름"><rect x="28" y="62" width="155" height="86" rx="10" fill="#d9e5f7" stroke="#627da8"/><text x="105" y="96" text-anchor="middle" class="lbl-b">사용 프로파일</text><text x="105" y="119" text-anchor="middle" class="lbl">전압 · 전류</text><text x="105" y="137" text-anchor="middle" class="lbl">온도 · 시간</text><path d="M183 105 H226" stroke="#596273" stroke-width="3"/><path d="m216 97 10 8-10 8" fill="none" stroke="#596273" stroke-width="3"/><rect x="226" y="62" width="155" height="86" rx="10" fill="#f4e5b9" stroke="#a88c44"/><text x="303" y="96" text-anchor="middle" class="lbl-b">스트레스</text><text x="303" y="119" text-anchor="middle" class="lbl">전계 · 전류</text><text x="303" y="137" text-anchor="middle" class="lbl">열 사이클</text><path d="M381 105 H424" stroke="#596273" stroke-width="3"/><path d="m414 97 10 8-10 8" fill="none" stroke="#596273" stroke-width="3"/><rect x="424" y="62" width="145" height="86" rx="10" fill="#efd9d3" stroke="#a65c5c"/><text x="496" y="96" text-anchor="middle" class="lbl-b">증거</text><text x="496" y="119" text-anchor="middle" class="lbl">시험 · 모니터링</text><text x="496" y="137" text-anchor="middle" class="lbl">고장 분석</text><path d="M569 105 H612" stroke="#596273" stroke-width="3"/><path d="m602 97 10 8-10 8" fill="none" stroke="#596273" stroke-width="3"/><rect x="612" y="62" width="120" height="86" rx="10" fill="#d9e8d7" stroke="#56825b"/><text x="672" y="96" text-anchor="middle" class="lbl-b">결정</text><text x="672" y="119" text-anchor="middle" class="lbl">설계 · 인증</text><text x="672" y="137" text-anchor="middle" class="lbl">모니터링</text><text x="380" y="190" text-anchor="middle" class="lbl">반복적인 엔지니어링 순환 과정이며 증거와 한계는 기술·적용별로 다름</text></svg><figcaption>신뢰성 판단은 의도된 사용, 물리적 스트레스, 관찰된 증거, 문서화된 설계 결정을 연결합니다.</figcaption></figure>
+    <p>인증 시험은 정해진 조건에서 얻은 증거이며, 그 자체로 특정 현장 수명을 보장하지 않습니다. 데이터를 해석할 때는 표본 수, 고장 판정 기준, 중도 중단 데이터, 시험 조건, 가속 스트레스와 실제 사용의 관계를 고려해야 합니다. 표준은 방법과 판정 체계를 지정하며 이 교육 자료는 시험 절차를 재현하지 않습니다.</p>
+  </section>
+  <section id="protection"><h2>ESD, 래치업, 시스템 보호</h2>
+    <p>ESD 보호 소자는 짧은 과도 전류를 안전하게 흘리면서 정상 동작에는 충분히 영향을 주지 않아야 합니다. 보호 경로가 약하면 방전 중 고장날 수 있고, 커패시턴스나 누설이 너무 크면 인터페이스나 아날로그 노드를 저하시킬 수 있습니다. 래치업은 CMOS 구조에서 나타나는 기생 재생성 도통 경로입니다. BCD 웰·절연 선택, 가드 구조, 기판 접점, 주입 조건이 모두 위험에 영향을 줍니다. 다음 자료는 <a href="https://esdindustrycouncil.org/ic/en/index.php/documents/white-paper-5-latchup-survey-report">ESD Industry Council 래치업 설문</a> 공개 배경 정보를 제공합니다. 설계 평가에는 기술 및 제품별 규칙을 사용하세요.</p>
+  </section>
+  <section class="keypoints" id="summary"><h2>핵심 정리</h2><ol><li>신뢰성 기구는 서로 다른 구조에 작용하지만 전기적 증상은 서로 겹칠 수 있습니다.</li><li>전류 밀도와 온도는 유용한 스트레스 개념이지만 이것만으로 수명을 판단할 수 없습니다.</li><li>PMIC 임무 프로파일에는 전기·열·스위칭·고장 조건이 포함됩니다.</li><li>인증 증거는 정의된 방법과 조건 안에서 해석해야 합니다.</li></ol></section>
+  <section class="quiz-sec" id="quiz"><h2>이해도 확인</h2><div class="quiz"><div class="quiz-q"><p>\(J=I/A\)만으로 PMIC 금속 배선의 수명을 예측하기에 부족한 이유는 무엇인가요?</p><div class="opts"><button class="opt">전류 밀도에는 단위가 없기 때문입니다.</button><button class="opt" data-correct>국부 형상, 재료·공정 파라미터, 온도 이력, 파형, 보정된 고장 판정 기준을 반영하지 않기 때문입니다.</button><button class="opt">금속 배선은 가열되지 않기 때문입니다.</button></div><div class="quiz-exp">평균 전류 밀도는 유용한 기술 지표이지 수명 법칙이 아닙니다. 신뢰성 예측에는 검증된 기술별 모델과 정의된 동작·시험 조건이 필요합니다.</div></div></div></section>
+  <nav class="chapter-links"><a href="metrology.html">← 특성 평가와 테스트</a> · <a href="failure-analysis.html">다음: 고장 분석 →</a> · <a href="advanced.html">심화 주제</a></nav>
+<p class="source-note">영문 원문: <a href="https://github.com/frbread7/pmicbook/blob/main/chapters/reliability.html">PMIC reliability fundamentals</a></p>
+</main></body></html>

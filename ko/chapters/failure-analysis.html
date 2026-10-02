@@ -1,0 +1,66 @@
+<!doctype html>
+<!-- ProcessBook-derived site shell and shared styles: Copyright (c) 2026 geniuskey and ProcessBook contributors; MIT (see ../LICENSE-MIT).
+     Educational material authored for PMICBook is licensed under CC BY 4.0 (see ../LICENSE-CC-BY-4.0).
+     ProcessBook educational material is included only where identified in this page and docs/UPSTREAM_ATTRIBUTION.md. -->
+<html lang="ko">
+<head>
+<!--head:start {"desc":"전기적 고장 증상에서 위치 특정과 물리적 증거까지의 분석 흐름을 소개합니다.","libs":[],"lang":"ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>고장 분석 · PMICBook</title>
+<meta name="description" content="전기적 고장 증상에서 위치 특정과 물리적 증거까지의 분석 흐름을 소개합니다.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/failure-analysis.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/failure-analysis.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/failure-analysis.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/failure-analysis.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="고장 분석 · PMICBook">
+<meta property="og:description" content="전기적 고장 증상에서 위치 특정과 물리적 증거까지의 분석 흐름을 소개합니다.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/failure-analysis.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/failure-analysis.html#chapter","name":"고장 분석","headline":"고장 분석 · PMICBook","description":"전기적 고장 증상에서 위치 특정과 물리적 증거까지의 분석 흐름을 소개합니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/failure-analysis.html","position":22,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"22. 고장 분석","item":"https://frbread7.github.io/pmicbook/ko/chapters/failure-analysis.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<!--head:end-->
+</head><body data-chapter="failure-analysis"><main class="chapter">
+  <header class="chapter-hero"><div class="eyebrow">제22장 · 고장 분석</div><h1>고장 분석: 증상에서 물리적 증거까지</h1>
+    <p class="lead">고장 분석은 전기적 고장 특성을 물리적 위치와 가능한 경우 물리적 기구에 연결합니다. 이는 증거를 쌓는 과정입니다. 시료를 보존하고 증상을 재현·특성화하며 탐색 영역을 좁힌 뒤 적절한 영상화·발광 분석 방법을 선택하고 관련 구조를 신중하게 드러냅니다. 단일 현미경이나 이미지로 근본 원인이 입증되지는 않습니다. 여기의 방법은 교육용 개요이며 실험실 절차나 서비스 업체 작업 흐름이 아닙니다.</p>
+    <ul class="objectives"><li>누설, 단선, 단락, 간헐적 증상으로 관찰 결과를 정리합니다.</li><li>전기적 위치 특정 결과가 현미경·단면 분석을 이끄는 방식을 이해합니다.</li><li>물리적 증거를 PMIC 회로·소자·공정·신뢰성 가설과 다시 연결합니다.</li></ul>
+  </header>
+  <section id="evidence"><h2>추적 가능한 증거 경로 구축</h2>
+    <figure class="diagram"><svg viewBox="0 0 760 240" role="img" aria-label="전기적 특성에서 위치 특정, 물리 분석, 증거 기반 결론으로 이어지는 고장 분석 경로"><rect x="22" y="62" width="154" height="92" rx="10" fill="#d9e5f7" stroke="#627da8"/><text x="99" y="95" text-anchor="middle" class="lbl-b">1 · 전기 측정</text><text x="99" y="118" text-anchor="middle" class="lbl">특성 + 조건</text><text x="99" y="137" text-anchor="middle" class="lbl">기준선 / 재현</text><path d="M176 108 H207" stroke="#596273" stroke-width="3"/><path d="m197 100 10 8-10 8" fill="none" stroke="#596273" stroke-width="3"/><rect x="207" y="62" width="154" height="92" rx="10" fill="#f4e5b9" stroke="#a88c44"/><text x="284" y="95" text-anchor="middle" class="lbl-b">2 · 위치 특정</text><text x="284" y="118" text-anchor="middle" class="lbl">전기 / 광학</text><text x="284" y="137" text-anchor="middle" class="lbl">후보 위치 순위화</text><path d="M361 108 H392" stroke="#596273" stroke-width="3"/><path d="m382 100 10 8-10 8" fill="none" stroke="#596273" stroke-width="3"/><rect x="392" y="62" width="154" height="92" rx="10" fill="#efd9d3" stroke="#a65c5c"/><text x="469" y="95" text-anchor="middle" class="lbl-b">3 · 검사</text><text x="469" y="118" text-anchor="middle" class="lbl">발광 / SEM / TEM</text><text x="469" y="137" text-anchor="middle" class="lbl">구조 + 화학</text><path d="M546 108 H577" stroke="#596273" stroke-width="3"/><path d="m567 100 10 8-10 8" fill="none" stroke="#596273" stroke-width="3"/><rect x="577" y="62" width="160" height="92" rx="10" fill="#d9e8d7" stroke="#56825b"/><text x="657" y="95" text-anchor="middle" class="lbl-b">4 · 결론</text><text x="657" y="118" text-anchor="middle" class="lbl">증거 평가</text><text x="657" y="137" text-anchor="middle" class="lbl">가설 검증</text><path d="M657 154 C657 204 99 204 99 154" fill="none" stroke="#7b8494" stroke-width="2" stroke-dasharray="7 5"/><text x="380" y="229" text-anchor="middle" class="lbl">각 단계에서 시료와 맥락을 보존합니다. 결론에는 반복 검증이 필요할 수 있습니다.</text></svg><figcaption>고장 특성에 따라 서로 다른 측정이 필요합니다. 물리적 발견이 전기적 관찰을 설명하지 못하면 분석 흐름을 반복할 수 있습니다.</figcaption></figure>
+    <p>고장 시 동작 모드, 전원·부하 조건, 온도, 타이밍, 시험 설정, 동작이 안정적인지 간헐적인지를 기록하세요. 고장품과 정상 기준품을 같은 측정 구성으로 비교합니다. 스트레스를 가하거나 소자를 열기 전에 재현 가능한 기준선을 보존하세요. 그렇지 않으면 유발되거나 변형된 특성이 원래 상태를 가릴 수 있습니다.</p>
+  </section>
+  <section id="signatures"><h2>전기적 특성으로 탐색 범위 좁히기</h2>
+    <div class="table-wrap"><table><thead><tr><th>관찰된 증상</th><th>우선 확인할 질문</th><th>후보 영역(예시)</th></tr></thead><tbody>
+      <tr><td>과도한 누설</td><td>어떤 단자 조합, 바이어스 극성, 온도, 전압 의존성이 나타나는가?</td><td>접합, 게이트 유전체, ESD 클램프, 오염 또는 손상된 배선</td></tr>
+      <tr><td>단선 / 고저항</td><td>영구적인가, 부하에 따라 달라지는가, 기계적 조건에 민감한가?</td><td>접점·비아, 본딩, 퓨즈, 전류 경로 또는 균열 연결부</td></tr>
+      <tr><td>단락 / 저저항</td><td>어떤 노드가 연결되며 바이어스에 따라 경로가 바뀌는가?</td><td>유전체 파괴, 금속 브리지, 보호 구조 또는 패키지 손상</td></tr>
+      <tr><td>간헐 동작 / 드리프트</td><td>온도, 진동, 전력 사이클링, 스위칭 활동과 상관관계가 있는가?</td><td>불안정한 연결, 열 경로, 불안정 소자 또는 상태 의존 회로 상호작용</td></tr>
+    </tbody></table></div>
+    <p>PMIC에서는 입력, 출력, 접지, 인에이블, 피드백, 스위칭, 보호 경로를 구분해 블록과 핀을 특성화합니다. 예를 들어 벅 스위치를 켰을 때만 전원 전류가 높아지는 증상은 온도에 따라 대기 전류가 증가하는 증상과 다른 탐색 방향을 시사합니다. 이는 우선순위 단서이지 진단 결과가 아닙니다. 시스템 수준 고장은 보드, 패키지, 다이, 시험 설정 또는 이들의 상호작용에서 비롯될 수 있습니다.</p>
+  </section>
+  <section id="localization"><h2>고해상도 영상화 전 위치 특정</h2>
+    <p>전기적 프로빙으로 이상 경로를 찾거나 후보 네트를 비교할 수 있습니다. 광발광 방법은 국부 전기 활동과 연관된 빛을 감지할 수 있습니다. 시간 분해 발광 현미경은 발광 검출과 타이밍 정보를 결합해 회로 동작을 조사하는 데 도움을 줍니다. 다음을 참고하세요:  <a href="https://www.nist.gov/programs-projects/time-resolved-emission-microscopy-circuit-evaluation-and-failure-analysis">NIST 프로그램 설명</a>. 발광은 고장 기구, 바이어스, 타이밍, 장비 감도에 따라 다릅니다. 어두운 위치라고 해서 결함이 없다는 뜻은 아닙니다.</p>
+    <p>위치 특정 결과는 물리 분석 방법 선택을 안내합니다. 광학 현미경은 표면을 조사하고, 주사 전자 현미경(SEM)은 형태와 국부 대비를 관찰하며, 집속 이온 빔(FIB) 가공은 지정 영역을 드러낼 수 있고, 투과 전자 현미경(TEM)은 준비된 시료의 매우 작은 구조를 분해합니다. 방법마다 시야, 해상도, 시료 준비, 파괴성에 차이가 있습니다. 다음 자료는 <a href="https://www.nist.gov/publications/semiconductor-characterization-and-analytical-technology">NIST 반도체 특성 평가 및 분석 기술 자료</a> 특성 분석 방법에 대한 폭넓은 맥락을 제공합니다.</p>
+    <div class="callout warn"><strong>이미지에서 원인으로 성급히 단정하지 마세요</strong><p>관찰된 보이드, 균열, 대비 특징은 우연한 현상이거나 시료 준비 과정의 인공물일 수 있습니다. 물리적 발견이 전기적으로 의심되는 영역에 있고 관찰된 특성과 맞으며 적절한 대조군이나 추가 측정으로 뒷받침될 때 인과 주장의 근거가 강해집니다.</p></div>
+  </section>
+  <section id="deprocess"><h2>박막 제거와 단면 선택</h2>
+    <p>층 제거와 단면 시료 준비는 매립 구조를 드러낼 수 있지만 시료를 영구적으로 바꿉니다. 분석자는 이전 증거를 바탕으로 대상 영역과 방법을 선택하고 정렬 불확실성 및 준비 인공물을 고려해야 합니다. PMIC 레이아웃에는 두꺼운 금속, 대형 전력 소자, 깊은 웰, 분산 보호 구조가 있을 수 있습니다. 단일 단면은 국부 결함을 놓치거나 3차원 전류 경로를 보여주지 못할 수 있습니다. 가능하면 변형되지 않은 기준 시료를 보존하고 준비 단계를 모두 기록하세요.</p>
+    <p>물리적 발견이 공정 또는 신뢰성 기구를 시사하면 전기적 특성 및 예상 스트레스 이력과 비교하세요. 대전류 경로 근처의 배선 손상은 배선 형상, 동작 조건, 정상 기준품과 대조해 검증할 가설이지 곧바로 일렉트로마이그레이션의 증거는 아닙니다. 분석 결과에는 관찰 사실, 남은 불확실성, 서로 다른 설명을 가를 추가 증거를 명확히 기록해야 합니다.</p>
+  </section>
+  <section class="keypoints" id="summary"><h2>핵심 정리</h2><ol><li>재현 가능한 전기적 특성과 동작 조건에서 시작합니다.</li><li>무작정 영상화하기보다 위치 특정 결과를 물리 검사에 활용합니다.</li><li>현미경, 발광 분석, FIB, TEM은 서로 다른 질문에 답하며 시료 준비 한계가 있습니다.</li><li>타당한 결론은 불확실성과 대안 원인을 기록하면서 물리적 증거를 전기 동작과 연결합니다.</li></ol></section>
+  <section class="quiz-sec" id="quiz"><h2>이해도 확인</h2><div class="quiz"><div class="quiz-q"><p>PMIC 전력 소자 근처 단면에서 금속 보이드가 관찰되었습니다. 이를 근본 원인으로 판단하기 전에 취할 가장 타당한 다음 단계는 무엇인가요?</p><div class="opts"><button class="opt">금속이 전류를 흘리므로 보이드가 고장을 일으켰다고 가정합니다.</button><button class="opt" data-correct>위치와 특성이 전기적 고장 특성 및 스트레스 이력과 일치하는지 확인하고 적절한 대조군이나 추가 증거와 비교합니다.</button><button class="opt">전기적 데이터는 무시하고 더 높은 배율로 이미지를 반복 촬영합니다.</button></div><div class="quiz-exp">물리적 증거는 고장 특성을 설명하고 동작 이력과 부합해야 합니다. 상관관계와 적절한 대조군을 통해 인과적 결함을 우연한 특징이나 시료 준비 인공물과 구분할 수 있습니다.</div></div></div></section>
+  <nav class="chapter-links"><a href="reliability.html">← 신뢰성</a> · <a href="advanced.html">다음: 심화 주제 →</a> · <a href="lab.html">공정 실습</a></nav>
+<p class="source-note">영문 원문: <a href="https://github.com/frbread7/pmicbook/blob/main/chapters/failure-analysis.html">PMIC failure analysis</a></p>
+</main></body></html>

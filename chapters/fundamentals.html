@@ -1,0 +1,99 @@
+<!doctype html>
+<!-- ProcessBook-derived site shell and shared styles: Copyright (c) 2026 geniuskey and ProcessBook contributors; MIT (see ../LICENSE-MIT).
+     Educational material authored for PMICBook is licensed under CC BY 4.0 (see ../LICENSE-CC-BY-4.0).
+     ProcessBook educational material is included only where identified in this page and docs/UPSTREAM_ATTRIBUTION.md. -->
+<html lang="en">
+<head>
+<!--head:start {"desc":"Connect power-domain needs to voltage conversion, regulation, efficiency, and first-order pass-device limits.","libs":[],"lang":"en"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PMIC Specifications and Fundamentals · PMICBook</title>
+<meta name="description" content="Connect power-domain needs to voltage conversion, regulation, efficiency, and first-order pass-device limits.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/chapters/fundamentals.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/fundamentals.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/fundamentals.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/fundamentals.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="PMIC Specifications and Fundamentals · PMICBook">
+<meta property="og:description" content="Connect power-domain needs to voltage conversion, regulation, efficiency, and first-order pass-device limits.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/chapters/fundamentals.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/fundamentals.html#chapter","name":"PMIC Specifications and Fundamentals","headline":"PMIC Specifications and Fundamentals · PMICBook","description":"Connect power-domain needs to voltage conversion, regulation, efficiency, and first-order pass-device limits.","url":"https://frbread7.github.io/pmicbook/chapters/fundamentals.html","position":2,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"2. PMIC Specifications and Fundamentals","item":"https://frbread7.github.io/pmicbook/chapters/fundamentals.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="fundamentals">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 02 · System to circuit</div>
+    <h1>PMIC Fundamentals</h1>
+    <p class="lead">A power-management IC turns a source with imperfect voltage, current, and energy into one or more controlled power domains. Its architecture is a chain of trade-offs: the system asks for rails and load behavior, circuits regulate energy, and device and process choices set electrical and thermal limits.</p>
+    <ul class="objectives"><li>Distinguish conversion, regulation, sequencing, and protection.</li><li>Estimate efficiency, dissipation, dropout, and load regulation with units.</li><li>Trace an output requirement toward the devices and technology that constrain it.</li></ul>
+  </header>
+  <section id="domains"><h2>Start with the power domains</h2>
+    <p>A product may need a low-noise analog rail, a digital core rail, a high-current processor rail, and a battery-charging path. The PMIC partitions these loads, establishes startup and shutdown order, and protects against conditions such as undervoltage, overcurrent, and overheating. A power tree is a system map; it does not by itself specify regulator stability, transient response, or safe operating area.</p>
+    <div class="callout tip"><strong>Engineering question</strong><p>For each rail, record source range, output voltage, steady and peak load, allowed ripple, startup sequence, accuracy, temperature range, and what happens during a fault. Those requirements guide whether to use an LDO, a switching converter, a charge pump, or a combination.</p></div>
+  </section>
+  <section id="metrics"><h2>Useful first-order metrics</h2>
+    <h3>Efficiency and heat</h3><p>Efficiency is useful output power divided by input power: \(\eta=P_{out}/P_{in}\). For a linear regulator, the pass device approximately drops \(V_{in}-V_{out}\), so \(P_{loss}\approx(V_{in}-V_{out})I_{out}\) when quiescent current is small. A switching regulator transfers energy in pulses; its conduction, switching, magnetic, and control losses depend on operating conditions. A high efficiency percentage does not guarantee a cool die: absolute loss and thermal resistance also matter.</p>
+    <h3>Regulation and response</h3><p><strong>Line regulation</strong> describes output change as input changes; <strong>load regulation</strong> describes output change as load changes. Both require stated measurement ranges and conditions. A load transient also tests loop response and output capacitance. Quiescent current \(I_Q\) is current consumed by the regulator itself; at light load it can dominate system battery life even when heavy-load efficiency is high.</p>
+    <h3>Dropout and the local device picture</h3><p>An LDO needs enough input-to-output headroom to control its pass element. A simple long-channel MOS intuition is that the gate controls channel charge; a pass MOSFET operated as a source follower or in its resistive region needs voltage headroom, and its resistance rises with temperature and process variation. A BJT pass device has a different base-drive and saturation picture. Junctions also provide isolation and protection paths, but can conduct unexpectedly under forward bias. These are introductory circuit models; Chapter <a href="devices.html">05</a> develops MOS, BJT, and junction behavior, and Chapter <a href="references-ldo.html">03</a> applies it to LDOs. TI's application note distinguishes dropout behavior by regulator implementation and operating conditions; there is no universal fixed dropout voltage. <a href="https://www.ti.com/lit/an/sbva029/sbva029.pdf">TI, Understanding LDO Dropout</a>.</p>
+  </section>
+  <section id="loss-model"><h2>Explore a linear-regulator loss estimate</h2>
+    <p>This calculator answers: at a chosen input, output, load, and quiescent current, what are the approximate input power, useful output power, loss, and efficiency? The power balance applies only when the LDO can regulate, with input above output plus the required headroom. An invalid input/output pair is flagged without power or efficiency results. This is a steady-state approximation, not a transistor-level or transient model.</p>
+    <div class="formula">\[P_{in}\approx V_{in}(I_{out}+I_Q),\quad P_{out}=V_{out}I_{out},\quad P_{loss}=P_{in}-P_{out},\quad \eta=P_{out}/P_{in}\]</div>
+    <div class="sim" id="pm-fund-sim"><div class="sim-head"><span class="sim-tag">ESTIMATOR</span><h3>Where does the input power go?</h3></div>
+      <div class="sim-controls">
+        <label class="ctrl"><span>Input voltage <output id="fund-vin-out">5.0 V</output></span><input id="fund-vin" type="range" min="2" max="12" step="0.1" value="5"></label>
+        <label class="ctrl"><span>Output voltage <output id="fund-vout-out">3.3 V</output></span><input id="fund-vout" type="range" min="0.8" max="10" step="0.1" value="3.3"></label>
+        <label class="ctrl"><span>Load current <output id="fund-i-out">100 mA</output></span><input id="fund-i" type="range" min="1" max="500" step="1" value="100"></label>
+        <label class="ctrl"><span>Quiescent current <output id="fund-iq-out">0.1 mA</output></span><input id="fund-iq" type="range" min="0" max="10" step="0.1" value="0.1"></label>
+      </div>
+      <div class="sim-readout"><div class="stat"><span class="k">Input power</span><span class="v" id="fund-pin">—</span></div><div class="stat"><span class="k">Output power</span><span class="v" id="fund-pout">—</span></div><div class="stat"><span class="k">Estimated loss</span><span class="v" id="fund-loss">—</span></div><div class="stat"><span class="k">Efficiency</span><span class="v" id="fund-eff">—</span></div></div>
+      <p class="sim-note" id="fund-warning" aria-live="polite">Illustrative steady-state model. It omits startup, dropout dynamics, control current variation, package loss, and thermal feedback. The output slider is allowed above the input to illustrate an invalid LDO condition; the estimate is then flagged.</p>
+    </div>
+    <p>For a feasible linear regulator, \(V_{in}\) must exceed \(V_{out}\) plus the required headroom at the specified load and temperature. As an example of why topology matters, a low-dropout regulator's pass device, drive circuit, and load determine headroom; consult the specific datasheet in a design. Introductory LDO concepts and component-dependent behavior are discussed in <a href="https://www.ti.com/lit/an/slva079/slva079.pdf">TI application report SLVA079</a>.</p>
+  </section>
+  <section id="path"><h2>From requirement to silicon</h2><ol><li><strong>System:</strong> define rails, load profiles, sequencing, and fault behavior.</li><li><strong>Circuit:</strong> choose regulation/conversion and control strategy; budget ripple, response, and losses.</li><li><strong>Device:</strong> check voltage rating, current density, breakdown, gate drive, and parasitic paths.</li><li><strong>Technology and implementation:</strong> connect the device to BCD isolation and drift structures, then account for layout resistance, heat, test, and reliability.</li></ol><p>Continue to <a href="references-ldo.html">LDOs and references</a>, <a href="switching.html">switching converters</a>, <a href="devices.html">PMIC device fundamentals</a>, and <a href="bcd.html">BCD technology</a>.</p></section>
+  <section class="quiz-sec" id="quiz"><h2>Knowledge check</h2><div class="quiz"><div class="quiz-q"><p>A linear regulator changes 5 V to 3.3 V at 100 mA, ignoring its own current. What is its approximate pass-device loss?</p><div class="opts"><button data-correct="false">0.17 mW</button><button data-correct="true">170 mW</button><button data-correct="false">330 mW</button></div><div class="quiz-exp">\((5-3.3)\,\mathrm{V}\times0.1\,\mathrm{A}=0.17\,\mathrm{W}=170\,\mathrm{mW}\).</div></div><div class="quiz-q"><p>Why can a regulator with good heavy-load efficiency still drain a battery at light load?</p><div class="opts"><button data-correct="true">Its quiescent current can be a large share of the total input current.</button><button data-correct="false">Efficiency is always zero below rated load.</button><button data-correct="false">Line regulation necessarily worsens at zero load.</button></div><div class="quiz-exp">At light load, control and bias current can dominate the current delivered to the load, so compare I<sub>Q</sub> and light-load operating modes.</div></div></div></section>
+</main>
+<script>
+(function () {
+  var ids = ["vin", "vout", "i", "iq"];
+  function update() {
+    var x = {};
+    ids.forEach(function (key) { x[key] = Number(document.getElementById("fund-" + key).value); });
+    document.getElementById("fund-vin-out").textContent = x.vin.toFixed(1) + " V";
+    document.getElementById("fund-vout-out").textContent = x.vout.toFixed(1) + " V";
+    document.getElementById("fund-i-out").textContent = x.i.toFixed(0) + " mA";
+    document.getElementById("fund-iq-out").textContent = x.iq.toFixed(1) + " mA";
+
+    if (x.vin <= x.vout) {
+      ["pin", "pout", "loss", "eff"].forEach(function (key) { document.getElementById("fund-" + key).textContent = "—"; });
+      document.getElementById("fund-warning").textContent = "Input must exceed output plus required headroom. This LDO operating point is invalid, so the model does not report power or efficiency.";
+      return;
+    }
+
+    var pin = x.vin * (x.i + x.iq), pout = x.vout * x.i, loss = pin - pout;
+    document.getElementById("fund-pin").textContent = pin.toFixed(1) + " mW";
+    document.getElementById("fund-pout").textContent = pout.toFixed(1) + " mW";
+    document.getElementById("fund-loss").textContent = loss.toFixed(1) + " mW";
+    document.getElementById("fund-eff").textContent = (100 * pout / pin).toFixed(1) + "%";
+    document.getElementById("fund-warning").textContent = "Illustrative steady-state model. It omits startup, dropout dynamics, control current variation, package loss, and thermal feedback.";
+  }
+  ids.forEach(function (key) { document.getElementById("fund-" + key).addEventListener("input", update); });
+  update();
+})();
+</script>
+</body></html>

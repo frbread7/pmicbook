@@ -1,0 +1,52 @@
+<!doctype html>
+<!-- ProcessBook-derived site shell and shared styles: Copyright (c) 2026 geniuskey and ProcessBook contributors; MIT (see ../LICENSE-MIT).
+     Educational material authored for PMICBook is licensed under CC BY 4.0 (see ../LICENSE-CC-BY-4.0).
+     ProcessBook educational material is included only where identified in this page and docs/UPSTREAM_ATTRIBUTION.md. -->
+<html lang="ko">
+<head>
+<!--head:start {"desc":"LDMOS 드리프트 영역, 전계 제어, 항복 전압 및 온저항의 절충을 다룹니다.","libs":[],"lang":"ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>고전압 MOS 및 LDMOS · PMICBook</title>
+<meta name="description" content="LDMOS 드리프트 영역, 전계 제어, 항복 전압 및 온저항의 절충을 다룹니다.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/hv-devices.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/hv-devices.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/hv-devices.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/hv-devices.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="고전압 MOS 및 LDMOS · PMICBook">
+<meta property="og:description" content="LDMOS 드리프트 영역, 전계 제어, 항복 전압 및 온저항의 절충을 다룹니다.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/hv-devices.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/hv-devices.html#chapter","name":"고전압 MOS 및 LDMOS","headline":"고전압 MOS 및 LDMOS · PMICBook","description":"LDMOS 드리프트 영역, 전계 제어, 항복 전압 및 온저항의 절충을 다룹니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/hv-devices.html","position":7,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"7. 고전압 MOS 및 LDMOS","item":"https://frbread7.github.io/pmicbook/ko/chapters/hv-devices.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<!--head:end-->
+</head><body data-chapter="hv-devices"><main class="chapter">
+  <header class="chapter-hero"><div class="eyebrow">제7장 · BCD 소자</div><h1>고전압 MOS와 LDMOS 소자</h1>
+    <p class="lead">저전압 MOSFET은 소스와 드레인 사이에 짧은 채널을 둡니다. 고전압 횡형 DMOS(LDMOS)는 횡방향 드리프트 영역을 추가해 오프 상태 전압의 상당 부분을 채널에서 떨어진 곳에서 지탱합니다. 추가 영역은 실리콘 면적을 차지하고 저항도 더합니다. 세부 구조는 소자 아키텍처와 공정에 따라 다릅니다. IEEE 논문은 LDMOS/RESURF 구조를 다루지만 특정 결과를 모든 플랫폼에 일반화해서는 안 됩니다 (<a href="https://ieeexplore.ieee.org/document/9813626/">IEEE Xplore 논문 9813626</a>).</p>
+    <ul class="objectives"><li>채널, 드리프트 영역, 전계 집중 위치를 찾습니다.</li><li>항복 전압과 온저항 사이의 정성적 절충을 설명합니다.</li><li>RESURF를 보편적인 공식이 아닌 전계 분포 설계 개념으로 이해합니다.</li></ul>
+  </header>
+  <section id="structure"><h2>오프 상태 전압을 지탱하는 영역</h2><figure class="diagram"><svg viewBox="0 0 740 250" role="img" aria-label="소스, 게이트, 드리프트 영역, 필드 플레이트, 드레인을 포함한 개념적 LDMOS 단면"><rect x="30" y="55" width="680" height="160" rx="10" fill="#d8e0ef"/><rect x="73" y="120" width="80" height="55" fill="#f1c6c6"/><rect x="480" y="115" width="70" height="60" fill="#f3c48c"/><rect x="150" y="75" width="165" height="45" rx="5" fill="#d3bd9b"/><rect x="315" y="80" width="150" height="42" fill="#e8edf7" stroke="#73819a" stroke-dasharray="5 4"/><path d="M152 142 H480" stroke="#6d94cf" stroke-width="30" opacity=".45"/><path d="M170 94 V134 H440" fill="none" stroke="#393d48" stroke-width="5"/><text x="110" y="195" text-anchor="middle" class="lbl-b">소스</text><text x="233" y="68" text-anchor="middle" class="lbl-b">게이트</text><text x="375" y="105" text-anchor="middle" class="lbl">필드 플레이트(예)</text><text x="370" y="164" text-anchor="middle" class="lbl-b">횡방향 드리프트 영역</text><text x="515" y="195" text-anchor="middle" class="lbl-b">드레인</text><path d="M568 135 H660" stroke="#b84949" stroke-width="3" marker-end="url(#tip)"/><text x="613" y="120" text-anchor="middle" class="lbl">드레인 부근의 강한 전계</text><defs><marker id="tip" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0 0 L9 4 L0 8" fill="none" stroke="#b84949"/></marker></defs></svg><figcaption>축척에 맞지 않습니다. 필드 플레이트와 전계 분포는 LDMOS 설계마다 다릅니다. 이 도식은 학습용 그림이며 공정 단면 사양이 아닙니다.</figcaption></figure>
+    <p>오프 상태에서는 공핍 영역이 드리프트 영역으로 확장되어 전압 강하를 분산합니다. 급격한 형상과 재료 경계에는 전계가 집중될 수 있으며 드레인 쪽 표면이나 접합이 중요한 위치가 되기도 합니다. 필드 플레이트, 단계적 도핑, 전하 균형은 전계를 형상화하는 설계 수단입니다.</p>
+  </section>
+  <section id="tradeoff"><h2>항복 전압과 비저항 온저항의 절충</h2><p>온 상태에서는 채널과 드리프트 영역으로 전류가 흐릅니다. 드리프트 영역이 길거나 도핑 농도가 낮으면 애벌랜치 전까지 더 높은 전압을 견딜 수 있지만 저항도 증가합니다. 유용한 비교 지표는 비저항 온저항 \(R_{on,sp}=R_{on}A\)이며 보통 Ω·면적(흔히 mΩ·mm²)으로 표시합니다. 이는 활성 면적으로 저항을 정규화하지만 측정 정의에 포함되지 않는 한 종단 구조, 접점, 금속, 온도는 반영하지 않습니다.</p>
+    <div class="formula">$$R_{on}=\frac{V_{DS}}{I_D}\quad[\Omega], \qquad R_{on,sp}=R_{on}A\quad[\Omega\,\mathrm{m}^2]$$<div class="where">게이트 전압, 전류, 온도, 항복 판정 기준이 명시된 조건에서만 소자를 비교하세요. 보편적인 제품 목표 수치는 없습니다. BV–Ron 절충은 아키텍처, 재료, 형상, 공정에 따라 달라집니다.</div></div>
+    <p>RESURF(“표면 전계 감소”)는 전하 분포와 공핍을 이용해 표면 최대 전계를 낮추고 드리프트 영역을 더 활용해 전압을 지탱하는 접근을 폭넓게 가리킵니다. 전계 관리의 직관이지 특정 구조가 지정된 항복 전압을 달성한다는 보장은 아닙니다. 저전압 및 바이폴라 영역과 함께 이 소자들이 어떻게 배치되는지는 <a href="bcd.html">BCD 아키텍처 장</a>을 참고하세요.</p>
+  </section>
+  <section id="implications"><h2>PMIC 설계에 미치는 영향</h2><ul><li>과도 현상과 동작 조건에 대한 여유를 두고 차단 전압을 정하세요. 항복 전압은 반복 동작 권장점이 아닙니다.</li><li>드리프트 저항이 낮아지면 도통 손실을 줄일 수 있지만 면적·누설·커패시턴스가 늘거나 전압 여유가 줄 수 있습니다.</li><li>스위칭 손실은 게이트 전하, 출력 커패시턴스, 전이 시간, 드라이버 구동력에도 좌우됩니다.</li><li>접합 온도는 저항과 신뢰성을 바꾸므로 실제 사용 조건에 맞춰 특성화해야 합니다.</li></ul><p>컨버터 단에서는 이러한 소자 한계를 다음과 연결하세요:  <a href="switching.html">스위칭 장</a>, <a href="layout.html">전류 경로와 열 레이아웃</a>, <a href="integration.html">공정 통합 예시</a>를 참고하세요.</p></section>
+  <section class="keypoints" id="summary"><h2>핵심 정리</h2><ol><li>드리프트 영역은 오프 상태 전압을 지탱하고 온 상태 저항을 더합니다.</li><li>전계 집중은 조기 항복을 일으킬 수 있으며 전계 형상과 전하 설계가 결과에 영향을 줍니다.</li><li>RESURF는 전계 관리 개념의 계열이며 모든 LDMOS를 예측하는 단순한 보편식은 없습니다.</li><li>BV와 \(R_{on,sp}\)는 시험 조건과 면적 정의를 명시한 경우에만 비교하세요.</li></ol></section>
+  <section class="quiz-sec" id="quiz"><h2>이해도 확인</h2><div class="quiz"><div class="quiz-q"><p>LDMOS 드리프트 영역을 길게 하거나 약하게 도핑하면 전압 차단에는 도움이 되지만 도통에는 불리한 이유가 무엇인가요?</p><div class="opts"><button class="opt">모든 영역의 캐리어 이동도를 높입니다.</button><button class="opt" data-correct>오프 상태 전계를 분산할 수 있지만 길거나 전도성이 낮은 경로가 온저항을 더합니다.</button><button class="opt">드레인 접합을 제거합니다.</button></div><div class="quiz-exp">전압 지지와 전류 도통이 같은 드리프트 영역을 사용하므로 형상·도핑 간 핵심 절충이 생깁니다.</div></div></div></section>
+  <nav class="chapter-links"><a href="bcd.html">← BCD 아키텍처</a> · <a href="passives.html">다음: 집적 수동소자 →</a></nav>
+<p class="source-note">영문 원문: <a href="https://github.com/frbread7/pmicbook/blob/main/chapters/hv-devices.html">HV MOS and LDMOS devices</a></p>
+</main></body></html>

@@ -1,0 +1,174 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "스마트 전력, 자동차 시스템, GaN, 디지털 제어, 후면 전력 공급, 첨단 패키징을 PMIC 관점에서 살펴봅니다. 수치 모델은 교육용 근사입니다.", "libs": ["xsec"], "lang": "ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>스마트 파워와 첨단 기술 동향 · PMICBook</title>
+<meta name="description" content="스마트 전력, 자동차 시스템, GaN, 디지털 제어, 후면 전력 공급, 첨단 패키징을 PMIC 관점에서 살펴봅니다. 수치 모델은 교육용 근사입니다.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/advanced.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/advanced.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/advanced.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/advanced.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="스마트 파워와 첨단 기술 동향 · PMICBook">
+<meta property="og:description" content="스마트 전력, 자동차 시스템, GaN, 디지털 제어, 후면 전력 공급, 첨단 패키징을 PMIC 관점에서 살펴봅니다. 수치 모델은 교육용 근사입니다.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/advanced.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/advanced.html#chapter","name":"스마트 파워와 첨단 기술 동향","headline":"스마트 파워와 첨단 기술 동향 · PMICBook","description":"스마트 전력, 자동차 시스템, GaN, 디지털 제어, 후면 전력 공급, 첨단 패키징을 PMIC 관점에서 살펴봅니다. 수치 모델은 교육용 근사입니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/advanced.html","position":23,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"23. 스마트 파워와 첨단 기술 동향","item":"https://frbread7.github.io/pmicbook/ko/chapters/advanced.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<script src="../../js/xsec.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="advanced">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">제23장 · PMIC 첨단 기술</div>
+    <h1>PMIC 첨단 통합 기술</h1>
+    <p class="lead">스마트 전력 IC는 제어, 보호, 센싱, 전력 소자를 결합합니다. 더 높은 전압, 더 빠른 스위칭, 더 조밀한 패키징은 BCD 공정, 회로 토폴로지, 패키지 전류 경로, 제어 방식 전반에서 선택과 절충을 요구합니다. 이 장은 그 선택을 PMIC 설계와 연결하고 기존 패키지 모델을 제한된 형상 비교에만 사용합니다.</p>
+    <ul class="objectives">
+      <li>스마트 전력 통합과 소자 절연, 제어, 보호의 관계를 설명합니다.</li>
+      <li>자동차용 동작 제약과 GaN 시스템의 절충을 개괄합니다.</li>
+      <li>디지털 제어와 패키지 통합의 이점 및 남는 제약을 설명합니다.</li>
+      <li>기존 본딩 모델을 수율·인증 예측이 아닌 형상 설명에 사용합니다.</li>
+    </ul>
+  </header>
+
+
+
+
+  <section id="pmic-advanced"><h2>스마트 전력 통합 방식의 선택</h2>
+    <p><a href="bcd.html">BCD 플랫폼</a>은 아날로그·바이폴라, CMOS 제어, 전력 DMOS 소자를 통합합니다. PMIC에서는 전압, 절연, 전류, 열 요구가 플랫폼에 맞을 때 기준전압 회로, 게이트 드라이버, 고장 검출기, 컨트롤러, 출력 스위치를 하나의 다이에 집적할 수 있습니다. <a href="https://www.st.com/content/st_com/en/about/innovation-and-technology/bcd.html">STMicroelectronics의 공개 BCD 개요</a>는 이 통합 전략의 사례이며 보편적인 단일 적층 구조를 규정하지 않습니다.</p>
+    <div class="table-wrap"><table><thead><tr><th>구성 방식</th><th>검토할 설계 이점</th><th>검증할 제약</th></tr></thead><tbody>
+      <tr><td>단일 실리콘 BCD</td><td>짧은 제어·센싱 경로, 공정 통합, 적은 패키지 경계.</td><td>고전압 절연, 전력 소자 면적, 칩 내 열 결합, 상부 금속의 전류 용량.</td></tr>
+      <tr><td>컨트롤러 + 외장 스위치</td><td>부하에 적합한 전력 소자와 열 패키지를 선택할 수 있습니다.</td><td>드라이버 루프 인덕턴스, 센싱 정확도, EMI, PCB 면적, 외부 보호 동작.</td></tr>
+      <tr><td>공동 패키지 또는 집적 전력단</td><td>드라이버와 스위치가 가까워지면 중요한 루프를 줄일 수 있습니다.</td><td>패키지 기생 성분, 열 임피던스, 테스트 접근성, 수율, 조립 비용.</td></tr>
+    </tbody></table></div>
+    <p>선택은 전원 트리에서 시작합니다. 레일 전압·전류, 듀티 사이클, 동작 환경, 과도 한계, 효율 목표, 방열 경로, 고장 응답을 정합니다. 이어서 <a href="hv-devices.html">소자 항복 전압(BV)과 온저항</a>, <a href="metal.html">전류를 흘리는 금속 배선</a>, <a href="layout.html">루프 형상</a>을 검토합니다. 스위치 다이만 작다고 전원 솔루션 전체가 더 작거나 더 차가운 것은 아닙니다.</p>
+  </section>
+  <section id="auto-digital"><h2>자동차용 동작과 디지털 제어</h2>
+    <p>자동차용 PMIC는 전원 교란, 여러 부하 도메인, EMI 한계, 온도 변화, 고장 보고 요구를 마주할 수 있습니다. 차량 하위 시스템과 부품 요구사항을 바탕으로 관련 한계를 정한 뒤 해당 조건에서 기동, 과도 복구, 보호 임계값, 열 동작을 측정합니다. <a href="https://www.analog.com/en/resources/app-notes/layout-guidelines-with-example-layout-for-the-max20021max20022.html">Analog Devices의 자동차용 PMIC 레이아웃 노트</a>는 레일 배치를 출력 청정도 및 방출과 연결하는 구체적 사례입니다. 해당 부품의 레이아웃을 보편적인 PMIC 규칙으로 볼 수는 없습니다.</p>
+    <p>디지털 제어는 레일 시퀀싱, 텔레메트리 기록, 설정값 조정을 수행할 수 있습니다. 샘플링 간격, 계산 지연, 양자화는 아날로그 루프 대역폭과 상호작용합니다. 빠른 전류 제한과 열 차단에도 보호 대상 소자에 맞는 지연 응답 경로가 필요합니다. 이러한 요구를 검증하는 방법은 <a href="switching.html">컨버터 제어 및 보호</a>, <a href="metrology.html">특성 평가</a>, <a href="reliability.html">신뢰성</a> 장을 참고하세요.</p>
+  </section>
+  <section id="gan"><h2>GaN과 고주파 전력단</h2>
+    <p>GaN 스위치는 적합한 아키텍처에서 일부 스위칭 손실을 줄이고 더 높은 주파수를 지원해 자성 부품을 작게 할 수 있습니다. 에지가 빨라지면 드라이버 루프 인덕턴스, 링잉, 게이트 제어, EMI, 방열 요구가 더 까다로워집니다. <a href="https://www.ti.com/technologies/gallium-nitride.html">Texas Instruments의 공개 GaN 기술 개요</a>는 드라이버·보호 기능 통합과 저인덕턴스 패키징 선택지를 설명합니다. 최적 선택은 전압, 전류, 손실, 패키지, 신뢰성 목표에 따라 달라집니다. 이 장은 실리콘 BCD에 GaN 공정 모듈이 있다고 주장하지 않습니다.</p>
+    <div class="formula">$$P_{\mathrm{cond}}\approx I_{\mathrm{rms}}^2R_{\mathrm{on}},\qquad P_{\mathrm{sw}}\approx E_{\mathrm{sw}}f_{\mathrm{sw}}$$<div class="where">이 1차 항은 도통 손실과 스위칭 손실을 비교합니다. 실제 스위칭 에너지는 소자, 드라이버, 전압, 전류, 온도, 회로 기생 성분에 따라 달라집니다. 주파수를 높이면 수동소자를 줄일 수 있지만 스위칭 1회당 에너지가 낮아지지 않는 한 반복 스위칭 손실은 증가합니다.</div></div>
+    <p>패키지 수준에서는 스위치, 귀환 경로, 디커플링 커패시터, 부하를 통해 전류 루프가 어디서 닫히는지가 중요합니다. 더 빠른 소자의 이점을 추정하기 전에 패키지와 보드를 통과하는 루프를 따라가세요. <a href="layout.html">기생 성분과 열 레이아웃</a>을 참고하세요.</p>
+  </section>
+  <section id="bspdn">
+    <h2>연구 동향으로 보는 후면 전력 공급</h2>
+    <p>후면 전력 공급은 주로 첨단 로직 집적 분야의 방향입니다. 웨이퍼 본딩과 박막화 후 후면 접점 및 전력망을 추가해 일부 전원 배선을 전면 신호 배선과 분리합니다. 해당 아키텍처에서 전원 경로를 짧게 하거나 혼잡을 완화할 가능성이 있습니다. 접점을 만들고 정렬하며 열을 방출하는 과정은 새로운 공정·패키지 제약을 가져옵니다. 그림은 개념 비교일 뿐 PMIC에 이 방식을 적용해야 한다거나 전원·신호 배선이 완전히 독립된다는 뜻은 아닙니다.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 780 250" role="img" aria-label="전면·후면 전력 배선의 개념 비교">
+        <g transform="translate(40,20)">
+          <text x="140" y="0" text-anchor="middle" class="lbl-b">기존: 전면 전력</text>
+          <rect x="0" y="170" width="280" height="40" class="m-si"/>
+          <rect x="40" y="150" width="200" height="20" class="f-acc-soft"/><text x="140" y="164" text-anchor="middle" class="t-mono">트랜지스터</text>
+          <g class="m-cu"><rect x="20" y="126" width="240" height="8"/><rect x="20" y="100" width="240" height="10"/><rect x="20" y="70" width="240" height="14"/><rect x="20" y="30" width="240" height="22"/></g>
+          <path d="M60 30 V150 M220 30 V150" stroke="var(--bad)" stroke-width="3"/>
+          <text x="140" y="232" text-anchor="middle" class="lbl-dim">전력(빨간색)이 신호 배선 사이로 내려옵니다.</text>
+        </g>
+        <g transform="translate(440,20)">
+          <text x="140" y="0" text-anchor="middle" class="lbl-b">후면 전력(BSPDN)</text>
+          <rect x="0" y="20" width="280" height="30" class="m-si" opacity=".6"/><text x="140" y="40" text-anchor="middle" class="t-mono">캐리어 웨이퍼</text>
+          <g class="m-cu"><rect x="20" y="60" width="240" height="10"/><rect x="20" y="82" width="240" height="8"/><rect x="20" y="100" width="240" height="6"/></g>
+          <rect x="40" y="114" width="200" height="20" class="f-acc-soft"/><text x="140" y="128" text-anchor="middle" class="t-mono">트랜지스터</text>
+          <rect x="0" y="134" width="280" height="10" class="m-si"/>
+          <g class="m-cu"><rect x="20" y="150" width="240" height="18"/><rect x="20" y="180" width="240" height="26"/></g>
+          <path d="M60 134 V206 M220 134 V206" stroke="var(--bad)" stroke-width="3"/>
+          <text x="140" y="232" text-anchor="middle" class="lbl-dim">전면에는 신호만, 후면에는 두꺼운 전력망</text>
+        </g>
+      </svg>
+      <figcaption><b>그림 23-1.</b> 첨단 로직 맥락에서 전면·후면 전력 배선을 개념적으로 비교합니다. 실제 배선, 본딩, 박막화, 열 경로는 기술별로 다릅니다.</figcaption>
+    </figure>
+  </section>
+
+  <section id="bond">
+    <h2>패키지 전류 경로, 본딩, 칩렛</h2>
+    <p>PMIC의 대전류 경로는 접점, 상부 금속, 범프·본딩, 패키지 도체, 보드를 거칩니다. 각 구간은 저항과 인덕턴스를 더하며 패키지는 방열 경로도 제공합니다. 첫 점검에는 \(\Delta V\approx IR_{\rm path}\)와 \(P_{\rm path}\approx I_{\rm rms}^{2}R_{\rm path}\)를 사용할 수 있습니다. 이 집중 모델은 저저항 배선의 중요성을 보여주지만 전류 집중, 온도 상승, 스위칭 루프 링잉을 해석하지는 않습니다. <a href="metal.html">금속 배선과 접점</a>, <a href="layout.html">레이아웃·열 설계</a>와 연결해 보세요.</p>
+    <p>다중 다이 패키지는 컨트롤러, 드라이버, 전력단을 가까이 배치할 수 있습니다. 조밀한 본딩은 배선을 줄일 수 있지만 패드 전류 용량, 국부 발열, 테스트 접근성, 절연, 조립 수율, 비용도 중요합니다. 아래의 기존 본딩 모델은 패드 형상과 서로 독립적인 국부 정렬 오차만 분리해 살핍니다. 모델 범위는 PMIC 양산 수율 규칙이 아닙니다.</p>
+    <div class="sim" id="sim-hb">
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>패드 오프셋 독립성 사고 실험</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="hb-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>패드 피치 <output id="hb-p-out"></output></span><input type="range" id="hb-p" min="0.4" max="40" step="0.1" value="6"></label>
+          <label class="ctrl"><span>패드 직경 / 피치 <output id="hb-d-out"></output></span><input type="range" id="hb-d" min="0.2" max="0.7" step="0.05" value="0.5"></label>
+          <label class="ctrl"><span>독립 국부 오프셋 3σ <output id="hb-s-out"></output></span><input type="range" id="hb-s" min="10" max="1000" step="10" value="200"></label>
+          <label class="ctrl"><span>모델링할 패드 배열 면적 <output id="hb-a-out"></output></span><input type="range" id="hb-a" min="1" max="100" step="1" value="25"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">모델 패드 수</span><span class="v" id="hb-o-n">—</span></div>
+        <div class="stat"><span class="k">모델상 패드별 실패 확률</span><span class="v" id="hb-o-p">—</span></div>
+        <div class="stat"><span class="k">모델상 전체 패드 통과 확률</span><span class="v" id="hb-o-y">—</span></div>
+      </div>
+      <div class="sim-note">설계 질문: 피치가 달라질 때 고정된 국부 정렬 분포는 패드 직경과 어떻게 비교될까요? 이 단순 모델은 각 패드의 2차원 가우스 오프셋이 서로 독립이라고 가정하고 패드 직경의 절반보다 큰 오프셋을 실패로 판정합니다. 전체 모델 패드에 대해 \((1-p)^N\)을 계산합니다. 실제 배열 정렬에는 상관성이 있을 수 있고 전기 접촉은 기하학적 중첩 외에도 여러 요인에 좌우됩니다. 이 수치는 본딩 사양이나 제조 수율 예측이 아닙니다.</div>
+    </div>
+    <p>하나의 공정이나 열 경로로 제어 다이와 전력 다이를 효율적으로 구현하기 어려울 때 칩렛과 공동 패키지 전력단으로 분리할 수 있습니다. 다이·패키지 수율, 테스트 접근성, 배선 전류·인덕턴스, 열 흐름, 수리 가능성을 포함해 전체 조립품을 평가하세요. 원본 장의 대형 로직 다이 면적·수율 모델은 기본 치수와 가정이 PMIC 설계 질문에 답하지 않아 제외했습니다.</p>
+  </section>
+
+  <section class="keypoints" id="summary"><h2>핵심 정리</h2><ol><li>스마트 전력 제품은 제어, 보호, 센싱, 전력 소자를 통합하며 절연과 기판 결합이 중요합니다.</li><li>자동차용 PMIC 제약은 적용 분야와 인증 요구사항에 따라 다릅니다.</li><li>GaN과 조밀한 본딩은 전기·열·신뢰성 절충을 동반하는 시스템 선택지입니다. 후면 전력 공급은 별도의 첨단 로직 분야입니다.</li><li>디지털 제어는 프로그래밍 가능성을 더하지만 아날로그 루프와 보호 회로는 여전히 신중하게 설계해야 합니다.</li><li>본딩 도구는 독립적인 국부 오차를 가정한 형상 사고 실험이지 패키지 수율 예측이 아닙니다.</li></ol></section>
+
+  <section class="quiz-sec" id="quiz"><h2>이해도 확인</h2><div class="quiz">
+    <div class="quiz-q"><p>대전류 PMIC가 패키지 내 전용 저저항 전력 경로에서 얻을 수 있는 이점은 무엇인가요?</p><div class="opts"><button class="opt">반도체 접합을 없앱니다</button><button class="opt" data-correct>패키지와 레이아웃 제약 안에서 배선 전압 강하를 줄이고 열을 분산할 수 있습니다</button><button class="opt">전류 제한이 필요 없어집니다</button><button class="opt">EMI가 0임을 보장합니다</button></div><div class="quiz-exp">패키지 배선, 범프·본딩 저항, 귀환 경로, 열 임피던스가 모두 시스템 동작에 영향을 줍니다. 시뮬레이터는 선택한 형상 효과만 추정합니다.</div></div>
+    <div class="quiz-q"><p>실리콘 PMIC 전력단을 더 빠르게 스위칭하는 GaN 방식으로 바꾸기 전에 무엇을 확인해야 하나요?</p><div class="opts"><button class="opt">트랜지스터의 최대 주파수만 확인합니다</button><button class="opt" data-correct>드라이버 루프, 스위칭 손실, 패키지 기생 성분, 발열, EMI, 보호 기능을 확인합니다</button><button class="opt">패키지 표기만 확인합니다</button><button class="opt">다이가 더 작으면 추가 시험은 필요 없습니다</button></div><div class="quiz-exp">시스템 비교에는 소자 및 구현 손실과 그에 따른 과도·열·보호 동작이 모두 포함됩니다.</div></div>
+    <div class="quiz-q"><p>본딩 모델의 전체 패드 결과는 어떤 가정을 사용하나요?</p><div class="opts"><button class="opt" data-correct>선택한 기하학적 실패 기준에 따라 각 국부 패드 오프셋이 서로 독립이라고 가정합니다</button><button class="opt">공장 전체 패키지 수율을 측정한 값입니다</button><button class="opt">웨이퍼 정렬이 완전히 상관되고 국부 편차가 없다고 가정합니다</button><button class="opt">검증된 전류 용량 사양입니다</button></div><div class="quiz-exp">모델은 서로 독립인 국부 통과 확률을 곱합니다. 실제 배열에는 정렬 상관성과 다양한 전기·재료 고장 모드가 있으므로 교육용 비교로만 활용하세요.</div></div>
+  </div></section>
+<section class="callout" id="attribution"><h2>출처와 저작자 표시</h2><p>ProcessBook을 바탕으로 하며 CC BY 4.0에 따라 <a href="https://github.com/geniuskey/processbook/blob/0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff/chapters/advanced.html">커밋 0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff의 변경 불가 원본 첨단 기술 장</a>을 수정·각색했습니다. 후면 전력 공급 그림과 본딩 상호작용을 PMIC/BCD 맥락에 맞춰 번역·재구성하고 적용 범위를 제한했으며 대형 다이 비용·수율 위젯은 제외했습니다. 스마트 전력, 자동차, GaN, 전력 경로 설명을 추가했습니다. 기존 시뮬레이터는 교육용 근사이며 인증 데이터가 아닙니다. <a href="../../LICENSE-CC-BY-4.0">CC BY 4.0 라이선스</a>를 참고하세요.</p></section>
+</main>
+<script>
+(function () {
+  "use strict";
+  function small(v, u) { return v + "<small>" + u + "</small>"; }
+
+  /* ---------------- Hybrid bonding */
+  (function () {
+    var cv, rr = function () { cv && cv.redraw(); };
+    var gP = PB.range("hb-p", function (v) { return v + " µm"; }, rr), gD = PB.range("hb-d", function (v) { return v.toFixed(2); }, rr);
+    var gS = PB.range("hb-s", function (v) { return v + " nm"; }, rr), gA = PB.range("hb-a", function (v) { return v + " mm²"; }, rr);
+    cv = PB.canvas("#hb-cv", function (ctx, w, h) {
+      var P = PB.palette(), p = gP(), dr = gD(), s3 = gS() / 1000, A = gA();
+      var d = p * dr, sig = s3 / 3, lim = d * 0.5;              // Treat overlap below 50% of pad diameter as a teaching-model failure threshold.
+      var pf = Math.exp(-lim * lim / (2 * sig * sig));           // 2D Gaussian (Rayleigh) tail
+      var N = A * 1e6 / (p * p), Y = Math.exp(N * Math.log(Math.max(1e-300, 1 - pf)));
+      // Picture: Pad grid and random offset
+      var rnd = PB.rng(7), cols = 9, rows = 5, cell = Math.min((w - 40) / cols, (h - 120) / rows), ox = (w - cols * cell) / 2, oy = 20;
+      var sc = cell / p;
+      for (var i = 0; i< cols; i++) for (var j = 0; j < rows; j++) {
+        var cx = ox + (i + 0.5) * cell, cy = oy + (j + 0.5) * cell;
+        var u = Math.sqrt(-2 * Math.log(rnd() + 1e-12)), t = rnd() * 6.283, dx = sig * u * Math.cos(t) * sc, dy = sig * u * Math.sin(t) * sc;
+        ctx.fillStyle = "#cc7a3a"; ctx.globalAlpha = 0.8; ctx.beginPath(); ctx.arc(cx, cy, d / 2 * sc, 0, 6.283); ctx.fill();
+        var bad = Math.hypot(dx, dy) >lim*sc;
+        ctx.globalAlpha = 0.55; ctx.fillStyle = bad ? P.bad: "#e2a060"; ctx.beginPath(); ctx.arc(cx + dx, cy + dy, d / 2 * sc, 0, 6.283); ctx.fill(); ctx.globalAlpha = 1;
+      }
+      ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "center"; ctx.fillText("아래 패드(짙은색), 위 패드(밝은색) · 독립 국부 오프셋", w / 2, oy + rows * cell + 16);
+      // yield curve vs 3σ
+      var box = { x: 58, y: oy + rows * cell + 30, w: w - 76, h: h - (oy + rows * cell + 30) - 44 };
+      var data = []; for (var q = 10; q<= 1000; q += 10) { var sg = q / 3000, pf2 = Math.exp(-lim * lim / (2 * sg * sg)); data.push([q, Math.exp(N * Math.log(Math.max(1e-300, 1 - pf2)))]); }
+      PB.chart(ctx, box, { x: [10, 1000], y: [0, 1.05], xLabel: "국부 오프셋 3σ (nm)", yLabel: "", series: [{ data: data, color: P.accent, width: 2.6 }], vlines: [{ x: gS(), color: P.faint }] });
+      ctx.fillStyle = P.dim; ctx.textAlign = "left"; ctx.fillText("모델상 전체 패드 통과 확률", box.x + 6, box.y + 12);
+      PB.stat("hb-o-n", small(PB.fmt(N, 3), "개 패드"));
+      PB.stat("hb-o-p", pf < 1e-15 ? "&lt; 10<sup>−15</sup>" : pf.toExponential(1).replace(/e([-+]\d+)/, "×10<sup>$1</sup>"));
+      PB.stat("hb-o-y", Y > 0.995 ? "<span class='ok-t'>" + (Y * 100).toFixed(2) + "%</span>" : Y > 0.5 ? "<span class='warn-t'>" + (Y * 100).toFixed(1) + "%</span>" : "<span class='bad-t'>" + (Y * 100).toFixed(2) + "%</span>");
+    }, { aspect: 0.7, minHeight: 340, maxHeight: 500 });
+  })();
+
+})();
+</script>
+</body>
+</html>

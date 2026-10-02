@@ -1,0 +1,100 @@
+<!doctype html>
+<!-- ProcessBook-derived site shell and shared styles: Copyright (c) 2026 geniuskey and ProcessBook contributors; MIT (see ../LICENSE-MIT).
+     Educational material authored for PMICBook is licensed under CC BY 4.0 (see ../LICENSE-CC-BY-4.0).
+     ProcessBook educational material is included only where identified in this page and docs/UPSTREAM_ATTRIBUTION.md. -->
+<html lang="ko">
+<head>
+<!--head:start {"desc":"전원 도메인의 요구사항을 전압 변환·레귤레이션·효율 및 패스 소자의 1차 한계와 연결합니다.","libs":[],"lang":"ko"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PMIC 사양과 기초 · PMICBook</title>
+<meta name="description" content="전원 도메인의 요구사항을 전압 변환·레귤레이션·효율 및 패스 소자의 1차 한계와 연결합니다.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/chapters/fundamentals.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/fundamentals.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/fundamentals.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/fundamentals.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="PMIC 사양과 기초 · PMICBook">
+<meta property="og:description" content="전원 도메인의 요구사항을 전압 변환·레귤레이션·효율 및 패스 소자의 1차 한계와 연결합니다.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/chapters/fundamentals.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/fundamentals.html#chapter","name":"PMIC 사양과 기초","headline":"PMIC 사양과 기초 · PMICBook","description":"전원 도메인의 요구사항을 전압 변환·레귤레이션·효율 및 패스 소자의 1차 한계와 연결합니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/fundamentals.html","position":2,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"2. PMIC 사양과 기초","item":"https://frbread7.github.io/pmicbook/ko/chapters/fundamentals.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../../js/common.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="fundamentals">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">제2장 · 시스템에서 회로까지</div>
+    <h1>PMIC 기초</h1>
+    <p class="lead">전력관리 IC(PMIC)는 전압·전류·에너지가 이상적이지 않은 전원으로부터 하나 이상의 제어된 전원 도메인을 만듭니다. 아키텍처는 여러 절충의 연결입니다. 시스템은 전원 레일과 부하 동작을 요구하고, 회로는 에너지를 조절하며, 소자와 공정의 선택은 전기적·열적 한계를 정합니다.</p>
+    <ul class="objectives"><li>변환, 레귤레이션, 시퀀싱, 보호 기능을 구분합니다.</li><li>효율, 손실, 드롭아웃, 부하 레귤레이션을 단위와 함께 추정합니다.</li><li>출력 요구사항에서 출발해 이를 제한하는 소자와 기술을 추적합니다.</li></ul>
+  </header>
+  <section id="domains"><h2>전원 도메인부터 살펴보기</h2>
+    <p>제품에는 저잡음 아날로그 레일, 디지털 코어 레일, 대전류 프로세서 레일, 배터리 충전 경로가 필요할 수 있습니다. PMIC는 부하를 나누고 기동·종료 순서를 정하며 저전압, 과전류, 과열 같은 상황으로부터 보호합니다. 전원 트리는 시스템 구성도입니다. 그 자체로 레귤레이터 안정도, 과도 응답, 안전 동작 영역을 정하지는 않습니다.</p>
+    <div class="callout tip"><strong>설계 질문</strong><p>각 레일에 대해 입력 범위, 출력 전압, 정상 및 피크 부하, 허용 리플, 기동 순서, 정확도, 온도 범위, 고장 시 동작을 기록하세요. 이 요구사항을 바탕으로 LDO, 스위칭 컨버터, 차지 펌프 또는 그 조합을 선택합니다.</p></div>
+  </section>
+  <section id="metrics"><h2>유용한 1차 지표</h2>
+    <h3>효율과 발열</h3><p>효율은 유효 출력 전력을 입력 전력으로 나눈 값입니다: \(\eta=P_{out}/P_{in}\). 선형 레귤레이터에서는 패스 소자가 대략 \(V_{in}-V_{out}\)만큼 전압을 낮추므로, 대기 전류가 작을 때 \(P_{loss}\approx(V_{in}-V_{out})I_{out}\)입니다. 스위칭 레귤레이터는 펄스 형태로 에너지를 전달하며 도통·스위칭·자성체·제어 손실은 동작 조건에 따라 달라집니다. 효율이 높다고 다이가 항상 차가운 것은 아닙니다. 절대 손실과 열저항도 중요합니다.</p>
+    <h3>레귤레이션과 응답</h3><p><strong>라인 레귤레이션</strong>은 입력 변화에 따른 출력 변화를, <strong>부하 레귤레이션</strong>은 부하 변화에 따른 출력 변화를 나타냅니다. 두 지표 모두 측정 범위와 조건을 명시해야 합니다. 부하 과도 응답은 루프 응답과 출력 커패시턴스도 시험합니다. 대기 전류 \(I_Q\)는 레귤레이터 자체가 소비하는 전류입니다. 경부하에서는 대부하 효율이 높아도 이 전류가 배터리 수명을 좌우할 수 있습니다.</p>
+    <h3>드롭아웃과 소자 관점</h3><p>LDO가 패스 소자를 제어하려면 입력과 출력 사이에 충분한 여유 전압이 필요합니다. 장채널 MOS의 기본 직관은 게이트가 채널 전하를 제어한다는 것입니다. 소스 팔로어 또는 저항성 영역에서 동작하는 패스 MOSFET에는 전압 여유가 필요하고, 저항은 온도와 공정 편차에 따라 증가할 수 있습니다. BJT 패스 소자는 베이스 구동과 포화 특성이 다릅니다. 접합은 절연과 보호 경로를 제공하지만 순방향 바이어스에서 의도치 않게 도통할 수도 있습니다. 이는 입문용 회로 모델입니다. <a href="devices.html">소자 기초</a> 장에서 MOS·BJT·접합 동작을 다루고, <a href="references-ldo.html">기준전압과 LDO</a> 장에서 이를 LDO에 적용합니다. TI 자료는 레귤레이터 구현과 동작 조건에 따라 드롭아웃이 달라짐을 설명합니다. 보편적으로 고정된 드롭아웃 전압은 없습니다. <a href="https://www.ti.com/lit/an/sbva029/sbva029.pdf">TI, LDO 드롭아웃 이해하기</a>.</p>
+  </section>
+  <section id="loss-model"><h2>선형 레귤레이터 손실 추정기</h2>
+    <p>입력·출력·부하·대기 전류를 정했을 때 입력 전력, 유효 출력 전력, 손실, 효율이 각각 얼마인지 계산합니다. 입력이 출력과 필요한 헤드룸보다 커 LDO가 레귤레이션할 수 있는 조건에만 전력 수지를 적용합니다. 불가능한 입출력 조합에는 경고를 표시하고 전력·효율을 계산하지 않습니다. 정상 상태의 근사 모델이며 트랜지스터 수준이나 과도 상태는 모델링하지 않습니다.</p>
+    <div class="formula">\[P_{in}\approx V_{in}(I_{out}+I_Q),\quad P_{out}=V_{out}I_{out},\quad P_{loss}=P_{in}-P_{out},\quad \eta=P_{out}/P_{in}\]</div>
+    <div class="sim" id="pm-fund-sim"><div class="sim-head"><span class="sim-tag">추정기</span><h3>입력 전력은 어디로 갈까요?</h3></div>
+      <div class="sim-controls">
+        <label class="ctrl"><span>입력 전압 <output id="fund-vin-out">5.0 V</output></span><input id="fund-vin" type="range" min="2" max="12" step="0.1" value="5"></label>
+        <label class="ctrl"><span>출력 전압 <output id="fund-vout-out">3.3 V</output></span><input id="fund-vout" type="range" min="0.8" max="10" step="0.1" value="3.3"></label>
+        <label class="ctrl"><span>부하 전류 <output id="fund-i-out">100 mA</output></span><input id="fund-i" type="range" min="1" max="500" step="1" value="100"></label>
+        <label class="ctrl"><span>대기 전류 <output id="fund-iq-out">0.1 mA</output></span><input id="fund-iq" type="range" min="0" max="10" step="0.1" value="0.1"></label>
+      </div>
+      <div class="sim-readout"><div class="stat"><span class="k">입력 전력</span><span class="v" id="fund-pin">—</span></div><div class="stat"><span class="k">출력 전력</span><span class="v" id="fund-pout">—</span></div><div class="stat"><span class="k">추정 손실</span><span class="v" id="fund-loss">—</span></div><div class="stat"><span class="k">효율</span><span class="v" id="fund-eff">—</span></div></div>
+      <p class="sim-note" id="fund-warning" aria-live="polite">정상 상태를 가정한 예시 모델입니다. 기동, 드롭아웃 동특성, 제어 전류 변화, 패키지 손실, 열 피드백은 제외합니다. 잘못된 LDO 조건을 보여주기 위해 출력 슬라이더가 입력보다 높아질 수 있으며, 이 경우 추정 결과에 경고가 표시됩니다.</p>
+    </div>
+    <p>선형 레귤레이터가 동작하려면 지정된 부하와 온도에서 \(V_{in}\)이 \(V_{out}\)과 필요한 여유 전압의 합보다 커야 합니다. 토폴로지가 중요한 이유를 보여주는 예로, LDO의 여유 전압은 패스 소자, 구동 회로, 부하가 함께 결정합니다. 실제 설계에서는 해당 부품의 데이터시트를 확인하세요. LDO의 기본 개념과 부품별 차이는 <a href="https://www.ti.com/lit/an/slva079/slva079.pdf">TI 애플리케이션 보고서 SLVA079</a>에서 설명합니다.</p>
+  </section>
+  <section id="path"><h2>요구사항에서 실리콘까지</h2><ol><li><strong>시스템:</strong> 레일, 부하 프로파일, 시퀀싱, 고장 시 동작을 정의합니다.</li><li><strong>회로:</strong> 레귤레이션·변환 방식과 제어 전략을 선택하고 리플, 응답, 손실을 예산화합니다.</li><li><strong>소자:</strong> 정격 전압, 전류 밀도, 항복, 게이트 구동, 기생 경로를 확인합니다.</li><li><strong>기술과 구현:</strong> 소자를 BCD 절연·드리프트 구조와 연결하고 배선 저항, 발열, 테스트, 신뢰성을 고려합니다.</li></ol><p><a href="references-ldo.html">기준전압과 LDO</a>, <a href="switching.html">스위칭 컨버터</a>, <a href="devices.html">PMIC 소자 기초</a>, <a href="bcd.html">BCD 기술</a> 장으로 이어가세요.</p></section>
+  <section class="quiz-sec" id="quiz"><h2>이해도 확인</h2><div class="quiz"><div class="quiz-q"><p>선형 레귤레이터가 자체 전류를 무시하고 100 mA에서 5 V를 3.3 V로 변환합니다. 패스 소자의 손실은 대략 얼마인가요?</p><div class="opts"><button data-correct="false">0.17 mW</button><button data-correct="true">170 mW</button><button data-correct="false">330 mW</button></div><div class="quiz-exp">\((5-3.3)\,\mathrm{V}\times0.1\,\mathrm{A}=0.17\,\mathrm{W}=170\,\mathrm{mW}\)입니다.</div></div><div class="quiz-q"><p>대부하 효율이 좋은 레귤레이터도 경부하에서 배터리를 소모할 수 있는 이유는 무엇인가요?</p><div class="opts"><button data-correct="true">대기 전류가 전체 입력 전류에서 큰 비중을 차지할 수 있습니다.</button><button data-correct="false">정격 부하보다 낮으면 효율은 항상 0입니다.</button><button data-correct="false">무부하에서는 라인 레귤레이션이 반드시 나빠집니다.</button></div><div class="quiz-exp">경부하에서는 제어·바이어스 전류가 부하에 전달되는 전류보다 클 수 있습니다. I<sub>Q</sub>와 경부하 동작 모드를 함께 비교하세요.</div></div></div></section>
+<p class="source-note">영문 원문: <a href="https://github.com/frbread7/pmicbook/blob/main/chapters/fundamentals.html">PMIC Fundamentals</a></p>
+</main>
+<script>
+(function () {
+  var ids = ["vin", "vout", "i", "iq"];
+  function update() {
+    var x = {};
+    ids.forEach(function (key) { x[key] = Number(document.getElementById("fund-" + key).value); });
+    document.getElementById("fund-vin-out").textContent = x.vin.toFixed(1) + " V";
+    document.getElementById("fund-vout-out").textContent = x.vout.toFixed(1) + " V";
+    document.getElementById("fund-i-out").textContent = x.i.toFixed(0) + " mA";
+    document.getElementById("fund-iq-out").textContent = x.iq.toFixed(1) + " mA";
+
+    if (x.vin <= x.vout) {
+      ["pin", "pout", "loss", "eff"].forEach(function (key) { document.getElementById("fund-" + key).textContent = "—"; });
+      document.getElementById("fund-warning").textContent = "입력이 출력과 필요한 헤드룸의 합보다 커야 합니다. LDO 동작 조건이 성립하지 않으므로 전력이나 효율을 계산하지 않습니다.";
+      return;
+    }
+
+    var pin = x.vin * (x.i + x.iq), pout = x.vout * x.i, loss = pin - pout;
+    document.getElementById("fund-pin").textContent = pin.toFixed(1) + " mW";
+    document.getElementById("fund-pout").textContent = pout.toFixed(1) + " mW";
+    document.getElementById("fund-loss").textContent = loss.toFixed(1) + " mW";
+    document.getElementById("fund-eff").textContent = (100 * pout / pin).toFixed(1) + "%";
+    document.getElementById("fund-warning").textContent = "정상 상태를 가정한 교육용 모델입니다. 기동, 드롭아웃 동특성, 제어 전류 변화, 패키지 손실과 열 피드백은 제외합니다.";
+  }
+  ids.forEach(function (key) { document.getElementById("fund-" + key).addEventListener("input", update); });
+  update();
+})();
+</script>
+</body></html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<!-- ProcessBook-derived site shell and shared styles: Copyright (c) 2026 geniuskey and ProcessBook contributors; MIT (see ../LICENSE-MIT).
+     Educational material authored for PMICBook is licensed under CC BY 4.0 (see ../LICENSE-CC-BY-4.0).
+     ProcessBook educational material is included only where identified in this page and docs/UPSTREAM_ATTRIBUTION.md. -->
+<html lang="en">
+<head>
+<!--head:start {"desc":"Introduce PMIC reliability mechanisms including electromigration, dielectric wear-out, BTI, hot-carrier effects, thermal cycling, ESD, and latch-up.","libs":[],"lang":"en"}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reliability · PMICBook</title>
+<meta name="description" content="Introduce PMIC reliability mechanisms including electromigration, dielectric wear-out, BTI, hot-carrier effects, thermal cycling, ESD, and latch-up.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/chapters/reliability.html">
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/chapters/reliability.html">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/chapters/reliability.html">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/chapters/reliability.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Reliability · PMICBook">
+<meta property="og:description" content="Introduce PMIC reliability mechanisms including electromigration, dielectric wear-out, BTI, hot-carrier effects, thermal cycling, ESD, and latch-up.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/chapters/reliability.html">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/reliability.html#chapter","name":"Reliability","headline":"Reliability · PMICBook","description":"Introduce PMIC reliability mechanisms including electromigration, dielectric wear-out, BTI, hot-carrier effects, thermal cycling, ESD, and latch-up.","url":"https://frbread7.github.io/pmicbook/chapters/reliability.html","position":21,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"21. Reliability","item":"https://frbread7.github.io/pmicbook/chapters/reliability.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<!--head:end-->
+</head><body data-chapter="reliability"><main class="chapter">
+  <header class="chapter-hero"><div class="eyebrow">Chapter 21 · Reliability</div><h1>Reliability in power-management ICs</h1>
+    <p class="lead">Reliability asks whether a device continues to meet its electrical and safety requirements throughout its intended use. PMICs combine thin-oxide control devices, high-field power devices, dense interconnect, protection structures, and substantial self-heating. Their stresses depend on voltage, current, switching activity, temperature, environment, and mission profile. This chapter introduces mechanisms and engineering questions; it does not predict product lifetime or define qualification limits.</p>
+    <ul class="objectives"><li>Relate common wear-out mechanisms to the PMIC structures they can affect.</li><li>Distinguish device degradation, interconnect damage, ESD, and latch-up concerns.</li><li>Understand why application conditions and qualification evidence must be explicit.</li></ul>
+  </header>
+  <section id="mechanisms"><h2>Mechanisms and their physical clues</h2>
+    <div class="table-wrap"><table><thead><tr><th>Mechanism</th><th>Stress / affected structure</th><th>Possible electrical symptom</th></tr></thead><tbody>
+      <tr><td>Electromigration (EM)</td><td>High current density and temperature in metal/vias</td><td>Resistance increase, intermittent or permanent open</td></tr>
+      <tr><td>Time-dependent dielectric breakdown (TDDB)</td><td>Electric field and time in an insulating dielectric</td><td>Rising leakage or dielectric short</td></tr>
+      <tr><td>Bias temperature instability (BTI)</td><td>Bias and temperature in MOS gate stacks</td><td>Threshold shift, drive-current or timing change</td></tr>
+      <tr><td>Hot-carrier effects (HCI)</td><td>High lateral field during device operation</td><td>Transconductance or threshold degradation</td></tr>
+      <tr><td>Thermal fatigue / power cycling</td><td>Repeated temperature swings across die, package, and interfaces</td><td>Cracks, delamination, resistance or thermal-path change</td></tr>
+      <tr><td>ESD damage</td><td>Transient discharge beyond protection capability</td><td>Leakage, altered clamp behavior, open or short</td></tr>
+    </tbody></table></div>
+    <p>These mechanisms are not interchangeable. A PMIC power switch may stress its drift region, gate dielectric, contacts, and routing differently from its low-voltage control logic. A failure symptom alone rarely identifies the mechanism: elevated leakage, for example, can arise from a junction, dielectric, protection element, contamination, or physical damage.</p>
+    <p>Public reliability overviews describe reliability as a system of interacting device, circuit, package, and use conditions; see the <a href="https://www.esda.org/news/the-many-aspects-of-semiconductor-reliability-with-impact-on-esd-design/">ESD Association discussion of semiconductor reliability and ESD design</a>. Application-specific mission profiles and the responsible product standards must guide real qualification decisions.</p>
+  </section>
+  <section id="interconnect"><h2>Current density is a warning variable, not a lifetime calculator</h2>
+    <p>For a uniform conductor, current density is the current divided by its conducting cross-section:</p>
+    <div class="formula">$$J=\frac{I}{A}$$<div class="where">\(J\) is amperes per square metre, \(I\) is amperes, and \(A\) is square metres. This simple average does not capture local crowding at vias, corners, interfaces, or constrictions. Electromigration also depends on temperature, material, geometry, waveform, and process details.</div></div>
+    <p>Higher current density and temperature can accelerate atomic transport in interconnect and promote voids or hillocks. The <a href="https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir6971.pdf">NIST interconnect electromigration report</a> discusses the physical and measurement context. Do not infer a product lifetime from the equation above: lifetime models require calibrated process-specific parameters and a defined test/use condition.</p>
+    <div class="callout warn"><strong>Interpretation boundary</strong><p>There is no universal current-density limit or accelerated-stress multiplier in this chapter. Use the applicable technology documentation, design rules, package limits, and qualification evidence for a real product.</p></div>
+  </section>
+  <section id="system"><h2>Why PMIC use conditions matter</h2>
+    <p>Two systems using the same die can impose different stress histories. A battery charger can spend long intervals in a high-temperature, high-current state; a switching regulator can see repetitive voltage transitions and load transients; an automotive rail may experience a broad ambient range and supply disturbances. A reliability assessment therefore starts by defining operating voltage/current ranges, temperature, duty cycle, load and fault states, switching behavior, lifetime target, and package/board thermal conditions.</p>
+    <figure class="diagram"><svg viewBox="0 0 760 220" role="img" aria-label="Reliability reasoning flow from use profile through stress mechanisms and evidence to design decision"><rect x="28" y="62" width="155" height="86" rx="10" fill="#d9e5f7" stroke="#627da8"/><text x="105" y="96" text-anchor="middle" class="lbl-b">Use profile</text><text x="105" y="119" text-anchor="middle" class="lbl">voltage · current</text><text x="105" y="137" text-anchor="middle" class="lbl">temperature · time</text><path d="M183 105 H226" stroke="#596273" stroke-width="3"/><path d="m216 97 10 8-10 8" fill="none" stroke="#596273" stroke-width="3"/><rect x="226" y="62" width="155" height="86" rx="10" fill="#f4e5b9" stroke="#a88c44"/><text x="303" y="96" text-anchor="middle" class="lbl-b">Stresses</text><text x="303" y="119" text-anchor="middle" class="lbl">field · current</text><text x="303" y="137" text-anchor="middle" class="lbl">thermal cycles</text><path d="M381 105 H424" stroke="#596273" stroke-width="3"/><path d="m414 97 10 8-10 8" fill="none" stroke="#596273" stroke-width="3"/><rect x="424" y="62" width="145" height="86" rx="10" fill="#efd9d3" stroke="#a65c5c"/><text x="496" y="96" text-anchor="middle" class="lbl-b">Evidence</text><text x="496" y="119" text-anchor="middle" class="lbl">test · monitor</text><text x="496" y="137" text-anchor="middle" class="lbl">failure analysis</text><path d="M569 105 H612" stroke="#596273" stroke-width="3"/><path d="m602 97 10 8-10 8" fill="none" stroke="#596273" stroke-width="3"/><rect x="612" y="62" width="120" height="86" rx="10" fill="#d9e8d7" stroke="#56825b"/><text x="672" y="96" text-anchor="middle" class="lbl-b">Decision</text><text x="672" y="119" text-anchor="middle" class="lbl">design · qualify</text><text x="672" y="137" text-anchor="middle" class="lbl">monitor</text><text x="380" y="190" text-anchor="middle" class="lbl">Iterative engineering loop; evidence and limits are technology- and application-specific</text></svg><figcaption>Reliability reasoning links intended use, physical stress, observed evidence, and a documented engineering decision.</figcaption></figure>
+    <p>Qualification tests provide evidence under defined conditions; they are not, by themselves, a guarantee of a specific field lifetime. Data interpretation must account for sample size, failure criteria, censoring, test conditions, and the relationship between accelerated stress and use. Standards specify methods and acceptance frameworks; this educational text does not reproduce test procedures.</p>
+  </section>
+  <section id="protection"><h2>ESD, latch-up, and system protection</h2>
+    <p>ESD protection devices must conduct a short transient safely while remaining sufficiently invisible during normal operation. A protection path that is too weak may fail under a discharge; one that is too capacitive or leaky may impair an interface or analog node. Latch-up is a parasitic regenerative conduction path in CMOS structures. BCD well and isolation choices, guard structures, substrate contacts, and injection conditions all influence risk. The <a href="https://esdindustrycouncil.org/ic/en/index.php/documents/white-paper-5-latchup-survey-report">ESD Industry Council latch-up survey</a> offers public background; use the technology and product-specific rules for design evaluation.</p>
+  </section>
+  <section class="keypoints" id="summary"><h2>Key points</h2><ol><li>Reliability mechanisms map to different structures and produce overlapping electrical symptoms.</li><li>Current density and temperature are useful stress concepts, but cannot alone establish lifetime.</li><li>PMIC mission profiles include electrical, thermal, switching, and fault conditions.</li><li>Qualification evidence must be interpreted within its defined methods and conditions.</li></ol></section>
+  <section class="quiz-sec" id="quiz"><h2>Knowledge check</h2><div class="quiz"><div class="quiz-q"><p>Why is \(J=I/A\) insufficient to predict the lifetime of a PMIC metal route?</p><div class="opts"><button class="opt">Because current density has no units.</button><button class="opt" data-correct>It omits local geometry, material/process parameters, temperature history, waveform, and calibrated failure criteria.</button><button class="opt">Because metal routes do not heat up.</button></div><div class="quiz-exp">Average current density is a useful descriptor, not a lifetime law. Reliability prediction needs validated technology-specific models and defined operating or test conditions.</div></div></div></section>
+  <nav class="chapter-links"><a href="metrology.html">← Characterization and test</a> · <a href="failure-analysis.html">Next: Failure analysis →</a> · <a href="advanced.html">Advanced topics</a></nav>
+</main></body></html>
