@@ -1,3 +1,15 @@
+# PMICBook derivative license guide
+
+PMICBook is derived from ProcessBook and keeps its dual-license model for executable code and educational content. The ProcessBook copyright notice and attribution examples retained below identify upstream ProcessBook material; they do not attribute newly authored PMICBook lessons to ProcessBook contributors. PMICBook's original educational contributions are shared under CC BY 4.0, as are retained or adapted upstream educational materials subject to the attribution and modification requirements below. Code reused from ProcessBook remains under MIT with its original notice.
+
+When a chapter adapts ProcessBook prose, illustrations, questions, or explanations, it identifies the exact upstream source and changes in the chapter and in [docs/UPSTREAM_ATTRIBUTION.md](docs/UPSTREAM_ATTRIBUTION.md). New PMICBook-authored content must not be represented as ProcessBook content.
+
+## Retained ProcessBook license text
+
+The following license guide and copyright notice are retained from the ProcessBook source.
+
+---
+
 # ProcessBook 라이선스
 
 Copyright (c) 2026 geniuskey and ProcessBook contributors

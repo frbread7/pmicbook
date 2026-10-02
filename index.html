@@ -1,169 +1,143 @@
 <!doctype html>
-<!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
-     Executable code: MIT (see LICENSE-MIT).
-     Text, illustrations, questions and explanations: CC-BY-4.0 (see LICENSE.md). -->
-<html lang="ko">
+<!-- Shared site shell derived from ProcessBook: Copyright (c) 2026 geniuskey and ProcessBook contributors; MIT (see LICENSE-MIT).
+     PMICBook home-page text and illustrations are PMICBook educational contributions under CC BY 4.0 (see LICENSE-CC-BY-4.0).
+     Upstream educational material is used only where identified in docs/UPSTREAM_ATTRIBUTION.md. -->
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ProcessBook · 반도체 제조 공정 교과서</title>
-<meta name="description" content="모래에서 트랜지스터까지 — 공학도를 위한 인터랙티브 반도체 제조 공정 교과서. 노광·식각·증착·이온 주입·CMP·열처리의 조건을 바꾸며 단면이 어떻게 변하는지 시뮬레이터로 배운다.">
-<link rel="canonical" href="https://processbook.euiyun.com/">
+<title>PMICBook — Power Management IC Technology</title>
+<meta name="description" content="An interactive engineering textbook connecting PMIC systems and circuits to semiconductor devices, BCD technology, fabrication, layout, test, and reliability.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="theme-color" content="#c2550c">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="ProcessBook">
-<meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="ProcessBook · 반도체 제조 공정 교과서">
-<meta property="og:description" content="모래에서 트랜지스터까지 — 공학도를 위한 인터랙티브 반도체 제조 공정 교과서. 노광·식각·증착·이온 주입·CMP·열처리의 조건을 바꾸며 단면이 어떻게 변하는지 시뮬레이터로 배운다.">
-<meta property="og:url" content="https://processbook.euiyun.com/">
-<meta property="og:image" content="https://processbook.euiyun.com/og.png">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="PMICBook — Power Management IC Technology">
+<meta property="og:description" content="An interactive engineering textbook connecting PMIC systems and circuits to semiconductor devices, BCD technology, fabrication, layout, test, and reliability.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://processbook.euiyun.com/#site","name":"ProcessBook","alternateName":"프로세스북","url":"https://processbook.euiyun.com/","inLanguage":"ko","description":"공학도를 위한 인터랙티브 반도체 제조 공정 교과서"},{"@type":"Book","@id":"https://processbook.euiyun.com/#book","name":"ProcessBook · 반도체 제조 공정 교과서","url":"https://processbook.euiyun.com/","inLanguage":"ko","isAccessibleForFree":true,"educationalLevel":"공대 학부","about":["반도체 공정","노광","식각","증착","이온 주입","CMP"],"description":"모래에서 트랜지스터까지 — 공학도를 위한 인터랙티브 반도체 제조 공정 교과서.","image":"https://processbook.euiyun.com/og.png","dateModified":"2026-10-01","hasPart":[{"@type":"Chapter","name":"반도체 제조 개요","position":1,"url":"https://processbook.euiyun.com/chapters/overview.html"},{"@type":"Chapter","name":"실리콘 웨이퍼와 세정","position":2,"url":"https://processbook.euiyun.com/chapters/wafer.html"},{"@type":"Chapter","name":"열산화","position":3,"url":"https://processbook.euiyun.com/chapters/oxidation.html"},{"@type":"Chapter","name":"노광 I: 광학","position":4,"url":"https://processbook.euiyun.com/chapters/litho.html"},{"@type":"Chapter","name":"노광 II: 감광막과 패터닝","position":5,"url":"https://processbook.euiyun.com/chapters/resist.html"},{"@type":"Chapter","name":"식각","position":6,"url":"https://processbook.euiyun.com/chapters/etch.html"},{"@type":"Chapter","name":"박막 증착","position":7,"url":"https://processbook.euiyun.com/chapters/deposition.html"},{"@type":"Chapter","name":"이온 주입","position":8,"url":"https://processbook.euiyun.com/chapters/implant.html"},{"@type":"Chapter","name":"확산과 열처리","position":9,"url":"https://processbook.euiyun.com/chapters/anneal.html"},{"@type":"Chapter","name":"CMP 평탄화","position":10,"url":"https://processbook.euiyun.com/chapters/cmp.html"},{"@type":"Chapter","name":"금속 배선","position":11,"url":"https://processbook.euiyun.com/chapters/metal.html"},{"@type":"Chapter","name":"CMOS 공정 통합","position":12,"url":"https://processbook.euiyun.com/chapters/integration.html"},{"@type":"Chapter","name":"첨단 소자 공정","position":13,"url":"https://processbook.euiyun.com/chapters/advanced.html"},{"@type":"Chapter","name":"계측·결함·수율","position":14,"url":"https://processbook.euiyun.com/chapters/metrology.html"},{"@type":"Chapter","name":"공정 실험실","position":15,"url":"https://processbook.euiyun.com/chapters/lab.html"},{"@type":"Chapter","name":"용어집 & 종합 퀴즈","position":16,"url":"https://processbook.euiyun.com/chapters/glossary.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://frbread7.github.io/pmicbook/#site","name":"PMICBook","url":"https://frbread7.github.io/pmicbook/","inLanguage":"en","description":"An interactive engineering textbook connecting PMIC systems and circuits to semiconductor devices, BCD technology, fabrication, layout, test, and reliability."},{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/","inLanguage":"en","isAccessibleForFree":true,"educationalLevel":"Undergraduate and engineering professional","about":["power management integrated circuits","BCD technology","semiconductor fabrication","power electronics","reliability"],"description":"An interactive engineering textbook connecting PMIC systems and circuits to semiconductor devices, BCD technology, fabrication, layout, test, and reliability.","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","hasPart":[{"@type":"Chapter","name":"PMIC Systems and Power Domains","position":1,"url":"https://frbread7.github.io/pmicbook/chapters/overview.html"},{"@type":"Chapter","name":"PMIC Specifications and Fundamentals","position":2,"url":"https://frbread7.github.io/pmicbook/chapters/fundamentals.html"},{"@type":"Chapter","name":"References, Bias, and LDOs","position":3,"url":"https://frbread7.github.io/pmicbook/chapters/references-ldo.html"},{"@type":"Chapter","name":"Switching and Power-Path Circuits","position":4,"url":"https://frbread7.github.io/pmicbook/chapters/switching.html"},{"@type":"Chapter","name":"Semiconductor Devices for PMICs","position":5,"url":"https://frbread7.github.io/pmicbook/chapters/devices.html"},{"@type":"Chapter","name":"BCD Technology Architecture","position":6,"url":"https://frbread7.github.io/pmicbook/chapters/bcd.html"},{"@type":"Chapter","name":"High-Voltage MOS and LDMOS","position":7,"url":"https://frbread7.github.io/pmicbook/chapters/hv-devices.html"},{"@type":"Chapter","name":"Integrated Passive Devices","position":8,"url":"https://frbread7.github.io/pmicbook/chapters/passives.html"},{"@type":"Chapter","name":"Starting Substrate, Wells, and Isolation","position":9,"url":"https://frbread7.github.io/pmicbook/chapters/wafer.html"},{"@type":"Chapter","name":"Gate Dielectrics and Field Structures","position":10,"url":"https://frbread7.github.io/pmicbook/chapters/oxidation.html"},{"@type":"Chapter","name":"Lithography and Resist Patterning","position":11,"url":"https://frbread7.github.io/pmicbook/chapters/litho.html"},{"@type":"Chapter","name":"Etch, Isolation, and Contacts","position":12,"url":"https://frbread7.github.io/pmicbook/chapters/etch.html"},{"@type":"Chapter","name":"Deposition and Epitaxy","position":13,"url":"https://frbread7.github.io/pmicbook/chapters/deposition.html"},{"@type":"Chapter","name":"Doping and Well/Drift Implants","position":14,"url":"https://frbread7.github.io/pmicbook/chapters/implant.html"},{"@type":"Chapter","name":"Anneal and Thermal Budget","position":15,"url":"https://frbread7.github.io/pmicbook/chapters/anneal.html"},{"@type":"Chapter","name":"Planarization and CMP","position":16,"url":"https://frbread7.github.io/pmicbook/chapters/cmp.html"},{"@type":"Chapter","name":"Contacts, BEOL, and Thick Top Metal","position":17,"url":"https://frbread7.github.io/pmicbook/chapters/metal.html"},{"@type":"Chapter","name":"BCD Process Integration Flow","position":18,"url":"https://frbread7.github.io/pmicbook/chapters/integration.html"},{"@type":"Chapter","name":"Layout, Parasitics, Thermal, and Noise","position":19,"url":"https://frbread7.github.io/pmicbook/chapters/layout.html"},{"@type":"Chapter","name":"Characterization and Production Test","position":20,"url":"https://frbread7.github.io/pmicbook/chapters/metrology.html"},{"@type":"Chapter","name":"Reliability","position":21,"url":"https://frbread7.github.io/pmicbook/chapters/reliability.html"},{"@type":"Chapter","name":"Failure Analysis","position":22,"url":"https://frbread7.github.io/pmicbook/chapters/failure-analysis.html"},{"@type":"Chapter","name":"Smart Power and Emerging Context","position":23,"url":"https://frbread7.github.io/pmicbook/chapters/advanced.html"},{"@type":"Chapter","name":"BCD Process Lab","position":24,"url":"https://frbread7.github.io/pmicbook/chapters/lab.html"},{"@type":"Chapter","name":"Glossary and Final Knowledge Checks","position":25,"url":"https://frbread7.github.io/pmicbook/chapters/glossary.html"}]}]}</script>
 <link rel="stylesheet" href="css/style.css">
 <script src="js/common.js"></script>
-<script src="js/xsec.js"></script>
 <style>
-  .paths { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-  .path { padding: 18px 20px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-elev); }
-  .path h3 { margin: 0 0 6px; font-size: 17px; }
-  .path p { margin: 0 0 10px; color: var(--text-dim); font-size: 14.5px; }
-  .path .steps { display: flex; flex-wrap: wrap; gap: 6px; }
-  .path .steps a { font-family: var(--mono); font-size: 12px; padding: 3px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
-  .path .steps a:hover { text-decoration: none; filter: brightness(1.1); }
-  .numbers { display: grid; gap: 1px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-  .numbers div { background: var(--bg-elev); padding: 18px 20px; }
-  .numbers b { display: block; font-family: var(--mono); font-size: 26px; letter-spacing: -0.02em; color: var(--text); }
-  .numbers span { color: var(--text-dim); font-size: 14px; }
-  .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
-  .hero-badges span { font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border); color: var(--text-dim); background: var(--bg-elev); }
-  .hero-xs { position: relative; border-radius: 20px; border: 1px solid var(--border); background: var(--canvas-bg); overflow: hidden; box-shadow: var(--shadow); }
-  .hero-xs canvas { display: block; width: 100%; }
-  .hero-xs .cap { position: absolute; left: 14px; bottom: 10px; right: 14px; font-size: 13px; color: var(--text-dim); display: flex; justify-content: space-between; gap: 10px; pointer-events: none; }
-  .hero-xs .cap b { color: var(--text); }
-  .hero-xs .bar { position: absolute; left: 0; top: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); width: 0; }
+  .pmic-hero { min-height: 440px; }
+  .pmic-hero .inner { align-items: center; }
+  .pmic-hero h1 { max-width: 700px; }
+  .pmic-hero .lead { max-width: 680px; font-size: clamp(17px, 2vw, 20px); }
+  .power-map { padding: 12px; border: 1px solid var(--border); border-radius: 20px; background: var(--bg-elev); box-shadow: var(--shadow); }
+  .power-map svg { display:block; width:100%; height:auto; }
+  .power-map figcaption { margin: 8px 4px 0; color: var(--text-dim); font-size: 13px; line-height: 1.5; }
+  .learning-path { display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); gap:10px; counter-reset:path; }
+  .learning-path a { position:relative; display:flex; min-height:118px; flex-direction:column; justify-content:space-between; padding:14px 16px; border:1px solid var(--border); border-radius:var(--radius); background:var(--bg-elev); color:var(--text); }
+  .learning-path a:hover { border-color:var(--accent); text-decoration:none; }
+  .learning-path .step { font:600 11px var(--mono); color:var(--accent); letter-spacing:.08em; }
+  .learning-path b { font-size:15px; line-height:1.35; }
+  .learning-path span:last-child { color:var(--text-dim); font-size:12px; line-height:1.4; }
+  .scope-note { padding:18px 20px; border:1px solid var(--border); border-radius:var(--radius); background:var(--bg-elev); color:var(--text-dim); }
+  .scope-note strong { color:var(--text); }
+  @media(max-width:760px) { .pmic-hero .inner { display:block; } .power-map { margin-top:26px; } }
 </style>
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/">
 </head>
 <body data-root="">
-<section class="home-hero">
+<section class="home-hero pmic-hero">
   <div class="inner">
     <div>
-      <div class="eyebrow">Interactive Process Textbook</div>
-      <h1>모래에서<br><span class="grad">트랜지스터까지</span></h1>
-      <p>칩 하나는 지름 300 mm 실리콘 원판 위에서 수백 번 막을 입히고, 빛으로 무늬를 그리고, 플라즈마로 깎고, 이온을 쏘고, 굽고, 갈아 내며 만들어진다. 이 교과서는 각 공정의 물리를 수식으로 이해하고, <strong>조건을 바꾸면 단면·선폭·깊이가 어떻게 변하는지</strong> 시뮬레이터로 직접 확인하며, 마지막에는 CMOS 트랜지스터의 단면을 한 단계씩 쌓아 올린다.</p>
+      <div class="eyebrow">Interactive engineering textbook</div>
+      <h1>Power chips,<br><span class="grad">from rail to silicon.</span></h1>
+      <p class="lead">PMICBook connects the needs of a power system to the circuits, semiconductor devices, BCD technology, fabrication steps, and implementation choices that make a power-management IC work.</p>
       <div class="cta">
-        <a class="primary" href="chapters/overview.html">1장부터 시작하기 →</a>
-        <a class="ghost" href="chapters/lab.html">공정 실험실 열기</a>
+        <a class="primary" href="chapters/overview.html">Start with the system →</a>
+        <a class="ghost" href="chapters/bcd.html">Explore BCD technology</a>
       </div>
       <div class="hero-badges">
-        <span>16개 챕터</span><span>50여 개 시뮬레이터</span><span>2D 단면 공정 엔진</span><span>공대 학부 수준</span>
+        <span>25 guided chapters</span><span>System to process integration</span><span>Interactive educational models</span>
       </div>
     </div>
-    <div class="hero-xs" id="hero"><canvas id="hero-cv"></canvas><div class="bar" id="hero-bar"></div><div class="cap"><span id="hero-step"><b>시작</b></span><span id="hero-k"></span></div></div>
+    <figure class="power-map">
+      <svg viewBox="0 0 620 350" role="img" aria-labelledby="power-map-title power-map-desc">
+        <title id="power-map-title">A simplified PMIC power tree</title>
+        <desc id="power-map-desc">An input supply feeds a switching converter and a low-dropout regulator. Their rails supply digital, sensor, and actuator loads.</desc>
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--accent-2)"/></marker>
+          <linearGradient id="rail" x1="0" x2="1"><stop stop-color="var(--accent)"/><stop offset="1" stop-color="var(--accent-2)"/></linearGradient>
+        </defs>
+        <rect x="10" y="12" width="600" height="326" rx="16" fill="var(--surface)"/>
+        <g fill="var(--bg-elev)" stroke="var(--border)" stroke-width="2">
+          <rect x="34" y="137" width="112" height="72" rx="12"/>
+          <rect x="226" y="66" width="142" height="74" rx="12"/>
+          <rect x="226" y="208" width="142" height="74" rx="12"/>
+          <rect x="460" y="44" width="116" height="54" rx="10"/>
+          <rect x="460" y="148" width="116" height="54" rx="10"/>
+          <rect x="460" y="252" width="116" height="54" rx="10"/>
+        </g>
+        <g fill="var(--text)" text-anchor="middle" font-family="var(--font)">
+          <text x="90" y="168" font-size="16" font-weight="700">Input source</text><text x="90" y="190" font-size="12" fill="var(--text-dim)">battery / adapter</text>
+          <text x="297" y="98" font-size="16" font-weight="700">Switching stage</text><text x="297" y="120" font-size="12" fill="var(--text-dim)">buck / boost</text>
+          <text x="297" y="240" font-size="16" font-weight="700">LDO / reference</text><text x="297" y="262" font-size="12" fill="var(--text-dim)">quiet local rail</text>
+          <text x="518" y="68" font-size="14" font-weight="700">Digital core</text><text x="518" y="86" font-size="11" fill="var(--text-dim)">low-voltage load</text>
+          <text x="518" y="172" font-size="14" font-weight="700">Sensors</text><text x="518" y="190" font-size="11" fill="var(--text-dim)">analog load</text>
+          <text x="518" y="276" font-size="14" font-weight="700">Actuators</text><text x="518" y="294" font-size="11" fill="var(--text-dim)">higher-current load</text>
+        </g>
+        <g fill="none" stroke="url(#rail)" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)">
+          <path d="M146 158 C185 158 184 103 226 103"/><path d="M146 190 C184 190 185 245 226 245"/>
+          <path d="M368 103 C411 103 414 71 460 71"/><path d="M368 112 C410 112 415 175 460 175"/><path d="M368 245 C411 245 414 279 460 279"/>
+        </g>
+        <text x="310" y="322" text-anchor="middle" fill="var(--text-dim)" font-family="var(--mono)" font-size="11">Every rail trades voltage, current, noise, efficiency, area, and heat.</text>
+      </svg>
+      <figcaption>A system-level map: each rail creates circuit, device, process, layout, and thermal requirements.</figcaption>
+    </figure>
   </div>
 </section>
 
 <section class="home-section">
-  <h2>숫자로 보는 반도체 공정</h2>
-  <p class="sub">이 교과서를 끝내면 아래 숫자가 어디서 나오는지, 서로 어떻게 얽혀 있는지 설명할 수 있게 됩니다.</p>
-  <div class="numbers">
-    <div><b>13.5 nm</b><span>EUV 노광의 파장. 렌즈 대신 거울, 공기 대신 진공을 쓴다</span></div>
-    <div><b>k₁ ≥ 0.25</b><span>회절이 정한 노광 해상도의 벽. 넘으려면 멀티 패터닝</span></div>
-    <div><b>0.44</b><span>산화막 1 nm를 기를 때 소모되는 실리콘 두께 (nm)</span></div>
-    <div><b>~0.1 nm</b><span>ALD 한 사이클이 쌓는 두께. 원자층 하나에 못 미친다</span></div>
-    <div><b>√(Dt)</b><span>도펀트가 퍼지는 거리. 온도 100 °C가 확산을 10배 바꾼다</span></div>
-    <div><b>60~100장</b><span>첨단 로직 칩 하나에 쓰이는 노광 마스크 수</span></div>
+  <h2>One connected learning path</h2>
+  <p class="sub">Follow power-management decisions across the full IC stack. Start at the system level or jump to the topic you need.</p>
+  <div class="learning-path">
+    <a href="chapters/overview.html"><span class="step">01 · SYSTEM</span><b>Power domains</b><span>Rails, sources, loads, sequencing</span></a>
+    <a href="chapters/references-ldo.html"><span class="step">02 · CIRCUITS</span><b>References and regulation</b><span>LDOs, converters, protection</span></a>
+    <a href="chapters/devices.html"><span class="step">03 · DEVICES</span><b>Semiconductor behavior</b><span>Junctions, MOS, breakdown</span></a>
+    <a href="chapters/bcd.html"><span class="step">04 · TECHNOLOGY</span><b>BCD integration</b><span>LV, HV, bipolar, isolation</span></a>
+    <a href="chapters/integration.html"><span class="step">05 · FABRICATION</span><b>Process integration</b><span>Wells, drift, contacts, metal</span></a>
+    <a href="chapters/layout.html"><span class="step">06 · IMPLEMENTATION</span><b>Parasitics and heat</b><span>IR drop, noise, current paths</span></a>
+    <a href="chapters/metrology.html"><span class="step">07 · TEST</span><b>Characterization</b><span>DC, transients, wafer test</span></a>
+    <a href="chapters/reliability.html"><span class="step">08 · RELIABILITY</span><b>Lifetime and failure</b><span>Wear-out, ESD, analysis</span></a>
   </div>
 </section>
 
 <section class="home-section" style="padding-top:0">
-  <h2>전체 챕터</h2>
-  <p class="sub">순서대로 읽어도 좋고, 관심 있는 공정부터 골라 읽어도 됩니다. 각 장은 개념 → 그림 → 수식 → 시뮬레이터 → 퀴즈 순서로 구성됩니다.</p>
+  <h2>Explore all chapters</h2>
+  <p class="sub">Concepts, engineering interpretation, diagrams, models, and knowledge checks. Simulators are included where changing a parameter helps explain an engineering tradeoff.</p>
   <div class="ch-grid" id="chgrid"></div>
 </section>
 
 <section class="home-section" style="padding-top:0">
-  <h2>추천 학습 경로</h2>
-  <p class="sub">목적에 따라 이렇게 읽어 보세요.</p>
-  <div class="paths">
-    <div class="path"><h3>입문 · 전체 그림</h3><p>공정이 처음이라면. 큰 흐름과 대표 공정 셋, 그리고 완성 단면.</p><div class="steps"><a href="chapters/overview.html">01</a><a href="chapters/litho.html">04</a><a href="chapters/etch.html">06</a><a href="chapters/deposition.html">07</a><a href="chapters/integration.html">12</a></div></div>
-    <div class="path"><h3>패터닝 집중</h3><p>노광·감광막·식각·계측. 선폭과 프로파일이 어떻게 정해지는가.</p><div class="steps"><a href="chapters/litho.html">04</a><a href="chapters/resist.html">05</a><a href="chapters/etch.html">06</a><a href="chapters/metrology.html">14</a></div></div>
-    <div class="path"><h3>박막 · 도핑</h3><p>산화·증착·주입·열처리·CMP. 두께와 농도 분포의 물리.</p><div class="steps"><a href="chapters/oxidation.html">03</a><a href="chapters/deposition.html">07</a><a href="chapters/implant.html">08</a><a href="chapters/anneal.html">09</a><a href="chapters/cmp.html">10</a></div></div>
-    <div class="path"><h3>소자 · 공정 통합</h3><p>트랜지스터가 만들어지는 순서와 첨단 구조.</p><div class="steps"><a href="chapters/implant.html">08</a><a href="chapters/metal.html">11</a><a href="chapters/integration.html">12</a><a href="chapters/advanced.html">13</a></div></div>
-    <div class="path"><h3>품질 · 수율</h3><p>세정·계측·SPC·수율. 팹을 운영하는 숫자들.</p><div class="steps"><a href="chapters/overview.html">01</a><a href="chapters/wafer.html">02</a><a href="chapters/cmp.html">10</a><a href="chapters/metrology.html">14</a></div></div>
-    <div class="path"><h3>직접 만들어 보기</h3><p>원리는 대충 알고 바로 실험해 보고 싶다면.</p><div class="steps"><a href="chapters/lab.html">15</a><a href="chapters/integration.html">12</a><a href="chapters/glossary.html">16</a></div></div>
-  </div>
-</section>
-
-<section class="home-section" style="padding-top:0">
-  <h2>이 사이트 사용법</h2>
+  <h2>Built for cross-discipline learning</h2>
   <div class="flow">
-    <div><b>읽기</b>개념과 직관을 먼저. 영어 용어는 괄호로 병기합니다.</div>
-    <div><b>보기</b>SVG 도해와 단면 시뮬레이터로 구조를 머릿속에 그립니다.</div>
-    <div><b>바꿔 보기</b>슬라이더를 끝까지 움직여 보세요. 공정 창의 가장자리에서 배웁니다.</div>
-    <div><b>쌓아 보기</b>12장과 15장에서 공정을 한 단계씩 쌓아 단면을 완성합니다.</div>
-    <div><b>확인하기</b>장마다 퀴즈, 마지막 장에서 종합 퀴즈로 마무리합니다.</div>
+    <div><b>Understand the product</b>Electrical and process engineers can trace a power requirement into a device and fabrication constraint.</div>
+    <div><b>Connect models to hardware</b>Equations and interactive models make assumptions, units, and limits visible.</div>
+    <div><b>Learn the process context</b>Use the cross-section engine to explore public, illustrative process structures and integration ideas.</div>
+    <div><b>Check the tradeoffs</b>Knowledge checks link efficiency, breakdown, resistance, thermal behavior, testing, and reliability.</div>
   </div>
+  <p class="scope-note"><strong>Scope and model limits.</strong> PMICBook v1 is an educational resource. It does not represent a foundry process recipe or replace device characterization, circuit simulation, qualification, or product-specific design. Numerical examples are cited public values or clearly labeled illustrative assumptions. BCD cross-sections are simplified 2D teaching models.</p>
 </section>
 
 <script>
 (function () {
   "use strict";
   var grid = document.getElementById("chgrid");
-  var tagName = { sim: "시뮬레이터", "3d": "3D" };
+  var labels = { systems: "systems", circuits: "circuits", devices: "devices", BCD: "BCD", process: "process", physical: "implementation", test: "test", reliability: "reliability", advanced: "advanced", glossary: "glossary", interactive: "interactive" };
   grid.innerHTML = PB.CHAPTERS.map(function (c) {
     return '<a class="ch-card" href="chapters/' + c.slug + '.html"><span class="num">CHAPTER ' + c.num + "</span><h3>" + c.title + "</h3><p>" + c.desc + '</p><span class="tags">' +
-      c.tags.map(function (t) { return '<span class="' + (t === "sim" ? "sim" : t === "3d" ? "d3" : "") + '">' + (tagName[t] || t) + "</span>"; }).join("") + "</span></a>";
+      c.tags.map(function (t) { return '<span>' + (labels[t] || t) + "</span>"; }).join("") + "</span></a>";
   }).join("");
-
-  // 히어로: 작은 CMOS 단면이 스스로 쌓였다가 다시 시작한다
-  var W = 120, DX = 5, L = W * DX, G = 300;
-  var steps = [
-    { op: "depo", mat: "ox", mode: "ald", thick: 10, label: "패드 산화막" },
-    { op: "depo", mat: "nit", mode: "cvd", thick: 50, stick: 0.2, label: "질화막 증착" },
-    { op: "litho", thick: 150, wl: 193, NA: 1.35, sigma: 0.6, dose: 22, focus: 0, swing: 0.1, peb: 8, dev: 40, clear: [[-50, 50], [550, 650]], label: "노광 · 현상" },
-    { op: "etch", sel: { nit: 1, ox: 0.6, pr: 0.25, si: 0.1 }, rate: 5, time: 14, ion: 0.95, sigma: 2, label: "하드마스크 식각" },
-    { op: "etch", sel: { si: 1, ox: 0.02, nit: 0.04, pr: 0.25 }, rate: 6, time: 32, ion: 0.88, sigma: 4, label: "트렌치 식각" },
-    { op: "strip", mat: "pr", label: "감광막 제거" },
-    { op: "depo", mat: "ox", mode: "cvd", thick: 140, stick: 0.08, label: "산화막 갭필" },
-    { op: "cmp", stop: "nit", level: 0, over: 5, label: "CMP 평탄화" },
-    { op: "etch", wet: true, sel: { nit: 1, ox: 0.03 }, rate: 3, time: 22, label: "질화막 제거" },
-    { op: "etch", wet: true, sel: { ox: 1 }, rate: 2, time: 10, label: "패드 산화막 제거 · STI 완성" },
-    { op: "implant", species: "B", E: 30, dose: 2e13, tilt: 0, label: "웰 주입" },
-    { op: "depo", mat: "hk", mode: "ald", thick: 5, label: "게이트 절연막" },
-    { op: "depo", mat: "poly", mode: "cvd", thick: 90, stick: 0.15, label: "폴리실리콘" },
-    { op: "litho", thick: 120, wl: 13.5, NA: 0.33, sigma: 0.6, dose: 24, focus: 0, swing: 0.1, peb: 6, dev: 40, chrome: [[G - 35, G + 35]], label: "게이트 노광 (EUV)" },
-    { op: "etch", sel: { poly: 1, si: 1, hk: 0.02, ox: 0.02, pr: 0.3 }, rate: 5, time: 22, ion: 0.96, sigma: 2, label: "게이트 식각" },
-    { op: "strip", mat: "pr", label: "감광막 제거" },
-    { op: "implant", species: "As", E: 5, dose: 8e14, tilt: 0, label: "LDD 주입 (자기 정렬)" },
-    { op: "depo", mat: "nit", mode: "ald", thick: 30, label: "스페이서 증착" },
-    { op: "etch", sel: { nit: 1, si: 0.05, poly: 0.05, hk: 1, ox: 0.1 }, rate: 5, time: 7.5, ion: 1, sigma: 1.5, label: "스페이서 식각" },
-    { op: "implant", species: "As", E: 25, dose: 3e15, tilt: 0, label: "소스·드레인 주입" },
-    { op: "anneal", T: 1050, time: 3, label: "활성화 어닐" },
-    { op: "silicide", depth: 15, label: "실리사이드 · NMOS 완성" }
-  ];
-  var R = null, cv, cur = null, label = "시작", prog = 0;
-  cv = PB.canvas("#hero-cv", function (ctx, w, h) {
-    var s = cur || new XS.Sim({ W: W, H: 96, dx: DX, surf: 44, bgType: "p", bgConc: 1e15 });
-    XS.draw(ctx, s, { x: 0, y: 0, w: w, h: h }, { y0nm: -200, y1nm: 260, scale: false });
-  }, { aspect: 0.78, minHeight: 280, maxHeight: 440 });
-  R = XS.runner(function () { return new XS.Sim({ W: W, H: 96, dx: DX, surf: 44, bgType: "p", bgConc: 1e15 }); }, steps, function (sim, k, p) {
-    cur = sim; prog = p; cv.redraw();
-    document.getElementById("hero-step").innerHTML = "<b>" + (k ? steps[k - 1].label : "p형 실리콘 웨이퍼") + "</b>";
-    document.getElementById("hero-k").textContent = k + " / " + steps.length;
-    document.getElementById("hero-bar").style.width = ((k - 1 + p) / steps.length * 100) + "%";
-    if (p >= 1) setTimeout(next, k === steps.length ? 3500 : 650);
-  });
-  var visible = true;
-  if (window.IntersectionObserver) new IntersectionObserver(function (es) { var was = visible; visible = es[0].isIntersecting; if (visible && !was) next(); }).observe(document.getElementById("hero"));
-  function next() {
-    if (!visible || R.busy) return;
-    if (R.cur >= steps.length) { R.reset(); return; }
-    R.goto(R.cur + 1, true);
-  }
-  setTimeout(next, 600);
 })();
 </script>
 </body>

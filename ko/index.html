@@ -1,0 +1,144 @@
+<!doctype html>
+<!-- Shared site shell derived from ProcessBook: Copyright (c) 2026 geniuskey and ProcessBook contributors; MIT (see LICENSE-MIT).
+     PMICBook home-page text and illustrations are PMICBook educational contributions under CC BY 4.0 (see LICENSE-CC-BY-4.0).
+     Upstream educational material is used only where identified in docs/UPSTREAM_ATTRIBUTION.md. -->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PMICBook — 전력관리 IC 기술</title>
+<meta name="description" content="PMIC 시스템과 회로를 반도체 소자, BCD 기술, 제조 공정, 레이아웃, 시험 및 신뢰성과 연결하는 인터랙티브 공학 교재입니다.">
+<link rel="canonical" href="https://frbread7.github.io/pmicbook/ko/">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#c2550c">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PMICBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="PMICBook — 전력관리 IC 기술">
+<meta property="og:description" content="PMIC 시스템과 회로를 반도체 소자, BCD 기술, 제조 공정, 레이아웃, 시험 및 신뢰성과 연결하는 인터랙티브 공학 교재입니다.">
+<meta property="og:url" content="https://frbread7.github.io/pmicbook/ko/">
+<meta property="og:image" content="https://frbread7.github.io/pmicbook/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://frbread7.github.io/pmicbook/#site","name":"PMICBook","url":"https://frbread7.github.io/pmicbook/ko/","inLanguage":"ko","description":"PMIC 시스템과 회로를 반도체 소자, BCD 기술, 제조 공정, 레이아웃, 시험 및 신뢰성과 연결하는 인터랙티브 공학 교재입니다."},{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/","inLanguage":"ko","isAccessibleForFree":true,"educationalLevel":"공학 학부 및 실무 참고 자료","about":["power management integrated circuits","BCD technology","semiconductor fabrication","power electronics","reliability"],"description":"PMIC 시스템과 회로를 반도체 소자, BCD 기술, 제조 공정, 레이아웃, 시험 및 신뢰성과 연결하는 인터랙티브 공학 교재입니다.","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","hasPart":[{"@type":"Chapter","name":"PMIC 시스템과 전원 도메인","position":1,"url":"https://frbread7.github.io/pmicbook/ko/chapters/overview.html"},{"@type":"Chapter","name":"PMIC 사양과 기초","position":2,"url":"https://frbread7.github.io/pmicbook/ko/chapters/fundamentals.html"},{"@type":"Chapter","name":"기준전압, 바이어스 및 LDO","position":3,"url":"https://frbread7.github.io/pmicbook/ko/chapters/references-ldo.html"},{"@type":"Chapter","name":"스위칭 및 전원 경로 회로","position":4,"url":"https://frbread7.github.io/pmicbook/ko/chapters/switching.html"},{"@type":"Chapter","name":"PMIC용 반도체 소자","position":5,"url":"https://frbread7.github.io/pmicbook/ko/chapters/devices.html"},{"@type":"Chapter","name":"BCD 기술 아키텍처","position":6,"url":"https://frbread7.github.io/pmicbook/ko/chapters/bcd.html"},{"@type":"Chapter","name":"고전압 MOS 및 LDMOS","position":7,"url":"https://frbread7.github.io/pmicbook/ko/chapters/hv-devices.html"},{"@type":"Chapter","name":"집적 수동소자","position":8,"url":"https://frbread7.github.io/pmicbook/ko/chapters/passives.html"},{"@type":"Chapter","name":"기판, 웰 및 절연","position":9,"url":"https://frbread7.github.io/pmicbook/ko/chapters/wafer.html"},{"@type":"Chapter","name":"게이트 절연막 및 전계 구조","position":10,"url":"https://frbread7.github.io/pmicbook/ko/chapters/oxidation.html"},{"@type":"Chapter","name":"리소그래피와 포토레지스트 패터닝","position":11,"url":"https://frbread7.github.io/pmicbook/ko/chapters/litho.html"},{"@type":"Chapter","name":"식각, 절연 및 콘택트","position":12,"url":"https://frbread7.github.io/pmicbook/ko/chapters/etch.html"},{"@type":"Chapter","name":"박막 증착과 에피택시","position":13,"url":"https://frbread7.github.io/pmicbook/ko/chapters/deposition.html"},{"@type":"Chapter","name":"웰·드리프트 도핑과 이온 주입","position":14,"url":"https://frbread7.github.io/pmicbook/ko/chapters/implant.html"},{"@type":"Chapter","name":"어닐링과 열 예산","position":15,"url":"https://frbread7.github.io/pmicbook/ko/chapters/anneal.html"},{"@type":"Chapter","name":"평탄화와 CMP","position":16,"url":"https://frbread7.github.io/pmicbook/ko/chapters/cmp.html"},{"@type":"Chapter","name":"콘택트, BEOL 및 두꺼운 최상층 금속","position":17,"url":"https://frbread7.github.io/pmicbook/ko/chapters/metal.html"},{"@type":"Chapter","name":"BCD 공정 통합 흐름","position":18,"url":"https://frbread7.github.io/pmicbook/ko/chapters/integration.html"},{"@type":"Chapter","name":"레이아웃, 기생 성분, 열 및 노이즈","position":19,"url":"https://frbread7.github.io/pmicbook/ko/chapters/layout.html"},{"@type":"Chapter","name":"특성 평가 및 양산 테스트","position":20,"url":"https://frbread7.github.io/pmicbook/ko/chapters/metrology.html"},{"@type":"Chapter","name":"신뢰성","position":21,"url":"https://frbread7.github.io/pmicbook/ko/chapters/reliability.html"},{"@type":"Chapter","name":"고장 분석","position":22,"url":"https://frbread7.github.io/pmicbook/ko/chapters/failure-analysis.html"},{"@type":"Chapter","name":"스마트 파워와 첨단 기술 동향","position":23,"url":"https://frbread7.github.io/pmicbook/ko/chapters/advanced.html"},{"@type":"Chapter","name":"BCD 공정 실험실","position":24,"url":"https://frbread7.github.io/pmicbook/ko/chapters/lab.html"},{"@type":"Chapter","name":"용어집 및 종합 지식 점검","position":25,"url":"https://frbread7.github.io/pmicbook/ko/chapters/glossary.html"}]}]}</script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<style>
+  .pmic-hero { min-height: 440px; }
+  .pmic-hero .inner { align-items: center; }
+  .pmic-hero h1 { max-width: 700px; }
+  .pmic-hero .lead { max-width: 680px; font-size: clamp(17px, 2vw, 20px); }
+  .power-map { padding: 12px; border: 1px solid var(--border); border-radius: 20px; background: var(--bg-elev); box-shadow: var(--shadow); }
+  .power-map svg { display:block; width:100%; height:auto; }
+  .power-map figcaption { margin: 8px 4px 0; color: var(--text-dim); font-size: 13px; line-height: 1.5; }
+  .learning-path { display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); gap:10px; counter-reset:path; }
+  .learning-path a { position:relative; display:flex; min-height:118px; flex-direction:column; justify-content:space-between; padding:14px 16px; border:1px solid var(--border); border-radius:var(--radius); background:var(--bg-elev); color:var(--text); }
+  .learning-path a:hover { border-color:var(--accent); text-decoration:none; }
+  .learning-path .step { font:600 11px var(--mono); color:var(--accent); letter-spacing:.08em; }
+  .learning-path b { font-size:15px; line-height:1.35; }
+  .learning-path span:last-child { color:var(--text-dim); font-size:12px; line-height:1.4; }
+  .scope-note { padding:18px 20px; border:1px solid var(--border); border-radius:var(--radius); background:var(--bg-elev); color:var(--text-dim); }
+  .scope-note strong { color:var(--text); }
+  @media(max-width:760px) { .pmic-hero .inner { display:block; } .power-map { margin-top:26px; } }
+</style>
+<link rel="alternate" hreflang="en" href="https://frbread7.github.io/pmicbook/">
+<link rel="alternate" hreflang="ko" href="https://frbread7.github.io/pmicbook/ko/">
+<link rel="alternate" hreflang="x-default" href="https://frbread7.github.io/pmicbook/">
+</head>
+<body data-root="">
+<section class="home-hero pmic-hero">
+  <div class="inner">
+    <div>
+      <div class="eyebrow">인터랙티브 공학 교재</div>
+      <h1>전력 칩을,<br><span class="grad">전원 레일부터 실리콘까지.</span></h1>
+      <p class="lead">PMICBook은 전력 시스템의 요구를 회로, 반도체 소자, BCD 기술, 제조 공정, 구현 선택과 연결해 전력관리 IC의 동작을 설명합니다.</p>
+      <div class="cta">
+        <a class="primary" href="chapters/overview.html">시스템부터 시작하기 →</a>
+        <a class="ghost" href="chapters/bcd.html">BCD 기술 살펴보기</a>
+      </div>
+      <div class="hero-badges">
+        <span>25개 학습 챕터</span><span>시스템부터 공정 통합까지</span><span>인터랙티브 교육용 모델</span>
+      </div>
+    </div>
+    <figure class="power-map">
+      <svg viewBox="0 0 620 350" role="img" aria-labelledby="power-map-title power-map-desc">
+        <title id="power-map-title">간략화한 PMIC 전원 트리</title>
+        <desc id="power-map-desc">입력 전원이 스위칭 컨버터와 저전압 강하 레귤레이터에 공급되고, 각 전원 레일이 디지털 회로, 센서, 구동 부하에 전력을 공급합니다.</desc>
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--accent-2)"/></marker>
+          <linearGradient id="rail" x1="0" x2="1"><stop stop-color="var(--accent)"/><stop offset="1" stop-color="var(--accent-2)"/></linearGradient>
+        </defs>
+        <rect x="10" y="12" width="600" height="326" rx="16" fill="var(--surface)"/>
+        <g fill="var(--bg-elev)" stroke="var(--border)" stroke-width="2">
+          <rect x="34" y="137" width="112" height="72" rx="12"/>
+          <rect x="226" y="66" width="142" height="74" rx="12"/>
+          <rect x="226" y="208" width="142" height="74" rx="12"/>
+          <rect x="460" y="44" width="116" height="54" rx="10"/>
+          <rect x="460" y="148" width="116" height="54" rx="10"/>
+          <rect x="460" y="252" width="116" height="54" rx="10"/>
+        </g>
+        <g fill="var(--text)" text-anchor="middle" font-family="var(--font)">
+          <text x="90" y="168" font-size="16" font-weight="700">입력 전원</text><text x="90" y="190" font-size="12" fill="var(--text-dim)">배터리 / 어댑터</text>
+          <text x="297" y="98" font-size="16" font-weight="700">스위칭단</text><text x="297" y="120" font-size="12" fill="var(--text-dim)">벅 / 부스트</text>
+          <text x="297" y="240" font-size="16" font-weight="700">LDO / 기준전압</text><text x="297" y="262" font-size="12" fill="var(--text-dim)">저잡음 국부 레일</text>
+          <text x="518" y="68" font-size="14" font-weight="700">디지털 코어</text><text x="518" y="86" font-size="11" fill="var(--text-dim)">저전압 부하</text>
+          <text x="518" y="172" font-size="14" font-weight="700">센서</text><text x="518" y="190" font-size="11" fill="var(--text-dim)">아날로그 부하</text>
+          <text x="518" y="276" font-size="14" font-weight="700">구동기</text><text x="518" y="294" font-size="11" fill="var(--text-dim)">고전류 부하</text>
+        </g>
+        <g fill="none" stroke="url(#rail)" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)">
+          <path d="M146 158 C185 158 184 103 226 103"/><path d="M146 190 C184 190 185 245 226 245"/>
+          <path d="M368 103 C411 103 414 71 460 71"/><path d="M368 112 C410 112 415 175 460 175"/><path d="M368 245 C411 245 414 279 460 279"/>
+        </g>
+        <text x="310" y="322" text-anchor="middle" fill="var(--text-dim)" font-family="var(--mono)" font-size="11">전원 레일마다 전압, 전류, 노이즈, 효율, 면적, 발열을 절충합니다.</text>
+      </svg>
+      <figcaption>시스템 관점의 지도: 각 레일은 회로, 소자, 공정, 레이아웃 및 열 설계 요구를 만듭니다.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="home-section">
+  <h2>하나로 연결된 학습 경로</h2>
+  <p class="sub">전력관리 결정을 IC의 여러 층위에서 이어서 살펴보세요. 시스템부터 시작하거나 필요한 주제로 바로 이동할 수 있습니다.</p>
+  <div class="learning-path">
+    <a href="chapters/overview.html"><span class="step">01 · 시스템</span><b>전원 도메인</b><span>레일, 전원, 부하, 시퀀싱</span></a>
+    <a href="chapters/references-ldo.html"><span class="step">02 · 회로</span><b>기준전압과 레귤레이션</b><span>LDO, 컨버터, 보호</span></a>
+    <a href="chapters/devices.html"><span class="step">03 · 소자</span><b>반도체 소자 동작</b><span>접합, MOS, 항복</span></a>
+    <a href="chapters/bcd.html"><span class="step">04 · 기술</span><b>BCD 통합</b><span>저전압, 고전압, 바이폴라, 절연</span></a>
+    <a href="chapters/integration.html"><span class="step">05 · 제조 공정</span><b>공정 통합</b><span>웰, 드리프트, 콘택트, 금속</span></a>
+    <a href="chapters/layout.html"><span class="step">06 · 구현</span><b>기생 성분과 열</b><span>IR 강하, 노이즈, 전류 경로</span></a>
+    <a href="chapters/metrology.html"><span class="step">07 · 시험</span><b>특성 평가</b><span>DC, 과도 응답, 웨이퍼 시험</span></a>
+    <a href="chapters/reliability.html"><span class="step">08 · 신뢰성</span><b>수명과 고장</b><span>열화, ESD, 고장 분석</span></a>
+  </div>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <h2>모든 챕터 보기</h2>
+  <p class="sub">개념, 공학적 해석, 그림, 모델, 지식 확인을 함께 제공합니다. 매개변수를 바꾸는 일이 공학적 절충을 설명할 때에만 시뮬레이터를 사용합니다.</p>
+  <div class="ch-grid" id="chgrid"></div>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <h2>분야를 연결하는 학습</h2>
+  <div class="flow">
+    <div><b>제품을 이해하기</b>회로와 공정 엔지니어가 전력 요구에서 소자와 제조 제약까지 추적할 수 있습니다.</div>
+    <div><b>모델을 하드웨어에 연결하기</b>방정식과 인터랙티브 모델에서 가정, 단위, 한계를 분명히 확인할 수 있습니다.</div>
+    <div><b>공정 맥락 배우기</b>단면 엔진에서 공개된 교육용 공정 구조와 통합 개념을 살펴볼 수 있습니다.</div>
+    <div><b>절충 관계 확인하기</b>지식 확인을 통해 효율, 항복, 저항, 열, 시험과 신뢰성을 연결합니다.</div>
+  </div>
+  <p class="scope-note"><strong>범위와 모델의 한계.</strong> PMICBook v1은 교육 자료입니다. 파운드리 공정 레시피를 나타내거나 소자 특성 평가, 회로 시뮬레이션, 적격성 평가 및 제품별 설계를 대신하지 않습니다. 수치 예시는 출처가 있는 공개 값이거나 교육용 가정으로 명시합니다. BCD 단면도는 간략화한 2차원 학습 모델입니다.</p>
+</section>
+
+<script>
+(function () {
+  "use strict";
+  var grid = document.getElementById("chgrid");
+  var labels = { systems: "시스템", circuits: "회로", devices: "소자", BCD: "BCD", process: "공정", physical: "구현", test: "시험", reliability: "신뢰성", advanced: "심화", glossary: "용어", interactive: "인터랙티브" };
+  grid.innerHTML = PB.CHAPTERS.map(function (c) {
+    return '<a class="ch-card" href="chapters/' + c.slug + '.html"><span class="num">제' + c.num + "</span><h3>" + c.titleKo + "</h3><p>" + c.descKo + '</p><span class="tags">' +
+      c.tags.map(function (t) { return '<span>' + (labels[t] || t) + "</span>"; }).join("") + "</span></a>";
+  }).join("");
+})();
+</script>
+</body>
+</html>

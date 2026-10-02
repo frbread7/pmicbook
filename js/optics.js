@@ -12,8 +12,8 @@
   const TOOLS = {
     iline: { name: "i-line", wl: 365, NA: 0.6, n: 1 },
     krf: { name: "KrF", wl: 248, NA: 0.8, n: 1 },
-    arf: { name: "ArF 건식", wl: 193, NA: 0.93, n: 1 },
-    arfi: { name: "ArF 액침", wl: 193, NA: 1.35, n: 1.44 },
+    arf: { name: "ArF dry", wl: 193, NA: 0.93, n: 1 },
+    arfi: { name: "ArF immersion", wl: 193, NA: 1.35, n: 1.44 },
     euv: { name: "EUV", wl: 13.5, NA: 0.33, n: 1 },
     hna: { name: "High-NA EUV", wl: 13.5, NA: 0.55, n: 1 },
   };

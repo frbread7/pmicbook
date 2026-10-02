@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://processbook.euiyun.com/sitemap.xml
+Sitemap: https://frbread7.github.io/pmicbook/sitemap.xml

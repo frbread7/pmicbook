@@ -1,36 +1,53 @@
 /* Copyright (c) 2026 geniuskey and ProcessBook contributors.
-   Executable code: MIT (see ../LICENSE-MIT).
-   Educational content and illustrations: CC-BY-4.0 (see ../LICENSE.md). */
+   PMICBook is derived from ProcessBook. Executable code: MIT (see ../LICENSE-MIT).
+   Educational content and illustrations: CC BY 4.0 (see ../LICENSE.md and docs/UPSTREAM_ATTRIBUTION.md). */
 /* ==========================================================================
-   ProcessBook 공통 스크립트 — 전역 객체 PB
-   - 레이아웃(상단바, 목차, 이전/다음, 테마) 자동 생성
-   - 시뮬레이터 헬퍼: canvas, chart, range, seg, 색/난수/포맷, three.js 씬
-   이 파일은 <head>에서 defer 없이 로드된다. 페이지 스크립트는 </body> 직전에 둔다.
+   PMICBook shared browser helpers — global object PB
+   - Builds the top bar, chapter drawer, table of contents, pager, and theme control
+   - Provides canvas, chart, range, segmented-control, color, formatting, and Three.js helpers
+   This file is loaded in <head> without defer; chapter scripts belong before </body>.
    ========================================================================== */
 (function () {
   "use strict";
 
   const CHAPTERS = [
-    { slug: "overview",    num: "01", title: "반도체 제조 개요",        desc: "팹과 클린룸, 웨이퍼 한 장이 지나는 수백 단계. 8대 공정과 FEOL·BEOL, 수율과 원가의 큰 그림.", tags: ["기초", "sim"] },
-    { slug: "wafer",       num: "02", title: "실리콘 웨이퍼와 세정",     desc: "초크랄스키 성장과 편석, 결정 방향, 웨이퍼 가공. RCA 세정과 파티클·금속 오염.", tags: ["기판", "sim"] },
-    { slug: "oxidation",   num: "03", title: "열산화",                 desc: "Deal–Grove 모델로 산화막 두께를 계산한다. 건식·습식, 결정 방향, LOCOS 버즈 빅.", tags: ["FEOL", "sim"] },
-    { slug: "litho",       num: "04", title: "노광 I: 광학",            desc: "회절과 공중상, 레일리 해상도와 초점 심도, 조명(σ)과 포커스-노광 매트릭스.", tags: ["패터닝", "sim"] },
-    { slug: "resist",      num: "05", title: "노광 II: 감광막과 패터닝", desc: "도즈-CD 곡선, 정재파와 PEB, 화학 증폭형 레지스트, OPC, 멀티 패터닝, EUV 확률 결함.", tags: ["패터닝", "sim"] },
-    { slug: "etch",        num: "06", title: "식각",                   desc: "습식 등방성과 플라즈마 이방성, 선택비, 프로파일이 공정 조건에 따라 변하는 모습. ARDE·보잉·노칭.", tags: ["패턴 전사", "sim"] },
-    { slug: "deposition",  num: "07", title: "박막 증착",               desc: "CVD·PVD·ALD·에피택시. 부착 계수와 단차 피복, 보이드와 오버행, ALD 사이클.", tags: ["박막", "sim"] },
-    { slug: "implant",     num: "08", title: "이온 주입",               desc: "투사 거리 Rp와 ΔRp, 가우시안·피어슨 분포, 채널링과 틸트, 마스크 차폐와 그림자.", tags: ["도핑", "sim"] },
-    { slug: "anneal",      num: "09", title: "확산과 열처리",           desc: "픽의 법칙, erfc·가우시안 해, 열 예산 Dt. RTA·스파이크·레이저 어닐, 활성화와 TED.", tags: ["도핑", "sim"] },
-    { slug: "cmp",         num: "10", title: "CMP 평탄화",              desc: "프레스턴 식, 패턴 밀도와 단차 제거, 디싱과 이로전, 더미 필.", tags: ["평탄화", "sim"] },
-    { slug: "metal",       num: "11", title: "금속 배선",               desc: "다마신과 듀얼 다마신, 배리어·씨드·전해 도금, RC 지연과 전자 이동, 차세대 금속.", tags: ["BEOL", "sim"] },
-    { slug: "integration", num: "12", title: "CMOS 공정 통합",          desc: "STI부터 M1까지, 단면을 한 단계씩 쌓아 올린다. 웰, 게이트, 스페이서, 소스·드레인, 실리사이드.", tags: ["통합", "sim"] },
-    { slug: "advanced",    num: "13", title: "첨단 소자 공정",          desc: "HKMG와 게이트 라스트, FinFET·GAA 나노시트, 후면 전력 공급, 3D 적층과 하이브리드 본딩.", tags: ["첨단", "3d", "sim"] },
-    { slug: "metrology",   num: "14", title: "계측·결함·수율",          desc: "CD-SEM·엘립소미터·오버레이, 결함 검사, SPC와 Cpk, 수율 모델과 공정 창.", tags: ["품질", "sim"] },
-    { slug: "lab",         num: "15", title: "공정 실험실",             desc: "증착·노광·식각·주입·CMP·어닐을 직접 골라 단면을 쌓는 샌드박스. 레시피를 바꿔 결과를 비교하자.", tags: ["샌드박스", "sim"] },
-    { slug: "glossary",    num: "16", title: "용어집 & 종합 퀴즈",       desc: "핵심 공정 용어를 검색하고, 종합 퀴즈로 실력을 점검하자.", tags: ["정리"] },
+    { slug: "overview",         num: "01", title: "PMIC Systems and Power Domains", titleKo: "PMIC 시스템과 전원 도메인", desc: "Map power rails, domains, loads, sequencing, and integration needs.", descKo: "전원 레일, 도메인, 부하, 시퀀싱과 통합 요구사항을 살펴봅니다.", tags: ["systems"] },
+    { slug: "fundamentals",     num: "02", title: "PMIC Specifications and Fundamentals", titleKo: "PMIC 사양과 기초", desc: "Relate regulation, efficiency, quiescent current, transients, and temperature.", descKo: "레귤레이션, 효율, 정지 전류, 과도 응답과 온도의 관계를 다룹니다.", tags: ["systems", "interactive"] },
+    { slug: "references-ldo",   num: "03", title: "References, Bias, and LDOs", titleKo: "기준전압, 바이어스 및 LDO", desc: "Connect references and feedback to dropout, noise, stability, and heat.", descKo: "기준전압과 피드백을 드롭아웃, 노이즈, 안정성 및 발열과 연결합니다.", tags: ["circuits", "interactive"] },
+    { slug: "switching",        num: "04", title: "Switching and Power-Path Circuits", titleKo: "스위칭 및 전원 경로 회로", desc: "Explore buck, boost, charge-pump, charger, and protection functions.", descKo: "벅·부스트·차지펌프·충전기와 보호 기능의 동작을 살펴봅니다.", tags: ["circuits", "interactive"] },
+    { slug: "devices",          num: "05", title: "Semiconductor Devices for PMICs", titleKo: "PMIC용 반도체 소자", desc: "Build the MOS, BJT, junction, breakdown, and power-device foundations.", descKo: "MOS, BJT, 접합, 항복 및 전력 소자의 기초를 익힙니다.", tags: ["devices"] },
+    { slug: "bcd",              num: "06", title: "BCD Technology Architecture", titleKo: "BCD 기술 아키텍처", desc: "See why bipolar, CMOS, and high-voltage devices share one platform.", descKo: "바이폴라, CMOS 및 고전압 소자를 한 플랫폼에 통합하는 이유를 설명합니다.", tags: ["BCD"] },
+    { slug: "hv-devices",       num: "07", title: "High-Voltage MOS and LDMOS", titleKo: "고전압 MOS 및 LDMOS", desc: "Relate drift regions and field shaping to breakdown and on-resistance.", descKo: "드리프트 영역과 전계 제어를 항복 전압 및 온저항과 연결합니다.", tags: ["BCD", "devices"] },
+    { slug: "passives",         num: "08", title: "Integrated Passive Devices", titleKo: "집적 수동소자", desc: "Compare resistor, diode, capacitor, and inductor area and parasitics.", descKo: "저항, 다이오드, 커패시터와 인덕터의 면적 및 기생 성분을 비교합니다.", tags: ["BCD", "devices"] },
+    { slug: "wafer",            num: "09", title: "Starting Substrate, Wells, and Isolation", titleKo: "기판, 웰 및 절연", desc: "Connect wafers, epitaxy, wells, and isolation to BCD device boundaries.", descKo: "웨이퍼, 에피택시, 웰과 절연을 BCD 소자 경계에 연결합니다.", tags: ["process"] },
+    { slug: "oxidation",        num: "10", title: "Gate Dielectrics and Field Structures", titleKo: "게이트 절연막 및 전계 구조", desc: "Relate oxidation, dielectric choices, field plates, and thermal budget.", descKo: "산화, 절연막 선택, 필드 플레이트와 열 예산의 관계를 다룹니다.", tags: ["process", "interactive"] },
+    { slug: "litho",            num: "11", title: "Lithography and Resist Patterning", titleKo: "리소그래피와 포토레지스트 패터닝", desc: "Pattern wells, drift regions, isolation, field plates, and contacts.", descKo: "웰, 드리프트 영역, 절연, 필드 플레이트와 콘택트의 패턴 형성을 살펴봅니다.", tags: ["process", "interactive"] },
+    { slug: "etch",             num: "12", title: "Etch, Isolation, and Contacts", titleKo: "식각, 절연 및 콘택트", desc: "Understand etch selectivity, profile, isolation, and contact geometry.", descKo: "식각 선택비와 프로파일, 절연 및 콘택트 형상을 이해합니다.", tags: ["process", "interactive"] },
+    { slug: "deposition",       num: "13", title: "Deposition and Epitaxy", titleKo: "박막 증착과 에피택시", desc: "Study films, step coverage, void risk, epitaxy, and stress.", descKo: "박막, 단차 피복, 보이드 위험, 에피택시와 응력을 살펴봅니다.", tags: ["process", "interactive"] },
+    { slug: "implant",          num: "14", title: "Doping and Well/Drift Implants", titleKo: "웰·드리프트 도핑과 이온 주입", desc: "Relate implant distributions and masks to wells, drift, and junctions.", descKo: "주입 분포와 마스크를 웰, 드리프트 영역 및 접합과 연결합니다.", tags: ["process", "interactive"] },
+    { slug: "anneal",           num: "15", title: "Anneal and Thermal Budget", titleKo: "어닐링과 열 예산", desc: "Explore activation, diffusion, junction movement, and process tradeoffs.", descKo: "활성화, 확산, 접합 이동과 공정 간 트레이드오프를 다룹니다.", tags: ["process", "interactive"] },
+    { slug: "cmp",              num: "16", title: "Planarization and CMP", titleKo: "평탄화와 CMP", desc: "Connect topography, pattern density, contacts, and metal reliability.", descKo: "단차, 패턴 밀도, 콘택트와 금속 신뢰성의 관계를 살펴봅니다.", tags: ["process", "interactive"] },
+    { slug: "metal",            num: "17", title: "Contacts, BEOL, and Thick Top Metal", titleKo: "콘택트, BEOL 및 두꺼운 최상층 금속", desc: "Trace resistance, current density, IR drop, and electromigration.", descKo: "저항, 전류 밀도, IR 강하와 일렉트로마이그레이션을 추적합니다.", tags: ["process", "physical", "interactive"] },
+    { slug: "integration",      num: "18", title: "BCD Process Integration Flow", titleKo: "BCD 공정 통합 흐름", desc: "Map BCD device modules, then inspect a retained low-voltage CMOS base-flow stepper.", descKo: "BCD 소자 모듈을 정리하고 기존 저전압 CMOS 기반 공정 스테퍼를 살펴봅니다.", tags: ["BCD", "process", "interactive"] },
+    { slug: "layout",           num: "19", title: "Layout, Parasitics, Thermal, and Noise", titleKo: "레이아웃, 기생 성분, 열 및 노이즈", desc: "Connect current loops, substrate coupling, thermal rise, and EMI.", descKo: "전류 루프, 기판 결합, 온도 상승과 EMI를 연결합니다.", tags: ["physical"] },
+    { slug: "metrology",        num: "20", title: "Characterization and Production Test", titleKo: "특성 평가 및 양산 테스트", desc: "Interpret DC, transient, efficiency, WAT, wafer, and production tests.", descKo: "DC, 과도 응답, 효율, WAT, 웨이퍼 및 양산 테스트를 해석합니다.", tags: ["test", "interactive"] },
+    { slug: "reliability",      num: "21", title: "Reliability", titleKo: "신뢰성", desc: "Survey wear-out, overstress, ESD, latch-up, and power cycling.", descKo: "열화, 과전압 스트레스, ESD, 래치업과 전력 사이클링을 살펴봅니다.", tags: ["reliability"] },
+    { slug: "failure-analysis", num: "22", title: "Failure Analysis", titleKo: "고장 분석", desc: "Connect electrical symptoms to localization and physical evidence.", descKo: "전기적 증상을 고장 위치 파악 및 물리적 증거와 연결합니다.", tags: ["reliability"] },
+    { slug: "advanced",         num: "23", title: "Smart Power and Emerging Context", titleKo: "스마트 파워와 첨단 기술 동향", desc: "Survey automotive, higher-voltage BCD, GaN, packaging, and digital control.", descKo: "자동차용 PMIC, 고전압 BCD, GaN, 패키징과 디지털 제어를 살펴봅니다.", tags: ["advanced"] },
+    { slug: "lab",              num: "24", title: "BCD Process Lab", titleKo: "BCD 공정 실험실", desc: "Inspect illustrative process steps and BCD cross-sections.", descKo: "교육용 공정 단계와 BCD 단면을 살펴봅니다.", tags: ["BCD", "process", "interactive"] },
+    { slug: "glossary",         num: "25", title: "Glossary and Final Knowledge Checks", titleKo: "용어집 및 종합 지식 점검", desc: "Search PMIC and BCD terms and review the learning path.", descKo: "PMIC 및 BCD 용어를 검색하고 학습 경로를 복습합니다.", tags: ["glossary"] },
   ];
+
+  const pageLang = (document.documentElement.lang || "en").toLowerCase().startsWith("ko") || /(?:^|\/)ko(?:\/|$)/.test(location.pathname) ? "ko" : "en";
+  const isKorean = pageLang === "ko";
+  const chapterTitle = (chapter) => isKorean ? (chapter.titleKo || chapter.title) : chapter.title;
+  const chapterDescription = (chapter) => isKorean ? (chapter.descKo || chapter.desc || "") : (chapter.desc || "");
 
   const PB = (window.PB = {});
   PB.CHAPTERS = CHAPTERS;
+  PB.LANG = pageLang;
+  PB.chapterTitle = chapterTitle;
+  PB.chapterDescription = chapterDescription;
 
   /* ------------------------------------------------------------ math utils */
   PB.clamp = (x, a, b) => Math.min(b, Math.max(a, x));
@@ -361,7 +378,11 @@
    */
   PB.three = function (container, opts = {}) {
     if (typeof container === "string") container = document.querySelector(container);
-    if (!window.THREE) { container.innerHTML = '<p style="padding:20px;color:var(--text-dim)">3D 라이브러리를 불러오지 못했습니다. 인터넷 연결을 확인하세요.</p>'; return null; }
+    if (!window.THREE) {
+      const message = isKorean ? "3D 라이브러리를 불러오지 못했습니다. 인터넷 연결을 확인하세요." : "The 3D library could not be loaded. Check your internet connection.";
+      container.innerHTML = `<p style="padding:20px;color:var(--text-dim)">${message}</p>`;
+      return null;
+    }
     const THREE = window.THREE;
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -439,30 +460,44 @@
 
   function build() {
     const body = document.body;
-    const root = body.dataset.root != null ? body.dataset.root : body.dataset.chapter ? "../" : "";
     const curSlug = body.dataset.chapter || "";
-    const href = (slug) => (slug ? `${root}chapters/${slug}.html` : `${root}index.html`);
+    const inChapter = Boolean(curSlug);
+    const assetRoot = isKorean ? (inChapter ? "../../" : "../") : (inChapter ? "../" : "");
+    const sameLanguageHref = (slug) => `${inChapter ? "../" : ""}${slug ? `chapters/${slug}.html` : "index.html"}`;
+    const translatedHref = (slug, targetLang) => {
+      if (targetLang === pageLang) return sameLanguageHref(slug);
+      if (isKorean) return `${inChapter ? "../../" : "../"}${slug ? `chapters/${slug}.html` : "index.html"}`;
+      const prefix = inChapter ? "../ko/" : "ko/";
+      return `${prefix}${slug ? `chapters/${slug}.html` : "index.html"}`;
+    };
+    const href = (slug) => sameLanguageHref(slug);
+    const koreanAlternate = [...document.querySelectorAll('link[rel="alternate"][hreflang]')]
+      .some((link) => link.hreflang.toLowerCase() === "ko");
+    const showLanguageSwitch = isKorean || koreanAlternate;
+    const switchTargetLang = isKorean ? "en" : "ko";
+    const switchLabel = isKorean ? "English" : "한국어";
 
     // favicon
-    if (!document.querySelector('link[rel="icon"]')) { const fi = document.createElement("link"); fi.rel = "icon"; fi.type = "image/svg+xml"; fi.href = root + "favicon.svg"; document.head.appendChild(fi); }
+    if (!document.querySelector('link[rel="icon"]')) { const fi = document.createElement("link"); fi.rel = "icon"; fi.type = "image/svg+xml"; fi.href = assetRoot + "favicon.svg"; document.head.appendChild(fi); }
 
     // top bar
     const bar = document.createElement("header");
     bar.className = "pb-topbar";
     bar.innerHTML = `
-      <button class="pb-btn icon" id="pb-menu" aria-label="챕터 목록">${ICON_MENU}</button>
-      <a class="pb-logo" href="${href("")}">${LOGO}<span>ProcessBook <small>반도체 제조 공정 교과서</small></span></a>
+      <button class="pb-btn icon" id="pb-menu" aria-label="${isKorean ? "챕터 메뉴 열기" : "Open chapter menu"}">${ICON_MENU}</button>
+      <a class="pb-logo" href="${href("")}">${LOGO}<span>PMICBook <small>${isKorean ? "전력관리 IC" : "Power Management ICs"}</small></span></a>
       <span class="spacer"></span>
-      <button class="pb-btn icon" id="pb-theme" aria-label="테마 전환"></button>
+      ${showLanguageSwitch ? `<a class="pb-btn pb-locale" href="${translatedHref(curSlug, switchTargetLang)}" lang="${switchTargetLang}" hreflang="${switchTargetLang}" aria-label="${isKorean ? "Switch to English" : "한국어 페이지로 전환"}">${switchLabel}</a>` : ""}
+      <button class="pb-btn icon" id="pb-theme" aria-label="${isKorean ? "색상 테마 전환" : "Toggle color theme"}"></button>
       <div class="pb-progress" id="pb-progress"></div>`;
     body.prepend(bar);
 
     // drawer
     const drawer = document.createElement("nav");
     drawer.className = "pb-drawer";
-    drawer.innerHTML = `<h4>Chapters</h4><ul class="pb-chlist">
-      <li><a href="${href("")}" class="${curSlug ? "" : "active"}"><span class="num">00</span><span>홈 · 로드맵</span></a></li>
-      ${CHAPTERS.map((c) => `<li><a href="${href(c.slug)}" class="${c.slug === curSlug ? "active" : ""}"><span class="num">${c.num}</span><span>${c.title}</span></a></li>`).join("")}
+    drawer.innerHTML = `<h4>${isKorean ? "챕터" : "Chapters"}</h4><ul class="pb-chlist">
+      <li><a href="${href("")}" class="${curSlug ? "" : "active"}"><span class="num">00</span><span>${isKorean ? "홈 및 학습 경로" : "Home and roadmap"}</span></a></li>
+      ${CHAPTERS.map((c) => `<li><a href="${href(c.slug)}" class="${c.slug === curSlug ? "active" : ""}"><span class="num">${c.num}</span><span>${chapterTitle(c)}</span></a></li>`).join("")}
     </ul>`;
     const backdrop = document.createElement("div");
     backdrop.className = "pb-drawer-backdrop";
@@ -499,7 +534,7 @@
       toc.className = "pb-toc";
       const h2s = [...main.querySelectorAll("section > h2")];
       let n = 0;
-      toc.innerHTML = "<h4>ON THIS PAGE</h4>" + h2s.map((h, i) => {
+      toc.innerHTML = `<h4>${isKorean ? "이 페이지의 목차" : "ON THIS PAGE"}</h4>` + h2s.map((h, i) => {
         const sec = h.parentElement;
         if (!sec.id) sec.id = "s" + (i + 1);
         const numbered = !sec.classList.contains("keypoints") && !sec.classList.contains("quiz-sec") && !sec.hasAttribute("data-nonum");
@@ -522,24 +557,33 @@
       const pager = document.createElement("nav");
       pager.className = "pb-pager";
       pager.innerHTML =
-        (prev ? `<a class="prev" href="${href(prev.slug)}"><small>← 이전 · ${prev.num}</small>${prev.title}</a>` : `<a class="prev" href="${href("")}"><small>← 처음으로</small>홈 · 로드맵</a>`) +
-        (next ? `<a class="next" href="${href(next.slug)}"><small>다음 · ${next.num} →</small>${next.title}</a>` : "");
+        (prev ? `<a class="prev" href="${href(prev.slug)}"><small>← ${isKorean ? "이전" : "Previous"} · ${prev.num}</small>${chapterTitle(prev)}</a>` : `<a class="prev" href="${href("")}"><small>← ${isKorean ? "처음부터" : "Start here"}</small>${isKorean ? "홈 및 학습 경로" : "Home and roadmap"}</a>`) +
+        (next ? `<a class="next" href="${href(next.slug)}"><small>${isKorean ? "다음" : "Next"} · ${next.num} →</small>${chapterTitle(next)}</a>` : "");
       layout.after(pager);
     }
     const foot = document.createElement("footer");
     foot.className = "pb-foot";
-    foot.innerHTML = `ProcessBook — 공학도를 위한 인터랙티브 반도체 제조 공정 교과서 · 수치는 교육용 근사 모델입니다.<br>
-      © 2026 geniuskey 및 ProcessBook 기여자 · 콘텐츠 <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · 코드 <a href="${root}LICENSE-MIT">MIT</a> · <a href="${root}LICENSE.md">라이선스 안내</a>`;
+    foot.innerHTML = isKorean
+      ? `PMICBook — 전력관리 IC 기술을 위한 인터랙티브 학습 자료입니다. 시뮬레이터 수치는 교육용 근사값입니다.<br>
+      ProcessBook에서 파생 · © 2026 geniuskey 및 ProcessBook 기여자 · 콘텐츠 <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · 코드 <a href="${assetRoot}LICENSE-MIT">MIT</a> · <a href="${assetRoot}LICENSE.md">라이선스 안내</a>`
+      : `PMICBook — Interactive learning about power management IC technology. Simulator values are educational approximations.<br>
+      Derived from ProcessBook · © 2026 geniuskey and ProcessBook contributors · Content <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · Code <a href="${assetRoot}LICENSE-MIT">MIT</a> · <a href="${assetRoot}LICENSE.md">License guide</a>`;
     body.appendChild(foot);
 
     // quiz
     document.querySelectorAll(".quiz-q").forEach((q) => {
-      const opts = [...q.querySelectorAll("button.opt")];
+      const legacyOptions = new Set(q.querySelectorAll("button.opt"));
+      const opts = [...new Set(q.querySelectorAll("button.opt, .opts button"))];
+      opts.forEach((option) => option.classList.add("opt"));
+      const isCorrect = (option) => {
+        const value = option.getAttribute("data-correct");
+        return value === "true" || (legacyOptions.has(option) && value === "");
+      };
       opts.forEach((b) => b.addEventListener("click", () => {
-        opts.forEach((o) => { o.disabled = true; if (o.hasAttribute("data-correct")) o.classList.add("right"); });
-        if (!b.hasAttribute("data-correct")) b.classList.add("wrong");
+        opts.forEach((o) => { o.disabled = true; if (isCorrect(o)) o.classList.add("right"); });
+        if (!isCorrect(b)) b.classList.add("wrong");
         q.classList.add("done");
-        q.dispatchEvent(new CustomEvent("answered", { bubbles: true, detail: { correct: b.hasAttribute("data-correct") } }));
+        q.dispatchEvent(new CustomEvent("answered", { bubbles: true, detail: { correct: isCorrect(b) } }));
       }));
     });
 

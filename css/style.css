@@ -1,7 +1,7 @@
 /* Copyright (c) 2026 geniuskey and ProcessBook contributors.
    SPDX-License-Identifier: MIT — see ../LICENSE-MIT. */
 /* ==========================================================================
-   ProcessBook — 반도체 제조 공정 교과서 공통 스타일
+   PMICBook — power-management IC textbook styles, derived from ProcessBook
    ========================================================================== */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap");
@@ -138,6 +138,8 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 48px 0; }
 }
 .pb-btn:hover { border-color: var(--accent); }
 .pb-btn.icon { width: 36px; padding: 0; }
+.pb-locale { min-width: 54px; padding: 0 10px; font-size: 13px; font-weight: 650; white-space: nowrap; }
+.pb-locale:hover { text-decoration: none; }
 .pb-progress { position: absolute; left: 0; bottom: -1px; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); width: 0; }
 
 /* Drawer (chapter list) */
@@ -187,10 +189,12 @@ strong { font-weight: 700; }
 /* Chapter hero */
 .chapter-hero { padding: 24px 0 8px; }
 .eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: .16em; color: var(--accent); font-weight: 600; text-transform: uppercase; }
+html:lang(ko) .eyebrow { font-family: var(--font); letter-spacing: .05em; }
 .chapter-hero h1 { font-size: clamp(32px, 5.4vw, 46px); line-height: 1.2; letter-spacing: -0.03em; margin: 10px 0 16px; }
 .lead { font-size: 19px; color: var(--text-dim); line-height: 1.7; }
 .objectives { list-style: none; padding: 18px 20px !important; margin: 24px 0 0 !important; background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius); display: grid; gap: 6px; }
-.objectives::before { content: "이 장에서 배우는 것"; display: block; font-size: 12px; letter-spacing: .1em; color: var(--text-faint); font-weight: 700; margin-bottom: 4px; }
+.objectives::before { content: "Learning objectives"; display: block; font-size: 12px; letter-spacing: .1em; color: var(--text-faint); font-weight: 700; margin-bottom: 4px; }
+html:lang(ko) .objectives::before { content: "학습 목표"; letter-spacing: .05em; }
 .objectives li { padding-left: 26px; position: relative; margin: 0 !important; }
 .objectives li::before { content: ""; position: absolute; left: 4px; top: 0.62em; width: 10px; height: 10px; border-radius: 3px; background: var(--accent); opacity: .85; }
 
@@ -281,7 +285,7 @@ input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius
 .callout.tip { background: color-mix(in srgb, var(--ok) 12%, transparent); border-left-color: var(--ok); }
 .callout.warn { background: color-mix(in srgb, var(--warn) 14%, transparent); border-left-color: var(--warn); }
 .callout.deep { background: var(--accent-2-soft); border-left-color: var(--accent-2); }
-.callout.deep > strong:first-child::before { content: "심화 · "; color: var(--accent-2); }
+.callout.deep > strong:first-child::before { content: "In depth · "; color: var(--accent-2); }
 
 .formula { margin: 22px 0; padding: 14px 18px; background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow-x: auto; }
 .formula .where { font-size: 14px; color: var(--text-dim); margin-top: 6px; }
@@ -366,6 +370,9 @@ td.num, th.num { text-align: right; font-family: var(--mono); font-variant-numer
 .gl-item .ch { font-size: 12px; margin-top: 6px; display: inline-block; }
 
 @media (max-width: 640px) {
+  .pb-topbar { gap: 8px; padding: 0 10px; }
+  .pb-logo { gap: 7px; font-size: 16px; }
+  .pb-locale { min-width: 0; height: 34px; padding: 0 8px; font-size: 12px; }
   body { font-size: 16px; }
   main.chapter { padding-top: 24px; }
   main.chapter h2 { font-size: 24px; }
