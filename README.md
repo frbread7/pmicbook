@@ -1,5 +1,8 @@
 # PMICBook — Power Management IC Technology
 
+**Current stable version:** v1.0.0<br>
+**Live site:** <https://frbread7.github.io/pmicbook/>
+
 PMICBook is an interactive engineering textbook about power-management integrated circuits. It connects system rails and specifications to circuit behavior, semiconductor devices, BCD technology, fabrication and process integration, layout and parasitics, thermal behavior, characterization, reliability, and failure analysis.
 
 This repository is a derivative of [ProcessBook](https://github.com/geniuskey/processbook), which remains the primary implementation base. PMICBook retains its static-site structure, chapter navigation, educational helpers, and 2D process cross-section engine while adapting the content and chapter path for PMIC/BCD learning. The upstream starting point is commit `0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff`, recorded by the `upstream-processbook-baseline` tag. See [upstream attribution and reuse notes](docs/UPSTREAM_ATTRIBUTION.md).
@@ -39,9 +42,9 @@ python3 tools/head.py
 
 The generator updates English/Korean canonical and `hreflang` metadata, structured data, `sitemap.xml`, and home-page JSON-LD. It requires all 25 matching Korean chapter routes before publishing language links. The chapter order and localized titles live in `PB.CHAPTERS` in `js/common.js`.
 
-## Deployment status
+## Deployment
 
-GitHub Pages is not currently configured for this fork. The intended project-site URL is <https://frbread7.github.io/pmicbook/>; canonical and sitemap entries use that path in preparation for a later Pages setup. To publish, configure the repository's **Settings → Pages** to deploy the `main` branch from the repository root after reviewing the finished content and metadata. No ProcessBook custom domain is carried by this fork.
+The live site is published with GitHub Pages from the `main` branch and repository root (`/`). It uses the project-site URL <https://frbread7.github.io/pmicbook/>. No custom domain is configured; the ProcessBook domain is not used. See [production QA](docs/PRODUCTION_QA.md) for the release deployment and browser-check record.
 
 ## Licensing and attribution
 

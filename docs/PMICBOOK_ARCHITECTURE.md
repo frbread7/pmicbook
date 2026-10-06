@@ -64,7 +64,7 @@ Components classified during the audit: **generic/keep** — static chapter shel
 
 ### SEO, deployment, and licensing audit
 
-- `tools/head.py`, `index.html`, chapter head markers, `sitemap.xml`, `robots.txt`, and `CNAME` all name ProcessBook or `processbook.euiyun.com`; they must be transformed together. The fork currently has no GitHub Pages site configured. Do not enable or publish Pages as part of local code work.
+- At the upstream baseline, `tools/head.py`, `index.html`, chapter head markers, `sitemap.xml`, `robots.txt`, and `CNAME` named ProcessBook or `processbook.euiyun.com`; these were audited and transformed together for PMICBook. The current fork publishes the `main` branch root at `https://frbread7.github.io/pmicbook/`, with no custom domain or inherited `CNAME`. See [production QA](PRODUCTION_QA.md) for the publication check.
 - `LICENSE-MIT`, `LICENSE-CC-BY-4.0`, `LICENSE.md`, and existing source headers distinguish executable framework/code from educational text, figures, questions, and explanations. Preserve notices and record per-chapter reuse/modifications in `docs/UPSTREAM_ATTRIBUTION.md`.
 - The baseline browser and source checks are in `docs/BASELINE_VALIDATION.md`.
 
