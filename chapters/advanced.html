@@ -1,7 +1,7 @@
 <!doctype html>
 <!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
      Executable code: MIT (see ../LICENSE-MIT).
-     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE-CC-BY-4.0). -->
 <html lang="en">
 <head>
 <!--head:start {"desc": "PMIC-focused context on smart power, automotive systems, GaN, digital control, backside power delivery, and advanced packaging. Numerical models are educational approximations.", "libs": ["xsec"], "lang": "en"}-->
@@ -25,7 +25,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/advanced.html#chapter","name":"Smart Power and Emerging Context","headline":"Smart Power and Emerging Context · PMICBook","description":"PMIC-focused context on smart power, automotive systems, GaN, digital control, backside power delivery, and advanced packaging. Numerical models are educational approximations.","url":"https://frbread7.github.io/pmicbook/chapters/advanced.html","position":23,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"23. Smart Power and Emerging Context","item":"https://frbread7.github.io/pmicbook/chapters/advanced.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/advanced.html#chapter","name":"Smart Power and Emerging Context","headline":"Smart Power and Emerging Context · PMICBook","description":"PMIC-focused context on smart power, automotive systems, GaN, digital control, backside power delivery, and advanced packaging. Numerical models are educational approximations.","url":"https://frbread7.github.io/pmicbook/chapters/advanced.html","position":23,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"23. Smart Power and Emerging Context","item":"https://frbread7.github.io/pmicbook/chapters/advanced.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -71,7 +71,7 @@
   </section>
   <section id="bspdn">
     <h2>Backside power delivery as a research context</h2>
-    <p>Backside power delivery is mainly an advanced logic integration direction. It separates some supply routing from front-side signal wiring by adding backside contacts and a power network after wafer bonding and thinning. Its possible benefit is a shorter or less congested supply path in that architecture. Making those contacts, aligning them, and removing heat introduce new process and package constraints. The figure is a conceptual comparison; it does not imply that a PMIC should use this approach or that its supply/signal routing becomes completely independent.</p>
+    <p>Backside power delivery is mainly an advanced logic integration direction. Published demonstrations move the power-delivery network to the wafer backside and report lower IR drop and improved routing efficiency for the studied architecture (<a href="https://doi.org/10.1109/iedm45741.2023.10413867">Veloso et al., IEDM 2023</a>). A reported flow bonds the device wafer to a carrier, thins its backside, then patterns through-silicon connections and backside metal (<a href="https://www.imec-int.com/en/articles/imec-demonstrates-critical-building-blocks-backside-power-delivery-network">imec, 2021</a>). These results describe specific advanced-logic research, not a general PMIC benefit; the figure is conceptual and does not imply that supply and signal routing become completely independent.</p>
     <figure class="diagram">
       <svg viewBox="0 0 780 250" role="img" aria-label="Conceptual comparison of front-side and backside power routing">
         <g transform="translate(40,20)">

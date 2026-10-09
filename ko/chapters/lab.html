@@ -1,7 +1,7 @@
 <!doctype html>
 <!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
      Executable code: MIT (see ../../LICENSE-MIT).
-     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE.md). -->
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE-CC-BY-4.0). -->
 <html lang="ko">
 <head>
 <!--head:start {"desc":"BCD 공정 모듈과 교육용 nLDMOS 단면을 편집 가능한 셀 격자 모델로 탐색합니다.","libs":["xsec"],"lang":"ko"}-->
@@ -25,7 +25,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/lab.html#chapter","name":"BCD 공정 실험실","headline":"BCD 공정 실험실 · PMICBook","description":"BCD 공정 모듈과 교육용 nLDMOS 단면을 편집 가능한 셀 격자 모델로 탐색합니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/lab.html","position":24,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"24. BCD 공정 실험실","item":"https://frbread7.github.io/pmicbook/ko/chapters/lab.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/lab.html#chapter","name":"BCD 공정 실험실","headline":"BCD 공정 실험실 · PMICBook","description":"BCD 공정 모듈과 교육용 nLDMOS 단면을 편집 가능한 셀 격자 모델로 탐색합니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/lab.html","position":24,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"24. BCD 공정 실험실","item":"https://frbread7.github.io/pmicbook/ko/chapters/lab.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -152,7 +152,7 @@
     <p>제어 패널에서 모듈과 조건을 고른 뒤 <b>단계 추가</b>를 누르면 재료·도펀트 지도가 바뀝니다. 앞선 단계를 선택하면 당시 상태를 볼 수 있고, 단계를 제거하면 그 이후 기록도 지워집니다. 과거 상태에서 새 단계를 추가하면 이후 기록을 대체합니다.</p>
     <div class="preset-grid" id="presets"></div>
     <div id="lab"></div>
-    <p style="font-size:14px;color:var(--text-dim)">실험 설정은 URL 조각(#r=…)에 저장됩니다. 링크 복사로 같은 교육용 공정 순서를 공유할 수 있습니다.</p>
+    <p style="font-size:14px;color:var(--text-dim)">실험 설정은 URL 조각(#r=…)에 저장됩니다. 링크 복사로 같은 교육용 공정 순서를 공유할 수 있습니다. 공유 링크는 32단계와 제한된 재생 계산량으로 보호합니다. 긴 확산·산화 순서는 로컬 편집기에만 저장됩니다.</p>
   </section>
 
   <section id="ideas">
@@ -289,7 +289,7 @@
       var amb = v.amb === "n2" ? "" : v.amb;
       return { op: "anneal", T: v.T, time: v.time, ambient: amb, k: amb ? "OX" : "ANL",
         label: (amb ? (amb === "wet" ? "습식 산화 " : "건식 산화 ") : "어닐 ") + v.T + " °C · " + (v.time >= 120 ? Math.round(v.time / 60) + " min" : v.time + " s"),
-        desc: amb ? "산화제가 산화막을 뚫고 실리콘 표면까지 확산해 반응한다. 실리콘 1 nm가 소모될 때 산화막은 약 2.27 nm 생긴다. 질화막은 산화제를 막는다." : "도펀트가 실리콘 안에서 √(Dt)만큼 퍼지고 격자 자리로 들어가 활성화된다." };
+        desc: amb ? "산화제가 산화막을 뚫고 실리콘 표면까지 확산해 반응한다. 실리콘 1 nm가 소모될 때 산화막은 약 2.27 nm 생기며, 질화막은 산화제를 막는다. 방향 선택 항목이 없어 (100) 규소를 가정한다." : "도펀트가 실리콘 안에서 √(Dt)만큼 퍼지고 격자 자리로 들어가 활성화된다." };
     } },
     cmp: { name: "CMP", fields: [
       { id: "stop", label: "정지막", type: "select", opts: [["", "없음 (높이 지정)"]].concat(matOpts), v: "nit" },
@@ -462,11 +462,57 @@
     document.getElementById("lab-msg").textContent = message;
     return false;
   }
+  // 공개 공유 URL을 복원할 때 동기 스냅샷 계산량을 제한한다.
+  // 로컬 편집기에는 더 긴 순서를 둘 수 있지만 링크로 공유할 수는 없다.
+  var MAX_SHARED_STEPS = 32, MAX_SHARED_WORK = 36;
+  var MAX_SHARED_DIFFUSION_OPS = 20000000, MAX_SHARED_OXIDATION_SWEEPS = 120;
+  function sharedWork(steps, domainKey) {
+    if (!Array.isArray(steps) || steps.length > MAX_SHARED_STEPS || !DOM[domainKey]) return null;
+    var weight = { litho: 8, etch: 2, implant: 2 };
+    var domain = DOM[domainKey], cells = domain.W * domain.H;
+    var score = 0, diffusionOps = 0, oxidationSweeps = 0;
+    steps.forEach(function (step) {
+      score += weight[step.op] || 1;
+      if (step.op !== "anneal") return;
+      // XS.diffuse의 두 도펀트 배열에서 셀·이웃 방문 상한을 센다.
+      // 종마다 N셀 마스크를 할당·0 초기화한 뒤 명시적으로 채운다. 블러 반복마다 N셀 임시 배열 할당/초기화와
+      // N셀 격자 스캔 두 번, 직경 크기 커널 생성, 두 방향의 최대 N×직경 이웃 방문이 있다.
+      var D = Math.max(XS.diffusivity("P", step.T), XS.diffusivity("B", step.T));
+      var sigma = Math.min(Math.sqrt(2 * D * step.time) * 1e7 / domain.dx, 80);
+      if (sigma >= 0.3) {
+        var requested = Math.max(1, Math.ceil(Math.pow(sigma / 6, 2)));
+        var iterations = Math.min(requested, 40);
+        var kernelSigma = sigma / Math.sqrt(requested > 40 ? 40 : requested);
+        var radius = Math.ceil(3 * kernelSigma);
+        var diameter = 2 * radius + 1;
+        diffusionOps += 4 * cells + iterations * (6 * cells + 4 * cells * diameter + 2 * diameter);
+      }
+      if (step.ambient === "dry" || step.ambient === "wet") {
+        // C ≤ 1인 산화제 농도와 최대 네 개 노출면을 가정해 반복 횟수를 보수적으로 계산한다.
+        // XS.oxidizeGen은 최대 속도의 0.5/셀만큼 이상 진행하므로 동기 복원 전에 상한을 구할 수 있다.
+        var dg = XS.dealGrove(step.T, step.ambient, "100");
+        var maxRate = 1.76 * (dg.BA * 1e3 / 3600) / domain.dx;
+        var upperIterations = Math.min(8000, Math.ceil(2 * maxRate * step.time));
+        oxidationSweeps += upperIterations ? 120 + 24 * (upperIterations - 1) : 0;
+      }
+    });
+    return { score: score, diffusionOps: diffusionOps, oxidationSweeps: oxidationSweeps };
+  }
+  function canShare(steps, domainKey) {
+    var work = sharedWork(steps, domainKey);
+    return !!work && work.score <= MAX_SHARED_WORK && work.diffusionOps <= MAX_SHARED_DIFFUSION_OPS && work.oxidationSweeps <= MAX_SHARED_OXIDATION_SWEEPS;
+  }
+  function clearStaleShareHash() {
+    if (!location.hash.startsWith("#r=")) return;
+    try { history.replaceState(null, "", location.pathname + location.search); }
+    catch (e) { saveFailure("현재 순서는 로컬에서 사용할 수 있지만 이전 공유 링크를 지우지 못했습니다.", e); }
+  }
+  function shareLimitMessage() { return "순서가 공유 링크 한도(32단계, 가중 계산량 36, 제한된 확산·산화 계산량)를 초과했습니다. 단계를 줄이거나 실험을 초기화하세요. 로컬 순서는 계속 사용할 수 있습니다."; }
   function saveHash() {
     var steps;
     try { steps = S.steps(); }
     catch (e) { return saveFailure("공유 링크를 인코딩하지 못했습니다. 현재 실험 순서는 그대로 사용할 수 있습니다.", e); }
-    if (steps.length > 100) return saveFailure("공유 링크에 담기에는 순서가 너무 큽니다. 초기화하거나 단계를 줄이세요.");
+    if (!canShare(steps, dom)) { clearStaleShareHash(); return saveFailure(shareLimitMessage()); }
     var enc;
     try {
       var data = JSON.stringify({ d: dom, s: steps });
@@ -488,8 +534,8 @@
     try { navigator.clipboard.writeText(location.href).then(function () { msg.textContent = "복사했습니다."; }, function () { msg.textContent = "주소창의 링크를 복사하세요."; }); }
     catch (e) { msg.textContent = "주소창의 링크를 복사하세요."; }
   });
-  function validSharedSteps(steps) {
-    if (!Array.isArray(steps) || steps.length > 100) return false;
+  function validSharedSteps(steps, domainKey) {
+    if (!Array.isArray(steps) || steps.length > MAX_SHARED_STEPS) return false;
     var materials = Object.keys(XS.ID);
     var common = ["op", "label", "desc", "k"];
     var fields = {
@@ -511,7 +557,7 @@
         return Array.isArray(pair) && pair.length === 2 && inRange(pair[0], -500, 5000) && inRange(pair[1], -500, 5000) && pair[0] < pair[1];
       });
     }
-    return steps.every(function (step) {
+    var valid = steps.every(function (step) {
       if (!step || typeof step !== "object" || Array.isArray(step) || !Object.prototype.hasOwnProperty.call(fields, step.op)) return false;
       if (step.label != null && (typeof step.label !== "string" || step.label.length > 300)) return false;
       if (step.desc != null && (typeof step.desc !== "string" || step.desc.length > 1000)) return false;
@@ -534,6 +580,7 @@
         default: return false;
       }
     });
+    return valid && canShare(steps, domainKey);
   }
   function loadDefaultLab(message) {
     dom = PRESETS.ldmos.dom;
@@ -552,12 +599,12 @@
     try {
       if (m[1].length > 65536) throw new Error("공유 실험실 상태가 너무 큽니다");
       var data = JSON.parse(decodeURIComponent(escape(atob(m[1]))));
-      if (!data || typeof data !== "object" || Array.isArray(data) || Object.keys(data).some(function (key) { return key !== "d" && key !== "s"; }) || typeof data.d !== "string" || !Object.prototype.hasOwnProperty.call(DOM, data.d) || !validSharedSteps(data.s)) throw new Error("잘못된 공유 실험실 상태");
+      if (!data || typeof data !== "object" || Array.isArray(data) || Object.keys(data).some(function (key) { return key !== "d" && key !== "s"; }) || typeof data.d !== "string" || !Object.prototype.hasOwnProperty.call(DOM, data.d) || !validSharedSteps(data.s, data.d)) throw new Error("잘못된 공유 실험실 상태");
       dom = data.d;
       document.getElementById("lab-dom").value = dom;
       S.setSteps(data.s, 0); S.go(data.s.length);
     } catch (e) {
-      loadDefaultLab("공유 실험실 링크가 올바르지 않거나 너무 큽니다. 기본 BCD nLDMOS 프리셋을 불러왔습니다.");
+      loadDefaultLab("공유 실험실 링크가 올바르지 않거나 계산량 한도(32단계 / 확산·산화 작업 제한)를 초과했습니다. 기본 BCD nLDMOS 프리셋을 불러왔습니다.");
     }
   })();
 })();

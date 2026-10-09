@@ -1,7 +1,7 @@
 <!doctype html>
 <!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
      Executable code: MIT (see ../../LICENSE-MIT).
-     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE.md). -->
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE-CC-BY-4.0). -->
 <html lang="ko">
 <head>
 <!--head:start {"desc":"구리 콘택트와 배선으로 PMIC 소자와 회로를 연결합니다. 듀얼 다마신, 선 저항, RC 지연, 전류 밀도, IR 강하와 일렉트로마이그레이션을 예시 모델로 살펴봅니다.","libs":["xsec"],"lang":"ko"}-->
@@ -25,7 +25,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/metal.html#chapter","name":"콘택트, BEOL 및 두꺼운 최상층 금속","headline":"콘택트, BEOL 및 두꺼운 최상층 금속 · PMICBook","description":"구리 콘택트와 배선으로 PMIC 소자와 회로를 연결합니다. 듀얼 다마신, 선 저항, RC 지연, 전류 밀도, IR 강하와 일렉트로마이그레이션을 예시 모델로 살펴봅니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/metal.html","position":17,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"17. 콘택트, BEOL 및 두꺼운 최상층 금속","item":"https://frbread7.github.io/pmicbook/ko/chapters/metal.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/metal.html#chapter","name":"콘택트, BEOL 및 두꺼운 최상층 금속","headline":"콘택트, BEOL 및 두꺼운 최상층 금속 · PMICBook","description":"구리 콘택트와 배선으로 PMIC 소자와 회로를 연결합니다. 듀얼 다마신, 선 저항, RC 지연, 전류 밀도, IR 강하와 일렉트로마이그레이션을 예시 모델로 살펴봅니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/metal.html","position":17,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"17. 콘택트, BEOL 및 두꺼운 최상층 금속","item":"https://frbread7.github.io/pmicbook/ko/chapters/metal.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -133,7 +133,7 @@
     <h2>일렉트로마이그레이션: 상대적 스트레스 경향</h2>
     <p>전류와 온도는 원자 이동을 유발해 배선 저항을 바꾸는 보이드나 힐록을 만들 수 있습니다. 블랙 식은 경험적 스트레스 모델입니다. 상수는 재료, 계면, 형상, 파형, 공정과 고장 판정 기준에 따라 달라집니다. 유지된 위젯은 하나의 가정된 메커니즘 안에서 비율을 비교하며 수명(년수)이나 적격성 평가 결과를 제공하지 않습니다.</p>
     <div class="formula">$$\mathrm{MTTF} = A\,J^{-n}\exp\!\left(\frac{E_a}{kT}\right)$$
-      <div class="where">\(J\)는 전류 밀도, \(n\)은 경험적 전류 지수, \(E_a\)는 유효 활성화 에너지이며 \(A\)에는 보정 계수가 포함됩니다. 두 조건 모두에서 가정한 메커니즘과 매개변수가 적용될 때만 비율 계산에서 \(A\)가 소거됩니다. 아래에서 선택하는 \(E_a\)와 \(n\)은 민감도 분석용 입력값이며 알루미늄, 구리 또는 특정 캡층에 지정한 값이 아닙니다.</div>
+      <div class="where">\(J\)는 전류 밀도, \(n\)은 경험적 전류 지수, \(E_a\)는 유효 활성화 에너지이며 \(A\)에는 보정 계수가 포함됩니다. 이 식은 반경험식이며 지배적인 고장 메커니즘에 따라 보고된 전류 지수가 달라지므로 외삽에 주의해야 합니다(<a href="https://www.iue.tuwien.ac.at/phd/rovitto/node24.html">Rovitto, §1.4.3</a>). 두 조건 모두에서 가정한 메커니즘과 매개변수가 적용될 때만 비율 계산에서 \(A\)가 소거됩니다. 아래에서 선택하는 \(E_a\)와 \(n\)은 민감도 분석용 입력값이며 알루미늄, 구리 또는 특정 캡층에 지정한 값이 아닙니다.</div>
     </div>
     <div class="sim" id="sim-em">
       <div class="sim-head"><span class="sim-tag">상대 모델</span><h3>전류 및 온도 스트레스 민감도</h3></div>

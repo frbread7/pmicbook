@@ -495,6 +495,9 @@
     // drawer
     const drawer = document.createElement("nav");
     drawer.className = "pb-drawer";
+    drawer.id = "pb-chapter-drawer";
+    drawer.setAttribute("aria-label", isKorean ? "챕터 탐색" : "Chapter navigation");
+    drawer.inert = true;
     drawer.innerHTML = `<h4>${isKorean ? "챕터" : "Chapters"}</h4><ul class="pb-chlist">
       <li><a href="${href("")}" class="${curSlug ? "" : "active"}"><span class="num">00</span><span>${isKorean ? "홈 및 학습 경로" : "Home and roadmap"}</span></a></li>
       ${CHAPTERS.map((c) => `<li><a href="${href(c.slug)}" class="${c.slug === curSlug ? "active" : ""}"><span class="num">${c.num}</span><span>${chapterTitle(c)}</span></a></li>`).join("")}
@@ -502,10 +505,23 @@
     const backdrop = document.createElement("div");
     backdrop.className = "pb-drawer-backdrop";
     body.append(backdrop, drawer);
-    const toggleDrawer = (o) => body.classList.toggle("drawer-open", o);
-    bar.querySelector("#pb-menu").addEventListener("click", () => toggleDrawer(true));
+    const menuButton = bar.querySelector("#pb-menu");
+    menuButton.setAttribute("aria-controls", drawer.id);
+    menuButton.setAttribute("aria-expanded", "false");
+    const toggleDrawer = (open) => {
+      const isOpen = body.classList.contains("drawer-open");
+      if (open === isOpen) return;
+      body.classList.toggle("drawer-open", open);
+      drawer.inert = !open;
+      menuButton.setAttribute("aria-expanded", String(open));
+      if (open) drawer.querySelector("a")?.focus();
+      else menuButton.focus();
+    };
+    menuButton.addEventListener("click", () => toggleDrawer(true));
     backdrop.addEventListener("click", () => toggleDrawer(false));
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape") toggleDrawer(false); });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && body.classList.contains("drawer-open")) toggleDrawer(false);
+    });
 
     // theme toggle
     const tbtn = bar.querySelector("#pb-theme");

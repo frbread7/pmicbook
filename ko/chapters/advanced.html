@@ -1,7 +1,7 @@
 <!doctype html>
 <!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
-     Executable code: MIT (see ../LICENSE-MIT).
-     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+     Executable code: MIT (see ../../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE-CC-BY-4.0). -->
 <html lang="ko">
 <head>
 <!--head:start {"desc": "스마트 전력, 자동차 시스템, GaN, 디지털 제어, 후면 전력 공급, 첨단 패키징을 PMIC 관점에서 살펴봅니다. 수치 모델은 교육용 근사입니다.", "libs": ["xsec"], "lang": "ko"}-->
@@ -25,7 +25,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/advanced.html#chapter","name":"스마트 파워와 첨단 기술 동향","headline":"스마트 파워와 첨단 기술 동향 · PMICBook","description":"스마트 전력, 자동차 시스템, GaN, 디지털 제어, 후면 전력 공급, 첨단 패키징을 PMIC 관점에서 살펴봅니다. 수치 모델은 교육용 근사입니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/advanced.html","position":23,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"23. 스마트 파워와 첨단 기술 동향","item":"https://frbread7.github.io/pmicbook/ko/chapters/advanced.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/advanced.html#chapter","name":"스마트 파워와 첨단 기술 동향","headline":"스마트 파워와 첨단 기술 동향 · PMICBook","description":"스마트 전력, 자동차 시스템, GaN, 디지털 제어, 후면 전력 공급, 첨단 패키징을 PMIC 관점에서 살펴봅니다. 수치 모델은 교육용 근사입니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/advanced.html","position":23,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"23. 스마트 파워와 첨단 기술 동향","item":"https://frbread7.github.io/pmicbook/ko/chapters/advanced.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -71,7 +71,7 @@
   </section>
   <section id="bspdn">
     <h2>연구 동향으로 보는 후면 전력 공급</h2>
-    <p>후면 전력 공급은 주로 첨단 로직 집적 분야의 방향입니다. 웨이퍼 본딩과 박막화 후 후면 접점 및 전력망을 추가해 일부 전원 배선을 전면 신호 배선과 분리합니다. 해당 아키텍처에서 전원 경로를 짧게 하거나 혼잡을 완화할 가능성이 있습니다. 접점을 만들고 정렬하며 열을 방출하는 과정은 새로운 공정·패키지 제약을 가져옵니다. 그림은 개념 비교일 뿐 PMIC에 이 방식을 적용해야 한다거나 전원·신호 배선이 완전히 독립된다는 뜻은 아닙니다.</p>
+    <p>후면 전력 공급은 주로 첨단 로직 집적 분야의 방향입니다. 발표된 시연에서는 전력망을 웨이퍼 후면으로 옮겼으며, 연구된 구조에서 IR 강하 감소와 배선 효율 향상을 보고했습니다(<a href="https://doi.org/10.1109/iedm45741.2023.10413867">Veloso 외, IEDM 2023</a>). 공개된 한 공정 흐름은 소자 웨이퍼를 캐리어에 본딩하고 후면을 박막화한 다음 실리콘 관통 연결과 후면 금속을 형성합니다(<a href="https://www.imec-int.com/en/articles/imec-demonstrates-critical-building-blocks-backside-power-delivery-network">imec, 2021</a>). 이 결과는 특정 첨단 로직 연구를 설명하며 일반 PMIC 이점을 뜻하지 않습니다. 그림은 개념도이며 전원과 신호 배선이 완전히 독립된다는 뜻도 아닙니다.</p>
     <figure class="diagram">
       <svg viewBox="0 0 780 250" role="img" aria-label="전면·후면 전력 배선의 개념 비교">
         <g transform="translate(40,20)">

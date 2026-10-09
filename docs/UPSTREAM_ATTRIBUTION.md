@@ -1,6 +1,6 @@
 # Upstream origin and attribution
 
-**Project status:** The English and Korean PMICBook v1 chapter set is implemented and validated. The tables below describe the implemented English-route reuse and paired Korean translations; validation evidence is recorded in [CURRENT_MILESTONE.md](CURRENT_MILESTONE.md).
+**Project status:** The English and Korean PMICBook chapter set is implemented. The tables below describe the implemented English-route reuse and paired Korean translations; v1.1 review evidence is recorded in [V1_1_QA.md](V1_1_QA.md), with final production evidence in [PRODUCTION_QA.md](PRODUCTION_QA.md).
 
 ## Origin and baseline
 
@@ -68,4 +68,4 @@ The following lesson content was newly authored for PMICBook and is not ProcessB
 | `devices.html`, `bcd.html`, `hv-devices.html`, `passives.html` | New PMIC device, BCD, HV/LDMOS, and passive-device lessons, with paired Korean translations. |
 | `layout.html`, `reliability.html`, `failure-analysis.html` | New layout/parasitics, reliability, and failure-analysis introductions, with paired Korean translations. |
 
-All 25 subject chapters have matching English and Korean routes with localized lesson text, controls, metadata, and knowledge checks. The Korean pages are translations or adaptations with language-specific edits, not metadata-only copies. Final browser validation of interactive behavior is tracked in [CURRENT_MILESTONE.md](CURRENT_MILESTONE.md).
+All 25 subject chapters have matching English and Korean routes with localized lesson text, controls, metadata, and knowledge checks. The Korean pages are translations or adaptations with language-specific edits, not metadata-only copies. Final browser validation of interactive behavior is recorded in [PRODUCTION_QA.md](PRODUCTION_QA.md); the in-progress review checklist is in [CURRENT_MILESTONE.md](CURRENT_MILESTONE.md).

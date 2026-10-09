@@ -1,7 +1,7 @@
 <!doctype html>
 <!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
      Executable code: MIT (see ../LICENSE-MIT).
-     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE-CC-BY-4.0). -->
 <html lang="en">
 <head>
 <!--head:start {"desc": "Starting substrates, crystal growth, epitaxy, wafer preparation and contamination control for PMIC and BCD devices.", "libs": [], "lang": "en"}-->
@@ -25,7 +25,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/wafer.html#chapter","name":"Starting Substrate, Wells, and Isolation","headline":"Starting Substrate, Wells, and Isolation · PMICBook","description":"Starting substrates, crystal growth, epitaxy, wafer preparation and contamination control for PMIC and BCD devices.","url":"https://frbread7.github.io/pmicbook/chapters/wafer.html","position":9,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"9. Starting Substrate, Wells, and Isolation","item":"https://frbread7.github.io/pmicbook/chapters/wafer.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/wafer.html#chapter","name":"Starting Substrate, Wells, and Isolation","headline":"Starting Substrate, Wells, and Isolation · PMICBook","description":"Starting substrates, crystal growth, epitaxy, wafer preparation and contamination control for PMIC and BCD devices.","url":"https://frbread7.github.io/pmicbook/chapters/wafer.html","position":9,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"9. Starting Substrate, Wells, and Isolation","item":"https://frbread7.github.io/pmicbook/chapters/wafer.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -89,7 +89,7 @@
     </figure>
     <p>As liquid silicon solidifies, some dopants preferentially remain in the melt. The equilibrium segregation coefficient is the ratio of solid-side to liquid-side concentration at the interface, \(k_0=C_s/C_l\). For \(k_0<1\), dopant accumulates in the remaining melt, so concentration can rise toward the ingot tail. Under the well-mixed-melt approximation, the Scheil equation describes this trend.</p>
     <div class="formula">$$C_s(f) = k_0\,C_0\,(1-f)^{k_0-1}$$
-      <div class="where">\(C_0\) is the initial dopant concentration in the melt and \(f\) is the fraction of the melt that has solidified. Representative equilibrium segregation coefficients include B ≈ 0.8, P ≈ 0.35, As ≈ 0.3 and Sb ≈ 0.023; values depend on conditions. Some metallic impurities have very small coefficients and preferentially remain in the melt. Float-zone (FZ) growth uses a moving molten zone and does not use a quartz crucible.</div>
+      <div class="where">\(C_0\) is the initial dopant concentration in the melt and \(f\) is the fraction of the melt that has solidified. The simulator uses illustrative selected coefficients B ≈ 0.8, P ≈ 0.35, As ≈ 0.3 and Sb ≈ 0.023; these are not a measured ingot dataset, and effective segregation depends on growth conditions. Some metallic impurities have very small coefficients and preferentially remain in the melt. Float-zone (FZ) growth uses a moving molten zone and does not use a quartz crucible.</div>
     </div>
     <div class="sim" id="sim-seg">
       <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>Doping and resistivity along ingot length</h3></div>
@@ -117,7 +117,7 @@
     <h2>Resistivity and Dopant Concentration</h2>
     <p>Wafer specifications commonly identify conductivity type, orientation and resistivity. Resistivity is inversely related to carrier concentration times mobility, and provides an indirect check on substrate or epitaxial-layer doping.</p>
     <div class="formula">$$\rho = \frac{1}{q\,(n\mu_n + p\mu_p)} \approx \frac{1}{q N \mu(N)}, \qquad \mu(N) = \mu_{\min} + \frac{\mu_{\max}-\mu_{\min}}{1 + (N/N_{\mathrm{ref}})^{\alpha}}$$
-      <div class="where">Mobility decreases as the doping increases due to scattering of ionized impurities (Caughey–Thomas model). Room temperature silicon: electrons \(\mu_{\max}\) ≈ 1414, \(\mu_{\min}\) ≈ 68.5 cm²/V·s, \(N_{\mathrm{ref}}\) ≈ 9.2×10¹⁶, \(\alpha\) ≈ 0.71. Hole 470.5, 44.9, 2.23×10¹⁷, 0.72.</div>
+      <div class="where">Mobility decreases as doping increases due in part to ionized-impurity scattering. This simplified Caughey–Thomas-style fit uses illustrative room-temperature silicon parameters: electrons \(\mu_{\max}\) ≈ 1414, \(\mu_{\min}\) ≈ 68.5 cm²/V·s, \(N_{\mathrm{ref}}\) ≈ 9.2×10¹⁶ cm⁻³, \(\alpha\) ≈ 0.71; holes 470.5, 44.9, 2.23×10¹⁷ cm⁻³, 0.72. The set is not a calibrated process or compensated-doping mobility model.</div>
     </div>
     <div class="sim" id="sim-rho">
       <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>Irvin curve: doping ↔ resistivity ↔ sheet resistance</h3></div>
@@ -210,35 +210,35 @@
   <section id="clean">
     <h2>Cleaning and Contamination Control</h2>
     <p>Common wafer-surface contaminants include <strong>particles</strong> (dust or equipment debris), <strong>organic residues</strong> (including resist residue), <strong>metals</strong> (such as Fe, Cu, Ni, Na and K), and <strong>native oxide</strong> that forms on exposed silicon. Cleaning is repeated at selected points in fabrication; its sequence and frequency depend on the process flow.</p>
-    <p><span class="term">RCA cleaning</span>, developed by Werner Kern of RCA in 1965, is still the basis of wet cleaning even after half a century.</p>
+    <p><span class="term">RCA cleaning</span> traces to Werner Kern and David A. Puotinen's “Cleaning solutions based on hydrogen peroxide for use in silicon semiconductor technology,” <em>RCA Review</em> 31(2), 187–206 (1970) (<a href="https://jglobal.jst.go.jp/detail?JGLOBAL_ID=201602014223485705">JST bibliographic record</a>). In a later first-person retrospective, Kern recounts the work's origins and identifies SC-1/SC-2 as “Standard Clean, Steps 1 and 2” (<a href="https://garfield.library.upenn.edu/classics1983/A1983QD90200001.pdf">1983 Citation Classic</a>). A <a href="https://www.nist.gov/document/reynioldstechcmosrcacleanusersmanualv1-2pdf">NIST NanoFab wet-bench manual</a> describes one facility's SC1/SC2 baths and use of an RCA sequence before furnace or deposition work; it is an equipment procedure, not a universal recipe.</p>
+    <p>An experimental study describes conventional SC1 as effective for particles and organic matter while noting possible metal deposition from contaminated chemistry; SC2 is used to remove surface metals carried into the sequence. The exact result depends on the species, solution and process conditions (<a href="https://doi.org/10.1016/S0167-9317(99)00150-1">Kolbesen et al., Microelectronic Engineering 45 (1999), 197–208</a>).</p>
     <div class="table-wrap">
       <table>
         <thead><tr><th>Step</th><th>Solution (volume ratio)</th><th>Temperature</th><th>Material removed</th><th>Principle</th></tr></thead>
         <tbody>
           <tr><td>SPM (Piranha)</td><td>H₂SO₄ : H₂O₂ = 4:1</td><td>120 °C</td><td>Organic matter, photoresist residue</td><td>Burn carbon into CO₂ by strong oxidation</td></tr>
-          <tr><td>SC1 (APM)</td><td>NH₄OH : H₂O₂ : H₂O = 1:1:5</td><td>70~80 °C</td><td>Particles, organic matter</td><td>Thinly oxidizes and etches the surface, lifts the particles, and reattaches them with a surface charge of the same sign to reduce re-adhesion.</td></tr>
+          <tr><td>SC1 (APM)</td><td>NH₄OH : H₂O₂ : H₂O = 1:1:5</td><td>70~80 °C</td><td>Particles, organic matter</td><td>Oxidation and slight surface etching can lift particles into suspension; appropriate surface charging helps limit redeposition.</td></tr>
           <tr><td>DHF</td><td>HF : H₂O = 1:50~100</td><td>Room temperature</td><td>Natural oxide film, metal trapped in the oxide film</td><td>SiO₂ etching, surface terminated with hydrogen (hydrophobic)</td></tr>
-          <tr><td>SC2 (HPM)</td><td>HCl : H₂O₂ : H₂O = 1:1:6</td><td>70~80 °C</td><td>Metal ions (Fe, Al, Mg, Na…)</td><td>Forms soluble chloride complexes with many metals</td></tr>
+          <tr><td>SC2 (HPM)</td><td>HCl : H₂O₂ : H₂O = 1:1:6</td><td>70~80 °C</td><td>Metallic surface contamination</td><td>Acidic peroxide cleaning removes many metal contaminants from the wafer surface; effectiveness is species- and condition-dependent.</td></tr>
         </tbody>
       </table>
     </div>
-    <p>Why does metallic contamination matter? Transition metals such as iron or copper create an energy level in the middle of the silicon band gap, which becomes a station where electrons and holes recombine. Even low levels of transition-metal contamination can introduce recombination centers and degrade minority-carrier lifetime; mobile alkali ions can shift MOS thresholds. Alkaline ions such as sodium and potassium move through the oxide film and shake the threshold voltage.</p>
+    <p>Why does metallic contamination matter? Transition-metal impurities can introduce species- and charge-state-dependent deep levels in silicon, some near mid-gap, that promote carrier recombination. Even low bulk concentrations can reduce minority-carrier lifetime; mobile alkali ions such as sodium and potassium can shift MOS threshold voltage. Wet SC1/SC2 cleaning targets <em>surface</em> contamination and does not directly remove impurities already distributed through the silicon bulk. The <a href="https://ocw.mit.edu/courses/6-774-physics-of-microfabrication-front-end-processing-fall-2004/1RhMlsWln7tVtc_3WeIdSblNinAm7UP8N_transcript.pdf">MIT OCW lecture on transition-metal levels</a> discusses species-dependent impurity states.</p>
     <div class="sim" id="sim-life">
-      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>Metal contamination and minority carrier lifetime</h3></div>
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>Bulk trap density and lifetime contribution</h3></div>
       <div class="sim-body side">
         <div class="sim-view"><canvas id="lf-cv"></canvas></div>
         <div class="sim-controls">
-          <div class="ctrl"><span>Contaminated metals</span><div class="seg" id="lf-m"><button data-value="Fe" class="on">Fe</button><button data-value="Au">Au</button><button data-value="Cu">Cu</button><button data-value="Ni">Ni</button></div></div>
-          <label class="ctrl"><span>Bulk contaminant concentration log₁₀ N<sub>t</sub> <output id="lf-n-out"></output></span><input type="range" id="lf-n" min="9" max="14" step="0.1" value="11"></label>
-          <label class="ctrl"><span>SC2 cleaning removal rate <output id="lf-e-out"></output></span><input type="range" id="lf-e" min="0" max="99.9" step="0.1" value="0"></label>
+          <label class="ctrl"><span>Bulk trap density log₁₀ N<sub>t</sub> (cm⁻³) <output id="lf-n-out"></output></span><input type="range" id="lf-n" min="9" max="14" step="0.1" value="11"></label>
+          <label class="ctrl"><span>Assumed capture cross-section log₁₀ σ (cm²) <output id="lf-s-out"></output></span><input type="range" id="lf-s" min="-16" max="-13" step="0.1" value="-14"></label>
         </div>
       </div>
       <div class="sim-readout">
-        <div class="stat"><span class="k">Concentration after cleaning</span><span class="v" id="lf-o-n">—</span></div>
-        <div class="stat"><span class="k">SRH Lifetime τ</span><span class="v" id="lf-o-t">—</span></div>
-        <div class="stat"><span class="k">Diffusion distance L = √(Dτ)</span><span class="v" id="lf-o-l">—</span></div>
+        <div class="stat"><span class="k">Bulk trap density</span><span class="v" id="lf-o-n">—</span></div>
+        <div class="stat"><span class="k">Trap-limited lifetime estimate τ</span><span class="v" id="lf-o-t">—</span></div>
+        <div class="stat"><span class="k">Illustrative L = √(Dτ)</span><span class="v" id="lf-o-l">—</span></div>
       </div>
-      <div class="sim-note">Explore the SRH lifetime approximation as contaminant concentration and removal fraction change. Its output depends on the selected metal and assumed capture cross-section; it is a teaching model, not a cleaning-efficiency specification.</div>
+      <div class="sim-note">Single-trap, low-injection proxy: τ ≈ 1/(σv<sub>th</sub>N<sub>t</sub>), with illustrative v<sub>th</sub> = 10⁷ cm/s and D = 30 cm²/s. Trap energy, occupancy, separate electron/hole capture, other recombination paths, and surfaces are omitted. The displayed value is this trap's contribution, not total device lifetime or an SC2 cleaning result; no material-specific cross-section is claimed. Model context: <a href="https://ocw.mit.edu/courses/2-627-fundamentals-of-photovoltaics-fall-2013/9b4a45fd2ca234fa5f3184f24a991020_MIT2_627F13_lec08.pdf">MIT OCW lecture 8</a>.</div>
     </div>
     <p>After wet cleaning, wafers are rinsed with ultrapure water (UPW; nominal resistivity 18.2 MΩ·cm) and dried. Drying can leave watermarks, while capillary forces can cause <span class="term">pattern collapse</span> in narrow, high-aspect-ratio structures. IPA-assisted or supercritical CO₂ drying can reduce these risks in suitable processes. Ozonated water, megasonic agitation, plasma and vapor HF are among other cleaning approaches used for specific materials and residues.</p>
     <div class="callout warn"><strong>Cleaning Dilemma</strong><p>Cleaning must balance residue removal against loss or damage to exposed films and structures. The acceptable window depends on materials, geometry and process; no single recipe applies to every technology.</p></div>
@@ -347,24 +347,20 @@
 
   /* ---------------- Lifespan */
   (function () {
-    var SIG = { Fe: 5e-14, Au: 1e-13, Cu: 3e-15, Ni: 1e-14 };
     var cv, rr = function () { cv && cv.redraw(); };
-    var gM = PB.seg("lf-m", rr);
     var gN = PB.range("lf-n", function (v) { return v.toFixed(1); }, rr);
-    var gE = PB.range("lf-e", function (v) { return v.toFixed(1) + "%"; }, rr);
+    var gS = PB.range("lf-s", function (v) { return v.toFixed(1); }, rr);
     var tau = function (N, s) { return 1 / (s * 1e7 * N); };
     cv = PB.canvas("#lf-cv", function (ctx, w, h) {
-      var P = PB.palette(), m = gM(), N = Math.pow(10, gN()) * (1 - gE() / 100);
-      var series = Object.keys(SIG).map(function (k, i) {
-        var d = []; for (var e = 8; e <= 15; e += 0.1) { var x = Math.pow(10, e); d.push([x, Math.min(1e-2, tau(x, SIG[k]))]); }
-        return { data: d, color: k === m ? P.accent : P.border, width: k === m ? 3 : 1.4 };
-      });
-      var c = PB.chart(ctx, null, { x: [1e8, 1e15], y: [1e-8, 1e-2], logX: true, logY: true, xLabel: "Metal concentration Nₜ (cm⁻³)", yLabel: "Minority carrier lifetime τ (s)", series: series,
-        points: [{ x: Math.max(1e8, N), y: Math.min(1e-2, tau(Math.max(1e8, N), SIG[m])), color: P.accent, r: 6 }], vlines: [{ x: 5e10, color: P.faint, label: "1 ppt ≈ 5×10¹⁰", dash: [3, 3] }] });
-      ctx.font = PB.font(11, true); ctx.fillStyle = P.dim; ctx.textAlign = "left";
-      Object.keys(SIG).forEach(function (k) { var y = c.Y(tau(1e13, SIG[k])); ctx.fillStyle = k === m ? P.accent : P.dim; ctx.fillText(k, c.X(1e13) + 4, y - 4); });
-      var t = tau(N, SIG[m]);
-      PB.stat("lf-o-n", sup(Math.max(N, 1)) + "<small>cm⁻³</small>");
+      var P = PB.palette(), N = Math.pow(10, gN()), sigma = Math.pow(10, gS());
+      var curve = [];
+      for (var e = 8; e <= 15; e += 0.1) { var x = Math.pow(10, e); curve.push([x, tau(x, sigma)]); }
+      PB.chart(ctx, null, { x: [1e8, 1e15], y: [1e-9, 10], logX: true, logY: true,
+        xLabel: "Bulk trap density Nₜ (cm⁻³)", yLabel: "Trap-limited lifetime τ (s)",
+        series: [{ data: curve, color: P.accent, width: 3 }],
+        points: [{ x: N, y: tau(N, sigma), color: P.accent, r: 6 }] });
+      var t = tau(N, sigma);
+      PB.stat("lf-o-n", sup(N) + "<small>cm⁻³</small>");
       PB.stat("lf-o-t", t > 1e-3 ? small(PB.fmt(t * 1e3, 3), "ms") : small(PB.fmt(t * 1e6, 3), "µs"));
       var L = Math.sqrt(30 * t) * 1e4; // electron D≈30 cm²/s, µm
       PB.stat("lf-o-l", L > 1000 ? small(PB.fmt(L / 1000, 3), "mm") : small(PB.fmt(L, 3), "µm"));

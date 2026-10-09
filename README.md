@@ -1,6 +1,7 @@
 # PMICBook — Power Management IC Technology
 
 **Current stable version:** v1.0.0<br>
+**Next release:** v1.1.0 review in progress<br>
 **Live site:** <https://frbread7.github.io/pmicbook/>
 
 PMICBook is an interactive engineering textbook about power-management integrated circuits. It connects system rails and specifications to circuit behavior, semiconductor devices, BCD technology, fabrication and process integration, layout and parasitics, thermal behavior, characterization, reliability, and failure analysis.
@@ -21,7 +22,7 @@ Then open <http://localhost:8000/> for English or <http://localhost:8000/ko/> fo
 
 The 25-chapter map moves from PMIC systems and circuits through devices, BCD, fabrication, implementation, test, reliability, and advanced context. Each subject has paired English and Korean lessons. Start at [the English system overview](chapters/overview.html) or [the Korean system overview](ko/chapters/overview.html), or browse all chapters from either home page. Each chapter links to prerequisites and follow-on material where useful.
 
-The [architecture document](docs/PMICBOOK_ARCHITECTURE.md) records the audited chapter map, learning interactions, and ProcessBook content dispositions. [Current milestone](docs/CURRENT_MILESTONE.md) defines PMICBook v1 scope. Future ideas are kept separately in [VISION](docs/VISION.md).
+The [architecture document](docs/PMICBOOK_ARCHITECTURE.md) records the audited chapter map, learning interactions, and ProcessBook content dispositions. [Current milestone](docs/CURRENT_MILESTONE.md) tracks the v1.1 technical-quality review and release. The [v1.1 review record](docs/V1_1_REVIEW.md) separates completed corrections from deferred opportunities. Future ideas are kept separately in [VISION](docs/VISION.md).
 
 ## Educational and numerical limits
 

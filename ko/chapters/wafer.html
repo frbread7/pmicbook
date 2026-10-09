@@ -1,7 +1,7 @@
 <!doctype html>
 <!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
      Executable code: MIT (see ../../LICENSE-MIT).
-     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE.md). -->
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE-CC-BY-4.0). -->
 <html lang="ko">
 <head>
 <!--head:start {"desc":"PMIC 및 BCD 소자를 위한 시작 기판, 결정 성장, 에피택시, 웨이퍼 준비와 오염 관리.","libs":[],"lang":"ko"}-->
@@ -25,7 +25,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/wafer.html#chapter","name":"기판, 웰 및 절연","headline":"기판, 웰 및 절연 · PMICBook","description":"PMIC 및 BCD 소자를 위한 시작 기판, 결정 성장, 에피택시, 웨이퍼 준비와 오염 관리.","url":"https://frbread7.github.io/pmicbook/ko/chapters/wafer.html","position":9,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"9. 기판, 웰 및 절연","item":"https://frbread7.github.io/pmicbook/ko/chapters/wafer.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/wafer.html#chapter","name":"기판, 웰 및 절연","headline":"기판, 웰 및 절연 · PMICBook","description":"PMIC 및 BCD 소자를 위한 시작 기판, 결정 성장, 에피택시, 웨이퍼 준비와 오염 관리.","url":"https://frbread7.github.io/pmicbook/ko/chapters/wafer.html","position":9,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"9. 기판, 웰 및 절연","item":"https://frbread7.github.io/pmicbook/ko/chapters/wafer.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -89,7 +89,7 @@
     </figure>
     <p>액체 실리콘이 응고될 때 일부 도펀트는 고체보다 용융액에 더 잘 남습니다. 평형 편석 계수는 고액 계면에서 고체 쪽 농도를 액체 쪽 농도로 나눈 값, \(k_0=C_s/C_l\)입니다. \(k_0&lt;1\)이면 도펀트가 남은 용융액에 축적되어 잉곳 꼬리 쪽으로 갈수록 농도가 높아질 수 있습니다. 용융액이 잘 혼합된다고 가정하면 셰일 방정식으로 이 경향을 나타낼 수 있습니다.</p>
     <div class="formula">$$C_s(f) = k_0\,C_0\,(1-f)^{k_0-1}$$
-      <div class="where">\(C_0\)는 용융액의 초기 도펀트 농도이고, \(f\)는 응고된 용융액의 분율입니다. 대표적인 평형 편석 계수는 B 약 0.8, P 약 0.35, As 약 0.3, Sb 약 0.023이며 실제 값은 조건에 따라 달라집니다. 일부 금속 불순물은 편석 계수가 매우 작아 용융액에 우선적으로 남습니다. 부유대(FZ) 성장에서는 이동하는 용융 영역을 사용하며 석영 도가니를 사용하지 않습니다.</div>
+      <div class="where">\(C_0\)는 용융액의 초기 도펀트 농도이고, \(f\)는 응고된 용융액의 분율입니다. 시뮬레이터는 B 약 0.8, P 약 0.35, As 약 0.3, Sb 약 0.023의 선택된 예시 편석 계수를 사용합니다. 이는 측정된 단일 잉곳 데이터가 아니며 유효 편석은 성장 조건에 따라 달라집니다. 일부 금속 불순물은 편석 계수가 매우 작아 용융액에 우선적으로 남습니다. 부유대(FZ) 성장에서는 이동하는 용융 영역을 사용하며 석영 도가니를 사용하지 않습니다.</div>
     </div>
     <div class="sim" id="sim-seg">
       <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>잉곳 길이에 따른 도핑과 비저항</h3></div>
@@ -117,7 +117,7 @@
     <h2>비저항과 도펀트 농도</h2>
     <p>웨이퍼 사양에는 일반적으로 도전형, 결정 방향, 비저항이 표시됩니다. 비저항은 캐리어 농도와 이동도의 곱에 반비례하므로 기판이나 에피택셜층의 도핑 상태를 간접적으로 확인할 수 있습니다.</p>
     <div class="formula">$$\rho = \frac{1}{q\,(n\mu_n + p\mu_p)} \approx \frac{1}{q N \mu(N)}, \qquad \mu(N) = \mu_{\min} + \frac{\mu_{\max}-\mu_{\min}}{1 + (N/N_{\mathrm{ref}})^{\alpha}}$$
-      <div class="where">도핑 농도가 높아지면 이온화 불순물 산란으로 이동도가 낮아집니다(Caughey–Thomas 모델). 실온 실리콘에서 전자의 \(\mu_{\max}\)는 약 1414, \(\mu_{\min}\)은 약 68.5 cm²/V·s, \(N_{\mathrm{ref}}\)는 약 9.2×10¹⁶, \(\alpha\)는 약 0.71입니다. 정공의 대표값은 각각 470.5, 44.9, 2.23×10¹⁷, 0.72입니다.</div>
+      <div class="where">도핑 농도가 높아지면 이온화 불순물 산란 등의 영향으로 이동도가 낮아집니다. 단순화한 Caughey–Thomas 형태의 예시 실온 실리콘 매개변수는 전자 \(\mu_{\max}\) 약 1414, \(\mu_{\min}\) 약 68.5 cm²/V·s, \(N_{\mathrm{ref}}\) 약 9.2×10¹⁶ cm⁻³, \(\alpha\) 약 0.71입니다. 정공은 각각 470.5, 44.9, 2.23×10¹⁷ cm⁻³, 0.72입니다. 특정 공정이나 보상 도핑 조건에 맞춰 보정한 이동도 모델은 아닙니다.</div>
     </div>
     <div class="sim" id="sim-rho">
       <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>어빈 곡선: 도핑 ↔ 비저항 ↔ 면저항</h3></div>
@@ -210,35 +210,35 @@
   <section id="clean">
     <h2>세정과 오염 관리</h2>
     <p>웨이퍼 표면의 대표적인 오염원에는 <strong>입자</strong>(먼지 또는 장비 잔해), <strong>유기 잔류물</strong>(레지스트 잔류물 포함), <strong>금속</strong>(Fe, Cu, Ni, Na, K 등), 그리고 노출된 실리콘 표면에 생기는 <strong>자연 산화막</strong>이 있습니다. 세정은 제조 흐름 중 필요한 지점에서 반복하며 순서와 횟수는 공정 흐름에 따라 달라집니다.</p>
-    <p><span class="term">RCA 세정</span>은 1965년 RCA의 Werner Kern이 개발했으며, 반세기가 지난 지금도 습식 세정의 기반입니다.</p>
+    <p><span class="term">RCA 세정</span>은 Werner Kern과 David A. Puotinen의 “Cleaning solutions based on hydrogen peroxide for use in silicon semiconductor technology,” <em>RCA Review 31(2), 187–206 (1970)</em>에 기원을 둡니다(<a href="https://jglobal.jst.go.jp/detail?JGLOBAL_ID=201602014223485705">JST 서지 기록</a>). Kern은 이후 1인칭 회고에서 이 연구의 시작과 SC-1/SC-2가 “Standard Clean, Steps 1 and 2”를 뜻한다고 설명합니다(<a href="https://garfield.library.upenn.edu/classics1983/A1983QD90200001.pdf">1983년 Citation Classic</a>). <a href="https://www.nist.gov/document/reynioldstechcmosrcacleanusersmanualv1-2pdf">NIST 나노팹의 습식 벤치 매뉴얼</a>은 한 시설에서 사용하는 SC1/SC2 탱크와 확산로 또는 증착 전 RCA 세정 순서를 설명합니다. 이는 장비 운영 절차이지 보편적인 레시피가 아닙니다.</p>
+    <p>한 실험 연구는 기존 SC1이 입자와 유기물 제거에 효과적이지만 화학액 오염에 따라 금속이 표면에 다시 부착될 수 있음을 설명하고, SC2는 세정 순서에 남은 표면 금속을 제거하는 단계로 다룹니다. 결과는 금속 종류와 용액 및 공정 조건에 따라 달라집니다(<a href="https://doi.org/10.1016/S0167-9317(99)00150-1">Kolbesen 외, Microelectronic Engineering 45 (1999), 197–208</a>).</p>
     <div class="table-wrap">
       <table>
         <thead><tr><th>단계</th><th>용액(부피비)</th><th>온도</th><th>제거 대상</th><th>원리</th></tr></thead>
         <tbody>
           <tr><td>SPM (Piranha)</td><td>H₂SO₄ : H₂O₂ = 4:1</td><td>120 °C</td><td>유기물, 포토레지스트 잔류물</td><td>강한 산화로 탄소를 CO₂로 전환</td></tr>
-          <tr><td>SC1 (APM)</td><td>NH₄OH : H₂O₂ : H₂O = 1:1:5</td><td>70~80 °C</td><td>입자, 유기물</td><td>표면을 얇게 산화·식각해 입자를 들어 올리고, 표면과 같은 부호의 전하를 띠게 해 재부착을 줄입니다.</td></tr>
+          <tr><td>SC1 (APM)</td><td>NH₄OH : H₂O₂ : H₂O = 1:1:5</td><td>70~80 °C</td><td>입자, 유기물</td><td>산화와 완만한 표면 식각으로 입자를 분리할 수 있으며 적절한 표면 전하는 재부착을 줄이는 데 도움이 됩니다.</td></tr>
           <tr><td>DHF</td><td>HF : H₂O = 1:50~100</td><td>실온</td><td>자연 산화막, 산화막에 포획된 금속</td><td>SiO₂를 식각하고 표면을 수소로 종단해 소수성으로 만듦</td></tr>
-          <tr><td>SC2 (HPM)</td><td>HCl : H₂O₂ : H₂O = 1:1:6</td><td>70~80 °C</td><td>금속 이온(Fe, Al, Mg, Na 등)</td><td>많은 금속과 수용성 염화물 착물을 형성합니다</td></tr>
+          <tr><td>SC2 (HPM)</td><td>HCl : H₂O₂ : H₂O = 1:1:6</td><td>70~80 °C</td><td>금속 표면 오염</td><td>산성 과산화물 세정은 웨이퍼 표면의 여러 금속 오염을 제거하며 효과는 금속 종류와 조건에 따라 다릅니다.</td></tr>
         </tbody>
       </table>
     </div>
-    <p>금속 오염은 왜 중요할까요? 철이나 구리 같은 전이 금속은 실리콘 밴드갭 중앙에 에너지 준위를 만들어 전자와 정공의 재결합 경로가 될 수 있습니다. 낮은 농도의 전이 금속 오염도 재결합 중심을 만들고 소수 캐리어 수명을 낮출 수 있습니다. 이동성 알칼리 이온은 MOS 문턱 전압을 이동시킬 수 있습니다. 나트륨이나 칼륨 같은 이온은 산화막을 통과해 문턱 전압을 변동시킵니다.</p>
+    <p>금속 오염은 왜 중요할까요? 전이 금속 불순물은 종류와 전하 상태에 따라 다른 깊은 에너지 준위를 실리콘에 만들며, 일부는 밴드갭 중앙 부근에 위치해 캐리어 재결합을 촉진합니다. 벌크에 낮은 농도로 존재해도 소수 캐리어 수명을 줄일 수 있습니다. 나트륨이나 칼륨 같은 이동성 알칼리 이온은 MOS 문턱 전압을 변화시킬 수 있습니다. 습식 SC1/SC2 세정은 <em>표면</em> 오염을 대상으로 하며, 실리콘 벌크에 이미 분포한 불순물을 직접 제거하지 않습니다. <a href="https://ocw.mit.edu/courses/6-774-physics-of-microfabrication-front-end-processing-fall-2004/1RhMlsWln7tVtc_3WeIdSblNinAm7UP8N_transcript.pdf">MIT OCW 전이 금속 준위 강의</a>는 불순물에 따라 다른 준위가 생길 수 있음을 설명합니다.</p>
     <div class="sim" id="sim-life">
-      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>금속 오염과 소수 캐리어 수명</h3></div>
+      <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>벌크 트랩 밀도와 수명 기여</h3></div>
       <div class="sim-body side">
         <div class="sim-view"><canvas id="lf-cv"></canvas></div>
         <div class="sim-controls">
-          <div class="ctrl"><span>오염 금속</span><div class="seg" id="lf-m"><button data-value="Fe" class="on">Fe</button><button data-value="Au">Au</button><button data-value="Cu">Cu</button><button data-value="Ni">Ni</button></div></div>
-          <label class="ctrl"><span>벌크 오염 농도 log₁₀ N<sub>t</sub> <output id="lf-n-out"></output></span><input type="range" id="lf-n" min="9" max="14" step="0.1" value="11"></label>
-          <label class="ctrl"><span>SC2 세정 제거율 <output id="lf-e-out"></output></span><input type="range" id="lf-e" min="0" max="99.9" step="0.1" value="0"></label>
+          <label class="ctrl"><span>벌크 트랩 밀도 log₁₀ N<sub>t</sub> (cm⁻³) <output id="lf-n-out"></output></span><input type="range" id="lf-n" min="9" max="14" step="0.1" value="11"></label>
+          <label class="ctrl"><span>가정한 포획 단면적 log₁₀ σ (cm²) <output id="lf-s-out"></output></span><input type="range" id="lf-s" min="-16" max="-13" step="0.1" value="-14"></label>
         </div>
       </div>
       <div class="sim-readout">
-        <div class="stat"><span class="k">세정 후 농도</span><span class="v" id="lf-o-n">—</span></div>
-        <div class="stat"><span class="k">SRH 수명 τ</span><span class="v" id="lf-o-t">—</span></div>
-        <div class="stat"><span class="k">확산 거리 L = √(Dτ)</span><span class="v" id="lf-o-l">—</span></div>
+        <div class="stat"><span class="k">벌크 트랩 밀도</span><span class="v" id="lf-o-n">—</span></div>
+        <div class="stat"><span class="k">트랩 제한 수명 추정 τ</span><span class="v" id="lf-o-t">—</span></div>
+        <div class="stat"><span class="k">예시 L = √(Dτ)</span><span class="v" id="lf-o-l">—</span></div>
       </div>
-      <div class="sim-note">오염 농도와 제거율을 바꾸어 SRH 수명 근사값을 살펴보세요. 결과는 선택한 금속과 가정한 포획 단면적에 따라 달라집니다. 이 모델은 학습용이며 세정 효율 사양이 아닙니다.</div>
+      <div class="sim-note">단일 트랩·저준위 주입 근사: τ ≈ 1/(σv<sub>th</sub>N<sub>t</sub>). 예시로 v<sub>th</sub> = 10⁷ cm/s와 D = 30 cm²/s를 가정합니다. 트랩 에너지·점유율, 전자와 정공의 서로 다른 포획, 다른 재결합 경로와 표면 효과는 생략합니다. 표시값은 해당 트랩의 수명 기여이며 전체 소자 수명이나 SC2 세정 결과가 아닙니다. 특정 금속의 포획 단면적을 주장하지 않습니다. 모델 근거: <a href="https://ocw.mit.edu/courses/2-627-fundamentals-of-photovoltaics-fall-2013/9b4a45fd2ca234fa5f3184f24a991020_MIT2_627F13_lec08.pdf">MIT OCW 8강</a>.</div>
     </div>
     <p>습식 세정 후 웨이퍼를 초순수(UPW, 명목 비저항 18.2 MΩ·cm)로 헹군 뒤 건조합니다. 건조 자국이 남을 수 있고 모세관력으로 인해 <span class="term">패턴 붕괴</span>가 발생할 수 있습니다. 적합한 공정에서는 IPA 보조 건조나 초임계 CO₂ 건조로 이런 위험을 줄일 수 있습니다. 오존수, 메가소닉 교반, 플라즈마 및 HF 증기도 특정 재료와 잔류물에 사용하는 세정 방법입니다.</p>
     <div class="callout warn"><strong>세정의 딜레마</strong><p>세정은 잔류물 제거와 노출된 막·구조의 손실 또는 손상 사이에서 균형을 맞춰야 합니다. 허용 공정 창은 재료, 형상 및 공정에 따라 다르며 모든 기술에 통하는 단일 레시피는 없습니다.</p></div>
@@ -347,24 +347,20 @@
 
   /* ---------------- Lifespan */
   (function () {
-    var SIG = { Fe: 5e-14, Au: 1e-13, Cu: 3e-15, Ni: 1e-14 };
     var cv, rr = function () { cv && cv.redraw(); };
-    var gM = PB.seg("lf-m", rr);
     var gN = PB.range("lf-n", function (v) { return v.toFixed(1); }, rr);
-    var gE = PB.range("lf-e", function (v) { return v.toFixed(1) + "%"; }, rr);
+    var gS = PB.range("lf-s", function (v) { return v.toFixed(1); }, rr);
     var tau = function (N, s) { return 1 / (s * 1e7 * N); };
     cv = PB.canvas("#lf-cv", function (ctx, w, h) {
-      var P = PB.palette(), m = gM(), N = Math.pow(10, gN()) * (1 - gE() / 100);
-      var series = Object.keys(SIG).map(function (k, i) {
-        var d = []; for (var e = 8; e <= 15; e += 0.1) { var x = Math.pow(10, e); d.push([x, Math.min(1e-2, tau(x, SIG[k]))]); }
-        return { data: d, color: k === m ? P.accent : P.border, width: k === m ? 3 : 1.4 };
-      });
-      var c = PB.chart(ctx, null, { x: [1e8, 1e15], y: [1e-8, 1e-2], logX: true, logY: true, xLabel: "금속 농도 Nₜ (cm⁻³)", yLabel: "소수 캐리어 수명 τ (s)", series: series,
-        points: [{ x: Math.max(1e8, N), y: Math.min(1e-2, tau(Math.max(1e8, N), SIG[m])), color: P.accent, r: 6 }], vlines: [{ x: 5e10, color: P.faint, label: "1 ppt ≈ 5×10¹⁰", dash: [3, 3] }] });
-      ctx.font = PB.font(11, true); ctx.fillStyle = P.dim; ctx.textAlign = "left";
-      Object.keys(SIG).forEach(function (k) { var y = c.Y(tau(1e13, SIG[k])); ctx.fillStyle = k === m ? P.accent : P.dim; ctx.fillText(k, c.X(1e13) + 4, y - 4); });
-      var t = tau(N, SIG[m]);
-      PB.stat("lf-o-n", sup(Math.max(N, 1)) + "<small>cm⁻³</small>");
+      var P = PB.palette(), N = Math.pow(10, gN()), sigma = Math.pow(10, gS());
+      var curve = [];
+      for (var e = 8; e <= 15; e += 0.1) { var x = Math.pow(10, e); curve.push([x, tau(x, sigma)]); }
+      PB.chart(ctx, null, { x: [1e8, 1e15], y: [1e-9, 10], logX: true, logY: true,
+        xLabel: "벌크 트랩 밀도 Nₜ (cm⁻³)", yLabel: "트랩 제한 수명 τ (s)",
+        series: [{ data: curve, color: P.accent, width: 3 }],
+        points: [{ x: N, y: tau(N, sigma), color: P.accent, r: 6 }] });
+      var t = tau(N, sigma);
+      PB.stat("lf-o-n", sup(N) + "<small>cm⁻³</small>");
       PB.stat("lf-o-t", t > 1e-3 ? small(PB.fmt(t * 1e3, 3), "ms") : small(PB.fmt(t * 1e6, 3), "µs"));
       var L = Math.sqrt(30 * t) * 1e4; // electron D≈30 cm²/s, µm
       PB.stat("lf-o-l", L > 1000 ? small(PB.fmt(L / 1000, 3), "mm") : small(PB.fmt(L, 3), "µm"));

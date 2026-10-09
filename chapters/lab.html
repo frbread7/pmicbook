@@ -1,7 +1,7 @@
 <!doctype html>
 <!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
      Executable code: MIT (see ../LICENSE-MIT).
-     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE-CC-BY-4.0). -->
 <html lang="en">
 <head>
 <!--head:start {"desc": "Explore educational semiconductor process modules and an illustrative BCD LDMOS cross-section using editable material and dopant steps.", "libs": ["xsec"], "lang": "en"}-->
@@ -25,7 +25,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/lab.html#chapter","name":"BCD Process Lab","headline":"BCD Process Lab · PMICBook","description":"Explore educational semiconductor process modules and an illustrative BCD LDMOS cross-section using editable material and dopant steps.","url":"https://frbread7.github.io/pmicbook/chapters/lab.html","position":24,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"24. BCD Process Lab","item":"https://frbread7.github.io/pmicbook/chapters/lab.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/lab.html#chapter","name":"BCD Process Lab","headline":"BCD Process Lab · PMICBook","description":"Explore educational semiconductor process modules and an illustrative BCD LDMOS cross-section using editable material and dopant steps.","url":"https://frbread7.github.io/pmicbook/chapters/lab.html","position":24,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"24. BCD Process Lab","item":"https://frbread7.github.io/pmicbook/chapters/lab.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -152,7 +152,7 @@
     <p>Choose a module and conditions in the control panel, then select <b>Add step</b> to update the material and dopant map. Select an earlier step to inspect that state; remove a step to discard it and later steps. Editing from an earlier state replaces the subsequent history.</p>
     <div class="preset-grid" id="presets"></div>
     <div id="lab"></div>
-    <p style="font-size:14px;color:var(--text-dim)">A sandbox setup is encoded in the URL fragment (#r=…). Use Copy link to share the same educational sequence.</p>
+    <p style="font-size:14px;color:var(--text-dim)">A sandbox setup is encoded in the URL fragment (#r=…). Use Copy link to share the same educational sequence. Shared links are limited to 32 steps and bounded replay work; long diffusion or oxidation sequences stay in the local editor.</p>
   </section>
 
   <section id="ideas">
@@ -288,7 +288,7 @@
       var amb = v.amb === "n2" ? "" : v.amb;
       return { op: "anneal", T: v.T, time: v.time, ambient: amb, k: amb ? "OX" : "ANL",
         label: (amb ? (amb === "wet" ? "Wet oxidation " : "Dry oxidation ") : "Anneal ") + v.T + " °C · " + (v.time >= 120 ? Math.round(v.time / 60) + " min" : v.time + " s"),
-        desc: amb ? "Oxidant reaches exposed silicon through oxide; the model uses about 2.27 nm oxide volume per 1 nm consumed silicon and treats nitride as a barrier." : "Dopant redistribution follows a simplified square-root diffusion trend; activation is not calibrated." };
+        desc: amb ? "Oxidant reaches exposed silicon through oxide; the model uses about 2.27 nm oxide volume per 1 nm consumed silicon, treats nitride as a barrier, and assumes (100) silicon because this control has no orientation selector." : "Dopant redistribution follows a simplified square-root diffusion trend; activation is not calibrated." };
     } },
     cmp: { name: "CMP", fields: [
       { id: "stop", label: "Stop layer", type: "select", opts: [["", "None (target level)"]].concat(matOpts), v: "nit" },
@@ -461,11 +461,59 @@
     document.getElementById("lab-msg").textContent = message;
     return false;
   }
+  // Bound synchronous snapshot replay for public share URLs. The local editor
+  // can keep longer sequences, but only bounded sequences are shareable.
+  var MAX_SHARED_STEPS = 32, MAX_SHARED_WORK = 36;
+  var MAX_SHARED_DIFFUSION_OPS = 20000000, MAX_SHARED_OXIDATION_SWEEPS = 120;
+  function sharedWork(steps, domainKey) {
+    if (!Array.isArray(steps) || steps.length > MAX_SHARED_STEPS || !DOM[domainKey]) return null;
+    var weight = { litho: 8, etch: 2, implant: 2 };
+    var domain = DOM[domainKey], cells = domain.W * domain.H;
+    var score = 0, diffusionOps = 0, oxidationSweeps = 0;
+    steps.forEach(function (step) {
+      score += weight[step.op] || 1;
+      if (step.op !== "anneal") return;
+      // Count upper-bound cell/neighbor visits in XS.diffuse for both dopant arrays.
+      // Each species allocates/zeroes and explicitly fills one N-cell mask; each blur pass allocates/clears N cells,
+      // scans N cells twice, builds one diameter-cell kernel, and visits at most
+      // N*diameter neighbors in each of two directions.
+      var D = Math.max(XS.diffusivity("P", step.T), XS.diffusivity("B", step.T));
+      var sigma = Math.min(Math.sqrt(2 * D * step.time) * 1e7 / domain.dx, 80);
+      if (sigma >= 0.3) {
+        var requested = Math.max(1, Math.ceil(Math.pow(sigma / 6, 2)));
+        var iterations = Math.min(requested, 40);
+        var kernelSigma = sigma / Math.sqrt(requested > 40 ? 40 : requested);
+        var radius = Math.ceil(3 * kernelSigma);
+        var diameter = 2 * radius + 1;
+        diffusionOps += 4 * cells + iterations * (6 * cells + 4 * cells * diameter + 2 * diameter);
+      }
+      if (step.ambient === "dry" || step.ambient === "wet") {
+        // Each silicon cell sees at most four oxidant-bearing faces with C <= 1.
+        // Since XS.oxidizeGen advances by at least 0.5 / maxRate per loop,
+        // this bounds its iterations before the synchronous restore starts.
+        var dg = XS.dealGrove(step.T, step.ambient, "100");
+        var maxRate = 1.76 * (dg.BA * 1e3 / 3600) / domain.dx;
+        var upperIterations = Math.min(8000, Math.ceil(2 * maxRate * step.time));
+        oxidationSweeps += upperIterations ? 120 + 24 * (upperIterations - 1) : 0;
+      }
+    });
+    return { score: score, diffusionOps: diffusionOps, oxidationSweeps: oxidationSweeps };
+  }
+  function canShare(steps, domainKey) {
+    var work = sharedWork(steps, domainKey);
+    return !!work && work.score <= MAX_SHARED_WORK && work.diffusionOps <= MAX_SHARED_DIFFUSION_OPS && work.oxidationSweeps <= MAX_SHARED_OXIDATION_SWEEPS;
+  }
+  function clearStaleShareHash() {
+    if (!location.hash.startsWith("#r=")) return;
+    try { history.replaceState(null, "", location.pathname + location.search); }
+    catch (e) { saveFailure("The current sequence is local only, but the old share link could not be cleared.", e); }
+  }
+  function shareLimitMessage() { return "This sequence exceeds the share-link limits (32 steps, work budget 36, bounded diffusion and oxidation work). Shorten it or reset the lab; the local sequence remains available."; }
   function saveHash() {
     var steps;
     try { steps = S.steps(); }
     catch (e) { return saveFailure("Could not encode this share link. The current lab sequence is still available.", e); }
-    if (steps.length > 100) return saveFailure("This sequence is too large to share. Reset it or use fewer steps.");
+    if (!canShare(steps, dom)) { clearStaleShareHash(); return saveFailure(shareLimitMessage()); }
     var enc;
     try {
       var data = JSON.stringify({ d: dom, s: steps });
@@ -487,8 +535,8 @@
     try { navigator.clipboard.writeText(location.href).then(function () { msg.textContent = "Link copied."; }, function () { msg.textContent = "Copy the URL from the address bar."; }); }
     catch (e) { msg.textContent = "Copy the URL from the address bar."; }
   });
-  function validSharedSteps(steps) {
-    if (!Array.isArray(steps) || steps.length > 100) return false;
+  function validSharedSteps(steps, domainKey) {
+    if (!Array.isArray(steps) || steps.length > MAX_SHARED_STEPS) return false;
     var materials = Object.keys(XS.ID);
     var common = ["op", "label", "desc", "k"];
     var fields = {
@@ -510,7 +558,7 @@
         return Array.isArray(pair) && pair.length === 2 && inRange(pair[0], -500, 5000) && inRange(pair[1], -500, 5000) && pair[0] < pair[1];
       });
     }
-    return steps.every(function (step) {
+    var valid = steps.every(function (step) {
       if (!step || typeof step !== "object" || Array.isArray(step) || !Object.prototype.hasOwnProperty.call(fields, step.op)) return false;
       if (step.label != null && (typeof step.label !== "string" || step.label.length > 300)) return false;
       if (step.desc != null && (typeof step.desc !== "string" || step.desc.length > 1000)) return false;
@@ -533,6 +581,7 @@
         default: return false;
       }
     });
+    return valid && canShare(steps, domainKey);
   }
   function loadDefaultLab(message) {
     dom = PRESETS.ldmos.dom;
@@ -551,12 +600,12 @@
     try {
       if (m[1].length > 65536) throw new Error("Shared lab state is too large");
       var data = JSON.parse(decodeURIComponent(escape(atob(m[1]))));
-      if (!data || typeof data !== "object" || Array.isArray(data) || Object.keys(data).some(function (key) { return key !== "d" && key !== "s"; }) || typeof data.d !== "string" || !Object.prototype.hasOwnProperty.call(DOM, data.d) || !validSharedSteps(data.s)) throw new Error("Invalid shared lab state");
+      if (!data || typeof data !== "object" || Array.isArray(data) || Object.keys(data).some(function (key) { return key !== "d" && key !== "s"; }) || typeof data.d !== "string" || !Object.prototype.hasOwnProperty.call(DOM, data.d) || !validSharedSteps(data.s, data.d)) throw new Error("Invalid shared lab state");
       dom = data.d;
       document.getElementById("lab-dom").value = dom;
       S.setSteps(data.s, 0); S.go(data.s.length);
     } catch (e) {
-      loadDefaultLab("This shared lab link is invalid or too large. The default BCD nLDMOS preset was loaded.");
+      loadDefaultLab("This shared lab link is invalid, too large, or exceeds the replay work limits (32 steps / bounded diffusion and oxidation work). The default BCD nLDMOS preset was loaded.");
     }
   })();
 })();

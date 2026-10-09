@@ -37,3 +37,7 @@ Chrome headless 150 was used against the deployed URL at a 1280×900 desktop vie
 Publication changes were limited to enabling Pages and updating deployment, release, and review documentation. No site-code, chapter-content, or simulator fix was needed: all route, asset, metadata, and representative interaction checks passed. The README now records the production URL and stable version; the architecture audit describes the completed deployment rather than the pre-publication state.
 
 The site remains a static educational textbook. Simulator values and cross-sections are illustrative and are not foundry recipes, TCAD, signoff models, or qualification guidance. KaTeX, selected visualizations, and web fonts load from public CDNs, so those features can be unavailable on restricted or offline networks. Pages has no custom domain or content-management workflow.
+
+## PMICBook v1.1.0 production QA
+
+**Status:** Pending. The v1.1.0 candidate has not yet been pushed and verified at the live Pages URL. Do not treat local browser results as production validation. This section will record the exact tested commit, Pages deployment result, live route and browser checks, date, and any limitations after the candidate is deployed.

@@ -1,7 +1,7 @@
 <!doctype html>
 <!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
      Executable code: MIT (see ../LICENSE-MIT).
-     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE-CC-BY-4.0). -->
 <html lang="en">
 <head>
 <!--head:start {"desc": "Thermal oxidation for PMIC/BCD: oxide growth, field isolation, gate dielectrics, interface charge and thermal-budget trade-offs.", "libs": ["xsec"], "lang": "en"}-->
@@ -25,7 +25,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/oxidation.html#chapter","name":"Gate Dielectrics and Field Structures","headline":"Gate Dielectrics and Field Structures · PMICBook","description":"Thermal oxidation for PMIC/BCD: oxide growth, field isolation, gate dielectrics, interface charge and thermal-budget trade-offs.","url":"https://frbread7.github.io/pmicbook/chapters/oxidation.html","position":10,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"10. Gate Dielectrics and Field Structures","item":"https://frbread7.github.io/pmicbook/chapters/oxidation.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/oxidation.html#chapter","name":"Gate Dielectrics and Field Structures","headline":"Gate Dielectrics and Field Structures · PMICBook","description":"Thermal oxidation for PMIC/BCD: oxide growth, field isolation, gate dielectrics, interface charge and thermal-budget trade-offs.","url":"https://frbread7.github.io/pmicbook/chapters/oxidation.html","position":10,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"10. Gate Dielectrics and Field Structures","item":"https://frbread7.github.io/pmicbook/chapters/oxidation.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -117,20 +117,20 @@
         <div class="stat"><span class="k">B/A (linear)</span><span class="v" id="dg-o-ba">—</span></div>
         <div class="stat"><span class="k">Rate-limiting regime</span><span class="v" id="dg-o-reg">—</span></div>
       </div>
-      <div class="sim-note">Explore the model: At 1000 °C for one hour, these representative coefficients give roughly 50 nm for dry oxidation and 400 nm for wet oxidation. Increasing time shifts growth from near-linear toward a square-root-of-time regime; the dotted \(x=A\) line marks the transition scale. Orientation and pressure also affect modeled growth rates. All displayed coefficients are educational approximations and should not be treated as a process recipe.</div>
+      <div class="sim-note">Explore the model: At 1000 °C, 1 atm and one hour on (100) silicon, these coefficients give roughly 40 nm for dry oxidation and 390 nm for wet oxidation, with zero initial oxide. Increasing time shifts growth from near-linear toward a square-root-of-time regime; the dotted \(x=A\) line marks the transition scale. The tabulated coefficients and orientation factor come from a <a href="https://iue.tuwien.ac.at/phd/hollauer/node16.html">TU Wien public Deal–Grove study</a>; pressure scaling is a limited approximation from the same source. These are educational calculations, not a process recipe.</div>
     </div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Coefficient ((100) Si, 1 atm)</th><th>Dry O₂</th><th>Wet H₂O</th></tr></thead>
+        <thead><tr><th>Coefficient ((111) Si, 1 atm)</th><th>Dry O₂</th><th>Wet H₂O</th></tr></thead>
         <tbody>
           <tr><td>B = C₁ exp(−E₁/kT)</td><td>C₁ = 7.72×10² µm²/h, E₁ = 1.23 eV</td><td>C₁ = 3.86×10² µm²/h, E₁ = 0.78 eV</td></tr>
           <tr><td>B/A = C₂ exp(−E₂/kT)</td><td>C₂ = 6.23×10⁶ µm/h, E₂ = 2.0 eV</td><td>C₂ = 1.63×10⁸ µm/h, E₂ = 2.05 eV</td></tr>
-          <tr><td>(111) Correction</td><td colspan="2">B/A × 1.68 (B is the same)</td></tr>
+          <tr><td>(100) Conversion</td><td colspan="2">Divide (111) B/A by 1.68; B is unchanged.</td></tr>
           <tr><td>Uses</td><td>Gate oxide, pad oxide (thin and dense, excellent interface)</td><td>Field/isolation oxide (thicker and faster in the educational model)</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="callout deep"><strong>Limits of the Deal–Grove approximation for thin oxides</strong><p>The first 20-30 nm of dry oxidation grows much faster than in the Deal–Grove equation. The cause is not yet fully agreed upon (interface stress, atomic oxygen, micro-channels in the oxide, etc.), but in practice, it is corrected by \(\tau\) assuming an initial thickness \(x_i \approx 25\) nm, or Massoud's exponent term is added. Today's gate insulating film is 1 to 2 nm, so this area is all there is. Therefore, techniques that manipulate thickness on an atomic basis are used, such as high-temperature rapid oxidation (RTO), plasma oxidation, and radical oxidation (ISSG: direct reaction of hydrogen and oxygen on the wafer).</p></div>
+    <div class="callout deep"><strong>Limits of the Deal–Grove approximation for thin oxides</strong><p>Deal–Grove can miss the nonlinear initial stage of dry oxidation; this source describes the first ~30 nm as an anomalous thin-oxide regime and discusses an initial-thickness \(\tau\) correction and the Massoud model. Do not use this simplified fit to select a gate dielectric. Very thin gate stacks are often discussed using equivalent oxide thickness (EOT), which is an electrical equivalence and not necessarily the physical film thickness. Gate dielectrics depend on device and platform: one published 0.18 µm CMOS-compatible BCD LDMOS study reports an 11.5 nm gate oxide. <a href="https://doi.org/10.1016/j.mee.2013.03.051">That result is one measured device example, not a general BCD rule.</a> Oxidation methods and thickness targets must be chosen for the specific structure and process.</p></div>
   </section>
 
   <section id="color">
@@ -248,7 +248,7 @@
     var gXi = PB.range("dg-xi", function (v) { return v + " nm"; }, rr);
     var gP = PB.range("dg-p", function (v) { return v + " atm"; }, rr);
     var cTau = document.getElementById("dg-tau"); cTau.addEventListener("change", rr);
-    function coef(T, amb, ori, p) { var c = XS.dealGrove(T, amb, ori); return { B: c.B * p, BA: c.BA * p, A: c.A }; }
+    function coef(T, amb, ori, p) { var c = XS.dealGrove(T, amb, ori), B = c.B * p, BA = c.BA * Math.pow(p, amb === "dry" ? 0.75 : 1); return { B: B, BA: BA, A: B / BA }; }
     function thick(c, th, xi) { return XS.dgThickness(c.B, c.A, th, xi); }
     cv = PB.canvas("#dg-cv", function (ctx, w, h) {
       var P = PB.palette(), T = gT(), amb = gA(), ori = gO(), p = gP(), th = Math.pow(10, gt());

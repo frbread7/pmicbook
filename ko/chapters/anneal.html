@@ -1,7 +1,7 @@
 <!doctype html>
 <!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
      Executable code: MIT (see ../../LICENSE-MIT).
-     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE.md). -->
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE-CC-BY-4.0). -->
 <html lang="ko">
 <head>
 <!--head:start {"desc":"PMIC 및 BCD 소자의 확산, 도펀트 활성화와 열 예산을 다룹니다. 대화형 모델은 교육용 근사치입니다.","libs":["xsec"],"lang":"ko"}-->
@@ -25,7 +25,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/anneal.html#chapter","name":"어닐링과 열 예산","headline":"어닐링과 열 예산 · PMICBook","description":"PMIC 및 BCD 소자의 확산, 도펀트 활성화와 열 예산을 다룹니다. 대화형 모델은 교육용 근사치입니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/anneal.html","position":15,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"15. 어닐링과 열 예산","item":"https://frbread7.github.io/pmicbook/ko/chapters/anneal.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/anneal.html#chapter","name":"어닐링과 열 예산","headline":"어닐링과 열 예산 · PMICBook","description":"PMIC 및 BCD 소자의 확산, 도펀트 활성화와 열 예산을 다룹니다. 대화형 모델은 교육용 근사치입니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/anneal.html","position":15,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"15. 어닐링과 열 예산","item":"https://frbread7.github.io/pmicbook/ko/chapters/anneal.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -75,8 +75,8 @@
         <div class="stat"><span class="k">As</span><span class="v" id="ar-o-As">—</span></div>
         <div class="stat"><span class="k">Sb</span><span class="v" id="ar-o-Sb">—</span></div>
       </div>
-      <div class="sim-note">온도와 시간에 따른 도펀트 확산계수의 경향을 비교하세요. 아레니우스 매개변수는 대표적인 교육용 값이며 농도 및 점 결함 효과는 생략했습니다.</div>
-    </div><div class="callout"><strong>교육용 예시 매개변수</strong><p>시뮬레이터의 B, P, As, Sb 아레니우스 계수는 공개 문헌의 대표적 값을 참고한 예시이며 보편적으로 적용되는 매개변수 세트가 아닙니다. 점 결함, 농도, 분위기, 응력과 이온 주입 손상은 유효 확산을 크게 바꿀 수 있습니다.</p></div></section>
+      <div class="sim-note">온도와 시간에 따른 도펀트 확산계수의 경향을 비교하세요. 아레니우스 계수는 명시된 교육용 값이며 농도 및 점 결함 효과는 생략했습니다.</div>
+    </div><div class="callout"><strong>계수의 출처와 한계</strong><p>그래프는 B, P, As, Sb 순서로 PMICBook이 고정한 \(D_0,E_a\) 쌍 \((0.76,3.46)\), \((3.85,3.66)\), \((0.066,3.44)\), \((0.214,3.65)\)을 사용합니다(\(D_0\): cm²/s, \(E_a\): eV). 이는 시뮬레이터에서 선택한 값이며 한 출처에서 그대로 옮긴 값이 아닙니다. 비교 자료인 University of Illinois ECE444의 <a href="https://fabweb.ece.illinois.edu/gt/gt/gt10.aspx">GT10 실리콘 확산계수 표</a>는 다른 매개변수 세트를 제시하고 As 및 Sb 값이 도핑 농도에 크게 의존한다고 명시합니다. 두 세트 모두 농도, 점 결함, 분위기, 응력 및 주입 손상 효과를 모두 나타내지는 않으므로 그래프의 값은 정성적인 교육 입력값이며 공정 매개변수가 아닙니다.</p></div></section>
 <section id="anneal-types"><h2>로(爐), 급속 열처리(RTA), 스파이크 및 밀리초 어닐링</h2><p>장시간 로 어닐링은 큰 열 노출을 줍니다. 급속 열 어닐링과 스파이크 공정은 최고 온도 부근의 체류 시간을 줄이고, 플래시·레이저 공정은 표면을 매우 짧게 고온에 노출할 수 있습니다. 단순히 온도를 높이는 것이 답은 아닙니다. 과도한 재분포, 용융, 박막 또는 소자 열화 없이 도펀트를 활성화하고 손상을 회복해야 합니다.</p><div class="sim" id="sim-rta">
       <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>온도 이력과 열 예산</h3></div>
       <div class="sim-body side">

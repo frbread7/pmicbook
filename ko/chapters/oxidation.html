@@ -1,7 +1,7 @@
 <!doctype html>
 <!-- Copyright (c) 2026 geniuskey and ProcessBook contributors.
      Executable code: MIT (see ../../LICENSE-MIT).
-     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE.md). -->
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../../LICENSE-CC-BY-4.0). -->
 <html lang="ko">
 <head>
 <!--head:start {"desc":"PMIC/BCD를 위한 열산화: 산화막 성장, 필드 절연, 게이트 절연막, 계면 전하와 열 예산의 절충.","libs":["xsec"],"lang":"ko"}-->
@@ -25,7 +25,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/oxidation.html#chapter","name":"게이트 절연막 및 전계 구조","headline":"게이트 절연막 및 전계 구조 · PMICBook","description":"PMIC/BCD를 위한 열산화: 산화막 성장, 필드 절연, 게이트 절연막, 계면 전하와 열 예산의 절충.","url":"https://frbread7.github.io/pmicbook/ko/chapters/oxidation.html","position":10,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-02","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"10. 게이트 절연막 및 전계 구조","item":"https://frbread7.github.io/pmicbook/ko/chapters/oxidation.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/oxidation.html#chapter","name":"게이트 절연막 및 전계 구조","headline":"게이트 절연막 및 전계 구조 · PMICBook","description":"PMIC/BCD를 위한 열산화: 산화막 성장, 필드 절연, 게이트 절연막, 계면 전하와 열 예산의 절충.","url":"https://frbread7.github.io/pmicbook/ko/chapters/oxidation.html","position":10,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"10. 게이트 절연막 및 전계 구조","item":"https://frbread7.github.io/pmicbook/ko/chapters/oxidation.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -117,20 +117,20 @@
         <div class="stat"><span class="k">B/A(선형 항)</span><span class="v" id="dg-o-ba">—</span></div>
         <div class="stat"><span class="k">속도 지배 구간</span><span class="v" id="dg-o-reg">—</span></div>
       </div>
-      <div class="sim-note">모델 살펴보기: 1000 °C에서 한 시간 산화하면 대표 계수에 따라 건식 산화는 약 50 nm, 습식 산화는 약 400 nm 성장합니다. 시간이 길어질수록 성장 거동은 거의 선형에서 시간의 제곱근에 가까운 구간으로 이동합니다. 점선 \(x=A\)은 전이 규모를 나타냅니다. 결정 방향과 압력도 계산된 성장 속도에 영향을 줍니다. 표시된 계수는 교육용 근사치이며 공정 레시피가 아닙니다.</div>
+      <div class="sim-note">모델 살펴보기: (100) 실리콘에서 1000 °C, 1 atm, 초기 산화막 0 nm로 한 시간 산화하면 건식 약 40 nm, 습식 약 390 nm가 계산됩니다. 시간이 길어질수록 성장 거동은 거의 선형에서 시간의 제곱근에 가까운 구간으로 이동합니다. 점선 \(x=A\)은 전이 규모를 나타냅니다. 표의 계수와 결정 방향 보정은 <a href="https://iue.tuwien.ac.at/phd/hollauer/node16.html">TU Wien 공개 Deal–Grove 연구</a>를 따르며 압력 보정은 같은 자료의 제한적인 근사입니다. 이는 교육용 계산이지 공정 레시피가 아닙니다.</div>
     </div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>계수((100) Si, 1 atm)</th><th>건식 O₂</th><th>습식 H₂O</th></tr></thead>
+        <thead><tr><th>계수((111) Si, 1 atm)</th><th>건식 O₂</th><th>습식 H₂O</th></tr></thead>
         <tbody>
           <tr><td>B = C₁ exp(−E₁/kT)</td><td>C₁ = 7.72×10² µm²/h, E₁ = 1.23 eV</td><td>C₁ = 3.86×10² µm²/h, E₁ = 0.78 eV</td></tr>
           <tr><td>B/A = C₂ exp(−E₂/kT)</td><td>C₂ = 6.23×10⁶ µm/h, E₂ = 2.0 eV</td><td>C₂ = 1.63×10⁸ µm/h, E₂ = 2.05 eV</td></tr>
-          <tr><td>(111) 보정</td><td colspan="2">B/A × 1.68 (B는 동일)</td></tr>
+          <tr><td>(100) 변환</td><td colspan="2">(111)의 B/A를 1.68로 나눕니다. B는 그대로입니다.</td></tr>
           <tr><td>용도</td><td>게이트 산화막·패드 산화막(얇고 치밀하며 계면 특성이 우수함)</td><td>필드·절연 산화막(교육 모델에서는 더 두껍고 빠르게 성장)</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="callout deep"><strong>얇은 산화막에서 Deal–Grove 근사의 한계</strong><p>건식 산화의 초기 20~30 nm 구간은 Deal–Grove 식보다 훨씬 빠르게 성장합니다. 원인으로 계면 응력, 원자 산소, 산화막 내 미세 통로 등이 거론되지만 완전히 합의되지는 않았습니다. 실무에서는 초기 두께를 \(x_i \approx 25\) nm로 두어 \(\tau\)로 보정하거나 Massoud 지수항을 추가합니다. 오늘날 게이트 절연막 두께는 1~2 nm이므로 초기 성장 구간이 전체 두께에 해당합니다. 이에 따라 고온 급속 산화(RTO), 플라즈마 산화, 라디칼 산화(ISSG: 웨이퍼에서 수소와 산소를 직접 반응시키는 방법)처럼 원자 단위 두께 제어 기법을 사용합니다.</p></div>
+    <div class="callout deep"><strong>얇은 산화막에서 Deal–Grove 근사의 한계</strong><p>Deal–Grove 모델은 건식 산화 초기의 비선형 성장 구간을 정확히 설명하지 못할 수 있습니다. 이 자료는 초기 약 30 nm를 비정상 얇은 산화막 구간으로 설명하며 초기 두께 \(\tau\) 보정과 Massoud 모델을 소개합니다. 이 단순화된 근사로 게이트 절연막을 선택해서는 안 됩니다. 매우 얇은 게이트 적층은 등가 산화막 두께(EOT)로 설명되는 경우가 많지만, EOT는 전기적 등가값이지 반드시 실제 막 두께는 아닙니다. 게이트 절연막은 소자와 플랫폼에 따라 다릅니다. 한 공개된 0.18 µm CMOS 호환 BCD LDMOS 연구는 11.5 nm 게이트 산화막을 보고합니다. <a href="https://doi.org/10.1016/j.mee.2013.03.051">이는 단일 소자 사례이며 일반적인 BCD 규칙이 아닙니다.</a> 산화 방법과 두께 목표는 해당 구조와 공정에 맞춰 정해야 합니다.</p></div>
   </section>
 
   <section id="color">
@@ -248,7 +248,7 @@
     var gXi = PB.range("dg-xi", function (v) { return v + " nm"; }, rr);
     var gP = PB.range("dg-p", function (v) { return v + " atm"; }, rr);
     var cTau = document.getElementById("dg-tau"); cTau.addEventListener("change", rr);
-    function coef(T, amb, ori, p) { var c = XS.dealGrove(T, amb, ori); return { B: c.B * p, BA: c.BA * p, A: c.A }; }
+    function coef(T, amb, ori, p) { var c = XS.dealGrove(T, amb, ori), B = c.B * p, BA = c.BA * Math.pow(p, amb === "dry" ? 0.75 : 1); return { B: B, BA: BA, A: B / BA }; }
     function thick(c, th, xi) { return XS.dgThickness(c.B, c.A, th, xi); }
     cv = PB.canvas("#dg-cv", function (ctx, w, h) {
       var P = PB.palette(), T = gT(), amb = gA(), ori = gO(), p = gP(), th = Math.pow(10, gt());
