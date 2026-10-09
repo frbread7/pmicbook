@@ -40,4 +40,28 @@ The site remains a static educational textbook. Simulator values and cross-secti
 
 ## PMICBook v1.1.0 production QA
 
-**Status:** Pending. The v1.1.0 candidate has not yet been pushed and verified at the live Pages URL. Do not treat local browser results as production validation. This section will record the exact tested commit, Pages deployment result, live route and browser checks, date, and any limitations after the candidate is deployed.
+**Status:** Passed (2026-10-09). The candidate commit was pushed to `main`, deployed by GitHub Pages, and tested against the live site before the release metadata commit was prepared. The release tag points to the final commit that was deployed and rechecked at the same URL.
+
+**Production URL:** <https://frbread7.github.io/pmicbook/><br>
+**Candidate site commit:** `210a3fb969e6a8847973517b3388d44ece26acc6`<br>
+**Candidate Pages run:** [37939495837](https://github.com/frbread7/pmicbook/actions/runs/37939495837) — successful build and deployment; GitHub API reported `status: built`.<br>
+**Release:** annotated tag `v1.1.0`; it points to the final production-validated commit.<br>
+**Configuration:** `main` branch, repository root (`/`), GitHub-managed project-site domain, HTTPS enforced, no CNAME.
+
+The release commit was pushed and its Pages deployment completed before the final live browser pass. The release tag was created only after that pass. It contains the same HTML, CSS, JavaScript, and generated site metadata as the candidate commit above, plus release documentation and README version status.
+
+### Live browser and route checks
+
+The dependency-free `tools/browser_qa.mjs` harness used headless Chromium against the deployed URL. All **53 HTML routes** loaded. Four representative Korean/English mobile routes had no horizontal overflow. The route and interaction sweep reported `issues: []`: no HTTP or network errors, runtime exceptions, console errors, broken canvases, KaTeX error nodes, or project-path navigation escape.
+
+The live pass exercised drawer open/close, Escape and focus return, drawer chapter navigation, previous/next, TOC fragments, English/Korean round-trip, compatibility redirect, light/dark persistence, chapter quiz feedback, final 20-question quiz and retry, LDO, converter, BCD stepper, wafer lifetime model, and Deal–Grove orientation and thickness outputs. Observed oxidation checks were a (111)/(100) `B/A` ratio of 1.68, default/(100) ratio of 1.0, and 100-minute outputs of 38.49 nm dry and 388.32 nm wet at 1000 °C.
+
+### BCD process lab checks
+
+Both languages rejected hostile 100-step lithography shares and malformed Base64/JSON, unknown-operation, unknown-field, and oversized fragments with a localized notice and the default eight-step sequence. The 32-step share boundary was accepted and 33 steps rejected. Single-step anneal and oxidation boundaries in fine/standard/wide domains accepted at their computed limits (N2 at 1200 °C: 3/14/108 s; wet oxidation at 800 °C: 89/178/447 s) and rejected at +1 s. Maximum 1200 °C anneals and 16 repeated hostile anneals were rejected across all domains and ambients. All restores finished within 1.76 s.
+
+All seven lab presets in both locales loaded; shareable presets reloaded to their original step count, while the local-only LOCOS sequence displayed its share-limit explanation. The injected diagnostic exception and blocked request were detected and attributed to their test page; the diagnostic harness reported no unexpected issues.
+
+### Limitations and test boundaries
+
+The checks establish browser behavior for the tested routes, inputs, and current Chrome environment. They do not make the educational process models foundry-accurate or constitute accessibility certification. KaTeX, selected visualization resources, and fonts still use public CDNs and can be unavailable on restricted or offline networks. The simulator limits bound share-link replay work; the process engine remains a simplified educational model.

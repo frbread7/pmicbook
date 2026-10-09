@@ -1,6 +1,6 @@
 # Current milestone: PMICBook v1.1 technical-quality review and release
 
-**Status:** In progress. PMICBook v1.0.0 remains the current stable release. The v1.1.0 candidate is undergoing a whole-repository technical, bilingual, runtime, accessibility, documentation, and release review. Do not call v1.1.0 released until the final candidate has passed production validation and the release tag is published.
+**Status:** Complete (2026-10-09). PMICBook v1.1.0 passed the whole-repository review and production browser gates, is published at the project-site URL, and is tagged as a stable release. See [production QA](PRODUCTION_QA.md) for deployment and live-browser evidence.
 
 ## Outcome
 
@@ -15,9 +15,9 @@ Review the complete PMICBook v1.0.0 repository, correct valid P0/P1 findings and
 - [x] Repair confirmed faint-text contrast and keyboard drawer interaction issues.
 - [x] Resolve and re-test the shared lab-state restore performance finding, including expensive anneal/oxidation boundaries in both locales.
 - [x] Re-review changed technical and runtime areas; complete local static, bilingual, and browser interaction checks.
-- [ ] Run final production browser validation and record its actual commit, results, and limitations in [PRODUCTION_QA.md](PRODUCTION_QA.md).
-- [x] Update review findings and backlog dispositions; retain v1.1.0 as pending until production validation completes.
-- [ ] Push the validated commit, publish annotated tag `v1.1.0` and GitHub Release, and verify Pages and repository state.
+- [x] Run final production browser validation against the release commit and record route, interaction, simulator, and limitation evidence in [PRODUCTION_QA.md](PRODUCTION_QA.md).
+- [x] Update review findings and backlog dispositions; keep remaining improvement ideas bounded and deferred.
+- [x] Push the validated commit, publish annotated tag `v1.1.0` and GitHub Release, and verify Pages and repository state.
 
 ## Scope boundary
 
