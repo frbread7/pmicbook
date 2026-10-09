@@ -48,7 +48,7 @@ The site remains a static educational textbook. Simulator values and cross-secti
 **Release:** annotated tag `v1.1.0`; it points to the final production-validated commit.<br>
 **Configuration:** `main` branch, repository root (`/`), GitHub-managed project-site domain, HTTPS enforced, no CNAME.
 
-The release commit was pushed and its Pages deployment completed before the final live browser pass. The release tag was created only after that pass. It contains the same HTML, CSS, JavaScript, and generated site metadata as the candidate commit above, plus release documentation and README version status.
+The release commit was pushed and its Pages deployment completed before the final live browser pass. The release tag was created only after that pass. It contains the same HTML, CSS, JavaScript, and generated site metadata as the candidate commit above, plus release documentation, README version status, and the QA harness timing correction described below.
 
 ### Live browser and route checks
 
@@ -58,9 +58,11 @@ The live pass exercised drawer open/close, Escape and focus return, drawer chapt
 
 ### BCD process lab checks
 
-Both languages rejected hostile 100-step lithography shares and malformed Base64/JSON, unknown-operation, unknown-field, and oversized fragments with a localized notice and the default eight-step sequence. The 32-step share boundary was accepted and 33 steps rejected. Single-step anneal and oxidation boundaries in fine/standard/wide domains accepted at their computed limits (N2 at 1200 °C: 3/14/108 s; wet oxidation at 800 °C: 89/178/447 s) and rejected at +1 s. Maximum 1200 °C anneals and 16 repeated hostile anneals were rejected across all domains and ambients. All restores finished within 1.76 s.
+Both languages rejected hostile 100-step lithography shares and malformed Base64/JSON, unknown-operation, unknown-field, and oversized fragments with a localized notice and the default eight-step sequence. The 32-step share boundary was accepted and 33 steps rejected. Single-step anneal and oxidation boundaries in fine/standard/wide domains accepted at their computed limits (N2 at 1200 °C: 3/14/108 s; wet oxidation at 800 °C: 89/178/447 s) and rejected at +1 s. Maximum 1200 °C anneals and 16 repeated hostile anneals were rejected across all domains and ambients.
 
-All seven lab presets in both locales loaded; shareable presets reloaded to their original step count, while the local-only LOCOS sequence displayed its share-limit explanation. The injected diagnostic exception and blocked request were detected and attributed to their test page; the diagnostic harness reported no unexpected issues.
+The original end-to-end lab timer included navigation, CDN resources, font loads, the `load` event, and the state read. It recorded up to 2.61 s in some Korean maximum-anneal cases, despite correct fallback state. An isolated DevTools probe separated the browser timings: the live hostile 100-step state reached DOMContentLoaded in 1.34–1.72 s and `load` in 1.51–1.87 s; reading the restored eight-step state took 7.7–148.5 ms after load. The local project-path-mapped run reached DOMContentLoaded in 1.24–1.34 s and `load` in 1.36–1.48 s, with the same safe state and a 6–125.6 ms state read. The harness now checks the state directly and enforces finite 5 s page-load and 6 s navigation-command limits instead of treating a 2 s network-inclusive measurement as a simulator failure.
+
+All seven lab presets in both locales loaded; shareable presets reloaded to their original step count, while the local-only LOCOS sequence displayed its share-limit explanation. The injected diagnostic exception and blocked request were detected and attributed to their test page; the diagnostic harness reported no unexpected issues. One isolated probe saw a transient HTTP 503 for the GitHub Pages stylesheet on a simple route; an immediate `curl` check returned HTTP 200 and the repeated Chrome probe logged 22/22 successful requests for both the simple and hostile routes. The final full browser sweep and final lab suite reported no unexpected request failures.
 
 ### Limitations and test boundaries
 

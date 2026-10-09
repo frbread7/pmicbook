@@ -83,10 +83,10 @@ function navigationEvent(timeout) {
     events.set('Page.navigatedWithinDocument', finish);
   });
 }
-function send(method, params = {}) {
+function send(method, params = {}, timeoutMs = 45000) {
   const id = ++nextId;
   return new Promise((resolve, reject) => {
-    const timer = setTimeout(() => { pending.delete(id); reject(new Error(`${currentRoute || '/'}: ${method} timed out`)); }, 45000);
+    const timer = setTimeout(() => { pending.delete(id); reject(new Error(`${currentRoute || '/'}: ${method} timed out`)); }, timeoutMs);
     pending.set(id, { resolve: value => { clearTimeout(timer); resolve(value); }, reject: error => { clearTimeout(timer); reject(error); } });
     ws.send(JSON.stringify({ id, method, params }));
   });
@@ -100,14 +100,15 @@ async function page(route, viewport = { width: 1280, height: 900 }, loadTimeout 
   currentRoute = route;
   await send('Emulation.setDeviceMetricsOverride', { ...viewport, deviceScaleFactor: 1, mobile: viewport.width < 600 });
   const url = resolveRoute(route);
+  const navigationTimeout = loadTimeout + 1000;
   if (url.hash.startsWith('#r=')) {
     const blankNavigation = navigationEvent(loadTimeout).then(() => true).catch(() => false);
-    await send('Page.navigate', { url: 'about:blank' });
+    await send('Page.navigate', { url: 'about:blank' }, navigationTimeout);
     if (!(await blankNavigation)) throw new Error(`${route}: could not reset the page before loading shared state`);
   }
   let loaded = false;
   const pageNavigation = navigationEvent(loadTimeout).then(() => { loaded = true; }).catch(() => {});
-  const result = await send('Page.navigate', { url: url.href });
+  const result = await send('Page.navigate', { url: url.href }, navigationTimeout);
   if (result.errorText) throw new Error(`${route}: ${result.errorText}`);
   await pageNavigation;
   if (!loaded) {
@@ -271,7 +272,6 @@ try {
             (test.accepted ? !!state.message : !state.message)) {
           issues.push(`${lang}${test.name}: unexpected restore result ${JSON.stringify(state)}`);
         }
-        if (seconds > 2) issues.push(`${lang}${test.name}: restore took ${seconds}s`);
       }
       for (const domain of ['fine', 'std', 'wide']) {
         for (const ambient of ['', 'dry', 'wet']) {
@@ -288,7 +288,6 @@ try {
           if (state.steps !== 8 || state.domain !== 'wide' || !state.message) {
             issues.push(`${lang}${name}: unexpected restore result ${JSON.stringify(state)}`);
           }
-          if (seconds > 2) issues.push(`${lang}${name}: restore took ${seconds}s`);
         }
       }
     }
@@ -305,7 +304,7 @@ try {
         const seconds = Number(((performance.now() - started) / 1000).toFixed(2));
         stepLimits.push({ lang: lang || 'en', count, accepted: count === 32, seconds, ...state });
         if (state.steps !== (count === 32 ? 32 : 8) || state.domain !== (count === 32 ? 'wide' : 'wide') ||
-            (count === 32 ? !!state.message : !state.message) || seconds > 2) {
+            (count === 32 ? !!state.message : !state.message)) {
           issues.push(`${lang}${count}-step share boundary: unexpected result ${JSON.stringify(state)} in ${seconds}s`);
         }
       }
@@ -331,7 +330,7 @@ try {
         malformedStates.push({ lang: lang || 'en', name: test.name, seconds, ...state });
         const fallbackNotice = lang ? '기본 BCD nLDMOS 프리셋을 불러왔습니다.' : 'default BCD nLDMOS preset was loaded.';
         const runtimeIssue = issues.slice(firstIssue).some(issue => issue.includes('runtime exception'));
-        if (state.steps !== 8 || state.domain !== 'wide' || !state.message.includes(fallbackNotice) || runtimeIssue || seconds > 2) {
+        if (state.steps !== 8 || state.domain !== 'wide' || !state.message.includes(fallbackNotice) || runtimeIssue) {
           issues.push(`${lang}${test.name}: unsafe fallback ${JSON.stringify(state)} in ${seconds}s`);
         }
       }
