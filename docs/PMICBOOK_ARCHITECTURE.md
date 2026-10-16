@@ -3,6 +3,8 @@
 **Status:** Drafted after the unmodified ProcessBook baseline audit, 2026-10-02
 **Starting point:** `geniuskey/processbook` at `0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff`, retained as `upstream-processbook-baseline`
 
+This document retains the original v1 architecture record below. The dated v1.2 candidate addendum documents the later nLDMOS sequence viewer without rewriting that history.
+
 ## Product path
 
 PMICBook teaches one connected engineering path: power-system needs shape circuit choices; circuits depend on device behavior; devices are enabled and constrained by BCD technology and process integration; layout and package parasitics affect thermal, noise, and efficiency; characterization, reliability, and failure analysis feed learning back into the design.
@@ -59,6 +61,23 @@ The user selected **bilingual English and Korean**. Each of the 25 subject chapt
 | Implant | Species/energy/dose select an approximate projected-range Gaussian with lateral spread and optional channeling tail; material cells change stopping depth. | Add optional ideal incident-beam mask windows for the nLDMOS lab example. This changes where rays enter; it does not add a validated mask stack, implant activation, or field solution. |
 | Anneal / oxidation | Diffusion blurs dopant arrays inside semiconductor cells with an Arrhenius coefficient; oxidation uses local Deal–Grove-style growth and grid expansion. | Retain qualitative thermal-budget and dielectric-shape trends; separate chemical activation, junction motion, and oxide charge limitations in prose. |
 | CMP / silicide | CMP removes cells toward a stop or level with a simple dishing term; silicide converts exposed silicon/poly cells to a material label. | Retain to connect planarization, contact resistance, and high-current interconnect, with no process-window or contact-resistance prediction. |
+
+### v1.2 candidate: two-variant nLDMOS sequence viewer
+
+The v1.2 candidate adds a source-bounded, bilingual sequence viewer in `js/ldmos-sequence.js`, mounted in `chapters/lab.html#ldmos-cross-section` and `ko/chapters/lab.html#ldmos-cross-section`. It is a separate educational visualization, not a new operation in `XS.Sim` and not a process recipe editor.
+
+| View | Disclosed example represented | Viewer behavior and boundary |
+|---|---|---|
+| Early masked P-body (`stages`) | US 7,405,117 B2, process 600 / Figs. 5A, 7A–7H, 8A–8C. The selected Fig. 7 example uses p substrate and HV n-well; non-self-aligned P-body implant/drive precedes gate formation. A shallow N-LD option and n+/p+ junction modules are later. | Ten bounded stages, including a final contacts/interconnect stage explicitly identified in code as an electrical-connection inference rather than a patent process step. The selected patent slice does not define an NBL, epi growth, isolation trench, or field plate. |
+| Gate-aligned body (`gateAlignedStages`) | EP 1 119 050 A1, Table 1 and [0051]–[0061]. The platform sequence includes N+ buried layer, N− epi, sinker and field/isolation modules; patterned poly precedes self-aligned P-body implant/drive, followed by LDD and later N+/P+ modules. | Fifteen condensed stages. Platform modules are not a literal mask traveler; the code notes that P+ isolation is a shared platform module and is not represented as a verified isolation ring around the cropped DMOS cell. The final contact depiction is schematic. |
+
+The variant selector switches between two independently defined stage lists. Previous/next buttons and a selectable ordered step list change the selected stage; an `aria-live` output describes the current stage. Drawing code renders a coarse SVG cross-section from accumulated region flags. The view does not alter the editable `XS` lab state or encode its selection into the sandbox URL fragment. The existing `XS` editor remains a separate, user-editable process grid with its own bounded share-link state.
+
+The sequence viewer's educational boundary is strict: geometry is schematic and not to scale; masked implant windows are not final active dopant contours; neither sequence solves activation, concentration-dependent or transient diffusion, overlay, channel length, 2-D/3-D electric field, breakdown voltage, on-resistance, threshold voltage, leakage, or reliability. It supplies no foundry-specific dose, energy, anneal, mask count, or design rule. Patent disclosures establish only what each named example describes; they do not establish prevalence or a current manufacturing flow. Read [docs/NLDMOS_PROCESS_SEQUENCE_REVIEW.md](NLDMOS_PROCESS_SEQUENCE_REVIEW.md) and [docs/V1_2_SOURCE_EVIDENCE.md](V1_2_SOURCE_EVIDENCE.md) for source locators and limits.
+
+### v1.2 candidate mixed-file attribution note
+
+The code that selects stages, manages controls, and generates SVG is executable code; the bilingual stage explanations, labels, and generated instructional illustration are educational content. Their treatment follows the material-based split in `LICENSE.md`, not the `.js` extension. The file header records this distinction. See [docs/UPSTREAM_ATTRIBUTION.md](UPSTREAM_ATTRIBUTION.md) for the ProcessBook baseline object, PMICBook v1.1 tag, file-level `js/`/`css/`/`tools/` lineage, and release-review limits for mixed files.
 
 Components classified during the audit: **generic/keep** — static chapter shell, CSS tokens and responsive/theme behavior, `PB` navigation/quiz/math/chart/canvas helpers, metadata generator. **Adapt** — chapter taxonomy, glossary, `XS` example steps/readouts, process-lab presets, educational content and diagrams. **Process-specific/retain selectively** — `OPT` imaging, resist/deposition/etch/implant/anneal/CMP lessons and their relevant simulators. **Irrelevant or merged** — upstream custom domain, standalone resist route after its core track content moves into lithography, and leading-edge logic/EUV or large-chip cost digressions that do not explain PMIC engineering. Keep source history and attribution for removed or merged educational material.
 

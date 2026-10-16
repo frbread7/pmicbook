@@ -25,10 +25,10 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/implant.html#chapter","name":"Doping and Well/Drift Implants","headline":"Doping and Well/Drift Implants · PMICBook","description":"Ion implantation profiles, mask stopping, tilt, channeling, and anneal relationships for BCD wells, drift regions, and junctions.","url":"https://frbread7.github.io/pmicbook/chapters/implant.html","position":14,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"14. Doping and Well/Drift Implants","item":"https://frbread7.github.io/pmicbook/chapters/implant.html"}]}]}</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/implant.html#chapter","name":"Doping and Well/Drift Implants","headline":"Doping and Well/Drift Implants · PMICBook","description":"Ion implantation profiles, mask stopping, tilt, channeling, and anneal relationships for BCD wells, drift regions, and junctions.","url":"https://frbread7.github.io/pmicbook/chapters/implant.html","position":14,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-16","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"14. Doping and Well/Drift Implants","item":"https://frbread7.github.io/pmicbook/chapters/implant.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="../css/style.css">
 <script src="../js/common.js"></script>
 <script src="../js/xsec.js"></script>
@@ -38,7 +38,7 @@
 <main class="chapter">
 <header class="chapter-hero"><div class="eyebrow">Chapter 14 · Doping profiles</div><h1>Ion implantation for BCD</h1><p class="lead">Ion implantation controls the dose and depth of dopants used to form wells, threshold-adjust regions, drift regions and source/drain junctions. For BCD devices, these profiles help set isolation, breakdown, on-resistance and parasitic behavior. Implantation also damages the crystal, so the profile must be understood together with annealing, activation and thermal budget.</p><ul class="objectives"><li>Relate ion energy and species to projected range and profile width.</li><li>Explain dose, peak concentration, junction depth and mask stopping.</li><li>Recognize channeling, lateral spread, mask shadowing and implant damage.</li><li>Connect well and drift implants to BCD device structures without implying a foundry recipe.</li></ul></header>
 <section id="implant-system"><h2>Ion beam and dose control</h2><p>An implanter selects an ion species, accelerates it to a chosen energy, scans the beam and measures integrated charge to estimate dose. Energy mainly sets the depth scale, while dose mainly sets the amount introduced. Species and molecular ions such as BF₂ also affect how energy is shared among atoms.</p><p>In BCD, different masks and implant conditions form wells and high-voltage drift regions as well as low-voltage junctions. The exact sequence and dose-energy windows are platform-specific; this chapter focuses on profile intuition.</p></section>
-<section id="range"><h2>Projected range and straggle</h2><p>As an ion enters silicon, nuclear collisions redirect it and displace lattice atoms; electronic interactions also remove energy. Many ion trajectories produce a distribution described approximately by projected range \(R_p\) and straggle \(\Delta R_p\). A Gaussian is a first-order picture, not a complete implant simulation.</p><div class="formula">$$N(x)\approx\frac{\Phi}{\sqrt{2\pi}\,\Delta R_p}e^{-(x-R_p)^2/(2\Delta R_p^2)},\qquad N_p\approx\frac{0.4\Phi}{\Delta R_p}$$<div class="where">Here \(\Phi\) is dose (cm⁻²). A metallurgical junction estimate requires a background concentration and active dopant profile; chemical dose alone is not enough.</div></div><div class="sim" id="sim-prof">
+<section id="range"><h2>Projected range and straggle</h2><p>As an ion enters silicon, nuclear collisions redirect it and displace lattice atoms; electronic interactions also remove energy. Many ion trajectories produce a distribution described approximately by projected range \(R_p\) and straggle \(\Delta R_p\). A Gaussian is a first-order picture, not a complete implant simulation. The species and energy set a characteristic stopping depth, while dose scales the profile amplitude. Public range tables report these quantities for specified ion/target combinations; for example, the <a href="https://fabweb.ece.illinois.edu/gt/gt/gt15.aspx">University of Illinois ECE444 GT15 table</a> gives \(R_p\) and \(\Delta R_p\) for B and P in Si and SiO₂ over its stated energy interval. It does not define a BCD implant recipe.</p><div class="formula">$$N_{chem}(x)\approx\frac{\Phi}{\sqrt{2\pi}\,\Delta R_p}e^{-(x-R_p)^2/(2\Delta R_p^2)},\qquad \int_0^\infty N_{chem}(x)\,dx\approx\Phi$$<div class="where">Here \(\Phi\) is implanted areal dose (cm⁻²), depths are in cm, and \(N_{chem}\) is chemical concentration (cm⁻³); the profile peak is about \(0.399\Phi/\Delta R_p\). The integral is approximately dose conservation when the profile is well inside the silicon and no dose is lost to a surface film or sputtering. It does not predict the electrically active profile. After anneal, one may write \(N_{active}(x)=f_{act}(x)N_{chem}(x)\), where activation fraction \(f_{act}\) depends on species, concentration, defects and the full thermal sequence. A metallurgical junction estimate requires the net active dopant concentration to cross the opposing background; chemical dose alone is not enough.</div></div><div class="sim" id="sim-prof">
       <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>Implant profile and junction-depth estimate</h3></div>
       <div class="sim-body side">
         <div class="sim-view"><canvas id="ip-cv"></canvas></div>
@@ -59,7 +59,7 @@
         <div class="stat"><span class="k">Dose retained in screen film</span><span class="v" id="ip-o-s">—</span></div>
         <div class="stat"><span class="k">Sheet resistance (assuming full activation)</span><span class="v" id="ip-o-rs">—</span></div>
       </div>
-      <div class="sim-note">Explore species, energy, dose, background concentration, screen oxide and an illustrative channeling tail. The range table is an educational approximation, not a direct reproduction of a calibrated implant dataset.</div>
+      <div class="sim-note">Explore species, energy, dose, background concentration, screen oxide and an illustrative channeling tail that redistributes the selected dose. The range table is an educational approximation, not a direct reproduction of a calibrated implant dataset.</div>
     </div><div class="callout"><strong>Numerical model provenance and limits</strong><p>The simulator uses coarse interpolations of fixed teaching values. As a public comparison, the University of Illinois ECE444 <a href="https://fabweb.ece.illinois.edu/gt/gt/gt15.aspx">GT15 effective range table</a> reports \(R_p\) and \(\Delta R_p\) for B and P in silicon and silicon dioxide from 10 to 150 keV; PMICBook’s values are not a transcription of that table. GT15 does not provide the simulator’s As or BF₂ entries, and the simulator extends beyond GT15’s tabulated energy interval. Actual range and straggle depend on ion species, energy, crystal orientation, screen layers, tilt, channeling and tool conditions. Use calibrated implant simulation or measurements for quantitative analysis. Sheet resistance also uses a simplified mobility relation and assumes full activation.</p></div></section>
 <section id="mask"><h2>Mask stopping and leakage</h2><p>Resist, oxide, nitride or a gate can block an implant outside the intended region. Stopping depends on ion species, energy and mask composition. A Gaussian tail estimate can help frame a required thickness, but actual mask-edge transmission and secondary effects need process validation.</p><div class="sim" id="sim-mask">
       <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>Transmission and stopping thickness by mask material</h3></div>
@@ -100,7 +100,7 @@
       </div>
       <div class="sim-note">Change ion tilt, mask height and opening width to see geometric shadowing and lateral spread. The optional anneal uses a simplified diffusion assumption; values are illustrative.</div>
     </div></section>
-<section id="damage"><h2>Implant damage and annealing</h2><p>Implants displace atoms and can amorphize a near-surface region at sufficiently high damage density. Annealing repairs some lattice disorder and promotes electrical activation, but can also cause diffusion or defect-related transient effects. Therefore an implant profile is not the final electrical profile.</p><p>See <a href="anneal.html">Annealing, activation and diffusion</a> for thermal-history effects. For high-voltage BCD, drift-region dose and geometry trade breakdown against resistance; consult the <a href="hv-devices.html">high-voltage device lesson</a> for that device-level connection.</p></section>
+<section id="damage"><h2>Implant damage and annealing</h2><p>Implants displace atoms and can amorphize a near-surface region at sufficiently high damage density. Annealing repairs some lattice disorder and promotes electrical activation, but can also cause diffusion or defect-related transient effects. Thus the as-implanted chemical profile, the post-anneal chemical profile and the electrically active profile are distinct. In a PMIC well or drift region, incomplete activation can raise sheet resistance, while excess redistribution can move a compensation boundary or junction and alter breakdown and leakage. A useful first-order conduction relation is \(G_{sheet}\approx q\int \mu(x)N_{active}(x)\,dx\) (S/□), so sheet resistance is \(R_{sheet}=1/G_{sheet}\); this estimate assumes a single carrier type and needs concentration-dependent mobility and measured activation for quantitative use.</p><p>The anneal therefore balances damage recovery and activation against diffusion, clustering and the limits imposed by later films or junction geometry. Fast thermal cycles can reduce time available for redistribution, but peak temperature alone does not establish activation or defect removal. See <a href="anneal.html">Annealing, activation and diffusion</a> for thermal-history effects. For high-voltage BCD, drift-region dose and geometry trade breakdown against resistance; consult the <a href="hv-devices.html">high-voltage device lesson</a> for that device-level connection.</p></section>
 <section class="keypoints" id="summary"><h2>Key points</h2><ol><li>Implant energy sets a depth scale; dose sets the total introduced dopant amount.</li><li>Projected range and straggle summarize a profile but omit channeling and detailed collision physics.</li><li>Mask stopping, lateral straggle and tilt affect well, drift and junction boundaries.</li><li>Implant damage requires anneal; active concentration and final junction depth depend on the full thermal sequence.</li><li>All numerical values here are public educational approximations, not foundry-specific parameters.</li></ol></section>
 <section class="quiz-sec" id="quiz"><h2>Knowledge check</h2><div class="quiz">
 <div class="quiz-q"><p>In a first-order implant model, what primarily sets the projected depth scale?</p><div class="opts"><button class="opt">Dose alone</button><button class="opt" data-correct>Ion species and implant energy</button><button class="opt">Wafer diameter</button><button class="opt">Post-CMP clean duration</button></div><div class="quiz-exp">Species and energy determine stopping behavior and therefore the range distribution.</div></div>
@@ -132,18 +132,28 @@
       var P = PB.palette(), sp = gSp(), E = Math.pow(10, gE()), dose = Math.pow(10, gD()), NB = Math.pow(10, gB()), tox = gS(), ch = gC();
       var r = XS.range(sp, E), Rp = r.Rp, dR = r.dRp, k = 1.1;
       var g = SKEW[sp] * (mSel.value === "p" ? 1 : 0), s1 = dR * (1 - 0.35 * g), s2 = dR * (1 + 0.35 * g);
-      var norm = dose / (Math.sqrt(2 * Math.PI) * (s1 + s2) / 2 * 1e-7);
       var lam = Rp * 0.8 + 2 * dR;
+      // Normalize the truncated skew-Gaussian and exponential tail separately.
+      // The channeling control redistributes, rather than creates, the selected dose.
+      var erf = PB.erf(Rp / (Math.SQRT2 * s1));
+      var coreArea = Math.sqrt(Math.PI / 2) * (s1 * erf + s2) * 1e-7;
+      var coreNorm = dose * (1 - ch) / coreArea, tailNorm = dose * ch / (lam * 1e-7);
       var N = function (z) { // z: silicon-equivalent depth (nm)
-        var s = z < Rp ? s1 : s2, v = norm * Math.exp(-0.5 * Math.pow((z - Rp) / s, 2));
-        if (ch > 0 && z > Rp) v += ch * norm * 0.5 * Math.exp(-(z - Rp) / lam);
+        var sigma = z < Rp ? s1 : s2;
+        var v = coreNorm * Math.exp(-0.5 * Math.pow((z - Rp) / sigma, 2));
+        if (z > Rp) v += tailNorm * Math.exp(-(z - Rp) / lam);
         return v;
       };
       var zox = tox * k, data = [], xmax = Math.max(60, (Rp + 6 * dR + (ch ? 5 * lam : 0)) * 1.1 - zox);
-      var inOx = 0, total = 0, dz = xmax / 600;
-      for (var z = 0; z < zox; z += 0.25) inOx += N(z) * 0.25e-7;
+      var total = dose, dz = xmax / 600, left = Math.min(zox, Rp);
+      // Integrate the profile mass over the screen exactly; a fixed-depth
+      // left sum can exceed the incident dose for very shallow implants.
+      var inOx = coreNorm * Math.sqrt(Math.PI / 2) * s1 *
+        (PB.erf((left - Rp) / (Math.SQRT2 * s1)) + erf) * 1e-7;
+      if (zox > Rp) inOx += coreNorm * Math.sqrt(Math.PI / 2) * s2 *
+        PB.erf((zox - Rp) / (Math.SQRT2 * s2)) * 1e-7 + dose * ch * (1 - Math.exp(-(zox - Rp) / lam));
+      inOx = Math.max(0, Math.min(total, inOx));
       for (var x = 0; x <= xmax; x += dz) data.push([x, Math.max(1e13, N(x + zox))]);
-      for (var z2 = 0; z2 < zox + xmax + 10 * dR; z2 += 0.25) total += N(z2) * 0.25e-7;
       var xj = null;
       for (var i = data.length - 1; i > 0; i--) { if (data[i][1] < NB && data[i - 1][1] >= NB) { xj = data[i][0]; break; } }
       var peak = Math.max.apply(null, data.map(function (d) { return d[1]; }));
@@ -156,8 +166,8 @@
       PB.stat("ip-o-n", sup(peak) + "<small>cm⁻³</small>");
       PB.stat("ip-o-j", xj ? small(PB.fmt(xj, 3), "nm") : "<span class='bad-t'>No junction found</span>");
       PB.stat("ip-o-s", small((inOx / total * 100).toFixed(1), "%"));
-      var act = (total - inOx), Rs = 1 / (1.602e-19 * mob(peak / 3, r.type) * act);
-      PB.stat("ip-o-rs", small(PB.fmt(Rs, 3), "Ω/□"));
+      var act = total - inOx, Rs = 1 / (1.602e-19 * mob(peak / 3, r.type) * act);
+      PB.stat("ip-o-rs", act > total * 1e-9 ? small(PB.fmt(Rs, 3), "Ω/□") : "— (silicon dose below model resolution)");
     }, { aspect: 0.62, minHeight: 320, maxHeight: 460 });
   })();
 

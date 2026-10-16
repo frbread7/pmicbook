@@ -25,10 +25,10 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/lab.html#chapter","name":"BCD Process Lab","headline":"BCD Process Lab · PMICBook","description":"Explore educational semiconductor process modules and an illustrative BCD LDMOS cross-section using editable material and dopant steps.","url":"https://frbread7.github.io/pmicbook/chapters/lab.html","position":24,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"24. BCD Process Lab","item":"https://frbread7.github.io/pmicbook/chapters/lab.html"}]}]}</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/lab.html#chapter","name":"BCD Process Lab","headline":"BCD Process Lab · PMICBook","description":"Explore educational semiconductor process modules and an illustrative BCD LDMOS cross-section using editable material and dopant steps.","url":"https://frbread7.github.io/pmicbook/chapters/lab.html","position":24,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-16","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"24. BCD Process Lab","item":"https://frbread7.github.io/pmicbook/chapters/lab.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="../css/style.css">
 <script src="../js/common.js"></script>
 <script src="../js/xsec.js"></script>
@@ -100,40 +100,54 @@
         </tbody>
       </table>
     </div>
-    <div class="callout warn"><strong>Model boundary</strong><p>This retained cell-grid engine is for qualitative process intuition. It is not process TCAD: it does not model a complete BCD recipe, calibrated implant activation, three-dimensional layout, electric-field crowding, breakdown voltage, or device performance. Grid stair-steps and edge artifacts are expected. All values in the presets are illustrative assumptions.</p></div>
+    <div class="callout warn"><strong>Model boundary</strong><p>This retained cell-grid engine is for qualitative process intuition. It is not process TCAD: it does not model a complete BCD recipe, calibrated implant activation, three-dimensional layout, electric-field crowding, breakdown voltage, or device performance. It stores only total n-type and p-type concentrations. During anneal, all n-type dopant uses a P-like effective diffusion law and all p-type dopant a B-like law; the resulting As source contour is not an As-specific diffusion prediction. Grid stair-steps and edge artifacts are expected. All values in the presets are illustrative assumptions.</p></div>
   </section>
 
   <section id="ldmos-cross-section">
     <h2>Annotated BCD example: an nLDMOS</h2>
-    <p>This generic cross-section shows how an HV well, p-body, n-type drift region, gate, field oxide, and source/drain regions fit together. Specific BCD platforms use different well, isolation, field-shaping, and implant modules; this drawing is a teaching schematic rather than a process recipe.</p>
+    <p>This generic final-state cross-section shows an HV well, p-body, n-type drift region, gate, optional field structure, and source/drain/body terminals. It does not specify a fabrication order. The selector below compares two published examples. Its initial view follows <a href="https://patents.google.com/patent/US7405117B2/en">US7405117B2 process 600, Figs. 5A, 7A–7H and 8A–8C</a>: masked P-body implant and drive precede gate oxide and polysilicon. Switch to <a href="https://data.epo.org/publication-server/rest/v1.2/patents/EP1119050NWA1/document.pdf">EP1119050A1 Table 1, [0051]–[0061]</a> to see patterned gate before gate-aligned P-body in an NBL/N− epi/sinker architecture. These are disclosed examples, not evidence of common production practice.</p>
+    <div class="ld-sequence" data-ldmos-sequence="en"></div>
+    <div class="callout"><strong>Text equivalent of both timelines</strong><p>US process 600: p substrate → masked HV n-well → separate P-body implant → body drive → gate dielectric → patterned poly → optional post-gate N-LD → n+ source/drain and p+ body-contact implants → later activation/contact sketch. EP1119050A1: p substrate → N+ buried-layer implant/drive → N− epi → N+ sinker and platform field modules → gate oxide → patterned poly → gate-aligned P-body implant/drive → blanket N− LDD → separate N+ source and P+ body-contact implants → contact sketch. The arrows condense other modules and do not specify recipe conditions.</p></div>
+    <p><strong>Read the sequence and anatomy views differently.</strong> Each stage reveals module dependencies and uses dashed fill for an implant footprint; the static cross-section below is a final device anatomy sketch of the first architecture only. Neither predicts the electrically active concentration after all thermal steps. The US process-600 slice uses a p substrate and HV n-well and does not define an N+ buried layer, epi growth, isolation trench, or field plate for that slice. The EP platform includes N+ buried layers, N− epi and sinkers; its P+ isolation is a shared platform module and is not drawn as a verified ring around the cropped DMOS cell. These structures must not be spliced into one supposed universal flow.</p>
+    <div class="table-wrap"><table><thead><tr><th>Stage group</th><th>What is defined</th><th>What must still be checked</th></tr></thead><tbody>
+      <tr><td>Substrate / well</td><td>p substrate; masked HV n-well in the selected example</td><td>Isolation and substrate tie; an NBL/epi stack belongs only to a platform that specifies it.</td></tr>
+      <tr><td>Body before gate</td><td>Independent P-body mask, implant, then drive/RTA</td><td>Mask overlay, lateral diffusion, surface concentration, punch-through and V<sub>th</sub>.</td></tr>
+      <tr><td>Gate / drain path</td><td>Gate dielectric then patterned poly; one allowed post-gate N-LD option</td><td>Body–gate overlap and body–drain spacing; BV and R<sub>on,sp</sub> require device data.</td></tr>
+      <tr><td>Terminals</td><td>n+ source/drain and p+ body contact, activation, contacts; optional spacers are a separate module</td><td>Body short, contact/silicide resistance, current crowding, remaining thermal budget.</td></tr>
+    </tbody></table></div>
+    <p>The optional gate-connected field plate in the final sketch requires its own dielectric, conductor, patterning, and connection before it can shape field. A floating decorative stripe would not establish its bias. The disclosed process 600 does not provide a field-plate recipe; any quantitative effect must be measured or solved for a specified structure. <a href="integration.html">Chapter 18</a> retains a separate LV CMOS stepper.</p>
     <figure class="ldmos-figure">
       <svg viewBox="0 0 840 330" role="img" aria-labelledby="ldmos-title ldmos-desc">
         <title id="ldmos-title">Illustrative BCD nLDMOS cross-section</title>
-        <desc id="ldmos-desc">An n-channel lateral DMOS schematic with n-plus source in a p-body, gate over the channel, an n-type drift region in an HV n-well, field oxide and a field plate, n-plus drain, and p-type substrate.</desc>
+        <desc id="ldmos-desc">Final-state n-channel lateral DMOS anatomy: n-plus source and p-plus body tie in a p-body, gate over the channel, n-type drift in an HV n-well, optional gate-connected field plate, n-plus drain, and p-type substrate. This is not a process stage.</desc>
         <rect x="45" y="166" width="750" height="125" rx="3" class="sub" stroke="currentColor"/>
         <path d="M130 165 Q130 112 190 112 H684 Q744 112 744 165 V225 H130 Z" class="nw" stroke="#267aa4" stroke-width="2"/>
-        <rect x="162" y="118" width="177" height="62" rx="22" class="pb" stroke="#43814d" stroke-width="2"/>
+        <rect x="162" y="118" width="208" height="62" rx="22" class="pb" stroke="#43814d" stroke-width="2"/>
         <rect x="372" y="120" width="273" height="45" class="drift" stroke="#267aa4" stroke-width="2"/>
-        <rect x="184" y="111" width="53" height="33" class="nplus" stroke="#1d5f89" stroke-width="2"/>
+        <rect x="260" y="111" width="70" height="33" class="nplus" stroke="#1d5f89" stroke-width="2"/>
+        <rect x="184" y="111" width="53" height="33" fill="#d98798" stroke="#853e52" stroke-width="2"/>
         <rect x="652" y="111" width="53" height="34" class="nplus" stroke="#1d5f89" stroke-width="2"/>
         <rect x="314" y="99" width="76" height="10" class="oxide" stroke="#9d681d"/>
         <rect x="322" y="68" width="60" height="30" class="gate" stroke="#293544"/>
         <rect x="390" y="98" width="230" height="19" class="oxide" stroke="#9d681d"/>
         <rect x="435" y="75" width="129" height="12" class="metal" stroke="#946c19"/>
+        <path d="M382 80 H435" stroke="#946c19" stroke-width="7" fill="none"/>
         <rect x="198" y="84" width="22" height="27" class="contact" stroke="#755a40"/>
+        <rect x="281" y="84" width="19" height="27" class="contact" stroke="#755a40"/>
+        <path d="M209 83 H290" stroke="#946c19" stroke-width="6" fill="none"/>
         <rect x="346" y="84" width="18" height="14" class="contact" stroke="#755a40"/>
         <rect x="669" y="84" width="22" height="27" class="contact" stroke="#755a40"/>
-        <path d="M211 52 L211 80 M353 52 L353 80 M680 52 L680 80" class="leader"/>
-        <text x="174" y="42">Source contact</text><text x="326" y="42">Gate contact</text><text x="645" y="42">Drain contact</text>
-        <path d="M204 151 L178 203 M264 142 L264 233 M486 142 L500 247 M599 92 L594 64 M502 75 L502 54" class="leader"/>
-        <text x="75" y="216">n+ source</text><text x="213" y="248">p-body</text>
+        <path d="M285 52 L285 80 M353 52 L353 80 M680 52 L680 80" class="leader"/>
+        <text x="174" y="42">Source/body short</text><text x="326" y="42">Gate contact</text><text x="645" y="42">Drain contact</text>
+        <path d="M295 145 L178 203 M244 159 L264 233 M210 145 L250 179 M486 142 L500 247 M599 92 L594 64 M502 75 L502 54" class="leader"/>
+        <text x="75" y="216">n+ source</text><text x="213" y="248">p-body</text><text x="250" y="183">p+ body tie</text>
         <text x="426" y="269">n− drift region</text><text x="521" y="49">Field plate</text>
         <text x="562" y="64">Field oxide</text>
         <text x="450" y="211">HV n-well</text><text x="65" y="280">p-type substrate</text>
         <text x="648" y="157">n+ drain</text>
         <text x="297" y="310" class="small">Illustrative geometry only · not to scale · module order and structures vary by technology</text>
       </svg>
-      <figcaption>Conceptual nLDMOS anatomy. The field plate and isolation treatment are platform-dependent. The XS preset below illustrates selected mask/implant/anneal interactions; it does not calculate electric field or breakdown.</figcaption>
+      <figcaption>Conceptual final nLDMOS anatomy, not to scale. Source and p+ body are shown tied together. A gate-connected field plate is an optional architecture-specific example; the XS preset below does not calculate its electric field or breakdown.</figcaption>
     </figure>
     <div class="table-wrap"><table>
       <thead><tr><th>Device region</th><th>Process module connection</th><th>Why it matters to a PMIC</th></tr></thead>
@@ -144,7 +158,7 @@
         <tr><td>Source, drain, contacts, metal</td><td><a href="etch.html">pattern transfer</a>, <a href="anneal.html">thermal budget</a>, <a href="metal.html">contacts and top metal</a></td><td>Contributes series resistance, current density, heating, and reliability limits.</td></tr>
       </tbody>
     </table></div>
-    <p>Use the <strong>BCD nLDMOS module</strong> preset to inspect ideal mask windows for a well proxy, body, drift, and source/drain implants followed by an illustrative anneal. The grid's 1.6 µm width and submicron depth are a compact teaching window, not the physical dimensions or doping specification of an HV well. Compare the dopant shapes with the annotated drawing and the qualitative device trade-offs in <a href="hv-devices.html">HV MOS and LDMOS</a>.</p>
+    <p>Use the <strong>BCD nLDMOS module</strong> preset to inspect ideal mask windows for a well proxy, pre-gate body implant/drive, gate geometry, one post-gate drain extension, and later source/drain/body-contact implants. The grid's 1.6 µm width and submicron depth are a compact teaching window, not the physical dimensions or doping specification of an HV well. Compare the dopant shapes with the annotated drawing and <a href="hv-devices.html">HV MOS and LDMOS</a>.</p>
   </section>
 
   <section id="lab-sec">
@@ -288,7 +302,7 @@
       var amb = v.amb === "n2" ? "" : v.amb;
       return { op: "anneal", T: v.T, time: v.time, ambient: amb, k: amb ? "OX" : "ANL",
         label: (amb ? (amb === "wet" ? "Wet oxidation " : "Dry oxidation ") : "Anneal ") + v.T + " °C · " + (v.time >= 120 ? Math.round(v.time / 60) + " min" : v.time + " s"),
-        desc: amb ? "Oxidant reaches exposed silicon through oxide; the model uses about 2.27 nm oxide volume per 1 nm consumed silicon, treats nitride as a barrier, and assumes (100) silicon because this control has no orientation selector." : "Dopant redistribution follows a simplified square-root diffusion trend; activation is not calibrated." };
+        desc: amb ? "Oxidant reaches exposed silicon through oxide; the model uses about 2.27 nm oxide volume per 1 nm consumed silicon, treats nitride as a barrier, and assumes (100) silicon because this control has no orientation selector." : "The grid redistributes aggregate n-type dopant with a P-like diffusion proxy and p-type dopant with a B-like proxy. It does not predict species-specific As diffusion or electrical activation." };
     } },
     cmp: { name: "CMP", fields: [
       { id: "stop", label: "Stop layer", type: "select", opts: [["", "None (target level)"]].concat(matOpts), v: "nit" },
@@ -333,15 +347,16 @@
       desc: "An ideal mask admits the ion beam only in the named window. The grid stores an illustrative Gaussian dopant profile; the depth, activation, lateral mask edge, and electric field are not calibrated." };
   }
   var PRESETS = {
-    ldmos: { name: "BCD nLDMOS modules", d: "Illustrative well proxy, p-body, n-drift, n+ source/drain, anneal, gate and field structures", dom: "wide", steps: function () { return [
+    ldmos: { name: "Pre-gate P-body nLDMOS example", d: "Masked well/body → body drive → gate → drain extension → n+/p+ junctions", dom: "wide", steps: function () { return [
       maskedImplant("P", 200, 2e11, [[150, 1450]], "HV well proxy window · P 200 keV, 2e11 cm⁻²"),
       maskedImplant("B", 30, 5e11, [[230, 680]], "p-body window · B 30 keV, 5e11 cm⁻²"),
-      maskedImplant("P", 70, 4e11, [[700, 1280]], "n-drift window · P 70 keV, 4e11 cm⁻²"),
-      maskedImplant("As", 35, 1e14, [[260, 390], [1300, 1430]], "n+ source/drain windows · As 35 keV, 1e14 cm⁻²"),
-      { op: "anneal", T: 1000, time: 30, ambient: "", k: "ANL", label: "Illustrative activation/redistribution · 1000 °C, 30 s", desc: "A simplified diffusion calculation redistributes the stored dopants. It does not model activation fraction or a qualified thermal budget." },
-      { op: "rect", mat: "ox", x0: 590, x1: 780, y0: -20, y1: 0, k: "OX", label: "Gate dielectric region", desc: "Schematic dielectric placement; actual dielectric thickness and process order depend on the BCD platform." },
-      { op: "rect", mat: "poly", x0: 610, x1: 720, y0: -60, y1: -20, k: "GATE", label: "Gate electrode region", desc: "The gate overlaps the p-body/channel edge and leads toward the drift region. This is geometry for explanation, not a transistor solver." },
-      { op: "rect", mat: "ox", x0: 820, x1: 1210, y0: -40, y1: 0, k: "FIELD", label: "Field dielectric over drift region", desc: "Field dielectric and optional field-plate configurations differ across technologies; this rectangle does not compute field shaping." }
+      { op: "anneal", T: 1000, time: 30, ambient: "", k: "ANL", label: "Illustrative pre-gate P-body drive · 1000 °C, 30 s", desc: "The selected disclosed sequence drives the P-body before gate oxide. This grid only redistributes chemical dopant; activation fraction, lateral channel length, and source-substrate punch-through are not solved." },
+      { op: "rect", mat: "ox", x0: 590, x1: 780, y0: -20, y1: 0, k: "OX", label: "Gate dielectric after body drive", desc: "Schematic gate dielectric after the selected pre-gate body drive; thickness and charge are not calibrated." },
+      { op: "rect", mat: "poly", x0: 610, x1: 720, y0: -60, y1: -20, k: "GATE", label: "Patterned gate after body drive", desc: "This gate is placed relative to an already implanted/diffused body edge. Real mask overlay and channel overlap require measured profiles and layout rules." },
+      maskedImplant("P", 70, 4e11, [[720, 1280]], "post-gate N-LD window · P 70 keV, 4e11 cm⁻²"),
+      maskedImplant("As", 35, 1e14, [[480, 610], [1300, 1430]], "n+ source/drain windows · As 35 keV, 1e14 cm⁻²"),
+      maskedImplant("B", 20, 1e14, [[260, 390]], "p+ body-contact window · B 20 keV, 1e14 cm⁻²"),
+      { op: "anneal", T: 1000, time: 10, ambient: "", k: "ANL", label: "Illustrative later junction anneal · 1000 °C, 10 s", desc: "The n-type contour uses a P-like effective diffusion law even for the earlier As source implant; the grid cannot predict As-specific diffusion, activation, contact resistance, or electrically active junctions. Numeric values are teaching inputs, not a patent/foundry recipe." }
     ]; } },
     sti: { name: "STI trench", d: "Pad oxide/nitride → pattern → silicon etch → oxide fill → CMP", dom: "std", steps: function () { return [
       D({ mat: "ox", mode: "ald", thick: 8 }), D({ mat: "nit", mode: "cvd", thick: 40, stick: 0.2 }),
@@ -405,7 +420,7 @@
     legend: ["si", "ox", "nit", "poly", "pr", "w", "cu", "tin", "sil", "epi", "acl"],
     aspect: 0.8, minHeight: 360, maxHeight: 560, below: ctrlHTML,
     startDesc: "p-type silicon substrate (1e15 cm⁻³). Choose a step in the controls below.",
-    note: "This cell-grid model is an educational approximation. The progress bar updates during calculation; long wet-oxidation examples can take several seconds."
+    note: "Educational cell-grid model. In the displayed post-anneal n/p concentration map, n-type diffusion is a P-like proxy and p-type diffusion a B-like proxy; an As implant followed by anneal is not an As-specific profile. The progress bar updates during calculation; long wet-oxidation examples can take several seconds."
   });
 
   var curOp = "depo", fieldGet = {};
@@ -610,5 +625,6 @@
   })();
 })();
 </script>
+<script src="../js/ldmos-sequence.js"></script>
 </body>
 </html>

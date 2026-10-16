@@ -1,4 +1,10 @@
-# Current milestone: PMICBook v1.1 technical-quality review and release
+# Current milestone: PMICBook v1.2 engineering candidate
+
+**Status:** Local verification and bounded independent review are complete on `v1.2.0-engineering-candidate`. The published stable version remains v1.1.0. The candidate has not been pushed, tagged, released, or deployed; no hosted CI or Pages workflow was used. C8 remains deferred P3, and native-speaker/human language naturalness review is not claimed. The exact local evidence and review scope are recorded in the [technical audit](V1_2_TECHNICAL_AUDIT.md).
+
+The v1.2 scope is recorded in the [technical audit](V1_2_TECHNICAL_AUDIT.md), [content improvement register](V1_2_CONTENT_IMPROVEMENTS.md), [nLDMOS sequence review](NLDMOS_PROCESS_SEQUENCE_REVIEW.md), [device physics note](NLDMOS_DEVICE_PHYSICS.md), and [source evidence register](V1_2_SOURCE_EVIDENCE.md). Local checks include static/content validation, the persistent physics regression, Chrome route and responsive journeys, representative model endpoints, the bilingual process-lab interactions, and the regenerated KaTeX SRI assets. Their exact scope and bounded failures/corrections are in the technical audit. These are local candidate checks; the published v1.1 evidence below remains historical and does not validate v1.2.
+
+## Prior milestone: v1.1 technical-quality review and release
 
 **Status:** Complete (2026-10-09). PMICBook v1.1.0 passed the whole-repository review and production browser gates, is published at the project-site URL, and is tagged as a stable release. See [production QA](PRODUCTION_QA.md) for deployment and live-browser evidence.
 

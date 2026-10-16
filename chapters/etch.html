@@ -25,10 +25,10 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/etch.html#chapter","name":"Etch, Isolation, and Contacts","headline":"Etch, Isolation, and Contacts · PMICBook","description":"How etch profile, selectivity, aspect ratio and endpoint margin affect BCD isolation, contacts and field structures. Interactive cross-sections are educational approximations, not foundry recipes.","url":"https://frbread7.github.io/pmicbook/chapters/etch.html","position":12,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"12. Etch, Isolation, and Contacts","item":"https://frbread7.github.io/pmicbook/chapters/etch.html"}]}]}</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/chapters/etch.html#chapter","name":"Etch, Isolation, and Contacts","headline":"Etch, Isolation, and Contacts · PMICBook","description":"How etch profile, selectivity, aspect ratio and endpoint margin affect BCD isolation, contacts and field structures. Interactive cross-sections are educational approximations, not foundry recipes.","url":"https://frbread7.github.io/pmicbook/chapters/etch.html","position":12,"inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Interactive textbook","educationalLevel":"Undergraduate and engineering professional","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-16","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/#book","name":"PMICBook: Power Management IC Technology","url":"https://frbread7.github.io/pmicbook/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"12. Etch, Isolation, and Contacts","item":"https://frbread7.github.io/pmicbook/chapters/etch.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="../css/style.css">
 <script src="../js/common.js"></script>
 <script src="../js/xsec.js"></script>
@@ -123,7 +123,7 @@
           <label class="ctrl"><span>Film thickness <output id="oe-h-out"></output></span><input type="range" id="oe-h" min="50" max="500" step="10" value="200"></label>
           <label class="ctrl"><span>Film thickness variation (thicker at edge) <output id="oe-u-out"></output></span><input type="range" id="oe-u" min="0" max="10" step="0.5" value="3"></label>
           <label class="ctrl"><span>Etch-rate variation (faster at center) <output id="oe-r-out"></output></span><input type="range" id="oe-r" min="0" max="10" step="0.5" value="4"></label>
-          <label class="ctrl"><span>Overetch (relative to endpoint) <output id="oe-o-out"></output></span><input type="range" id="oe-o" min="0" max="60" step="1" value="20"></label>
+          <label class="ctrl"><span>Overetch (relative to assumed mean time) <output id="oe-o-out"></output></span><input type="range" id="oe-o" min="0" max="60" step="1" value="20"></label>
           <label class="ctrl"><span>Selectivity to stop layer S <output id="oe-s-out"></output></span><input type="range" id="oe-s" min="2" max="100" step="1" value="20"></label>
         </div>
       </div>
@@ -132,7 +132,7 @@
         <div class="stat"><span class="k">Stop-layer loss, min / max</span><span class="v" id="oe-o-l">—</span></div>
         <div class="stat"><span class="k">Overetch needed for full clearing</span><span class="v" id="oe-o-need">—</span></div>
       </div>
-      <div class="sim-note">Vary thickness and rate nonuniformity to see which location clears last. More overetch can improve clearing but increases stop-layer loss where the target film cleared earlier. This model is illustrative, not a tool endpoint specification.</div>
+      <div class="sim-note">Vary thickness and rate nonuniformity to see which location clears last. The assumed mean clearing time and uncleared area use annular-area weighting for an axisymmetric wafer; this is not an optical endpoint signal or a pattern-density map. More overetch can improve clearing but increases stop-layer loss where the target film cleared earlier.</div>
     </div></section>
   <section class="keypoints" id="summary"><h2>Key points</h2><ol><li>Etch integration balances profile, selectivity, mask survival, damage and wafer uniformity.</li><li>Ion directionality and sidewall chemistry help explain anisotropic plasma profiles; wet etches often undercut laterally.</li><li>ARDE can make narrow or deep contacts clear differently from wide openings.</li><li>Overetch margin protects against incomplete clearing but consumes the stop layer.</li><li>These interactive values are illustrative and must not be treated as a foundry recipe.</li></ol></section>
   <section class="quiz-sec" id="quiz"><h2>Knowledge check</h2><div class="quiz">
@@ -317,17 +317,23 @@
       var P = PB.palette(), h0 = gH(), u = gU() / 100, ru = gR() / 100, oe = gO() / 100, S = gS(), R0 = 5;
       var rs = [], tc = [], N = 61;
       for (var i = 0; i < N; i++) { var r = -150 + 300 * i / (N - 1), q = (r / 150) * (r / 150); var hh = h0 * (1 - u + 2 * u * q), R = R0 * (1 + ru - 2 * ru * q); rs.push([r, hh, R]); tc.push(hh / R); }
-      var tAvg = tc.reduce(function (a, b) { return a + b; }, 0) / N, tMax = Math.max.apply(null, tc), tTot = tAvg * (1 + oe);
+      // Uniform q = (r/Rwafer)^2 samples equal annular area, unlike equal-r samples.
+      var area = [], M = 1000, areaTime = 0;
+      for (var j = 0; j < M; j++) {
+        var qA = (j + 0.5) / M, hA = h0 * (1 - u + 2 * u * qA), rateA = R0 * (1 + ru - 2 * ru * qA);
+        area.push([hA, rateA]); areaTime += hA / rateA;
+      }
+      var tAvg = areaTime / M, tMax = Math.max.apply(null, tc), tTot = tAvg * (1 + oe);
       var loss = rs.map(function (p, i) { return [p[0], Math.max(0, (tTot - tc[i]) * p[2] / S)]; });
       var rem = rs.map(function (p, i) { return [p[0], Math.max(0, p[1] - p[2] * tTot)]; });
       var b1 = { x: 58, y: 16, w: w - 76, h: (h - 110) / 2 }, b2 = { x: 58, y: 16 + (h - 110) / 2 + 40, w: w - 76, h: (h - 110) / 2 };
       PB.chart(ctx, b1, { x: [-150, 150], y: [0, Math.max(tMax, tTot) * 1.15], xLabel: "", yLabel: "Time (s)", series: [{ data: rs.map(function (p, i) { return [p[0], tc[i]]; }), color: P.accent, width: 2.6 }],
-        hlines: [{ y: tAvg, color: P.faint, label: "Endpoint (wafer average)" }, { y: tTot, color: P.accent2, label: "Total etch time" }] });
+        hlines: [{ y: tAvg, color: P.faint, label: "Assumed area-mean time" }, { y: tTot, color: P.accent2, label: "Total etch time" }] });
       ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left"; ctx.fillText("Local clearing time t_clear(r)", b1.x + 6, b1.y + 12);
       var lm = Math.max(1, Math.max.apply(null, loss.map(function (l) { return l[1]; })) * 1.2);
       PB.chart(ctx, b2, { x: [-150, 150], y: [0, lm], xLabel: "Wafer radial position (mm)", yLabel: "nm", series: [{ data: loss, color: P.warn, width: 2.6, fill: "rgba(217,138,0,.12)" }, { data: rem, color: P.bad, width: 2.6 }] });
       ctx.fillStyle = P.warn; ctx.fillText("Stop-layer loss", b2.x + 6, b2.y + 12); ctx.fillStyle = P.bad; ctx.fillText("Remaining film (not cleared)", b2.x + 90, b2.y + 12);
-      var nc = rem.filter(function (p) { return p[1] > 0.5; }).length / N;
+      var nc = area.filter(function (p) { return p[0] - p[1] * tTot > 0.5; }).length / M;
       PB.stat("oe-o-nc", nc > 0 ? "<span class='bad-t'>" + Math.round(nc * 100) + "%</span>" : "<span class='ok-t'>None</span>");
       var lv = loss.map(function (l) { return l[1]; });
       PB.stat("oe-o-l", small(PB.fmt(Math.min.apply(null, lv), 2) + " / " + PB.fmt(Math.max.apply(null, lv), 2), "nm"));

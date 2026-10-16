@@ -21,7 +21,7 @@ Then open <http://localhost:8000/> for English or <http://localhost:8000/ko/> fo
 
 The 25-chapter map moves from PMIC systems and circuits through devices, BCD, fabrication, implementation, test, reliability, and advanced context. Each subject has paired English and Korean lessons. Start at [the English system overview](chapters/overview.html) or [the Korean system overview](ko/chapters/overview.html), or browse all chapters from either home page. Each chapter links to prerequisites and follow-on material where useful.
 
-The [architecture document](docs/PMICBOOK_ARCHITECTURE.md) records the audited chapter map, learning interactions, and ProcessBook content dispositions. [Current milestone](docs/CURRENT_MILESTONE.md) records the completed v1.1 technical-quality review and release. The [v1.1 review record](docs/V1_1_REVIEW.md) separates completed corrections from deferred opportunities. Future ideas are kept separately in [VISION](docs/VISION.md).
+The [architecture document](docs/PMICBOOK_ARCHITECTURE.md) records the audited chapter map, learning interactions, and ProcessBook content dispositions. [Current milestone](docs/CURRENT_MILESTONE.md) records the unreleased v1.2 engineering candidate and its verification gates; the [v1.1 review record](docs/V1_1_REVIEW.md) covers the completed v1.1 technical-quality review and release. Future ideas are kept separately in [VISION](docs/VISION.md).
 
 ## Educational and numerical limits
 

@@ -29,8 +29,23 @@ function resolveRoute(route) {
 const registry = await readFile(new URL('../js/common.js', import.meta.url), 'utf8');
 const slugs = [...registry.matchAll(/\{ slug: "([^"]+)"/g)].map(match => match[1]);
 if (slugs.length !== 25) throw new Error(`Expected 25 chapter slugs, found ${slugs.length}`);
+const mathRoutes = new Set();
+for (const prefix of ['', 'ko/']) {
+  for (const slug of slugs) {
+    const source = await readFile(new URL(`../${prefix}chapters/${slug}.html`, import.meta.url), 'utf8');
+    const visibleSource = source
+      .replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '')
+      .replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi, '')
+      .replace(/<code\b[^>]*>[\s\S]*?<\/code\s*>/gi, '')
+      .replace(/<pre\b[^>]*>[\s\S]*?<\/pre\s*>/gi, '')
+      .replace(/<!--[\s\S]*?-->/g, '');
+    if (/\\\([\s\S]+?\\\)|\$\$[\s\S]+?\$\$|\\\[[\s\S]+?\\\]/.test(visibleSource)) {
+      mathRoutes.add(`${prefix}chapters/${slug}.html`);
+    }
+  }
+}
 const focus = process.argv[3] || '';
-const routes = focus.startsWith('route:') ? [focus.slice(6)] : ['--lab', '--lab-presets', '--diagnostics'].includes(focus) ? [] :
+const routes = focus.startsWith('route:') ? [focus.slice(6)] : ['--lab', '--lab-presets', '--lab-interactions', '--process-interactions', '--model-sweep', '--diagnostics', '--tablet'].includes(focus) ? [] :
   ['', 'ko/', ...slugs.flatMap(slug => [`chapters/${slug}.html`, `ko/chapters/${slug}.html`]), 'chapters/resist.html'];
 routes.map(resolveRoute);
 const profile = await mkdtemp(join(tmpdir(), 'pmicbook-chrome-'));
@@ -119,9 +134,16 @@ async function page(route, viewport = { width: 1280, height: 900 }, loadTimeout 
   const info = await evaluate(`(() => ({title: document.title, path: location.pathname, ready: document.readyState,
     css: !!document.querySelector('link[href$="css/style.css"]'), bar: !!document.querySelector('.pb-topbar'),
     badCanvas: [...document.querySelectorAll('canvas')].filter(c => !c.width || !c.height).length,
+    katexCss: !!document.querySelector('link[href*="katex.min.css"]')?.sheet,
+    katexCore: typeof window.katex === 'object', katexRenderer: typeof window.renderMathInElement === 'function',
+    renderedMath: document.querySelectorAll('.katex').length,
     katexErrors: document.querySelectorAll('.katex-error').length, overflow: document.body.scrollWidth > innerWidth + 6,
     canonical: document.querySelector('link[rel="canonical"]')?.href || ''}))()`);
-  if (!info?.title || !info?.css || !info?.bar || info.katexErrors || info.badCanvas || (viewport.width < 600 && info.overflow)) {
+  const contentChapter = route.includes('chapters/') && !route.endsWith('chapters/resist.html');
+  const chapterHasMath = mathRoutes.has(route);
+  if (!info?.title || !info?.css || !info?.bar || info.katexErrors || info.badCanvas ||
+      (contentChapter && (!info.katexCss || !info.katexCore || !info.katexRenderer)) ||
+      (chapterHasMath && !info.renderedMath) || (viewport.width < 600 && info.overflow)) {
     issues.push(`${route || '/'}: ${JSON.stringify(info)}`);
   }
   return { ...info, loaded: true };
@@ -141,6 +163,47 @@ async function clickAndWait(selector) {
   }
   currentRoute = destination.pathname.slice(base.pathname.length) + destination.search + destination.hash;
   return { href, path: destination.pathname, hash: destination.hash };
+}
+async function tabletJourneys() {
+  const tablet = [], tabletNavigation = [];
+  for (const lang of ['', 'ko/']) {
+    for (const slug of ['lab', 'hv-devices', 'integration']) {
+      const route = `${lang}chapters/${slug}.html`;
+      const info = await page(route, { width: 820, height: 1180 });
+      const layout = await evaluate(`(() => {
+        const visible = element => { const box = element.getBoundingClientRect(); return box.width > 0 && box.height > 0; };
+        const controls = [...document.querySelectorAll('.sim input[type="range"], .sim select, [data-ldmos-sequence] button')].filter(visible);
+        const canvases = [...document.querySelectorAll('.sim canvas')].filter(visible);
+        const diagrams = [...document.querySelectorAll('figure.diagram svg')].filter(visible);
+        return {width: innerWidth, height: innerHeight, overflow: document.documentElement.scrollWidth > innerWidth + 6,
+          visibleControls: controls.length, visibleCanvases: canvases.length,
+          visibleDiagrams: diagrams.length, heading: document.querySelector('main h1')?.textContent.trim() || '',
+          locale: document.documentElement.lang, localeLink: document.querySelector('.pb-locale')?.getAttribute('href') || ''};
+      })()`);
+      tablet.push({route, ...layout});
+      const pageContentVisible = slug === 'hv-devices' ? layout.visibleDiagrams > 0 : layout.visibleControls > 0 && layout.visibleCanvases > 0;
+      if (!info.loaded || layout.width !== 820 || layout.height !== 1180 || layout.overflow ||
+          !pageContentVisible || !layout.heading || layout.locale !== (lang ? 'ko' : 'en') || !layout.localeLink) {
+        issues.push(`${route}: tablet layout/content check failed: ${JSON.stringify(layout)}`);
+      }
+    }
+    const hvRoute = `${lang}chapters/hv-devices.html`;
+    await page(hvRoute, { width: 820, height: 1180 });
+    const integrationLink = await clickAndWait('a[href$="integration.html"]');
+    const expectedPrefix = lang ? '/ko/chapters/' : '/chapters/';
+    if (!integrationLink.path.endsWith(`${expectedPrefix}integration.html`)) {
+      issues.push(`${hvRoute}: tablet HV-to-integration navigation failed: ${JSON.stringify(integrationLink)}`);
+    }
+    tabletNavigation.push({from: hvRoute, to: integrationLink.path});
+    const integrationRoute = `${lang}chapters/integration.html`;
+    await page(integrationRoute, { width: 820, height: 1180 });
+    const hvLink = await clickAndWait('a[href$="hv-devices.html"]');
+    if (!hvLink.path.endsWith(`${expectedPrefix}hv-devices.html`)) {
+      issues.push(`${integrationRoute}: tablet integration-to-HV navigation failed: ${JSON.stringify(hvLink)}`);
+    }
+    tabletNavigation.push({from: integrationRoute, to: hvLink.path});
+  }
+  return {tablet, tabletNavigation};
 }
 try {
   chrome = spawn('google-chrome', [
@@ -208,7 +271,7 @@ try {
       const state = await evaluate(`({steps: document.querySelectorAll('#lab .steps-list li').length,
         message: document.querySelector('#lab-msg')?.textContent || ''})`);
       lab.push({ lang: lang || 'en', seconds: Number(((performance.now() - started) / 1000).toFixed(2)), ...state });
-      if (state.steps !== 8 || !state.message) issues.push(`${lang}lab: hostile share state did not fall back`);
+      if (state.steps !== 9 || !state.message) issues.push(`${lang}lab: hostile share state did not fall back`);
     }
     await page('chapters/lab.html');
     const limits = await evaluate(`(() => {
@@ -268,7 +331,7 @@ try {
           domain: document.querySelector('#lab-dom')?.value, message: document.querySelector('#lab-msg')?.textContent || ''})`);
         const seconds = Number(((performance.now() - started) / 1000).toFixed(2));
         workloads.push({ lang: lang || 'en', ...test, inputDomain: test.domain, restoredDomain: state.domain, seconds, ...state });
-        if (state.steps !== (test.accepted ? 1 : 8) || state.domain !== (test.accepted ? test.domain : 'wide') ||
+        if (state.steps !== (test.accepted ? 1 : 9) || state.domain !== (test.accepted ? test.domain : 'wide') ||
             (test.accepted ? !!state.message : !state.message)) {
           issues.push(`${lang}${test.name}: unexpected restore result ${JSON.stringify(state)}`);
         }
@@ -285,7 +348,7 @@ try {
             domain: document.querySelector('#lab-dom')?.value, message: document.querySelector('#lab-msg')?.textContent || ''})`);
           const seconds = Number(((performance.now() - started) / 1000).toFixed(2));
           workloads.push({ lang: lang || 'en', name, inputDomain: domain, restoredDomain: state.domain, seconds, ...state });
-          if (state.steps !== 8 || state.domain !== 'wide' || !state.message) {
+          if (state.steps !== 9 || state.domain !== 'wide' || !state.message) {
             issues.push(`${lang}${name}: unexpected restore result ${JSON.stringify(state)}`);
           }
         }
@@ -303,7 +366,7 @@ try {
           domain: document.querySelector('#lab-dom')?.value, message: document.querySelector('#lab-msg')?.textContent || ''})`);
         const seconds = Number(((performance.now() - started) / 1000).toFixed(2));
         stepLimits.push({ lang: lang || 'en', count, accepted: count === 32, seconds, ...state });
-        if (state.steps !== (count === 32 ? 32 : 8) || state.domain !== (count === 32 ? 'wide' : 'wide') ||
+        if (state.steps !== (count === 32 ? 32 : 9) || state.domain !== (count === 32 ? 'wide' : 'wide') ||
             (count === 32 ? !!state.message : !state.message)) {
           issues.push(`${lang}${count}-step share boundary: unexpected result ${JSON.stringify(state)} in ${seconds}s`);
         }
@@ -330,7 +393,7 @@ try {
         malformedStates.push({ lang: lang || 'en', name: test.name, seconds, ...state });
         const fallbackNotice = lang ? '기본 BCD nLDMOS 프리셋을 불러왔습니다.' : 'default BCD nLDMOS preset was loaded.';
         const runtimeIssue = issues.slice(firstIssue).some(issue => issue.includes('runtime exception'));
-        if (state.steps !== 8 || state.domain !== 'wide' || !state.message.includes(fallbackNotice) || runtimeIssue) {
+        if (state.steps !== 9 || state.domain !== 'wide' || !state.message.includes(fallbackNotice) || runtimeIssue) {
           issues.push(`${lang}${test.name}: unsafe fallback ${JSON.stringify(state)} in ${seconds}s`);
         }
       }
@@ -363,6 +426,356 @@ try {
       console.log(JSON.stringify({ route, presets, issues }, null, 2));
     }
     process.exitCode = issues.length ? 1 : 0;
+  } else if (focus === '--lab-interactions') {
+    const timelines = [];
+    const expectedKeys = {
+      early: ['substrate', 'well', 'bodyImplant', 'bodyDrive', 'oxide', 'gate', 'drainExtension', 'junctionImplant', 'junctionDrive', 'contacts'],
+      aligned: ['epiSubstrate', 'nblImplant', 'nblDrive', 'epi', 'sinker', 'epiField', 'epiOxide', 'epiGate', 'alignedBodyImplant', 'alignedBodyDrive', 'blanketLdd', 'epiSourceImplant', 'epiBodyContact', 'epiJunctions', 'epiContacts']
+    };
+    for (const lang of ['', 'ko/']) {
+      const route = `${lang}chapters/lab.html`;
+      await page(route);
+      for (const variant of ['early', 'aligned']) {
+        const timeline = await evaluate(`(() => {
+          const host = document.querySelector('[data-ldmos-sequence]');
+          const selector = host.querySelector('select');
+          selector.value = ${JSON.stringify(variant)};
+          selector.dispatchEvent(new Event('change', {bubbles: true}));
+          const stages = PMICLDMOS[selector.value === 'aligned' ? 'gateAlignedStages' : 'stages'];
+          const output = host.querySelector('output');
+          const buttons = host.querySelectorAll('[data-dir]');
+          const first = {text: output.textContent, prevDisabled: buttons[0].disabled, nextDisabled: buttons[1].disabled,
+            title: host.querySelector('svg title')?.textContent || ''};
+          buttons[1].click();
+          const advanced = output.textContent;
+          for (let i = 1; i < stages.length; i++) buttons[1].click();
+          const last = {text: output.textContent, prevDisabled: buttons[0].disabled, nextDisabled: buttons[1].disabled};
+          host.querySelector('.ld-sequence-steps button').click();
+          const selectedFirst = output.textContent;
+          const localizedStages = [];
+          for (let i = 0; i < stages.length; i++) {
+            const stepButton = host.querySelectorAll('.ld-sequence-steps button')[i];
+            stepButton.click();
+            const fields = [...host.querySelectorAll('.ld-sequence-detail dd')].map(node => node.textContent.trim());
+            localizedStages.push({label: output.textContent, step: stepButton.textContent,
+              title: host.querySelector('svg title')?.textContent || '', desc: host.querySelector('svg desc')?.textContent || '',
+              detail: host.querySelector('.ld-sequence-detail')?.querySelector('p')?.textContent || '', mask: fields[0] || '', thermal: fields[1] || ''});
+          }
+          return {variant: ${JSON.stringify(variant)}, keys: stages.map(stage => stage.key), first, advanced, last, selectedFirst,
+            variantOptions: [...selector.options].map(option => option.textContent), navigationLabels: [...buttons].map(button => button.textContent),
+            localizedStages};
+        })()`);
+        timelines.push({lang: lang || 'en', ...timeline});
+        const expected = expectedKeys[variant];
+        if (JSON.stringify(timeline.keys) !== JSON.stringify(expected)) {
+          issues.push(`${route}: ${variant} timeline stages changed: ${JSON.stringify(timeline.keys)}`);
+        }
+        if (!timeline.first.prevDisabled || timeline.first.nextDisabled || !timeline.advanced.includes('2/') ||
+            timeline.last.prevDisabled || !timeline.last.nextDisabled || !timeline.selectedFirst.includes('1/')) {
+          issues.push(`${route}: ${variant} timeline navigation failed: ${JSON.stringify(timeline)}`);
+        }
+        if (!timeline.first.text.toLowerCase().includes(lang ? '단계 1/' : 'stage 1/')) {
+          issues.push(`${route}: ${variant} initial stage label missing: ${timeline.first.text}`);
+        }
+        const localizedText = lang ? /[가-힣]/ : /[A-Za-z]/;
+        const stringsToCheck = [...timeline.variantOptions, ...timeline.navigationLabels,
+          ...timeline.localizedStages.flatMap(stage => [stage.label, stage.step, stage.title, stage.desc, stage.detail, stage.mask, stage.thermal])];
+        if (timeline.localizedStages.length !== expected.length || stringsToCheck.some(value => !localizedText.test(value))) {
+          issues.push(`${route}: ${variant} stage strings are incomplete or not localized (${timeline.localizedStages.length}/${expected.length})`);
+        }
+      }
+      const editor = await evaluate(`(async () => {
+        const preset = document.querySelector('#presets button[data-p="ldmos"]');
+        preset.click();
+        const presetState = {steps: document.querySelectorAll('#lab .steps-list li').length,
+          domain: document.querySelector('#lab-dom').value, first: document.querySelector('#lab .steps-list li')?.textContent || ''};
+        const clickOp = op => document.querySelector('#lab-ops button[data-op="' + op + '"]').click();
+        const setRange = (id, value) => { const input = document.querySelector('#lf-' + id); input.value = String(value); input.dispatchEvent(new Event('input', {bubbles: true})); return input.value; };
+        const addAndWait = async () => {
+          const count = document.querySelectorAll('#lab .steps-list li').length;
+          document.querySelector('#lab-add').click();
+          for (let i = 0; i < 200; i++) {
+            const items = document.querySelectorAll('#lab .steps-list li');
+            if (items.length === count + 1 && items[count].classList.contains('cur')) return;
+            await new Promise(resolve => setTimeout(resolve, 50));
+          }
+          throw new Error('Lab simulator did not finish the newly added step');
+        };
+        clickOp('implant');
+        const implantEdges = {energyMin: setRange('E', 1), doseMin: setRange('logd', 11), tiltMin: setRange('tilt', -30), channelMax: setRange('channel', 0.3)};
+        await addAndWait();
+        const implantStep = JSON.parse(atob(location.hash.slice(3))).s.at(-1);
+        clickOp('anneal');
+        const annealEdges = {temperatureMax: setRange('T', 1200), timeMin: setRange('time', 1)};
+        const annealAmbient = document.querySelector('#lf-amb');
+        annealAmbient.value = 'n2';
+        annealAmbient.dispatchEvent(new Event('change', {bubbles: true}));
+        await addAndWait();
+        const annealStep = JSON.parse(atob(location.hash.slice(3))).s.at(-1);
+        setRange('T', 700);
+        annealAmbient.value = 'wet';
+        annealAmbient.dispatchEvent(new Event('change', {bubbles: true}));
+        await addAndWait();
+        const wetAnnealStep = JSON.parse(atob(location.hash.slice(3))).s.at(-1);
+        return {presetState, implantEdges, implantStep, annealEdges, annealStep, wetAnnealStep,
+          finalSteps: document.querySelectorAll('#lab .steps-list li').length};
+      })()`);
+      editor.route = route;
+      if (editor.presetState.steps !== 9 || editor.presetState.domain !== 'wide' ||
+          !editor.presetState.first.toLowerCase().includes(lang ? '고전압' : 'hv well') ||
+          Number(editor.implantEdges.energyMin) !== 1 || Number(editor.implantEdges.doseMin) !== 11 ||
+          Number(editor.implantEdges.tiltMin) !== -30 || Number(editor.implantEdges.channelMax) !== 0.3 ||
+          editor.implantStep?.op !== 'implant' || editor.implantStep.E !== 1 || editor.implantStep.dose !== 1e11 ||
+          editor.implantStep.tilt !== -30 || editor.implantStep.channel !== 0.3 ||
+          Number(editor.annealEdges.temperatureMax) !== 1200 || Number(editor.annealEdges.timeMin) !== 1 ||
+          editor.annealStep?.op !== 'anneal' || editor.annealStep.T !== 1200 || editor.annealStep.time !== 1 ||
+          editor.annealStep.ambient !== '' || editor.wetAnnealStep?.op !== 'anneal' ||
+          editor.wetAnnealStep.T !== 700 || editor.wetAnnealStep.time !== 1 ||
+          editor.wetAnnealStep.ambient !== 'wet' || editor.finalSteps !== 12) {
+        issues.push(`${route}: lab preset/editor edge interaction failed: ${JSON.stringify(editor)}`);
+      }
+    }
+    console.log(JSON.stringify({base: base.href, timelines, issues}, null, 2));
+    process.exitCode = issues.length ? 1 : 0;
+  } else if (focus === '--process-interactions') {
+    await page('chapters/implant.html');
+    const implant = await evaluate(`(() => {
+      const setRange = (id, value) => { const input = document.querySelector('#' + id); input.value = String(value); input.dispatchEvent(new Event('input', {bubbles: true})); };
+      const pickSpecies = species => document.querySelector('#ip-sp button[data-value="' + species + '"]').click();
+      const read = () => ({screen: document.querySelector('#ip-o-s')?.textContent || '', sheet: document.querySelector('#ip-o-rs')?.textContent || ''});
+      pickSpecies('BF2'); setRange('ip-e', 0); setRange('ip-s', 1);
+      const oneNm = read();
+      setRange('ip-s', 40);
+      const fortyNm = read();
+      return {oneNm, fortyNm, energy: document.querySelector('#ip-e-out')?.textContent || '', species: document.querySelector('#ip-sp button.on')?.dataset.value || ''};
+    })()`);
+    const oneNmPercent = Number.parseFloat(implant.oneNm.screen);
+    const fortyNmPercent = Number.parseFloat(implant.fortyNm.screen);
+    const oneNmSheet = Number.parseFloat(implant.oneNm.sheet.replaceAll(',', ''));
+    const fortyNmSheet = Number.parseFloat(implant.fortyNm.sheet.replaceAll(',', ''));
+    const fortyNmSheetBounded = Number.isFinite(fortyNmSheet) ? fortyNmSheet >= 0 && implant.fortyNm.sheet.includes('Ω/□') :
+      implant.fortyNm.sheet.includes('below model resolution');
+    if (implant.species !== 'BF2' || !implant.energy.includes('1.0 keV') ||
+        !Number.isFinite(oneNmPercent) || Math.abs(oneNmPercent - 26.54) > 0.2 ||
+        !Number.isFinite(fortyNmPercent) || fortyNmPercent < 0 || fortyNmPercent > 100 ||
+        !Number.isFinite(oneNmSheet) || oneNmSheet < 0 || !fortyNmSheetBounded ||
+        !implant.oneNm.sheet.includes('Ω/□')) {
+      issues.push(`Ultrashallow BF2 screen/dose readout: ${JSON.stringify({...implant, oneNmPercent, fortyNmPercent, oneNmSheet, fortyNmSheet})}`);
+    }
+    const implantFilm = [];
+    for (const lang of ['', 'ko/']) {
+      await page(`${lang}chapters/implant.html`);
+      for (const oxide of [1, 40]) for (const channel of [0, 0.3]) {
+        const result = await evaluate(`(() => {
+          const setRange = (id, value, {max, step} = {}) => {
+            const input = document.querySelector('#' + id);
+            if (max != null) input.max = String(max);
+            if (step != null) input.step = String(step);
+            input.value = String(value);
+            input.dispatchEvent(new Event('input', {bubbles: true}));
+            return input;
+          };
+          const species = document.querySelector('#ip-sp button[data-value="BF2"]');
+          species.click();
+          const energy = setRange('ip-e', Math.log10(1), {step: 'any'});
+          setRange('ip-s', ${oxide});
+          setRange('ip-c', ${channel}, {max: 0.3, step: 'any'});
+          const shape = document.querySelector('#ip-m');
+          shape.value = 'p';
+          shape.dispatchEvent(new Event('change', {bubbles: true}));
+
+          // Independent closed-form screen-dose reference for the displayed skewed profile.
+          // This intentionally does not call the page's PB.erf helper.
+          function erf(x) {
+            const sign = x < 0 ? -1 : 1, z = Math.abs(x), t = 1 / (1 + 0.3275911 * z);
+            const poly = (((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t);
+            return sign * (1 - poly * Math.exp(-z * z));
+          }
+          const range = XS.range('BF2', 1), Rp = range.Rp, dR = range.dRp;
+          const skew = -0.3, s1 = dR * (1 - 0.35 * skew), s2 = dR * (1 + 0.35 * skew);
+          const zox = ${oxide} * 1.1, lam = Rp * 0.8 + 2 * dR;
+          const coreArea = Math.sqrt(Math.PI / 2) * (s1 * erf(Rp / (Math.SQRT2 * s1)) + s2);
+          const belowPeak = Math.min(zox, Rp);
+          let core = Math.sqrt(Math.PI / 2) * s1 *
+            (erf((belowPeak - Rp) / (Math.SQRT2 * s1)) + erf(Rp / (Math.SQRT2 * s1)));
+          if (zox > Rp) core += Math.sqrt(Math.PI / 2) * s2 * erf((zox - Rp) / (Math.SQRT2 * s2));
+          const tail = zox > Rp ? ${channel} * (1 - Math.exp(-(zox - Rp) / lam)) : 0;
+          const referencePercent = 100 * ((1 - ${channel}) * core / coreArea + tail);
+          const screen = document.querySelector('#ip-o-s').textContent;
+          const sheet = document.querySelector('#ip-o-rs').textContent;
+          const numericSheet = Number.parseFloat(sheet.replaceAll(',', ''));
+          return {oxide: ${oxide}, channel: ${channel}, energy: document.querySelector('#ip-e-out').textContent,
+            screen, actualPercent: Number.parseFloat(screen), referencePercent, sheet,
+            numericSheet: Number.isFinite(numericSheet) ? numericSheet : null,
+            channelValue: Number(document.querySelector('#ip-c').value), species: species.dataset.value,
+            speciesSelected: species.classList.contains('on'),
+            rp: range.Rp, dRp: range.dRp};
+        })()`);
+        implantFilm.push({lang: lang || 'en', ...result});
+        const sheetBelowResolution = result.sheet.includes('below model resolution') || result.sheet.includes('분해능 미만');
+        if (result.species !== 'BF2' || !result.speciesSelected || !result.energy.includes('1.0 keV') || result.channelValue !== channel ||
+            !Number.isFinite(result.actualPercent) || Math.abs(result.actualPercent - result.referencePercent) > 0.051 ||
+            result.actualPercent < 0 || result.actualPercent > 100 ||
+            (!sheetBelowResolution && (!Number.isFinite(result.numericSheet) || result.numericSheet < 0))) {
+          issues.push(`${lang}BF2 1 keV ${oxide} nm oxide/${channel} channel screen-dose and sheet-resistance regression: ${JSON.stringify(result)}`);
+        }
+      }
+    }
+    await page('chapters/anneal.html');
+    const anneal = await evaluate(`(() => {
+      const presets = [];
+      for (const name of ['furn', 'rta', 'spike', 'flash']) {
+        document.querySelector('#rt-m button[data-value="' + name + '"]').click();
+        const slider = document.querySelector('#rt-s');
+        const hold = Number(slider.value) === 0 ? 0 : Math.pow(10, Number(slider.value) - 4);
+        const readout = id => document.querySelector('#' + id)?.textContent || '';
+        presets.push({name, hold, holdLabel: readout('rt-s-out'), budget: readout('rt-o-dt'), length: readout('rt-o-l'), equivalent: readout('rt-o-eq')});
+      }
+      return presets;
+    })()`);
+    const expectedHolds = {furn: 1800, rta: 10, spike: 0, flash: 0.001};
+    for (const preset of anneal) {
+      const validReadouts = [preset.budget, preset.length, preset.equivalent].every(value => value && !/—|NaN|Infinity/.test(value));
+      if (Math.abs(preset.hold - expectedHolds[preset.name]) > Math.max(1e-9, expectedHolds[preset.name] * 1e-6) || !validReadouts) {
+        issues.push(`Anneal ${preset.name} hold preset: ${JSON.stringify(preset)}`);
+      }
+    }
+    await page('chapters/etch.html');
+    const endpoint = await evaluate(`(() => {
+      function sample(over) {
+        const sim = new XS.Sim({W: 40, H: 30, dx: 2, surf: 8, bgType: 'p', bgConc: 1e15});
+        sim.rect('ox', 0, 80, 0, 10);
+        sim.rect('pr', 0, 30, -20, 0);
+        sim.rect('pr', 50, 80, -20, 0);
+        const siliconBefore = sim.count('si');
+        sim.run({op: 'etch', sel: {ox: 1, si: 1, pr: 0}, rate: 10, time: 20, ion: 1, sigma: 0.5,
+          endpoint: {mat: 'ox', over}});
+        return {siliconRemoved: siliconBefore - sim.count('si'), oxideRemaining: sim.count('ox'), time: sim.lastTime};
+      }
+      return {zero: sample(0), margin: sample(0.5)};
+    })()`);
+    if (endpoint.zero.siliconRemoved < 0 || endpoint.margin.siliconRemoved < endpoint.zero.siliconRemoved ||
+        endpoint.zero.time < 0 || endpoint.margin.time < endpoint.zero.time ||
+        endpoint.zero.oxideRemaining < 0 || endpoint.margin.oxideRemaining < 0) {
+      issues.push(`Etch endpoint margin: ${JSON.stringify(endpoint)}`);
+    }
+    console.log(JSON.stringify({base: base.href, implant, implantFilm, anneal, endpoint, issues}, null, 2));
+    process.exitCode = issues.length ? 1 : 0;
+  } else if (focus === '--model-sweep') {
+    const paired = new Map();
+    const families = [];
+    const numericTokens = value => (value.replace(/(?<=\d),(?=\d{3})/g, '').match(/[-+]?(?:\d*\.\d+|\d+\.?\d*)(?:e[-+]?\d+)?/gi) || []).map(Number);
+    for (const slug of slugs) {
+      for (const lang of ['', 'ko/']) {
+        const route = `${lang}chapters/${slug}.html`;
+        await page(route);
+        const results = await evaluate(`(async () => {
+          const outputText = element => [...element.querySelectorAll('.sim-readout .v, output')].map(node => node.textContent.trim());
+          const valid = values => values.length > 0 && values.every(value => value && !/NaN|Infinity/.test(value));
+          const waitForStableOutputs = async element => {
+            let previous = null, stable = 0;
+            const deadline = Date.now() + 15000;
+            while (Date.now() < deadline) {
+              await new Promise(resolve => setTimeout(resolve, 200));
+              const values = outputText(element);
+              const progress = element.querySelector('.lab-msg')?.textContent.trim() || '';
+              if (/calculat|running|loading|계산\s*중|실행\s*중|불러오는\s*중/i.test(progress) || !values.length) {
+                stable = 0; previous = null; continue;
+              }
+              const current = values.join('|');
+              stable = current === previous ? stable + 1 : 0;
+              if (stable >= 3) return true;
+              previous = current;
+            }
+            return false;
+          };
+          const records = [];
+          const containers = [...document.querySelectorAll('[id^="sim-"]')];
+          for (const container of containers) {
+            let control = container.querySelector('input[type="range"]');
+            let kind = 'range';
+            if (!control) { control = container.querySelector('select'); kind = 'select'; }
+            if (!control) { records.push({id: container.id, missingControl: true}); continue; }
+            const endpoints = kind === 'range' ? [control.min, control.max] : [control.options[0]?.value, control.options[control.options.length - 1]?.value];
+            const states = [];
+            for (const value of endpoints) {
+              control.value = value;
+              control.dispatchEvent(new Event(kind === 'range' ? 'input' : 'change', {bubbles: true}));
+              const stable = await waitForStableOutputs(container);
+              const values = outputText(container);
+              const canvases = [...container.querySelectorAll('canvas')].map(canvas => ({width: canvas.width, height: canvas.height}));
+              states.push({value, outputs: values, valid: valid(values), stable, canvases});
+            }
+            records.push({id: container.id, kind, states});
+          }
+          return records;
+        })()`);
+        for (const record of results) {
+          families.push({lang: lang || 'en', route, ...record});
+          if (record.missingControl) {
+            issues.push(`${route}: ${record.id} has no range/select control to sweep`);
+            continue;
+          }
+          for (const state of record.states) {
+            if (!state.valid || !state.stable || state.canvases.some(canvas => !canvas.width || !canvas.height)) {
+              issues.push(`${route}: ${record.id} invalid output/canvas at ${state.value}: ${JSON.stringify(state)}`);
+            }
+          }
+          const key = `${slug}:${record.id}`;
+          if (!paired.has(key)) paired.set(key, {});
+          paired.get(key)[lang ? 'ko' : 'en'] = record;
+        }
+      }
+    }
+    const parity = [];
+    for (const [key, locales] of paired) {
+      if (!locales.en || !locales.ko) {
+        issues.push(`${key}: missing EN/KO quantitative model pair`);
+        continue;
+      }
+      for (let endpoint = 0; endpoint < Math.min(locales.en.states.length, locales.ko.states.length); endpoint++) {
+        const left = locales.en.states[endpoint].outputs.flatMap(numericTokens);
+        const right = locales.ko.states[endpoint].outputs.flatMap(numericTokens);
+        const matches = left.length === right.length && left.every((value, index) =>
+          Math.abs(value - right[index]) <= Math.max(1e-8, Math.abs(value) * 1e-5));
+        parity.push({key, endpoint, matches, enNumbers: left, koNumbers: right});
+        if (!matches) issues.push(`${key}: EN/KO numeric outputs differ at endpoint ${endpoint}: ${JSON.stringify({left, right})}`);
+      }
+    }
+    const inline = [];
+    for (const slug of ['fundamentals', 'references-ldo', 'switching']) {
+      const pair = {};
+      for (const lang of ['', 'ko/']) {
+        const route = `${lang}chapters/${slug}.html`;
+        await page(route);
+        const result = await evaluate(`(async () => {
+          const region = document.querySelector('#pm-fund-sim, #ldo-i, #sw-vin')?.closest('.sim, section') || document.querySelector('.sim');
+          const input = region?.querySelector('input[type="range"]');
+          if (!input) return {missingControl: true};
+          const outputs = [];
+          for (const value of [input.min, input.max]) {
+            input.value = value;
+            input.dispatchEvent(new Event('input', {bubbles: true}));
+            await new Promise(resolve => setTimeout(resolve, 160));
+            outputs.push({value, readouts: [...(region || document).querySelectorAll('.sim-readout .v, output')].map(node => node.textContent.trim())});
+          }
+          return {outputs};
+        })()`);
+        pair[lang ? 'ko' : 'en'] = result;
+        inline.push({lang: lang || 'en', route, ...result});
+        if (result.missingControl || result.outputs.some(state => state.readouts.some(value => !value || /NaN|Infinity/.test(value)))) {
+          issues.push(`${route}: inline calculator min/max produced missing or invalid outputs: ${JSON.stringify(result)}`);
+        }
+      }
+      const enNumbers = pair.en?.outputs?.flatMap(state => state.readouts.flatMap(numericTokens)) || [];
+      const koNumbers = pair.ko?.outputs?.flatMap(state => state.readouts.flatMap(numericTokens)) || [];
+      const matches = enNumbers.length === koNumbers.length && enNumbers.every((value, index) =>
+        Math.abs(value - koNumbers[index]) <= Math.max(1e-8, Math.abs(value) * 1e-5));
+      if (!matches) issues.push(`${slug}: EN/KO inline calculator numeric outputs differ: ${JSON.stringify({enNumbers, koNumbers})}`);
+    }
+    console.log(JSON.stringify({base: base.href, containers: paired.size, endpointChecks: parity.length,
+      inlineCalculators: inline.length, parity, inline, issues}, null, 2));
+    process.exitCode = issues.length ? 1 : 0;
   } else if (focus === '--diagnostics') {
     await page('chapters/overview.html');
     const firstInjectedIssue = issues.length;
@@ -380,10 +793,15 @@ try {
     console.log(JSON.stringify({ base: base.href, exceptionFound, requestFound,
       expectedSignals: [...exceptionSignals, ...requestSignals], issues }, null, 2));
     process.exitCode = issues.length ? 1 : 0;
+  } else if (focus === '--tablet') {
+    const {tablet, tabletNavigation} = await tabletJourneys();
+    console.log(JSON.stringify({base: base.href, tablet, tabletNavigation, issues}, null, 2));
+    process.exitCode = issues.length ? 1 : 0;
   } else {
   for (const route of ['ko/chapters/fundamentals.html', 'ko/chapters/integration.html', 'ko/chapters/lab.html', 'chapters/lab.html']) {
     await page(route, { width: 390, height: 844 });
   }
+  const {tablet, tabletNavigation} = await tabletJourneys();
   await page('chapters/oxidation.html');
   const physics = await evaluate(`(() => { const c100 = XS.dealGrove(1000, 'dry', '100'); const c111 = XS.dealGrove(1000, 'dry', '111'); const cDefault = XS.dealGrove(1000, 'dry');
     return {ratio: c111.BA / c100.BA, dry100nm: XS.dgThickness(c100.B, c100.A, 1, 0) * 1000,
@@ -430,13 +848,15 @@ try {
   await page('chapters/references-ldo.html');
   const quiz = await evaluate(`(() => {
     const questions = [...document.querySelectorAll('.quiz-q')];
-    questions[0].querySelectorAll('button.opt')[1].click();
-    questions[1].querySelectorAll('button.opt')[1].click();
+    questions.forEach((q, i) => {
+      const button = q.querySelector(i === 1 ? 'button.opt[data-correct="false"]' : 'button.opt[data-correct="true"]');
+      button?.click();
+    });
     return questions.map(q => ({done:q.classList.contains('done'), disabled:[...q.querySelectorAll('button.opt')].every(b=>b.disabled),
       explanation:getComputedStyle(q.querySelector('.quiz-exp')).display !== 'none', right:!!q.querySelector('button.right'), wrong:!!q.querySelector('button.wrong')}));
   })()`);
-  if (quiz.length !== 2 || !quiz[0].done || !quiz[0].disabled || !quiz[0].explanation || !quiz[0].right ||
-      !quiz[1].done || !quiz[1].disabled || !quiz[1].explanation || !quiz[1].right || !quiz[1].wrong) {
+  if (quiz.length < 2 || quiz.some(q => !q.done || !q.disabled || !q.explanation) ||
+      !quiz.some(q => q.right) || !quiz.some(q => q.wrong)) {
     issues.push(`Chapter quiz behavior: ${JSON.stringify(quiz)}`);
   }
   await page('chapters/references-ldo.html');
@@ -483,7 +903,7 @@ try {
   await page('ko/chapters/overview.html');
   const themePersisted = await evaluate(`({theme:document.documentElement.getAttribute('data-theme'), saved:localStorage.getItem('pb-theme')})`);
   if (!themePersisted.theme || themePersisted.theme !== themePersisted.saved) issues.push(`Theme persistence across bilingual route: ${JSON.stringify(themePersisted)}`);
-  console.log(JSON.stringify({ base: base.href, routes: checked, mobilePages: 4, physics, wafer, navigation, quiz, ldo, converter, bcd, finalQuiz, theme, themePersisted, issues }, null, 2));
+  console.log(JSON.stringify({ base: base.href, routes: checked, mobilePages: 4, tablet, tabletNavigation, physics, wafer, navigation, quiz, ldo, converter, bcd, finalQuiz, theme, themePersisted, issues }, null, 2));
   process.exitCode = issues.length ? 1 : 0;
   }
 } catch (error) {

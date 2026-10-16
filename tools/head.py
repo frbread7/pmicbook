@@ -25,6 +25,9 @@ SITE = "https://frbread7.github.io/pmicbook/"
 BOOK_EN = "PMICBook: Power Management IC Technology"
 BOOK_KO = "PMICBook: 전력관리 IC 기술"
 TODAY = datetime.date.today().isoformat()
+KATEX_CSS_SRI = "sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+KATEX_CORE_SRI = "sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+KATEX_RENDER_SRI = "sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
 
 src = (ROOT / "js/common.js").read_text(encoding="utf-8")
 chapter_pattern = re.compile(
@@ -109,9 +112,9 @@ def chapter_head(chapter, meta, lang, paired):
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="{KATEX_CSS_SRI}" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="{KATEX_CORE_SRI}" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="{KATEX_RENDER_SRI}" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="{prefix}css/style.css">
 <script src="{prefix}js/common.js"></script>
 '''

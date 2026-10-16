@@ -25,10 +25,10 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/integration.html#chapter","name":"BCD 공정 통합 흐름","headline":"BCD 공정 통합 흐름 · PMICBook","description":"BCD 소자 모듈을 연결하고 기존 저전압 CMOS 기본 공정의 단면 스테퍼를 교육용으로 살펴봅니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/integration.html","position":18,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"18. BCD 공정 통합 흐름","item":"https://frbread7.github.io/pmicbook/ko/chapters/integration.html"}]}]}</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/integration.html#chapter","name":"BCD 공정 통합 흐름","headline":"BCD 공정 통합 흐름 · PMICBook","description":"BCD 소자 모듈을 연결하고 기존 저전압 CMOS 기본 공정의 단면 스테퍼를 교육용으로 살펴봅니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/integration.html","position":18,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-16","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"18. BCD 공정 통합 흐름","item":"https://frbread7.github.io/pmicbook/ko/chapters/integration.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="../../css/style.css">
 <script src="../../js/common.js"></script>
 <script src="../../js/xsec.js"></script>
@@ -72,6 +72,17 @@
     <div class="mod-grid" id="mods"></div>
     <div id="sim-cmos"></div>
     <div class="callout warn"><strong>모델의 범위</strong><p>ProcessBook에서 가져온 이 스테퍼는 저전압 CMOS 한 쌍의 예를 시각화합니다. 완전한 BCD 순서, 딥웰 절연, 바이폴라 소자, LDMOS 전계, 항복 전압, 공정별 실제 치수를 시뮬레이션하지 않습니다. 셀 격자 연산은 교육용 근사입니다. 별도의 고전압 소자 개념 단면은 <a href="lab.html">BCD 공정 실험실</a>에서 확인하되 두 모델을 공정 TCAD로 해석하지 마세요.</p></div>
+  </section>
+
+  <section id="sequence-branches"><h2>근거가 확인된 두 가지 nLDMOS 순서</h2>
+    <p>위의 다섯 줄 모듈 지도는 의존 관계의 목록이며 <strong>시간 순서 지시가 아닙니다</strong>. <a href="https://patents.google.com/patent/US7405117B2/en">US7405117B2 공정 600, 그림 7–8</a>에서는 p형 기판에 고전압 n웰을 형성하고, 별도 마스크의 p바디를 게이트 산화막·폴리 전에 주입·확산하며, 허용되는 한 N-LD 선택지와 n+/p+ 단자 주입이 게이트 뒤에 옵니다. 반면 <a href="https://data.epo.org/publication-server/rest/v1.2/patents/EP1119050NWA1/document.pdf">EP1119050A1 표 1, [0051]–[0055]</a>에는 매몰층·에피·절연을 거쳐 폴리 게이트를 패턴한 뒤, 게이트에 자기 정렬된 DMOS p바디를 주입·확산하고 N-LDD 및 n+/p+ 모듈을 수행합니다. 두 자료는 전문을 볼 수 있는 공개 문헌이지만 보편적 양산 빈도를 증명하지는 않습니다.</p>
+    <div class="table-wrap"><table><thead><tr><th>결정</th><th>초기 독립 마스크 바디 예시</th><th>이후 게이트 정렬 바디 예시</th><th>물리적 결과</th></tr></thead><tbody>
+      <tr><td>기판 / 수직 절연</td><td>해당 LDMOS 단면은 p형 기판과 주입 고전압 n웰을 보이며 매몰 n층/에피는 지정하지 않습니다.</td><td>p형 기판, 매몰 N+/P+ 영역, 에피, 웰 및 P+ 절연 모듈.</td><td>구조에 따라 바디/기판 접합, 기생 경로, 사용 가능한 바이어스 도메인이 달라집니다.</td></tr>
+      <tr><td>p바디와 게이트</td><td>독립 마스크와 바디 확산을 게이트 산화막/폴리 전에 수행합니다.</td><td>패턴된 폴리 가장자리가 자기 정렬 p바디 주입 경계가 되고 후속 확산이 이어집니다.</td><td>마스크 오버레이와 열에 따른 측방 이동이 채널 및 바디–드리프트 겹침을 정합니다. 자기 정렬도 유효 채널의 불확실성을 0으로 만들지 않습니다.</td></tr>
+      <tr><td>드레인과 단자</td><td>한 N-LD 선택지는 게이트 뒤에 오고 n+ 소스/드레인 및 p+ 바디 접점이 뒤따릅니다.</td><td>바디 확산 뒤 N-LDD, 그 뒤 n+/p+ 접점 영역 단계.</td><td>드리프트 전하는 공핍/저항을 정하고 바디 연결·콘택트 네트워크는 기생 바이폴라 구동, 전류 집중, 발열에 영향을 줍니다.</td></tr>
+    </tbody></table></div>
+    <p>마스크는 <em>주입 개구</em>를 정의하지 최종 전기적 활성 경계를 정의하지 않습니다. 의도적으로 단순화한 일정 확산 계수 근사에서 한 축의 누적 퍼짐은 \(\ell_{rms}=\sqrt{2\sum_i D_i t_i}\)이며 \(D\) 단위는 cm²/s, \(t\)는 s입니다. 이 식은 무작위 이동에 따른 넓어짐만 설명합니다. 주입 손상, 활성화, 과도 증강 확산, 농도 의존성, 산화, 후속 열처리에는 공정 자료가 필요합니다. 바디와 게이트의 상대 위치 및 후속 열 이력은 측정한 분포와 전기적 V<sub>th</sub>, BV, R<sub>on</sub>, 누설로 확인해야 합니다. <a href="anneal.html">열 예산</a>, <a href="implant.html">주입 분포</a>, <a href="lab.html#ldmos-cross-section">전용 nLDMOS 순서 그림</a>을 참고하세요.</p>
+    <p>기초 내용을 중복하지 않으려면 <a href="https://frbread7.github.io/processintegrationbook/">ProcessIntegrationBook</a>에서 모듈 간 공정 의존 관계를, <a href="https://frbread7.github.io/thinfilmbook/">ThinFilmBook</a>에서 박막/계면 측정을, <a href="https://frbread7.github.io/watbook/">WATBook</a>에서 전기적 공정 모니터를, <a href="https://frbread7.github.io/fabcontrolbook/">FabControlBook</a>에서 생산 신호의 제어와 계보를 더 공부할 수 있습니다. PMICBook은 이 토대를 레일·효율·고장 동작과 연결합니다.</p>
   </section>
 
   <section id="modules">

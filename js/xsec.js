@@ -136,6 +136,11 @@
     }
   }
   const SP = Sim.prototype;
+  function erfApprox(x) {
+    const sign = x < 0 ? -1 : 1, a = Math.abs(x), t = 1 / (1 + 0.3275911 * a);
+    return sign * (1 - t * (0.254829592 + t * (-0.284496736 + t * (1.421413741 +
+      t * (-1.453152027 + t * 1.061405429)))) * Math.exp(-a * a));
+  }
   SP.clone = function () {
     const s = Object.create(Sim.prototype);
     s.W = this.W; s.H = this.H; s.dx = this.dx; s.surf = this.surf;
@@ -490,8 +495,11 @@
     const arr = r.type === "n" ? this.nd : this.na;
     const add = new Float32Array(W * H);
     const th = ((p.tilt || 0) * Math.PI) / 180, sx = Math.sin(th), sy = Math.cos(th);
-    const Rp = r.Rp, dR = r.dRp, ch = p.channel || 0, lam = Rp * 0.8 + 2 * dR;
-    const peak = p.dose / (Math.sqrt(2 * Math.PI) * dR * 1e-7);  // cm^-3
+    const Rp = r.Rp, dR = r.dRp, ch = Math.max(0, Math.min(1, p.channel || 0));
+    const lam = Rp * 0.8 + 2 * dR;
+    // Normalize over physical depths z >= 0. Channeling moves a fraction of
+    // incident dose from the Gaussian core into the deeper exponential tail.
+    const coreDen = 1 + erfApprox(Rp / (Math.SQRT2 * dR));
     for (let x0 = 0; x0 < W; x0++) {
       // The optional incident-beam window is an ideal mask boundary for BCD lessons.
       // It changes only where rays enter this 2D approximation; no resist stopping
@@ -508,11 +516,15 @@
         const mt = m[i];
         if (!mt) continue;
         const dz = step * dx * MATS[mt].k;
-        const zc = z + dz / 2;
+        const z0 = z;
         z += dz;
-        let c = peak * Math.exp(-0.5 * Math.pow((zc - Rp) / dR, 2));
-        if (ch > 0 && zc > Rp) c += ch * peak * 0.5 * Math.exp(-(zc - Rp) / lam);
-        add[i] += c * step;  // 셀 하나를 지나는 길이(셀 단위) 가중
+        // Integrate the profile over this exact stopping-depth segment.
+        // Midpoint concentration samples alias sub-cell low-energy peaks.
+        const u0 = (z0 - Rp) / (Math.SQRT2 * dR), u1 = (z - Rp) / (Math.SQRT2 * dR);
+        const coreDose = p.dose * (1 - ch) * Math.max(0, erfApprox(u1) - erfApprox(u0)) / coreDen;
+        const tailDose = ch && z > Rp ? p.dose * ch *
+          (Math.exp(-Math.max(0, z0 - Rp) / lam) - Math.exp(-(z - Rp) / lam)) : 0;
+        add[i] += (coreDose + tailDose) / (dx * 1e-7);
         if (z > Rp + 8 * dR + (ch ? 6 * lam : 0)) break;
       }
     }
@@ -552,19 +564,29 @@
   };
   function blurMaskedSet(a, mask, W, H, sig) {
     const R = Math.ceil(sig * 3), k = [];
-    for (let i = -R; i <= R; i++) k.push(Math.exp(-0.5 * (i / sig) * (i / sig)));
+    let norm = 0;
+    for (let i = -R; i <= R; i++) { const weight = Math.exp(-0.5 * (i / sig) * (i / sig)); k.push(weight); norm += weight; }
     const tmp = new Float32Array(W * H);
     for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
       const i = y * W + x; if (!mask[i]) continue;
-      let s = 0, ws = 0;
-      for (let d = -R; d <= R; d++) { const j = y * W + (((x + d) % W) + W) % W; if (mask[j]) { s += a[j] * k[d + R]; ws += k[d + R]; } }
-      tmp[i] = s / ws;
+      let change = 0;
+      for (let d = -R; d <= R; d++) {
+        if (!d) continue;
+        const j = y * W + (((x + d) % W) + W) % W;
+        if (mask[j]) change += k[d + R] * (a[j] - a[i]) / norm;
+      }
+      tmp[i] = a[i] + change;
     }
     for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
       const i = y * W + x; if (!mask[i]) continue;
-      let s = 0, ws = 0;
-      for (let d = -R; d <= R; d++) { const yy = y + d; if (yy < 0 || yy >= H) continue; const j = yy * W + x; if (mask[j]) { s += tmp[j] * k[d + R]; ws += k[d + R]; } }
-      a[i] = s / ws;
+      let change = 0;
+      for (let d = -R; d <= R; d++) {
+        if (!d) continue;
+        const yy = y + d; if (yy < 0 || yy >= H) continue;
+        const j = yy * W + x;
+        if (mask[j]) change += k[d + R] * (tmp[j] - tmp[i]) / norm;
+      }
+      a[i] = tmp[i] + change;
     }
   }
 

@@ -25,10 +25,10 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/implant.html#chapter","name":"웰·드리프트 도핑과 이온 주입","headline":"웰·드리프트 도핑과 이온 주입 · PMICBook","description":"BCD 웰, 드리프트 영역과 접합을 위한 이온 주입 프로파일, 마스크 정지, 기울임, 채널링 및 어닐 관계.","url":"https://frbread7.github.io/pmicbook/ko/chapters/implant.html","position":14,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"14. 웰·드리프트 도핑과 이온 주입","item":"https://frbread7.github.io/pmicbook/ko/chapters/implant.html"}]}]}</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/implant.html#chapter","name":"웰·드리프트 도핑과 이온 주입","headline":"웰·드리프트 도핑과 이온 주입 · PMICBook","description":"BCD 웰, 드리프트 영역과 접합을 위한 이온 주입 프로파일, 마스크 정지, 기울임, 채널링 및 어닐 관계.","url":"https://frbread7.github.io/pmicbook/ko/chapters/implant.html","position":14,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-16","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"14. 웰·드리프트 도핑과 이온 주입","item":"https://frbread7.github.io/pmicbook/ko/chapters/implant.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="../../css/style.css">
 <script src="../../js/common.js"></script>
 <script src="../../js/xsec.js"></script>
@@ -38,7 +38,7 @@
 <main class="chapter">
 <header class="chapter-hero"><div class="eyebrow">14장 · 도핑 프로파일</div><h1>BCD 이온 주입</h1><p class="lead">이온 주입은 웰, 문턱전압 조정 영역, 드리프트 영역과 소스/드레인 접합 형성에 필요한 도펀트의 선량과 깊이를 제어합니다. BCD 소자에서는 프로파일이 절연, 항복, 온저항과 기생 특성에 영향을 줍니다. 주입은 결정에 손상을 주므로 어닐링, 활성화 및 열 예산과 함께 이해해야 합니다.</p><ul class="objectives"><li>이온 에너지와 종류를 투영 사정거리 및 프로파일 폭과 연결합니다.</li><li>선량, 피크 농도, 접합 깊이와 마스크 차단을 설명합니다.</li><li>채널링, 측방 확산, 마스크 그림자 효과와 주입 손상을 알아봅니다.</li><li>파운드리 레시피를 제시하지 않으면서 웰 및 드리프트 주입을 BCD 소자 구조와 연결합니다.</li></ul></header>
 <section id="implant-system"><h2>이온 빔과 선량 제어</h2><p>이온 주입 장비는 이온 종류를 선택해 목표 에너지로 가속하고 빔을 주사하며, 적산 전하를 측정해 선량을 추정합니다. 에너지는 주로 깊이 규모를, 선량은 주입량을 정합니다. BF₂와 같은 분자 이온은 원자 사이의 에너지 분배에도 영향을 줍니다.</p><p>BCD에서는 서로 다른 마스크와 주입 조건으로 웰, 고전압 드리프트 영역 및 저전압 접합을 형성합니다. 구체적인 순서와 선량·에너지 범위는 플랫폼마다 다르며, 이 장에서는 프로파일의 직관을 다룹니다.</p></section>
-<section id="range"><h2>투영 사정거리와 스트래글</h2><p>이온이 실리콘에 들어가면 핵 충돌로 진행 방향이 바뀌고 격자 원자가 밀려나며, 전자와의 상호작용으로도 에너지를 잃습니다. 다수 이온의 궤적은 투영 사정거리 \(R_p\)와 스트래글 \(\Delta R_p\)로 근사해 표현할 수 있는 분포를 만듭니다. 가우스 분포는 1차적인 그림일 뿐 완전한 주입 시뮬레이션은 아닙니다.</p><div class="formula">$$N(x)\approx\frac{\Phi}{\sqrt{2\pi}\,\Delta R_p}e^{-(x-R_p)^2/(2\Delta R_p^2)},\qquad N_p\approx\frac{0.4\Phi}{\Delta R_p}$$<div class="where">여기서 \(\Phi\)는 선량(cm⁻²)입니다. 야금학적 접합을 추정하려면 배경 농도와 활성 도펀트 프로파일이 필요하며, 화학적 선량만으로는 충분하지 않습니다.</div></div><div class="sim" id="sim-prof">
+<section id="range"><h2>투영 사정거리와 스트래글</h2><p>이온이 실리콘에 들어가면 핵 충돌로 진행 방향이 바뀌고 격자 원자가 밀려나며, 전자와의 상호작용으로도 에너지를 잃습니다. 다수 이온의 궤적은 투영 사정거리 \(R_p\)와 스트래글 \(\Delta R_p\)로 근사해 표현할 수 있는 분포를 만듭니다. 가우스 분포는 1차적인 그림일 뿐 완전한 주입 시뮬레이션은 아닙니다. 종과 에너지가 대표적인 정지 깊이를 정하고, 선량은 프로파일 진폭을 조절합니다. 공개 범위 표는 지정된 이온/타깃 조합의 값을 제시합니다. 예를 들어 <a href="https://fabweb.ece.illinois.edu/gt/gt/gt15.aspx">University of Illinois ECE444 GT15 표</a>는 명시된 에너지 범위에서 Si와 SiO₂ 내 B 및 P의 \(R_p\), \(\Delta R_p\)를 제공합니다. 이는 BCD 주입 레시피가 아닙니다.</p><div class="formula">$$N_{chem}(x)\approx\frac{\Phi}{\sqrt{2\pi}\,\Delta R_p}e^{-(x-R_p)^2/(2\Delta R_p^2)},\qquad \int_0^\infty N_{chem}(x)\,dx\approx\Phi$$<div class="where">여기서 \(\Phi\)는 주입 면밀도(cm⁻²), 깊이는 cm, \(N_{chem}\)은 화학 농도(cm⁻³)이며 프로파일 피크는 약 \(0.399\Phi/\Delta R_p\)입니다. 프로파일이 실리콘 내부에 충분히 있고 표면막 손실이나 스퍼터링이 없으면 적분값은 선량을 보존합니다. 이것만으로 전기적 활성 프로파일을 예측하지는 못합니다. 어닐링 후에는 \(N_{active}(x)=f_{act}(x)N_{chem}(x)\)로 쓸 수 있습니다. 활성화율 \(f_{act}\)는 종, 농도, 결함 및 전체 열 이력에 좌우됩니다. 야금학적 접합을 추정하려면 순 활성 도펀트 농도가 반대형 배경 농도와 교차해야 하며 화학적 선량만으로는 충분하지 않습니다.</div></div><div class="sim" id="sim-prof">
       <div class="sim-head"><span class="sim-tag">시뮬레이터</span><h3>주입 프로파일 및 접합 깊이 추정</h3></div>
       <div class="sim-body side">
         <div class="sim-view"><canvas id="ip-cv"></canvas></div>
@@ -49,7 +49,7 @@
           <label class="ctrl"><span>배경 도핑 (반대형) <output id="ip-b-out"></output></span><input type="range" id="ip-b" min="14" max="18" step="0.1" value="15"></label>
           <label class="ctrl"><span>스크린 산화막 <output id="ip-s-out"></output></span><input type="range" id="ip-s" min="0" max="40" step="1" value="0"></label>
           <label class="ctrl"><span>프로파일 형태</span><select id="ip-m"><option value="g">가우스형</option><option value="p" selected>비대칭 프로파일 (설명용 반가우스 접합)</option></select></label>
-          <label class="ctrl"><span>채널링 꼬리 (기울임각 0°일 때) <output id="ip-c-out"></output></span><input type="range" id="ip-c" min="0" max="0.2" step="0.005" value="0"></label>
+          <label class="ctrl"><span>선택한 도즈를 깊이 방향으로 재분배하는 채널링 꼬리 (기울임각 0°일 때) <output id="ip-c-out"></output></span><input type="range" id="ip-c" min="0" max="0.2" step="0.005" value="0"></label>
         </div>
       </div>
       <div class="sim-readout">
@@ -100,7 +100,7 @@
       </div>
       <div class="sim-note">이온 기울임각, 마스크 높이와 개구 폭을 바꾸어 기하학적 그림자와 측방 확산을 살펴보세요. 선택적 어닐링은 확산을 단순화해 가정하며 값은 설명용입니다.</div>
     </div></section>
-<section id="damage"><h2>주입 손상과 어닐링</h2><p>충분히 큰 손상 밀도에서는 이온 주입으로 원자가 밀려나 표면 근처가 비정질화될 수 있습니다. 어닐링은 격자 무질서를 일부 회복시키고 전기적 활성화를 촉진하지만, 확산이나 결함 관련 과도 현상을 일으킬 수도 있습니다. 따라서 주입 프로파일이 최종 전기적 프로파일과 같지는 않습니다.</p><p>열 이력의 영향은 <a href="anneal.html">어닐링, 활성화와 확산</a>을 참고하세요. 고전압 BCD의 드리프트 영역에서는 선량과 형상에 따라 항복 특성과 저항이 절충됩니다. 소자 수준의 연관성은 <a href="hv-devices.html">고전압 소자 장</a>을 참고하세요.</p></section>
+<section id="damage"><h2>주입 손상과 어닐링</h2><p>충분히 큰 손상 밀도에서는 이온 주입으로 원자가 밀려나 표면 근처가 비정질화될 수 있습니다. 어닐링은 격자 무질서를 일부 회복시키고 전기적 활성화를 촉진하지만, 확산이나 결함 관련 과도 현상을 일으킬 수도 있습니다. 따라서 주입 직후 화학 프로파일, 어닐링 후 화학 프로파일, 전기적 활성 프로파일은 서로 다릅니다. PMIC 웰이나 드리프트 영역에서는 불완전한 활성화가 면저항을 높일 수 있고, 과도한 재분포는 보상 경계나 접합을 이동시켜 항복과 누설을 바꿀 수 있습니다. 1차 전도 관계는 \(G_{sheet}\approx q\int \mu(x)N_{active}(x)\,dx\)(S/□), \(R_{sheet}=1/G_{sheet}\)입니다. 이 추정은 단일 캐리어형을 가정하며 정량적으로 쓰려면 농도 의존 이동도와 실측 활성화가 필요합니다.</p><p>어닐링은 후속 막이나 접합 형상의 한계 안에서 손상 복구와 활성화를 이루면서 확산과 클러스터 형성을 억제해야 합니다. 빠른 열처리는 재분포 시간을 줄일 수 있지만 최고 온도만으로 활성화나 결함 제거 정도를 알 수는 없습니다. 열 이력의 영향은 <a href="anneal.html">어닐링, 활성화와 확산</a>을 참고하세요. 고전압 BCD의 드리프트 영역에서는 선량과 형상에 따라 항복 특성과 저항이 절충됩니다. 소자 수준의 연관성은 <a href="hv-devices.html">고전압 소자 장</a>을 참고하세요.</p></section>
 <section class="keypoints" id="summary"><h2>핵심 정리</h2><ol><li>주입 에너지는 깊이 규모를 정하고 선량은 주입되는 총 도펀트 양을 정합니다.</li><li>투영 사정거리와 스트래글은 프로파일을 요약하지만 채널링과 상세한 충돌 물리는 포함하지 않습니다.</li><li>마스크 차단, 측방 스트래글과 기울임은 웰·드리프트·접합 경계에 영향을 줍니다.</li><li>주입 손상에는 어닐링이 필요하며 활성 농도와 최종 접합 깊이는 전체 열처리 순서에 따라 달라집니다.</li><li>여기에 제시된 수치는 공개된 교육용 근사치이며 특정 파운드리의 공정 변수가 아닙니다.</li></ol></section>
 <section class="quiz-sec" id="quiz"><h2>확인 문제</h2><div class="quiz">
 <div class="quiz-q"><p>1차 주입 모델에서 투영 깊이 규모를 주로 결정하는 것은 무엇인가요?</p><div class="opts"><button class="opt">선량만</button><button class="opt" data-correct>이온 종류와 주입 에너지</button><button class="opt">웨이퍼 지름</button><button class="opt">CMP 후 세정 시간</button></div><div class="quiz-exp">이온 종류와 에너지가 정지 거동을 결정하므로 사정거리 분포도 이에 따라 정해집니다.</div></div>
@@ -132,18 +132,28 @@
       var P = PB.palette(), sp = gSp(), E = Math.pow(10, gE()), dose = Math.pow(10, gD()), NB = Math.pow(10, gB()), tox = gS(), ch = gC();
       var r = XS.range(sp, E), Rp = r.Rp, dR = r.dRp, k = 1.1;
       var g = SKEW[sp] * (mSel.value === "p" ? 1 : 0), s1 = dR * (1 - 0.35 * g), s2 = dR * (1 + 0.35 * g);
-      var norm = dose / (Math.sqrt(2 * Math.PI) * (s1 + s2) / 2 * 1e-7);
       var lam = Rp * 0.8 + 2 * dR;
+      // Normalize the truncated skew-Gaussian and exponential tail separately.
+      // The channeling control redistributes, rather than creates, the selected dose.
+      var erf = PB.erf(Rp / (Math.SQRT2 * s1));
+      var coreArea = Math.sqrt(Math.PI / 2) * (s1 * erf + s2) * 1e-7;
+      var coreNorm = dose * (1 - ch) / coreArea, tailNorm = dose * ch / (lam * 1e-7);
       var N = function (z) { // z: silicon-equivalent depth (nm)
-        var s = z < Rp ? s1 : s2, v = norm * Math.exp(-0.5 * Math.pow((z - Rp) / s, 2));
-        if (ch > 0 && z > Rp) v += ch * norm * 0.5 * Math.exp(-(z - Rp) / lam);
+        var sigma = z < Rp ? s1 : s2;
+        var v = coreNorm * Math.exp(-0.5 * Math.pow((z - Rp) / sigma, 2));
+        if (z > Rp) v += tailNorm * Math.exp(-(z - Rp) / lam);
         return v;
       };
       var zox = tox * k, data = [], xmax = Math.max(60, (Rp + 6 * dR + (ch ? 5 * lam : 0)) * 1.1 - zox);
-      var inOx = 0, total = 0, dz = xmax / 600;
-      for (var z = 0; z < zox; z += 0.25) inOx += N(z) * 0.25e-7;
+      var total = dose, dz = xmax / 600, left = Math.min(zox, Rp);
+      // Integrate the profile mass over the screen exactly; a fixed-depth
+      // left sum can exceed the incident dose for very shallow implants.
+      var inOx = coreNorm * Math.sqrt(Math.PI / 2) * s1 *
+        (PB.erf((left - Rp) / (Math.SQRT2 * s1)) + erf) * 1e-7;
+      if (zox > Rp) inOx += coreNorm * Math.sqrt(Math.PI / 2) * s2 *
+        PB.erf((zox - Rp) / (Math.SQRT2 * s2)) * 1e-7 + dose * ch * (1 - Math.exp(-(zox - Rp) / lam));
+      inOx = Math.max(0, Math.min(total, inOx));
       for (var x = 0; x <= xmax; x += dz) data.push([x, Math.max(1e13, N(x + zox))]);
-      for (var z2 = 0; z2 < zox + xmax + 10 * dR; z2 += 0.25) total += N(z2) * 0.25e-7;
       var xj = null;
       for (var i = data.length - 1; i > 0; i--) { if (data[i][1] < NB && data[i - 1][1] >= NB) { xj = data[i][0]; break; } }
       var peak = Math.max.apply(null, data.map(function (d) { return d[1]; }));
@@ -156,8 +166,8 @@
       PB.stat("ip-o-n", sup(peak) + "<small>cm⁻³</small>");
       PB.stat("ip-o-j", xj ? small(PB.fmt(xj, 3), "nm") : "<span class='bad-t'>접합을 찾지 못함</span>");
       PB.stat("ip-o-s", small((inOx / total * 100).toFixed(1), "%"));
-      var act = (total - inOx), Rs = 1 / (1.602e-19 * mob(peak / 3, r.type) * act);
-      PB.stat("ip-o-rs", small(PB.fmt(Rs, 3), "Ω/□"));
+      var act = total - inOx, Rs = 1 / (1.602e-19 * mob(peak / 3, r.type) * act);
+      PB.stat("ip-o-rs", act > total * 1e-9 ? small(PB.fmt(Rs, 3), "Ω/□") : "— (실리콘 도즈가 모델 분해능 미만)");
     }, { aspect: 0.62, minHeight: 320, maxHeight: 460 });
   })();
 

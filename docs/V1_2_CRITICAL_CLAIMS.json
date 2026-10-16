@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "scope": "Bounded public-source claims for the nLDMOS process-sequence review. Patent examples do not establish prevalence or a foundry recipe.",
+  "sources": {
+    "US7405117": {
+      "title": "Method of fabricating a lateral double-diffused MOSFET (LDMOS) transistor",
+      "identifier": "US 7,405,117 B2",
+      "url": "https://patents.google.com/patent/US7405117B2/en",
+      "full_text_accessed": true,
+      "access_note": "Full description and claims opened on Google Patents; direct USPTO full-text access is not claimed."
+    },
+    "EP1119050": {
+      "title": "BiCDMOS process technology and structures",
+      "identifier": "EP 1 119 050 A1",
+      "url": "https://data.epo.org/publication-server/rest/v1.2/patents/EP1119050NWA1/document.pdf",
+      "full_text_accessed": true,
+      "access_note": "Full 60-page PDF opened from the European Patent Office publication server."
+    },
+    "HOWER2005": {
+      "title": "Short and Long-Term Safe Operating Area Considerations in LDMOS Transistors",
+      "identifier": "IEEE IRPS 2005, pp. 545-550, DOI 10.1109/RELPHY.2005.1493145",
+      "url": "https://k5tra.net/tech%20library/LDMOS/LDMOS%20SOA%20Considerations.pdf",
+      "full_text_accessed": true,
+      "access_note": "Six-page paper text opened from a public mirror. Publisher-hosted access was not verified."
+    },
+    "MIT720J_L30": {
+      "title": "Lecture 30: The Short MOSFET",
+      "identifier": "MIT OCW 6.720J/3.43J, Spring 2007",
+      "url": "https://ocw.mit.edu/courses/6-720j-integrated-microelectronic-devices-spring-2007/3cd96dd9125660cf29f35c79654425a4_lecture30.pdf",
+      "full_text_accessed": true,
+      "access_note": "Full 21-page official MIT OpenCourseWare lecture PDF opened."
+    }
+  },
+  "claims": [
+    {
+      "id": "NLDMOS-SEQ-001",
+      "claim": "In the US patent's process 600, the Fig. 7 example uses a p-type substrate with an HV n-well and describes a non-self-aligned P-body implant before LDMOS gate oxide formation.",
+      "priority": "P1",
+      "evidence": [
+        {
+          "source_id": "US7405117",
+          "locator": "Process 600, steps 602-608 and Figs. 7A-7D; description lines 681-685 in Google Patents text.",
+          "full_text": true
+        },
+        {
+          "source_id": "US7405117",
+          "locator": "Step 610 and Fig. 7E; description lines 688-692 in Google Patents text.",
+          "full_text": true
+        }
+      ],
+      "technical_limit": "This establishes the patent's named example only. Process 600 does not describe an N+ buried layer or epitaxial layer in this illustrated slice; that absence must not be generalized to all nLDMOS devices or all embodiments in the patent.",
+      "confidence": "high for the disclosed example",
+      "uncertainty": "Production prevalence and present-day foundry usage are unknown."
+    },
+    {
+      "id": "NLDMOS-SEQ-002",
+      "claim": "In EP 1 119 050 A1's illustrated BiCDMOS flow, patterned poly gate precedes the DMOS P-body implant, which the description identifies as self-aligned to the poly gate; body drive follows.",
+      "priority": "P1",
+      "evidence": [
+        {
+          "source_id": "EP1119050",
+          "locator": "Table 1, steps 49-54, PDF p. 4; paragraphs [0051]-[0055], PDF pp. 8-9.",
+          "full_text": true
+        }
+      ],
+      "technical_limit": "Paragraph [0020] explicitly allows listed steps to be eliminated, reversed, or combined in some embodiments. This is not a universal sequence requirement.",
+      "confidence": "high for the cited embodiment",
+      "uncertainty": "Prevalence across BCD platforms and current production flows is unknown."
+    },
+    {
+      "id": "NLDMOS-SEQ-003",
+      "claim": "EP 1 119 050 A1 Table 1 places N+ and P+ buried-layer formation, epi growth, P+ isolation, and N+ sinker formation before its gate/poly module.",
+      "priority": "P2",
+      "evidence": [
+        {
+          "source_id": "EP1119050",
+          "locator": "Table 1, steps 1-20 and 42-54, PDF pp. 4-5; [0020] qualification on PDF p. 5.",
+          "full_text": true
+        }
+      ],
+      "technical_limit": "This describes a BiCDMOS platform sequence and its table qualification, not a required module set for every BCD implementation.",
+      "confidence": "high for the table as printed",
+      "uncertainty": "The patent does not quantify how representative this platform is of other processes."
+    },
+    {
+      "id": "NLDMOS-SEQ-004",
+      "claim": "Neither cited patent supports the claim that n+ source/drain implantation before gate geometry is universally impossible; the sources describe different flow choices and US 7,405,117 B2 explicitly permits its shallow N-LD implant before or after gate formation.",
+      "priority": "P1",
+      "evidence": [
+        {
+          "source_id": "US7405117",
+          "locator": "Process 600, step 614, description lines 695-697; n+ and p+ implants are step 616, lines 698-700.",
+          "full_text": true
+        },
+        {
+          "source_id": "EP1119050",
+          "locator": "[0058]-[0061], PDF pp. 9-10, describes later N+ and P+ S/D implants for its illustrated sequence.",
+          "full_text": true
+        }
+      ],
+      "technical_limit": "The US patent's explicit before/after option concerns the shallow N-LD implant, not a blanket permission for every n+ S/D module. Keep these implant categories distinct. Neither source establishes a universal ordering rule.",
+      "confidence": "high for the stated distinction",
+      "uncertainty": "Whether a particular early n+ S/D step is compatible depends on the specific process integration and device design; the sources do not resolve an unspecified preset."
+    },
+    {
+      "id": "NLDMOS-PBODY-001",
+      "claim": "US 7,405,117 B2 describes a two-implant P-body implementation and associates implant/drive choices with depth, lateral diffusion, channel length, and threshold control.",
+      "priority": "P2",
+      "evidence": [
+        {
+          "source_id": "US7405117",
+          "locator": "Figs. 8A-8C and description lines 685-689; two-implant details are introduced as 'one implementation'.",
+          "full_text": true
+        }
+      ],
+      "technical_limit": "These are qualitative descriptions of one implementation. They do not supply portable implant/anneal values or predict profiles without process-specific models and measurements.",
+      "confidence": "high for what the patent says",
+      "uncertainty": "Transferability to another technology is unsupported."
+    },
+    {
+      "id": "NLDMOS-BODYTIE-001",
+      "claim": "The EP patent's device structures illustrate P+ body-contact topology as embodiment dependent: one structure can connect the body contact through a P sinker/buried layer, while another confines the P+ contact to the P-body.",
+      "priority": "P2",
+      "evidence": [
+        {
+          "source_id": "EP1119050",
+          "locator": "[0095]-[0100], PDF pp. 14-15; especially [0099]-[0100] for the contrasting Figure 25 and Figure 26 structures.",
+          "full_text": true
+        }
+      ],
+      "technical_limit": "The structural embodiments establish a useful body-contact example but do not prescribe one universal tie layout.",
+      "confidence": "high for the illustrated variants",
+      "uncertainty": "Other process/device architectures may use different body-tie geometries."
+    },
+    {
+      "id": "NLDMOS-SOA-001",
+      "claim": "A single Rsp-versus-breakdown comparison is not a complete LDMOS safe-operating-area view; the cited paper frames design as also involving short-term and long-term SOA.",
+      "priority": "P2",
+      "evidence": [
+        {
+          "source_id": "HOWER2005",
+          "locator": "Full paper, SOA regimes PDF pp. 1-2 and conclusion PDF p. 6; public mirror copy.",
+          "full_text": true
+        }
+      ],
+      "technical_limit": "The paper gives a context-specific design/characterization framing, not a universal qualification limit or lifetime model.",
+      "confidence": "high for the paper's framing",
+      "uncertainty": "Quantitative limits require device-, package-, application-, and stress-specific evidence."
+    },
+    {
+      "id": "MOS-PHYSICS-001",
+      "claim": "MIT OCW Lecture 30 supports the general MOSFET physics statement that short-channel inversion-layer devices can show mobility degradation and velocity saturation that reduce current relative to simple long-channel models.",
+      "priority": "P3",
+      "evidence": [
+        {
+          "source_id": "MIT720J_L30",
+          "locator": "Full lecture PDF pp. 3-4 and 10-14; summary on p. 21.",
+          "full_text": true
+        }
+      ],
+      "technical_limit": "The lecture is not LDMOS-specific and does not support P-body diffusion, implant chronology, drift design, or foundry process claims.",
+      "confidence": "high for the lecture's stated general MOSFET physics",
+      "uncertainty": "Any application to a specific LDMOS operating regime requires device-specific analysis."
+    }
+  ]
+}

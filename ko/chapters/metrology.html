@@ -25,10 +25,10 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/metrology.html#chapter","name":"특성 평가 및 양산 테스트","headline":"특성 평가 및 양산 테스트 · PMICBook","description":"PMIC의 직류 동작, 과도 응답, 효율, 웨이퍼 모니터, 다이 선별 및 양산 시험을 조건별로 평가합니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/metrology.html","position":20,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"20. 특성 평가 및 양산 테스트","item":"https://frbread7.github.io/pmicbook/ko/chapters/metrology.html"}]}]}</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/metrology.html#chapter","name":"특성 평가 및 양산 테스트","headline":"특성 평가 및 양산 테스트 · PMICBook","description":"PMIC의 직류 동작, 과도 응답, 효율, 웨이퍼 모니터, 다이 선별 및 양산 시험을 조건별로 평가합니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/metrology.html","position":20,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-16","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"20. 특성 평가 및 양산 테스트","item":"https://frbread7.github.io/pmicbook/ko/chapters/metrology.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="../../css/style.css">
 <script src="../../js/common.js"></script>
 <!--head:end-->
@@ -59,10 +59,12 @@
           <tr><td>과도 응답</td><td>제어된 부하 스텝을 인가하고 출력 전압 및 복구 파형 측정</td><td>오버슈트, 언더슈트, 안정화 및 링잉</td><td>시스템 한계를 넘지 않고 전원 레일이 복구되는가?</td></tr>
           <tr><td>효율 및 열</td><td>각 동작점에서 입력·출력 전력과 온도 측정</td><td>효율, 손실, 온도 상승</td><td>입력·부하·동작 모드에 따라 손실이 최대가 되는 조건은?</td></tr>
           <tr><td>스위칭 파형</td><td>스위치 노드, 인덕터 전류, 관련 제어 신호를 프로빙</td><td>듀티비, 리플, 링잉, 보호 동작</td><td>대역폭·접지·프로브 루프의 영향을 통제했는가?</td></tr>
+          <tr><td>엔지니어링 특성 평가</td><td>제품·공정 개발 중 선정된 시료를 여러 온도·코너에서 넓게 스윕</td><td>동작 곡선, 마진, 상호작용, 고장 경계</td><td>한계를 설정·개선하고 설계나 공정 변경에 따라 평가를 반복합니다.</td></tr>
+          <tr><td>제품·공정 적격성 평가(qualification)</td><td>정의된 설계와 공정을 적용 가능한 합의된 적격성 요구사항에 따라 평가</td><td>범위가 정해진 출하 또는 변경 결정의 근거</td><td>적격성 평가는 증거의 집합이지 보편적인 고정 양산 시험 단계나 현장 수명 보증이 아닙니다.</td></tr>
           <tr><td><a href="https://doi.org/10.1109/66.857945">웨이퍼 인수 시험(WAT; Fan 외, 2000)</a></td><td>웨이퍼 시험 구조에서 공정 종료 시점의 전기 데이터를 수집</td><td>웨이퍼·팹 모니터링에 사용하는 공정 모니터 값</td><td>웨이퍼 인수 데이터에서 공정 변화가 보이는가?</td></tr>
           <tr><td><a href="https://ecss.nl/item/?glossary_id=1796">공정 관리 모니터(PCM)</a></td><td>공정 특성을 모니터하는 전용 구조를 측정</td><td>문턱전압, 누설, 저항, 항복 및 관련 매개변수</td><td>웨이퍼 전반에서 공정이 관리 범위 안에 있는가?</td></tr>
           <tr><td><a href="https://semiconductor.samsung.com/kr/support/tools-resources/fabrication-process/eight-essential-semiconductor-fabrication-processes-part-8-eds-electrical-die-sorting-for-the-perfect-chips/">EDS / 웨이퍼 선별 (삼성 EDS 개요)</a></td><td>프로브 카드로 각 다이에 접촉해 전기 시험을 수행</td><td>합격·불합격 빈, 파라미터 한계, 다이 선별 데이터</td><td>조립 전에 제품 한계를 만족하는 다이는 무엇인가?</td></tr>
-          <tr><td>양산 테스트</td><td>자동 테스터로 규정 벡터와 아날로그 조건 인가</td><td>검사 범위, 한계, 시험 시간, 반복성</td><td>허용 가능한 비용으로 관련 결함을 선별하는가?</td></tr>
+          <tr><td>최종 테스트(조립 후)</td><td>조립된 부품을 ATE에서 규정 벡터와 조건으로 시험</td><td>패키지 상태 기능·파라미터 빈 및 추적성</td><td>조립된 부품이 출하 한계를 만족하는가?</td></tr>
         </tbody>
       </table>
     </div>
@@ -71,12 +73,23 @@
   <section id="test-matrix">
     <h2>유용한 시험 매트릭스 구성하기</h2>
     <p>각 측정에서 인가 조건, 부하, 입력 범위, 온도, 동작 모드, 계측기 대역폭, 합격 기준을 기록하세요. 부하 스텝 파형은 스텝 크기와 에지 속도를 명시해야 의미가 있으며, 효율을 구할 때는 동일 동작점에서 입력·출력 전력을 측정해야 합니다. 이는 일반적인 특성 평가 방법이며 제품 한계는 제품별로 다릅니다. 다음 공개 자료도 참고하세요: <a href="https://www.ti.com/lit/an/slva079/slva079.pdf">TI LDO 기초 애플리케이션 보고서</a>(LDO 동작 개념) 및 <a href="https://www.nist.gov/publications/semiconductor-characterization-and-analytical-technology">NIST 반도체 특성 평가 간행물 정보</a>(공개 계측 자료).</p>
+    <p>범위를 한정한 개발·출하 수명 주기는 반복적입니다. 제품·공정 개발 단계에서 엔지니어링 특성 평가로 동작 마진을 설정·개선하고, 정의된 적격성 평가 계획으로 적용 요구사항에 대한 설계와 공정을 평가해 최초 출하 또는 변경 결정을 뒷받침합니다. 적격성 평가는 보편적인 고정 양산 시험 단계가 아니라 증거의 집합이며, 설계·공정 변경이나 새로운 고장 근거에 따라 특성 평가와 적격성 평가를 반복할 수 있습니다. 양산에서는 WAT / PCM이 웨이퍼 제조 중 공정 구조를 별도로 모니터하고, EDS / 웨이퍼 선별은 조립 전 다이를 검사하며, 패키지 최종 테스트는 조립 후 부품을 확인합니다. 단계의 담당 조직과 시험 계획은 제품에 따라 다릅니다. 변경점 평가나 고장 분석을 위해 출하 후에도 특성 평가를 이어갈 수 있습니다.</p>
     <div class="table-wrap"><table><thead><tr><th>시험 분류</th><th>변경 조건</th><th>기록할 항목</th><th>해석</th></tr></thead><tbody>
       <tr><td>DC</td><td>입력 전압, 부하 전류, 인에이블, 온도</td><td>출력, 입력 전류, 드롭아웃, 보호 임계값</td><td>동일한 조건의 제품 한계와 비교합니다.</td></tr>
       <tr><td>동적 응답</td><td>부하 스텝 크기, 에지 속도, 동작 모드</td><td>최대 편차, 안정화 시간, 링잉</td><td>레귤레이터 응답과 프로브·보드 기생 성분을 구분합니다.</td></tr>
       <tr><td>효율</td><td>입력, 부하, 스위칭 모드</td><td>입·출력 전력, 소자 온도</td><td>전력 소모가 가장 큰 동작 영역을 찾습니다.</td></tr>
-      <tr><td>웨이퍼 / 양산</td><td>공정 모니터 구조 및 정의된 다이 시험 조건</td><td>파라미터 분포, 시험 빈, 재시험 비율</td><td>WAT와 EDS는 제조 흐름의 서로 다른 단계에서 쓰입니다.</td></tr>
+      <tr><td>엔지니어링 특성 평가</td><td>계획된 매트릭스에서 코너·마진·동작 탐색</td><td>설계 이해 및 한계 검증</td><td>엔지니어링 학습 범위는 제한된 시간의 양산 검사보다 넓습니다.</td></tr>
+      <tr><td>제품·공정 적격성 평가</td><td>정의된 설계·공정을 적용 가능한 요구사항에 따라 평가</td><td>범위가 정해진 출하 또는 변경 결정의 근거</td><td>요구사항과 재평가 여부는 제품·변경 범위에 따라 다릅니다.</td></tr>
+      <tr><td>WAT / PCM</td><td>웨이퍼 위치별 전용 모니터 구조를 측정</td><td>공정 민감 전기 파라미터 및 공간·추세 데이터</td><td>모니터 구조는 공정 상태 진단용이며 완전한 제품 시험이 아닙니다.</td></tr>
+      <tr><td>EDS / 웨이퍼 선별</td><td>제조된 개별 다이를 제품 중심 시험으로 프로빙</td><td>다이별 합격·불합격 빈 및 측정 파라미터</td><td>조립 전 양품 후보를 찾으며 검사 범위는 프로브·시험 조건에 한정됩니다.</td></tr>
+      <tr><td>최종 테스트</td><td>생산 시험 프로그램으로 패키지 부품 시험</td><td>패키지 부품 한계, 빈 분류, 추적성</td><td>조립에서 추가될 수 있는 고장 모드까지 별도 출하 선별합니다.</td></tr>
     </tbody></table></div>
+  </section>
+
+  <section id="uncertainty">
+    <h2>측정 불확도와 가드 밴드</h2>
+    <p>측정 한계를 비교하려면 측정 방법과 불확도를 함께 명시해야 합니다. 관련되는 경우 교정, 반복성, 분해능, 접촉·프로브 영향, 픽스처 부하, 안정화 시간, 온도 오차, 시료 변동을 포함하세요. 독립성이 모델에 부합할 때만 표준 불확도 성분을 제곱합 제곱근으로 결합하며, 상관되거나 경계값으로 주어진 영향에는 적절한 처리가 필요합니다. NIST의 <a href="https://www.nist.gov/pml/nist-technical-note-1297">Technical Note 1297</a>은 불확도 평가와 보고를 설명합니다.</p>
+    <p>단측 상한 사양이 1.00 V이고 측정값이 0.985 V, 확장 불확도가 0.010 V라고 하겠습니다(포함 인자와 방법을 보고서에 명시). 보수적 상한은 0.995 V이므로 한계 아래입니다. 측정값이 0.995 V라면 보수적 상한이 1.005 V로 한계를 넘으므로 자동 합격으로 처리해서는 안 됩니다. 양산 가드 밴드는 위험, 불확도, 적용 사양을 반영해 문서화한 판정 규칙이지 보편적인 고정 오프셋이 아닙니다. 웨이퍼 모니터나 특성 평가 결과가 다이별 EDS 또는 패키지 최종 테스트를 대체하지 않습니다.</p>
   </section>
 
   <section id="film">
@@ -205,6 +218,7 @@
       <div class="quiz-q"><p>제조 흐름에서 EDS 또는 웨이퍼 선별의 역할은 무엇인가요?</p><div class="opts">
         <button class="opt">웨이퍼 두께만 측정</button><button class="opt" data-correct>패키징 전에 다이의 전기적 특성 선별</button><button class="opt">신뢰성 인증을 대체</button><button class="opt">파운드리 레시피 설정</button>
       </div><div class="quiz-exp">웨이퍼 선별은 조립 전에 각 다이를 프로빙하고 전기적 측정 결과를 정해진 제품 한계에 따라 빈으로 분류합니다.</div></div>
+      <div class="quiz-q"><p>1.000 V 상한에 대해 0.995 V를 측정했고 확장 불확도가 0.010 V입니다. 타당한 해석은 무엇인가요?</p><div class="opts"><button class="opt">표시값이 한계보다 낮으므로 합격입니다.</button><button class="opt" data-correct>보수적 상한이 1.005 V로 한계를 넘으므로 불확도를 반영한 문서화된 판정 규칙 없이 자동 합격시킬 수 없습니다.</button><button class="opt">해당 계측기로 측정한 모든 부품은 불합격입니다.</button></div><div class="quiz-exp">표시값에 명시된 확장 불확도를 더하면 상한 사양을 초과합니다. 가드 밴드 규칙은 합의된 판정 규칙과 위험에 따르며, 불확도만으로 보편적인 합격 한계가 정해지지는 않습니다.</div></div>
     </div>
   </section>
 </main>

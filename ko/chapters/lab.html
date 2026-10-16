@@ -25,10 +25,10 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/lab.html#chapter","name":"BCD 공정 실험실","headline":"BCD 공정 실험실 · PMICBook","description":"BCD 공정 모듈과 교육용 nLDMOS 단면을 편집 가능한 셀 격자 모델로 탐색합니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/lab.html","position":24,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-09","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"24. BCD 공정 실험실","item":"https://frbread7.github.io/pmicbook/ko/chapters/lab.html"}]}]}</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://frbread7.github.io/pmicbook/ko/chapters/lab.html#chapter","name":"BCD 공정 실험실","headline":"BCD 공정 실험실 · PMICBook","description":"BCD 공정 모듈과 교육용 nLDMOS 단면을 편집 가능한 셀 격자 모델로 탐색합니다.","url":"https://frbread7.github.io/pmicbook/ko/chapters/lab.html","position":24,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공학 학부 및 실무 참고 자료","image":"https://frbread7.github.io/pmicbook/og.png","dateModified":"2026-10-16","isPartOf":{"@type":"Book","@id":"https://frbread7.github.io/pmicbook/ko/#book","name":"PMICBook: 전력관리 IC 기술","url":"https://frbread7.github.io/pmicbook/ko/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PMICBook","item":"https://frbread7.github.io/pmicbook/"},{"@type":"ListItem","position":2,"name":"24. BCD 공정 실험실","item":"https://frbread7.github.io/pmicbook/ko/chapters/lab.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="../../css/style.css">
 <script src="../../js/common.js"></script>
 <script src="../../js/xsec.js"></script>
@@ -100,40 +100,54 @@
         </tbody>
       </table>
     </div>
-    <div class="callout warn"><strong>모델의 한계</strong><p>기존 셀 격자 엔진은 공정 경향에 대한 정성적 직관을 위한 것입니다. 완전한 BCD 레시피, 보정된 주입 활성화, 3차원 레이아웃, 전계 집중, 항복 전압, 소자 성능을 계산하는 공정 TCAD가 아닙니다. 격자 계단과 모서리 아티팩트가 생길 수 있으며 프리셋의 수치는 모두 교육용 가정입니다.</p></div>
+    <div class="callout warn"><strong>모델의 한계</strong><p>기존 셀 격자 엔진은 공정 경향에 대한 정성적 직관을 위한 것입니다. 완전한 BCD 레시피, 보정된 주입 활성화, 3차원 레이아웃, 전계 집중, 항복 전압, 소자 성능을 계산하는 공정 TCAD가 아닙니다. n형·p형 도펀트의 합산 농도만 저장합니다. 어닐링에서는 모든 n형 도펀트에 P와 비슷한 유효 확산 법칙, 모든 p형 도펀트에 B와 비슷한 법칙을 적용합니다. 따라서 어닐 후 As 소스 경계는 As 고유의 확산 예측값이 아닙니다. 격자 계단과 모서리 아티팩트가 생길 수 있으며 프리셋의 수치는 모두 교육용 가정입니다.</p></div>
   </section>
 
   <section id="ldmos-cross-section">
     <h2>주석으로 살펴보는 BCD nLDMOS 예시</h2>
-    <p>이 일반적인 단면은 고전압 웰, p바디, n형 드리프트 영역, 게이트, 필드 산화막, 소스·드레인이 어떻게 배치되는지 보여줍니다. 실제 BCD 플랫폼은 웰, 절연, 전계 제어, 주입 모듈이 서로 다르므로 이 그림은 제조 레시피가 아니라 교육용 개념도입니다.</p>
+    <p>아래의 완성 상태 단면은 고전압 웰, p바디, n형 드리프트, 게이트, 선택적 전계 구조, 소스·드레인·바디 단자를 보여줍니다. 제조 순서를 뜻하지는 않습니다. 아래 선택 메뉴는 두 공개 예시를 비교합니다. 처음 보이는 <a href="https://patents.google.com/patent/US7405117B2/en">US7405117B2 공정 600, 그림 5A·7A–7H·8A–8C</a>에서는 마스킹한 p바디 주입과 확산이 게이트 산화막·폴리보다 앞섭니다. <a href="https://data.epo.org/publication-server/rest/v1.2/patents/EP1119050NWA1/document.pdf">EP1119050A1 표 1, [0051]–[0061]</a>을 선택하면 N+ 매몰층/N− 에피/싱커 구조에서 패턴된 게이트 뒤에 게이트 정렬 p바디를 형성하는 예시를 볼 수 있습니다. 이는 공개 예시이지 생산 공정에서 널리 쓰인다는 증거가 아닙니다.</p>
+    <div class="ld-sequence" data-ldmos-sequence="ko"></div>
+    <div class="callout"><strong>두 순서의 텍스트 대체 설명</strong><p>US 공정 600: p형 기판 → 마스킹한 고전압 n웰 → 별도 p바디 주입 → 바디 확산 → 게이트 절연막 → 패턴된 폴리 → 선택 가능한 게이트 후 N-LD → n+ 소스/드레인 및 p+ 바디 접점 주입 → 후속 활성화/콘택트 개념도. EP1119050A1: p형 기판 → N+ 매몰층 주입/확산 → N− 에피 → N+ 싱커와 플랫폼 필드 모듈 → 게이트 산화막 → 패턴된 폴리 → 게이트 정렬 p바디 주입/확산 → 전면 N− LDD → 별도 N+ 소스 및 P+ 바디 접점 주입 → 콘택트 개념도. 화살표는 다른 모듈을 생략한 요약이며 레시피 조건을 지정하지 않습니다.</p></div>
+    <p><strong>단계 그림과 완성 단면을 구분해 읽으세요.</strong> 단계 그림의 점선은 주입 직후 범위이며 아래 고정 단면은 첫 번째 아키텍처의 완성 구조만 나타냅니다. 어느 쪽도 모든 열처리 후 전기적 활성 농도를 예측하지 않습니다. US 공정 600의 표시한 단면은 p형 기판과 고전압 n웰을 사용하며 해당 부분에 N+ 매몰층, 에피 성장, 절연 트렌치 또는 필드 플레이트를 지정하지 않습니다. EP 플랫폼에는 N+ 매몰층, N− 에피 및 싱커가 있고 P+ 절연은 공유 플랫폼 모듈입니다. 잘라낸 DMOS 셀 주변에 확인된 고리로 그리지는 않습니다. 서로 다른 구조를 하나의 보편적 순서로 합치면 안 됩니다.</p>
+    <div class="table-wrap"><table><thead><tr><th>단계 묶음</th><th>형성하는 것</th><th>추가로 검증할 것</th></tr></thead><tbody>
+      <tr><td>기판 / 웰</td><td>선택한 예시의 p형 기판과 마스크된 고전압 n웰</td><td>절연과 기판 연결; 매몰 n층/에피는 명시된 플랫폼에만 적용.</td></tr>
+      <tr><td>게이트 전 바디</td><td>독립적인 p바디 마스크·주입 후 확산/RTA</td><td>마스크 오버레이, 측방 확산, 표면 농도, 펀치스루와 V<sub>th</sub>.</td></tr>
+      <tr><td>게이트 / 드레인 경로</td><td>게이트 절연막, 패턴된 폴리, 허용되는 한 가지 게이트 후 N-LD</td><td>바디–게이트 겹침과 바디–드레인 간격; BV·R<sub>on,sp</sub>는 소자 자료가 필요.</td></tr>
+      <tr><td>단자</td><td>n+ 소스·드레인, p+ 바디 접점, 활성화, 콘택트; 선택적인 스페이서는 별도 모듈</td><td>바디 단락, 콘택트/실리사이드 저항, 전류 집중, 남은 열 이력.</td></tr>
+    </tbody></table></div>
+    <p>완성 그림의 선택적 게이트 연결 필드 플레이트가 전계를 바꾸려면 자체 절연막·도체·패터닝·전기 연결이 필요합니다. 떠 있는 장식 금속선으로 바이어스를 정할 수 없습니다. 선택한 공정 600은 필드 플레이트 레시피를 제공하지 않으며 정량적 효과는 특정 구조에서 측정하거나 해석해야 합니다. <a href="integration.html">18장</a>의 단계별 그림은 별도의 저전압 CMOS 예시입니다.</p>
     <figure class="ldmos-figure">
       <svg viewBox="0 0 840 330" role="img" aria-labelledby="ldmos-title ldmos-desc">
         <title id="ldmos-title">교육용 BCD nLDMOS 단면</title>
-        <desc id="ldmos-desc">p바디 안의 n⁺ 소스, 채널 위 게이트, 고전압 n웰의 n형 드리프트, 필드 산화막과 필드 플레이트, n⁺ 드레인, p형 기판을 보여주는 n채널 수평 DMOS 개념도입니다.</desc>
+        <desc id="ldmos-desc">완성 상태 n채널 수평 DMOS 구조: p바디의 n+ 소스와 p+ 바디 연결, 채널 위 게이트, 고전압 n웰의 n형 드리프트, 선택적 게이트 연결 필드 플레이트, n+ 드레인, p형 기판. 공정 단계가 아닙니다.</desc>
         <rect x="45" y="166" width="750" height="125" rx="3" class="sub" stroke="currentColor"/>
         <path d="M130 165 Q130 112 190 112 H684 Q744 112 744 165 V225 H130 Z" class="nw" stroke="#267aa4" stroke-width="2"/>
-        <rect x="162" y="118" width="177" height="62" rx="22" class="pb" stroke="#43814d" stroke-width="2"/>
+        <rect x="162" y="118" width="208" height="62" rx="22" class="pb" stroke="#43814d" stroke-width="2"/>
         <rect x="372" y="120" width="273" height="45" class="drift" stroke="#267aa4" stroke-width="2"/>
-        <rect x="184" y="111" width="53" height="33" class="nplus" stroke="#1d5f89" stroke-width="2"/>
+        <rect x="260" y="111" width="70" height="33" class="nplus" stroke="#1d5f89" stroke-width="2"/>
+        <rect x="184" y="111" width="53" height="33" fill="#d98798" stroke="#853e52" stroke-width="2"/>
         <rect x="652" y="111" width="53" height="34" class="nplus" stroke="#1d5f89" stroke-width="2"/>
         <rect x="314" y="99" width="76" height="10" class="oxide" stroke="#9d681d"/>
         <rect x="322" y="68" width="60" height="30" class="gate" stroke="#293544"/>
         <rect x="390" y="98" width="230" height="19" class="oxide" stroke="#9d681d"/>
         <rect x="435" y="75" width="129" height="12" class="metal" stroke="#946c19"/>
+        <path d="M382 80 H435" stroke="#946c19" stroke-width="7" fill="none"/>
         <rect x="198" y="84" width="22" height="27" class="contact" stroke="#755a40"/>
+        <rect x="281" y="84" width="19" height="27" class="contact" stroke="#755a40"/>
+        <path d="M209 83 H290" stroke="#946c19" stroke-width="6" fill="none"/>
         <rect x="346" y="84" width="18" height="14" class="contact" stroke="#755a40"/>
         <rect x="669" y="84" width="22" height="27" class="contact" stroke="#755a40"/>
-        <path d="M211 52 L211 80 M353 52 L353 80 M680 52 L680 80" class="leader"/>
-        <text x="174" y="42">소스 콘택트</text><text x="326" y="42">게이트 콘택트</text><text x="645" y="42">드레인 콘택트</text>
-        <path d="M204 151 L178 203 M264 142 L264 233 M486 142 L500 247 M599 92 L594 64 M502 75 L502 54" class="leader"/>
-        <text x="75" y="216">n⁺ 소스</text><text x="213" y="248">p바디</text>
+        <path d="M285 52 L285 80 M353 52 L353 80 M680 52 L680 80" class="leader"/>
+        <text x="174" y="42">소스/바디 단락</text><text x="326" y="42">게이트 콘택트</text><text x="645" y="42">드레인 콘택트</text>
+        <path d="M295 145 L178 203 M244 159 L264 233 M210 145 L250 179 M486 142 L500 247 M599 92 L594 64 M502 75 L502 54" class="leader"/>
+        <text x="75" y="216">n⁺ 소스</text><text x="213" y="248">p바디</text><text x="250" y="183">p+ 바디 연결</text>
         <text x="426" y="269">n⁻ 드리프트 영역</text><text x="521" y="49">필드 플레이트</text>
         <text x="562" y="64">필드 산화막</text>
         <text x="450" y="211">고전압 n웰</text><text x="65" y="280">p형 기판</text>
         <text x="648" y="157">n⁺ 드레인</text>
         <text x="297" y="310" class="small">개념 형상 · 축척 아님 · 모듈 순서와 구조는 공정마다 다름</text>
       </svg>
-      <figcaption>nLDMOS의 개념적 구조입니다. 필드 플레이트와 절연 방식은 플랫폼별로 다릅니다. 아래 XS 프리셋은 일부 마스크·주입·어닐의 관계를 나타낼 뿐 전계나 항복 전압을 계산하지 않습니다.</figcaption>
+      <figcaption>축척이 아닌 완성 상태 nLDMOS 개념도입니다. 소스와 p+ 바디를 묶었습니다. 게이트 연결 필드 플레이트는 선택적인 공정별 구조이며 아래 XS 프리셋은 그 전계나 항복을 계산하지 않습니다.</figcaption>
     </figure>
     <div class="table-wrap"><table>
       <thead><tr><th>소자 영역</th><th>관련 공정 모듈</th><th>PMIC에서 중요한 이유</th></tr></thead>
@@ -144,7 +158,7 @@
         <tr><td>소스·드레인, 콘택트, 금속</td><td><a href="etch.html">패턴 전사</a>, <a href="anneal.html">열 예산</a>, <a href="metal.html">콘택트와 최상층 금속</a></td><td>직렬 저항, 전류 밀도, 발열, 신뢰성 한계에 영향을 줍니다.</td></tr>
       </tbody>
     </table></div>
-    <p><strong>BCD nLDMOS 모듈</strong> 프리셋으로 웰의 대리 표현, 바디, 드리프트, 소스·드레인 주입의 이상적인 마스크 개구와 어닐 예시를 살펴보세요. 격자의 너비 1.6 µm와 1 µm보다 얕은 깊이는 작은 교육용 관찰 창이며 실제 고전압 웰의 치수나 도핑 규격이 아닙니다. 도펀트 형상을 주석 그림 및 <a href="hv-devices.html">고전압 MOS와 LDMOS</a> 장의 정성적 상충 관계와 비교하세요.</p>
+    <p><strong>BCD nLDMOS 모듈</strong> 프리셋에서 웰 대리 표현, 게이트 전 바디 주입/확산, 게이트 구조, 한 가지 게이트 후 드레인 확장부, 이후 소스·드레인·바디 접점 주입의 이상적 마스크 개구를 확인해 보세요. 격자 폭 1.6 µm와 1 µm 미만 깊이는 작은 교육용 창일 뿐 고전압 웰의 실제 치수나 도핑 사양이 아닙니다. 도펀트 형상을 주석 그림 및 <a href="hv-devices.html">고전압 MOS와 LDMOS</a>의 정성적 절충과 비교하세요.</p>
   </section>
 
   <section id="lab-sec">
@@ -289,7 +303,7 @@
       var amb = v.amb === "n2" ? "" : v.amb;
       return { op: "anneal", T: v.T, time: v.time, ambient: amb, k: amb ? "OX" : "ANL",
         label: (amb ? (amb === "wet" ? "습식 산화 " : "건식 산화 ") : "어닐 ") + v.T + " °C · " + (v.time >= 120 ? Math.round(v.time / 60) + " min" : v.time + " s"),
-        desc: amb ? "산화제가 산화막을 뚫고 실리콘 표면까지 확산해 반응한다. 실리콘 1 nm가 소모될 때 산화막은 약 2.27 nm 생기며, 질화막은 산화제를 막는다. 방향 선택 항목이 없어 (100) 규소를 가정한다." : "도펀트가 실리콘 안에서 √(Dt)만큼 퍼지고 격자 자리로 들어가 활성화된다." };
+        desc: amb ? "산화제가 산화막을 뚫고 실리콘 표면까지 확산해 반응한다. 실리콘 1 nm가 소모될 때 산화막은 약 2.27 nm 생기며, 질화막은 산화제를 막는다. 방향 선택 항목이 없어 (100) 규소를 가정한다." : "격자는 합산 n형 도펀트에 P와 비슷한 확산 대리 법칙, p형 도펀트에 B와 비슷한 법칙을 적용합니다. As 고유의 확산이나 전기적 활성화는 예측하지 않습니다." };
     } },
     cmp: { name: "CMP", fields: [
       { id: "stop", label: "정지막", type: "select", opts: [["", "없음 (높이 지정)"]].concat(matOpts), v: "nit" },
@@ -334,15 +348,16 @@
       desc: "이상적인 마스크는 지정한 창으로만 이온 빔을 통과시킵니다. 격자의 가우시안 도펀트 분포는 교육용이며 깊이, 활성화, 측방 마스크 경계, 전계는 보정되지 않았습니다." };
   }
   var PRESETS = {
-    ldmos: { name: "BCD nLDMOS 모듈", d: "웰 대리 표현, p바디, n드리프트, n⁺ 소스·드레인, 어닐, 게이트·전계 구조의 예시", dom: "wide", steps: function () { return [
+    ldmos: { name: "게이트 전 p바디 nLDMOS 예시", d: "웰/바디 마스크 → 바디 확산 → 게이트 → 드레인 확장 → n+/p+ 접합", dom: "wide", steps: function () { return [
       maskedImplant("P", 200, 2e11, [[150, 1450]], "고전압 웰 대리 창 · P 200 keV, 2e11 cm⁻²"),
       maskedImplant("B", 30, 5e11, [[230, 680]], "p바디 창 · B 30 keV, 5e11 cm⁻²"),
-      maskedImplant("P", 70, 4e11, [[700, 1280]], "n드리프트 창 · P 70 keV, 4e11 cm⁻²"),
-      maskedImplant("As", 35, 1e14, [[260, 390], [1300, 1430]], "n⁺ 소스·드레인 창 · As 35 keV, 1e14 cm⁻²"),
-      { op: "anneal", T: 1000, time: 30, ambient: "", k: "ANL", label: "활성화·재분포 예시 · 1000 °C, 30초", desc: "단순 확산 계산으로 저장된 도펀트를 재분포합니다. 활성화 비율이나 검증된 열 예산은 모델링하지 않습니다." },
-      { op: "rect", mat: "ox", x0: 590, x1: 780, y0: -20, y1: 0, k: "OX", label: "게이트 절연막 영역", desc: "도식적 절연막 배치입니다. 실제 두께와 공정 순서는 BCD 플랫폼마다 다릅니다." },
-      { op: "rect", mat: "poly", x0: 610, x1: 720, y0: -60, y1: -20, k: "GATE", label: "게이트 전극 영역", desc: "게이트는 p바디·채널 경계에서 드리프트 쪽으로 뻗습니다. 구조 설명용 형상이며 트랜지스터 해석기가 아닙니다." },
-      { op: "rect", mat: "ox", x0: 820, x1: 1210, y0: -40, y1: 0, k: "FIELD", label: "드리프트 영역 위의 필드 절연막", desc: "필드 절연막과 선택적 필드 플레이트는 기술마다 다릅니다. 이 사각형은 전계 제어를 계산하지 않습니다." }
+      { op: "anneal", T: 1000, time: 30, ambient: "", k: "ANL", label: "게이트 전 p바디 확산 예시 · 1000 °C, 30초", desc: "선택한 공개 순서에서는 p바디를 게이트 산화막 전에 확산합니다. 격자는 화학적 도펀트만 재분포하며 활성화율, 측방 채널 길이, 소스-기판 펀치스루를 풀지 않습니다." },
+      { op: "rect", mat: "ox", x0: 590, x1: 780, y0: -20, y1: 0, k: "OX", label: "바디 확산 후 게이트 절연막", desc: "선택한 게이트 전 바디 확산 뒤의 개념적 절연막입니다. 두께와 전하는 보정되지 않았습니다." },
+      { op: "rect", mat: "poly", x0: 610, x1: 720, y0: -60, y1: -20, k: "GATE", label: "바디 확산 후 게이트 패턴", desc: "이미 주입/확산한 바디 가장자리에 상대적으로 게이트를 놓았습니다. 실제 오버레이와 채널 겹침에는 측정된 분포와 레이아웃 규칙이 필요합니다." },
+      maskedImplant("P", 70, 4e11, [[720, 1280]], "게이트 후 N-LD 창 · P 70 keV, 4e11 cm⁻²"),
+      maskedImplant("As", 35, 1e14, [[480, 610], [1300, 1430]], "n⁺ 소스·드레인 창 · As 35 keV, 1e14 cm⁻²"),
+      maskedImplant("B", 20, 1e14, [[260, 390]], "p⁺ 바디 접점 창 · B 20 keV, 1e14 cm⁻²"),
+      { op: "anneal", T: 1000, time: 10, ambient: "", k: "ANL", label: "이후 접합 어닐 예시 · 1000 °C, 10초", desc: "앞 단계에서 As 소스를 주입했더라도 n형 경계에는 P와 비슷한 유효 확산 법칙을 적용합니다. As 고유의 확산, 활성화, 콘택트 저항, 전기적 활성 접합은 예측하지 않습니다. 수치는 교육용 입력이지 특허/파운드리 레시피가 아닙니다." }
     ]; } },
     sti: { name: "STI 트렌치", d: "패드 산화막·질화막 → 노광 → 실리콘 식각 → 산화막 채움 → CMP", dom: "std", steps: function () { return [
       D({ mat: "ox", mode: "ald", thick: 8 }), D({ mat: "nit", mode: "cvd", thick: 40, stick: 0.2 }),
@@ -406,7 +421,7 @@
     legend: ["si", "ox", "nit", "poly", "pr", "w", "cu", "tin", "sil", "epi", "acl"],
     aspect: 0.8, minHeight: 360, maxHeight: 560, below: ctrlHTML,
     startDesc: "p형 실리콘 웨이퍼(1e15 cm⁻³). 오른쪽에서 공정을 골라 추가하세요.",
-    note: "셀 기반 교육용 근사 모델입니다. 계산 중에는 아래쪽 막대가 진행률을 표시합니다. 넓은 영역의 긴 습식 산화는 몇 초 걸릴 수 있습니다."
+    note: "교육용 셀 격자 모델입니다. 어닐 후 표시되는 n형/p형 농도 지도에서 n형 확산은 P와 비슷한 대리값, p형 확산은 B와 비슷한 대리값입니다. As 주입 후 어닐 결과는 As 고유 프로파일이 아닙니다. 계산 중에는 아래쪽 막대가 진행률을 표시합니다. 넓은 영역의 긴 습식 산화는 몇 초 걸릴 수 있습니다."
   });
 
   var curOp = "depo", fieldGet = {};
@@ -609,5 +624,6 @@
   })();
 })();
 </script>
+<script src="../../js/ldmos-sequence.js"></script>
 </body>
 </html>
