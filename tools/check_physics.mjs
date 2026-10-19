@@ -74,6 +74,45 @@ for (let i = uniform.surf * uniform.W; i < uniform.na.length; i++) {
   assert.ok(Math.abs(uniform.na[i] / 1e16 - 1) < 1e-6, 'uniform slab changed under no-flux diffusion');
 }
 
+// A full oxide or empty-cell barrier disconnects semiconductor regions.
+// The Gaussian tail must not jump across a masked cell even when both endpoints are silicon.
+for (const barrier of [XS.ID.ox, 0]) {
+  const vertical = new XS.Sim({ W: 8, H: 80, dx: 10, surf: 10 });
+  for (let x = 0; x < vertical.W; x++) {
+    vertical.mat[20 * vertical.W + x] = barrier;
+    vertical.nd[19 * vertical.W + x] = 1e18;
+  }
+  const initial = vertical.nd.reduce((sum, value) => sum + value, 0);
+  vertical.diffuse({ T: 1100, time: 10 });
+  let upper = 0, lower = 0;
+  for (let y = vertical.surf; y < vertical.H; y++) {
+    for (let x = 0; x < vertical.W; x++) {
+      const value = vertical.nd[y * vertical.W + x];
+      if (y < 20) upper += value;
+      if (y > 20) lower += value;
+    }
+  }
+  assert.equal(lower, 0, `donors crossed ${barrier ? 'oxide' : 'void'} row`);
+  assert.ok(Math.abs(upper / initial - 1) < 1e-6, 'barrier changed donor mass');
+}
+
+// Two oxide columns separate a periodic row into two components, including the wrap edge.
+const separated = new XS.Sim({ W: 12, H: 80, dx: 10, surf: 10 });
+for (let y = separated.surf; y < separated.H; y++) {
+  separated.mat[y * separated.W] = XS.ID.ox;
+  separated.mat[y * separated.W + 6] = XS.ID.ox;
+  separated.na[y * separated.W + 1] = 1e18;
+}
+const initialAcceptor = separated.na.reduce((sum, value) => sum + value, 0);
+separated.diffuse({ T: 1100, time: 10 });
+let left = 0, right = 0;
+for (let y = separated.surf; y < separated.H; y++) {
+  for (let x = 1; x < 6; x++) left += separated.na[y * separated.W + x];
+  for (let x = 7; x < separated.W; x++) right += separated.na[y * separated.W + x];
+}
+assert.equal(right, 0, 'acceptors crossed periodic oxide columns');
+assert.ok(Math.abs(left / initialAcceptor - 1) < 1e-6, 'oxide columns changed acceptor mass');
+
 // An interior delta should spread with variance approximately 2Dt when resolved.
 const impulse = new XS.Sim({ W: 8, H: 160, dx: 2, surf: 10 });
 for (let x = 0; x < impulse.W; x++) impulse.na[80 * impulse.W + x] = 1e18;
@@ -113,4 +152,4 @@ const dpDt = generation - recombination - holeCurrentDivergence;
 assert.equal(dnDt, 5);
 assert.equal(dpDt, 5);
 
-console.log(`Physics checks passed: ${implantCases} implant doses, ${diffusionCases} diffusion masses, no-flux uniformity/variance, staged geometry, continuity signs.`);
+console.log(`Physics checks passed: ${implantCases} implant doses, ${diffusionCases} diffusion masses, no-flux uniformity/variance, oxide/void barriers, staged geometry, continuity signs.`);

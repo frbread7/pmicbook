@@ -544,7 +544,7 @@
   };
 
   /* ------------------------------------------------------------ 공정: 열처리(확산) */
-  /** p = { T:°C, time:s }  실리콘·폴리·에피 안에서만 확산 (n형=P, p형=B 확산 계수 사용) */
+  /** p = { T:°C, time:s }  실리콘·폴리·에피 안에서만 확산 (합산 n형 공여체=인(P), 합산 p형 수용체=붕소(B) 확산계수 대리값) */
   SP.diffuse = function (p) {
     const out = {};
     [["nd", "P"], ["na", "B"]].forEach(([key, sp]) => {
@@ -570,21 +570,25 @@
     for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
       const i = y * W + x; if (!mask[i]) continue;
       let change = 0;
-      for (let d = -R; d <= R; d++) {
-        if (!d) continue;
-        const j = y * W + (((x + d) % W) + W) % W;
-        if (mask[j]) change += k[d + R] * (a[j] - a[i]) / norm;
+      for (let direction = -1; direction <= 1; direction += 2) {
+        for (let d = 1; d <= R; d++) {
+          const j = y * W + (((x + direction * d) % W) + W) % W;
+          if (!mask[j]) break;
+          change += k[R + d] * (a[j] - a[i]) / norm;
+        }
       }
       tmp[i] = a[i] + change;
     }
     for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
       const i = y * W + x; if (!mask[i]) continue;
       let change = 0;
-      for (let d = -R; d <= R; d++) {
-        if (!d) continue;
-        const yy = y + d; if (yy < 0 || yy >= H) continue;
-        const j = yy * W + x;
-        if (mask[j]) change += k[d + R] * (tmp[j] - tmp[i]) / norm;
+      for (let direction = -1; direction <= 1; direction += 2) {
+        for (let d = 1; d <= R; d++) {
+          const yy = y + direction * d;
+          if (yy < 0 || yy >= H || !mask[yy * W + x]) break;
+          const j = yy * W + x;
+          change += k[R + d] * (tmp[j] - tmp[i]) / norm;
+        }
       }
       a[i] = tmp[i] + change;
     }

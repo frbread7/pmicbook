@@ -100,7 +100,7 @@
         </tbody>
       </table>
     </div>
-    <div class="callout warn"><strong>Model boundary</strong><p>This retained cell-grid engine is for qualitative process intuition. It is not process TCAD: it does not model a complete BCD recipe, calibrated implant activation, three-dimensional layout, electric-field crowding, breakdown voltage, or device performance. It stores only total n-type and p-type concentrations. During anneal, all n-type dopant uses a P-like effective diffusion law and all p-type dopant a B-like law; the resulting As source contour is not an As-specific diffusion prediction. Grid stair-steps and edge artifacts are expected. All values in the presets are illustrative assumptions.</p></div>
+    <div class="callout warn"><strong>Model boundary</strong><p>This retained cell-grid engine is for qualitative process intuition. It is not process TCAD: it does not model a complete BCD recipe, calibrated implant activation, three-dimensional layout, electric-field crowding, breakdown voltage, or device performance. It stores only total n-type donor and p-type acceptor concentrations. During anneal, aggregate n-type donors use a phosphorus (P) diffusivity proxy and aggregate p-type acceptors use a boron (B) proxy. These uncalibrated chemical-profile proxies do not predict an As-specific source contour, dopant activation, or the electrically active P-body/channel profile. Grid stair-steps and edge artifacts are expected. All values in the presets are illustrative assumptions.</p></div>
   </section>
 
   <section id="ldmos-cross-section">
@@ -302,7 +302,7 @@
       var amb = v.amb === "n2" ? "" : v.amb;
       return { op: "anneal", T: v.T, time: v.time, ambient: amb, k: amb ? "OX" : "ANL",
         label: (amb ? (amb === "wet" ? "Wet oxidation " : "Dry oxidation ") : "Anneal ") + v.T + " °C · " + (v.time >= 120 ? Math.round(v.time / 60) + " min" : v.time + " s"),
-        desc: amb ? "Oxidant reaches exposed silicon through oxide; the model uses about 2.27 nm oxide volume per 1 nm consumed silicon, treats nitride as a barrier, and assumes (100) silicon because this control has no orientation selector." : "The grid redistributes aggregate n-type dopant with a P-like diffusion proxy and p-type dopant with a B-like proxy. It does not predict species-specific As diffusion or electrical activation." };
+        desc: amb ? "Oxidant reaches exposed silicon through oxide; the model uses about 2.27 nm oxide volume per 1 nm consumed silicon, treats nitride as a barrier, and assumes (100) silicon because this control has no orientation selector." : "The grid redistributes aggregate n-type donors with a phosphorus (P) diffusivity proxy and p-type acceptors with a boron (B) proxy. These uncalibrated proxies do not predict species-specific As diffusion or electrical activation." };
     } },
     cmp: { name: "CMP", fields: [
       { id: "stop", label: "Stop layer", type: "select", opts: [["", "None (target level)"]].concat(matOpts), v: "nit" },
@@ -356,7 +356,7 @@
       maskedImplant("P", 70, 4e11, [[720, 1280]], "post-gate N-LD window · P 70 keV, 4e11 cm⁻²"),
       maskedImplant("As", 35, 1e14, [[480, 610], [1300, 1430]], "n+ source/drain windows · As 35 keV, 1e14 cm⁻²"),
       maskedImplant("B", 20, 1e14, [[260, 390]], "p+ body-contact window · B 20 keV, 1e14 cm⁻²"),
-      { op: "anneal", T: 1000, time: 10, ambient: "", k: "ANL", label: "Illustrative later junction anneal · 1000 °C, 10 s", desc: "The n-type contour uses a P-like effective diffusion law even for the earlier As source implant; the grid cannot predict As-specific diffusion, activation, contact resistance, or electrically active junctions. Numeric values are teaching inputs, not a patent/foundry recipe." }
+      { op: "anneal", T: 1000, time: 10, ambient: "", k: "ANL", label: "Illustrative later junction anneal · 1000 °C, 10 s", desc: "The n-type donor contour uses a phosphorus (P) diffusivity proxy even for the earlier As source implant; the uncalibrated grid cannot predict As-specific diffusion, activation, contact resistance, or electrically active junctions. Numeric values are teaching inputs, not a patent/foundry recipe." }
     ]; } },
     sti: { name: "STI trench", d: "Pad oxide/nitride → pattern → silicon etch → oxide fill → CMP", dom: "std", steps: function () { return [
       D({ mat: "ox", mode: "ald", thick: 8 }), D({ mat: "nit", mode: "cvd", thick: 40, stick: 0.2 }),
@@ -420,7 +420,7 @@
     legend: ["si", "ox", "nit", "poly", "pr", "w", "cu", "tin", "sil", "epi", "acl"],
     aspect: 0.8, minHeight: 360, maxHeight: 560, below: ctrlHTML,
     startDesc: "p-type silicon substrate (1e15 cm⁻³). Choose a step in the controls below.",
-    note: "Educational cell-grid model. In the displayed post-anneal n/p concentration map, n-type diffusion is a P-like proxy and p-type diffusion a B-like proxy; an As implant followed by anneal is not an As-specific profile. The progress bar updates during calculation; long wet-oxidation examples can take several seconds."
+    note: "Educational cell-grid model. In the displayed post-anneal concentration map, n-type donors use a phosphorus (P) diffusivity proxy and p-type acceptors use a boron (B) proxy; an As implant followed by anneal is not an As-specific profile. The proxies are uncalibrated. The progress bar updates during calculation; long wet-oxidation examples can take several seconds."
   });
 
   var curOp = "depo", fieldGet = {};
