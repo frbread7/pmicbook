@@ -3,7 +3,7 @@
 **Status:** Drafted after the unmodified ProcessBook baseline audit, 2026-10-02
 **Starting point:** `geniuskey/processbook` at `0bc4314d1e13c485a658e0cb1d4fd237b5fc8dff`, retained as `upstream-processbook-baseline`
 
-This document retains the original v1 architecture record below. The dated v1.2 candidate addendum documents the later nLDMOS sequence viewer without rewriting that history.
+This document retains the original v1 architecture record below. The dated v1.2 addendum documents the later nLDMOS sequence viewer without rewriting that history.
 
 ## Product path
 
@@ -62,9 +62,9 @@ The user selected **bilingual English and Korean**. Each of the 25 subject chapt
 | Anneal / oxidation | Diffusion blurs dopant arrays inside semiconductor cells with an Arrhenius coefficient; oxidation uses local Deal–Grove-style growth and grid expansion. | Retain qualitative thermal-budget and dielectric-shape trends; separate chemical activation, junction motion, and oxide charge limitations in prose. |
 | CMP / silicide | CMP removes cells toward a stop or level with a simple dishing term; silicide converts exposed silicon/poly cells to a material label. | Retain to connect planarization, contact resistance, and high-current interconnect, with no process-window or contact-resistance prediction. |
 
-### v1.2 candidate: two-variant nLDMOS sequence viewer
+### v1.2: two-variant nLDMOS sequence viewer
 
-The v1.2 candidate adds a source-bounded, bilingual sequence viewer in `js/ldmos-sequence.js`, mounted in `chapters/lab.html#ldmos-cross-section` and `ko/chapters/lab.html#ldmos-cross-section`. It is a separate educational visualization, not a new operation in `XS.Sim` and not a process recipe editor.
+The v1.2 release adds a source-bounded, bilingual sequence viewer in `js/ldmos-sequence.js`, mounted in `chapters/lab.html#ldmos-cross-section` and `ko/chapters/lab.html#ldmos-cross-section`. It is a separate educational visualization, not a new operation in `XS.Sim` and not a process recipe editor.
 
 | View | Disclosed example represented | Viewer behavior and boundary |
 |---|---|---|
@@ -75,7 +75,7 @@ The variant selector switches between two independently defined stage lists. Pre
 
 The sequence viewer's educational boundary is strict: geometry is schematic and not to scale; masked implant windows are not final active dopant contours; neither sequence solves activation, concentration-dependent or transient diffusion, overlay, channel length, 2-D/3-D electric field, breakdown voltage, on-resistance, threshold voltage, leakage, or reliability. It supplies no foundry-specific dose, energy, anneal, mask count, or design rule. Patent disclosures establish only what each named example describes; they do not establish prevalence or a current manufacturing flow. Read [docs/NLDMOS_PROCESS_SEQUENCE_REVIEW.md](NLDMOS_PROCESS_SEQUENCE_REVIEW.md) and [docs/V1_2_SOURCE_EVIDENCE.md](V1_2_SOURCE_EVIDENCE.md) for source locators and limits.
 
-### v1.2 candidate mixed-file attribution note
+### v1.2 mixed-file attribution note
 
 The code that selects stages, manages controls, and generates SVG is executable code; the bilingual stage explanations, labels, and generated instructional illustration are educational content. Their treatment follows the material-based split in `LICENSE.md`, not the `.js` extension. The file header records this distinction. See [docs/UPSTREAM_ATTRIBUTION.md](UPSTREAM_ATTRIBUTION.md) for the ProcessBook baseline object, PMICBook v1.1 tag, file-level `js/`/`css/`/`tools/` lineage, and release-review limits for mixed files.
 
